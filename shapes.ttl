@@ -1,0 +1,257 @@
+prefix schema: <http://schema.org/>
+prefix sd: <https://w3id.org/okn/o/sd#>
+prefix bio: <https://bioschemas.org/>
+prefix spe: <https://openschemas.github.io/spec-container/specifications/>
+prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix sh:   <http://www.w3.org/ns/shacl#>
+prefix xsd:  <http://www.w3.org/2001/XMLSchema#>
+prefix shsh: <http://www.w3.org/ns/shacl-shacl#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix pulse: <https://open-pulse.epfl.ch/ontology#>
+prefix md4i: <http://w3id.org/nfdi4ing/metadata4ing#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix vann: <http://purl.org/vocab/vann/>
+prefix sphn: <https://biomedit.ch/rdf/sphn-schema/sphn#>
+prefix dmib: <https://biomedit.ch/rdf/sphn-schema/dmib#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+<https://open-pulse.epfl.ch/ontology#>
+	a owl:Ontology ;
+	sh:entailment sh:Rules ;
+	sh:declare [
+		sh:prefix "pulse" ;
+		sh:namespace <https://open-pulse.epfl.ch/ontology#> ;
+	] .
+
+schema:SoftwareSourceCode
+a sh:NodeShape, rdfs:Class ;
+sh:property   schema:CreativeWork-citation ,
+              schema:SoftwareSourceCode-codeRepository ,
+              schema:CreativeWork-dateCreated ,
+              schema:CreativeWork-datePublished ,
+              schema:Thing-description ,
+              schema:CreativeWork-isBasedOn ,
+              pulse:relatedToOrganizationShape, 
+              schema:CreativeWork-license ,
+              schema:CreativeWork-author ,
+              schema:Thing-name ,
+              schema:SoftwareSourceCode-programmingLanguage ,
+              schema:Thing-url ,
+              schema:Thing-identifier ,
+              sd:SoftwareApplication-readme , 
+              pulse:disciplineShape ,
+              pulse:repositoryTypeShape
+.
+
+schema:CreativeWork-citation
+  a sh:PropertyShape ;
+  sh:path schema:citation ;
+  sh:minCount 1 ;
+  sh:datatype xsd:string ;
+  sh:pattern "^http.*" ;
+.
+
+schema:SoftwareSourceCode-codeRepository
+  a sh:PropertyShape ;
+  sh:path schema:codeRepository ;
+  sh:pattern "^http.*" ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+.
+        
+
+schema:CreativeWork-dateCreated
+  a sh:PropertyShape ;
+  sh:path schema:dateCreated ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+  sh:datatype xsd:date ;
+  .
+
+schema:CreativeWork-datePublished
+  a sh:PropertyShape ;
+  sh:path schema:datePublished ;
+  sh:datatype xsd:date ;  
+  sh:minCount 1 ;
+.
+
+schema:Thing-description
+  a sh:PropertyShape ;
+  sh:path schema:description ;
+  sh:datatype xsd:string ;
+  sh:maxLength 2000 ;
+  sh:minCount 1 ;
+.
+
+pulse:relatedToOrganizationShape
+  a sh:PropertyShape ;
+  sh:path pulse:relatedToOrganization ;
+  sh:datatype xsd:string ;
+  .
+
+schema:CreativeWork-license
+  a sh:PropertyShape ;
+  sh:path schema:license ;
+  sh:pattern ".*spdx\\.org.*" ;
+  sh:minCount 1 ;
+.
+
+schema:CreativeWork-author
+  a sh:PropertyShape ;
+  sh:path schema:author ;
+  sh:minCount 1 ;
+  sh:or (
+      [
+        sh:class schema:Organization ;
+      ]
+      [
+        sh:class schema:Person ;
+      ]
+    ) ;
+.
+
+schema:Person
+a sh:NodeShape ;
+  sh:property schema:Thing-name ;
+  sh:property md4i:orcidIdShape ;
+  sh:property schema:Thing-affiliation ;
+  sh:property pulse:usernameShape
+.
+
+schema:Person-familyName
+  a sh:PropertyShape ;
+  sh:path schema:familyName ;
+  sh:datatype xsd:string ;
+  sh:minCount 1 ;
+  .
+
+schema:Person-givenName
+  a sh:PropertyShape ;
+  sh:path schema:givenName ;
+  sh:datatype xsd:string ;
+  sh:minCount 1 ;
+.
+
+md4i:orcidIdShape
+  a sh:PropertyShape ;
+  sh:path md4i:orcidId ;
+  sh:datatype xsd:string ;
+  .
+
+schema:Thing-affiliation
+  a sh:PropertyShape ;
+  sh:path schema:affiliation ;
+  sh:datatype xsd:string ;
+.
+
+schema:Organization
+  a sh:NodeShape ;
+sh:property schema:Organization-legalName ;
+sh:property md4i:hasRorIdShape ;
+.
+
+schema:GitHubOrganization
+  a sh:NodeShape ;
+sh:property pulse:usernameShape ;
+sh:property pulse:hasRepositoryShape ;
+sh:property schema:Thing-affiliation ;
+.
+
+
+
+schema:Thing-name
+  a sh:PropertyShape ;
+  sh:path schema:name ;
+  sh:datatype xsd:string ;
+  sh:minCount 1 ;
+  sh:maxLength 60
+.
+
+schema:SoftwareSourceCode-programmingLanguage
+  a sh:PropertyShape ;
+  sh:path schema:programmingLanguage ;
+  sh:datatype xsd:string ;
+.
+
+schema:Thing-url
+  a sh:PropertyShape ;
+  sh:path schema:url ;
+  sh:pattern "^http.*" ;
+.
+
+sd:SoftwareApplication-hasAcknowledgements
+    a sh:PropertyShape ;
+    sh:path sd:hasAcknowledgements ;
+    sh:datatype xsd:string ;
+    .
+
+sd:SoftwareApplication-readme
+    a sh:PropertyShape ;
+    sh:path sd:readme ;
+    sh:pattern "^http.*" ;
+  .
+
+schema:DataDownload-contentURL
+  a sh:PropertyShape ;
+  sh:path schema:contentUrl ;
+  sh:pattern "^http.*" ;
+  sh:minCount 1 ;
+  .
+    
+
+schema:Thing-identifier
+  a sh:PropertyShape ;
+  sh:path schema:identifier ;
+  sh:datatype xsd:string ;
+  sh:minCount 1 ;
+.
+
+
+schema:Organization-legalName
+  a sh:PropertyShape ;
+  sh:path schema:legalName ;
+  sh:datatype xsd:string ;
+  sh:minCount 1 ;
+.
+
+md4i:hasRorIdShape
+  a sh:PropertyShape ;
+  sh:path md4i:hasRorId ;
+  sh:pattern "^http.*" ;
+  .
+
+pulse:disciplineShape
+    a sh:PropertyShape ;
+    sh:path pulse:discipline ;
+    sh:datatype xsd:string ;
+    sh:in ("Physics" "Chemistry" "Biology" "Engineering" "Mathematics" "Computer Science" "Environmental Science" "Medicine" "Social Sciences" "Humanities")
+    .
+
+
+pulse:repositoryTypeShape
+    a sh:PropertyShape ;
+    sh:path schema:repositoryType ;
+    sh:datatype xsd:string ;
+    sh:in ("software" "educational resource" "documentation" "data" "other")
+    .
+
+
+pulse:usernameShape
+    a sh:PropertyShape ;
+    sh:path schema:username ;
+    sh:datatype xsd:string ;
+    .
+
+pulse:hasRepositoryShape
+    a sh:PropertyShape ;
+    sh:path pulse:hasRepository ;
+    sh:class schema:SoftwareSourceCode ;
+    .
+
+schema:memberOfShape 
+    a sh:PropertyShape ;
+    sh:path schema:memberOf ;
+    sh:class schema:GitHubOrganization ;
+    .

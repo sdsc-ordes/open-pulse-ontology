@@ -1,0 +1,172 @@
+@prefix schema: <http://schema.org/>.
+@prefix sd: <https://w3id.org/okn/o/sd#>.
+@prefix bio: <https://bioschemas.org/>.
+@prefix spe: <https://openschemas.github.io/spec-container/specifications/>.
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix shsh: <http://www.w3.org/ns/shacl-shacl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix md4i: <http://w3id.org/nfdi4ing/metadata4ing#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix vann: <http://purl.org/vocab/vann/>.
+@prefix sphn: <https://biomedit.ch/rdf/sphn-schema/sphn#> .
+@prefix dmib: <https://biomedit.ch/rdf/sphn-schema/dmib#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://open-pulse.epfl.ch/ontology#>
+    a owl:Ontology ;
+    dct:abstract "The Open Pulse ontology provides concepts (classes and properties) to model human and machine readable imaging software metadata. It is the result of re-using external pre-existing vocabularies such as schema.org and the software description ontology, together with custom imaging specific objects and properties." ;
+    dct:contributor "Robin Franken", "Carlos Vivar Rios" ;
+    dct:created "2025-05-13"^^xsd:date ;
+    dct:creator "Robin Franken" ;
+    dct:description "The Open Pulse ontology provides concepts (classes and properties) to model human and machine readable imaging software metadata. It is the result of re-using external pre-existing vocabularies such as schema.org and the software description ontology, together with custom imaging specific objects and properties. The ontology contains purely semantic information (labels, definitions etc.) and is meant to be used in conjuction with a graph of enumeration values and a graph containing SHACL shapes to provide more machine readable restrictions on values of properties." ;
+    dct:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    dct:modified "2025-05-13"^^xsd:date ;
+    dct:title "Open pulse Ontology" ;
+    vann:preferredNamespacePrefix "pulse" ;
+    vann:preferredNamespaceUri "https://open-pulse.epfl.ch/ontology#"^^xsd:string ;
+    owl:versionInfo "0.0.1"^^xsd:string 
+    .
+
+schema:SoftwareSourceCode
+  a rdfs:Class ;
+  rdfs:comment "A software application." ;
+  rdfs:label "Software application" ;
+  rdfs:subClassOf schema:CreativeWork .
+
+schema:Person
+  a rdfs:Class ;
+  rdfs:comment "A person (alive, dead, undead, or fictional)." ;
+  rdfs:label "Person" ;
+.
+
+schema:Organization
+  a rdfs:Class ;
+  rdfs:comment "An organization such as a school, NGO, corporation, club, etc." ;
+  rdfs:label "Organization" ;
+.
+
+pulse:GitHubOrganization
+  a rdfs:Class ;
+  rdfs:comment "A GitHub organization." ;
+  rdfs:label "GitHub organization" ;
+.
+#####################################
+schema:license a rdf:Property;
+  rdfs:comment "A license document that applies to this content, typically indicated by URL.";
+  rdfs:label "License" .
+
+schema:contentUrl a rdf:Property;
+  rdfs:comment "Actual bytes of the media object, for example the image file or video file.";
+  rdfs:label "Content URL".
+
+schema:dateCreated a rdf:Property;
+  rdfs:comment "The date on which the repository was created.";
+  rdfs:label "Date created" .
+
+schema:datePublished a rdf:Property;
+  rdfs:comment "Latest published git release date, else, the publish date of the doi.";
+  rdfs:label "Date published" .
+
+schema:author a rdf:Property;
+  rdfs:comment "The author of the software, this can be organizations or people that are maintainers and/or producers of the software.";
+  rdfs:label "Author" .
+
+schema:affiliation a rdf:Property;
+  rdfs:comment "An organization that this person is affiliated with. For example, a university (EPFL/ETHZ), lab, company." ;
+  rdfs:label "Affiliation". 
+
+schema:codeRepository a rdf:Property;
+  rdfs:comment "Primary link to the repository where the un-compiled, human readable code and related code is located (GitLab, GitHub, CodePlex etc.).";
+  rdfs:label "Code repository" .
+
+schema:description a rdf:Property;
+  rdfs:comment "A description of the item.";
+  rdfs:label "Description" .
+
+schema:isBasedOn a rdf:Property;
+  rdfs:comment "A resource from which this work is derived or from which it is a modification or adaption.";
+  rdfs:label "Is based on" .
+
+pulse:relatedToOrganization a rdf:Property ;
+  rdfs:comment "The lab/institution/group/project/organization to which a software is related and/or affiliated to" ;
+  rdfs:label "Related to organization" .
+
+schema:familyName a rdf:Property;
+  rdfs:comment "Family name. In the U.S., the last name of a Person.";
+  rdfs:label "Family name" .
+
+schema:givenName a rdf:Property;
+  rdfs:comment "Given name. In the U.S., the first name of a Person.";
+  rdfs:label "Given name" .
+
+schema:name a rdf:Property;
+  rdfs:comment "The name of a person, in the US their first and last name(s) seperated by spaces";
+  rdfs:label "Name" .
+
+md4i:orcidId a rdf:Property ;
+  rdfs:comment "The ORCID ID of a person" ;
+  rdfs:label "Has ORCID ID" .
+
+md4i:hasRorId a rdf:Property ;
+  rdfs:comment "A Research Organization Registry identifier, that points to a research organization" ;
+  rdfs:label "Has ROR ID" .
+
+schema:legalName a rdf:Property;
+  rdfs:comment "The official name of the organization, e.g. the registered company name.";
+  rdfs:label "Legal name" .
+
+schema:programmingLanguage a rdf:Property;
+  rdfs:comment "The computer programming language.";
+  rdfs:label "Programming Language" .
+
+schema:url a rdf:Property;
+  rdfs:comment "Fill in any URL related to this repository. e.g. related lab or project website.";
+  rdfs:label "URL" .
+
+schema:identifier a rdf:Property;
+  rdfs:comment "Represents any kind of unique string to identify something, such as ISBNs, GTIN codes, UUIDs etc.";
+  rdfs:label "Identifier" .
+
+sd:readme a rdf:Property;
+  rdfs:comment "URL to the Readme file of a software component"@en;
+  rdfs:label "Readme"@en .
+
+sd:hasAcknowledgements a rdf:Property;
+  rdfs:comment "String with the people, organizations and other contributors acknowledged by the authors."@en;
+  rdfs:label "Has acknowledgements"@en .
+
+pulse:discipline a rdf:Property ;
+    rdfs:comment "The academic or scientific discipline associated with the software or research." ;
+    rdfs:label "Discipline" .
+
+schema:repositoryType a rdf:Property ;
+    rdfs:comment "The type of repository, such as software, educational resource, documentation, data or other ." ;
+    rdfs:label "Repository Type" ;
+    rdfs:range xsd:string ;
+    rdfs:domain schema:SoftwareSourceCode .
+
+schema:username a rdf:Property ;
+    rdfs:comment "The username of a person or organization on GitHub or other similar platforms." ;
+    rdfs:label "Username" ;
+    rdfs:range xsd:string .
+
+pulse:hasRepository a rdf:Property ;
+  rdfs:comment "A software repository that is part of a GitHub organization." ;
+  rdfs:label "Has repository" ; 
+  rdfs:domain pulse:GitHubOrganization ;
+  rdfs:range schema:SoftwareSourceCode .
+
+schema:memberOf a rdf:Property ;
+  rdfs:comment "A person or organization that is a member of a GitHub organization." ;
+  rdfs:label "Member of" ;
+  rdfs:domain pulse:GitHubOrganization ;
+  rdfs:range schema:Person .
+
+
+
+
