@@ -17,6 +17,15 @@ prefix sphn: <https://biomedit.ch/rdf/sphn-schema/sphn#>
 prefix dmib: <https://biomedit.ch/rdf/sphn-schema/dmib#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 
+prefix wd: <http://www.wikidata.org/entity/> 
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix rdf4j: <http://rdf4j.org/schema/rdf4j#> 
+prefix sesame: <http://www.openrdf.org/schema/sesame#> 
+prefix owl: <http://www.w3.org/2002/07/owl#> 
+prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
+prefix fn: <http://www.w3.org/2005/xpath-functions#>
+
 <https://open-pulse.epfl.ch/ontology#>
 	a owl:Ontology ;
 	sh:entailment sh:Rules ;
@@ -226,13 +235,14 @@ pulse:disciplineShape
     a sh:PropertyShape ;
     sh:path pulse:discipline ;
     sh:datatype xsd:string ;
+    sh:class pulse:DisciplineEnumeration ;
     sh:in ("Physics" "Chemistry" "Biology" "Engineering" "Mathematics" "Computer Science" "Environmental Science" "Medicine" "Social Sciences" "Humanities")
     .
 
 
 pulse:repositoryTypeShape
     a sh:PropertyShape ;
-    sh:path schema:repositoryType ;
+    sh:path pulse:repositoryType ;
     sh:datatype xsd:string ;
     sh:in ("software" "educational resource" "documentation" "data" "other")
     .
@@ -255,3 +265,195 @@ schema:memberOfShape
     sh:path schema:memberOf ;
     sh:class schema:GitHubOrganization ;
     .
+  
+pulse:DisciplineEnumeration
+    a rdfs:Class ;
+    rdfs:label "Discipline Enumeration" ;
+    rdfs:comment "Enumeration of disciplines for categorizing software repositories." ;
+    rdfs:subClassOf schema:Enumeration ;
+    .
+
+
+wd:Q34749 a pulse:DisciplineEnumeration;
+  rdfs:label "Social sciences"@en;
+  rdfs:subClassOf wd:Q11862829 .
+
+wd:Q23404 a pulse:DisciplineEnumeration;
+  rdfs:label "Anthropology"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q11680831 a pulse:DisciplineEnumeration;
+  rdfs:label "Communication studies"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q8434 a pulse:DisciplineEnumeration;
+  rdfs:label "Education"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q8162 a pulse:DisciplineEnumeration;
+  rdfs:label "Linguistics"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q42240 a pulse:DisciplineEnumeration;
+  rdfs:label "Research"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q21201 a pulse:DisciplineEnumeration;
+  rdfs:label "Sociology"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q1071 a pulse:DisciplineEnumeration;
+  rdfs:label "Geography"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q9418 a pulse:DisciplineEnumeration;
+  rdfs:label "Psychology"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q7163 a pulse:DisciplineEnumeration;
+  rdfs:label "Politics"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q8134 a pulse:DisciplineEnumeration;
+  rdfs:label "Economics"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q7112556 a pulse:DisciplineEnumeration;
+  rdfs:label "Applied sciences"@en;
+  rdfs:subClassOf wd:Q11862829 .
+
+wd:Q843601 a pulse:DisciplineEnumeration;
+  rdfs:label "Health sciences"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q43035 a pulse:DisciplineEnumeration;
+  rdfs:label "Electrical engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q83588 a pulse:DisciplineEnumeration;
+  rdfs:label "Chemical engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q77590 a pulse:DisciplineEnumeration;
+  rdfs:label "Civil engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q12271 a pulse:DisciplineEnumeration;
+  rdfs:label "Architecture"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q428691 a pulse:DisciplineEnumeration;
+  rdfs:label "Computer engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q3353193 a pulse:DisciplineEnumeration;
+  rdfs:label "Energy engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q192386 a pulse:DisciplineEnumeration;
+  rdfs:label "Military science"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q18351432 a pulse:DisciplineEnumeration;
+  rdfs:label "Industrial and production engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q101333 a pulse:DisciplineEnumeration;
+  rdfs:label "Mechanical engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q580689 a pulse:DisciplineEnumeration;
+  rdfs:label "Biological engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q188847 a pulse:DisciplineEnumeration;
+  rdfs:label "Environmental science"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q2167061 a pulse:DisciplineEnumeration;
+  rdfs:label "Systems science and engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+<http://www.wikipedia.org/wiki/Information_engineering> a pulse:DisciplineEnumeration;
+  rdfs:label "Information engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q3606845 a pulse:DisciplineEnumeration;
+  rdfs:label "Agricultural and food sciences"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q4830453 a pulse:DisciplineEnumeration;
+  rdfs:label "Business"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q80083 a pulse:DisciplineEnumeration;
+  rdfs:label "Humanities"@en;
+  rdfs:subClassOf wd:Q11862829 .
+
+wd:Q309 a pulse:DisciplineEnumeration;
+  rdfs:label "History"@en;
+  rdfs:subClassOf wd:Q80083 .
+
+wd:Q8242 a pulse:DisciplineEnumeration;
+  rdfs:label "Literature"@en;
+  rdfs:subClassOf wd:Q80083 .
+
+wd:Q735 a pulse:DisciplineEnumeration;
+  rdfs:label "Art"@en;
+  rdfs:subClassOf wd:Q80083 .
+
+wd:Q9174 a pulse:DisciplineEnumeration;
+  rdfs:label "Religion"@en;
+  rdfs:subClassOf wd:Q80083 .
+
+wd:Q5891 a pulse:DisciplineEnumeration;
+  rdfs:label "Philosophy"@en;
+  rdfs:subClassOf wd:Q80083 .
+
+wd:Q7748 a pulse:DisciplineEnumeration;
+  rdfs:label "Law"@en;
+  rdfs:subClassOf wd:Q80083 .
+
+wd:Q816264 a pulse:DisciplineEnumeration;
+  rdfs:label "Formal sciences"@en;
+  rdfs:subClassOf wd:Q11862829 .
+
+wd:Q395 a pulse:DisciplineEnumeration;
+  rdfs:label "Mathematics"@en;
+  rdfs:subClassOf wd:Q816264 .
+
+wd:Q8078 a pulse:DisciplineEnumeration;
+  rdfs:label "Logic"@en;
+  rdfs:subClassOf wd:Q816264 .
+
+wd:Q12483 a pulse:DisciplineEnumeration;
+  rdfs:label "Statistics"@en;
+  rdfs:subClassOf wd:Q816264 .
+
+wd:Q2878974 a pulse:DisciplineEnumeration;
+  rdfs:label "Theoretical computer science"@en;
+  rdfs:subClassOf wd:Q816264 .
+
+wd:Q7991 a pulse:DisciplineEnumeration;
+  rdfs:label "Natural sciences"@en;
+  rdfs:subClassOf wd:Q11862829 .
+
+wd:Q413 a pulse:DisciplineEnumeration;
+  rdfs:label "Physics"@en;
+  rdfs:subClassOf wd:Q7991 .
+
+wd:Q333 a pulse:DisciplineEnumeration;
+  rdfs:label "Astronomy"@en;
+  rdfs:subClassOf wd:Q7991 .
+
+wd:Q420 a pulse:DisciplineEnumeration;
+  rdfs:label "Biology"@en;
+  rdfs:subClassOf wd:Q7991 .
+
+wd:Q2329 a pulse:DisciplineEnumeration;
+  rdfs:label "Chemistry"@en;
+  rdfs:subClassOf wd:Q7991 .
+
+wd:Q8008 a pulse:DisciplineEnumeration;
+  rdfs:label "Earth science"@en;
+  rdfs:subClassOf wd:Q7991 .

@@ -144,7 +144,7 @@ pulse:discipline a rdf:Property ;
     rdfs:comment "The academic or scientific discipline associated with the software or research." ;
     rdfs:label "Discipline" .
 
-schema:repositoryType a rdf:Property ;
+pulse:repositoryType a rdf:Property ;
     rdfs:comment "The type of repository, such as software, educational resource, documentation, data or other ." ;
     rdfs:label "Repository Type" ;
     rdfs:range xsd:string ;
