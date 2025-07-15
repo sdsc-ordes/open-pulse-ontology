@@ -236,15 +236,13 @@ pulse:disciplineShape
     sh:path pulse:discipline ;
     sh:datatype xsd:string ;
     sh:class pulse:DisciplineEnumeration ;
-    sh:in ("Physics" "Chemistry" "Biology" "Engineering" "Mathematics" "Computer Science" "Environmental Science" "Medicine" "Social Sciences" "Humanities")
     .
 
 
 pulse:repositoryTypeShape
     a sh:PropertyShape ;
     sh:path pulse:repositoryType ;
-    sh:datatype xsd:string ;
-    sh:in ("software" "educational resource" "documentation" "data" "other")
+    sh:class pulse:RepositoryTypeEnumeration
     .
 
 
@@ -273,6 +271,32 @@ pulse:DisciplineEnumeration
     rdfs:subClassOf schema:Enumeration ;
     .
 
+pulse:RepositoryTypeEnumeration
+    a rdfs:Class ;
+    rdfs:label "Repository Type Enumeration" ;
+    rdfs:comment "Enumeration of types of repositories." ;
+    rdfs:subClassOf schema:Enumeration ;
+    .
+
+pulse:Software a pulse:RepositoryTypeEnumeration ;
+    rdfs:label "Software" ;
+    rdfs:comment "A repository that contains software source code." .
+
+pulse:EducationalResource a pulse:RepositoryTypeEnumeration ;
+    rdfs:label "Educational Resource" ;
+    rdfs:comment "A repository that contains educational materials." .
+
+pulse:Documentation a pulse:RepositoryTypeEnumeration ;
+    rdfs:label "Documentation" ;
+    rdfs:comment "A repository that contains documentation." .
+
+pulse:Data a pulse:RepositoryTypeEnumeration ;
+    rdfs:label "Data" ;
+    rdfs:comment "A repository that contains datasets." .
+
+pulse:Other a pulse:RepositoryTypeEnumeration ;
+    rdfs:label "Other" ;
+    rdfs:comment "A repository that does not fit into the other categories." .
 
 wd:Q34749 a pulse:DisciplineEnumeration;
   rdfs:label "Social sciences"@en;
