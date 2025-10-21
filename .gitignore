@@ -3,3 +3,6 @@ taxonomy/main.py
 taxonomy/output.ttl
 taxonomy/qid_cache.json
 taxonomy/taxonomy.txt
+.venv/*
+software_instances.ttl
+

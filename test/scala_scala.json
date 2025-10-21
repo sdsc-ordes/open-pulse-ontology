@@ -1,0 +1,217 @@
+{
+    "link": "https://github.com/scala/scala",
+    "output": {
+        "http://schema.org/applicationCategory": [
+            {
+                "@value": "Programming Language"
+            },
+            {
+                "@value": "Compiler"
+            },
+            {
+                "@value": "Standard Library"
+            },
+            {
+                "@value": "Software Development Tools"
+            }
+        ],
+        "http://schema.org/citation": [
+            {
+                "@value": "https://github.com/scala/scala/releases"
+            }
+        ],
+        "http://schema.org/codeRepository": [
+            {
+                "@value": "https://github.com/scala/scala"
+            }
+        ],
+        "http://schema.org/conditionsOfAccess": [
+            {
+                "@value": "Free to access and use under the Apache 2.0 License."
+            }
+        ],
+        "http://schema.org/dateCreated": [
+            {
+                "@value": "2002-01-01"
+            }
+        ],
+        "http://schema.org/datePublished": [
+            {
+                "@value": "2006-03-12"
+            }
+        ],
+        "http://schema.org/description": [
+            {
+                "@value": "The Scala 2 standard library, compiler, and language specification. This project provides the core components for Scala 2, including the standard library, reflection capabilities, the compiler itself, and tools for documentation generation, bytecode parsing, and testing. It supports various build configurations and integrates with CI/CD pipelines for continuous validation and publishing."
+            }
+        ],
+        "pulse:discipline": [
+            {
+                "@value": "Computer Science"
+            }
+        ],
+        "http://schema.org/featureList": [
+            {
+                "@value": "Standard Library"
+            },
+            {
+                "@value": "Compiler"
+            },
+            {
+                "@value": "Reflection API"
+            },
+            {
+                "@value": "Documentation Generator (Scaladoc)"
+            },
+            {
+                "@value": "Bytecode Parser (Scalap)"
+            },
+            {
+                "@value": "Testing Framework (Partest, JUnit, ScalaCheck)"
+            },
+            {
+                "@value": "REPL (Read-Eval-Print Loop)"
+            },
+            {
+                "@value": "OSGi Bundling"
+            },
+            {
+                "@value": "Build Automation (sbt)"
+            },
+            {
+                "@value": "Continuous Integration Support"
+            }
+        ],
+        "https://w3id.org/okn/o/sd#hasAcknowledgements": [
+            {
+                "@value": "Copyright EPFL and Lightbend, Inc. dba Akka"
+            }
+        ],
+        "https://w3id.org/okn/o/sd#hasDocumentation": [
+            {
+                "@value": "https://docs.scala-lang.org"
+            }
+        ],
+        "https://w3id.org/okn/o/sd#hasExecutableInstructions": [
+            {
+                "@value": "https://github.com/scala/scala#get-ready-to-contribute"
+            }
+        ],
+        "http://schema.org/identifier": [
+            {
+                "@value": "https://github.com/scala/scala"
+            }
+        ],
+        "http://schema.org/image": [
+            {
+                "@value": "https://avatars.githubusercontent.com/lrytz"
+            },
+            {
+                "@value": "https://avatars.githubusercontent.com/retronym"
+            },
+            {
+                "@value": "https://avatars.githubusercontent.com/SethTisue"
+            },
+            {
+                "@value": "https://avatars.githubusercontent.com/dwijnand"
+            },
+            {
+                "@value": "https://avatars.githubusercontent.com/som-snytt"
+            },
+            {
+                "@value": "https://avatars.githubusercontent.com/Ichoran"
+            },
+            {
+                "@value": "https://avatars.githubusercontent.com/viktorklang"
+            },
+            {
+                "@value": "https://avatars.githubusercontent.com/sjrd"
+            },
+            {
+                "@value": "https://avatars.githubusercontent.com/NthPortal"
+            },
+            {
+                "@value": "https://avatars.githubusercontent.com/bishabosha"
+            },
+            {
+                "@value": "https://avatars.githubusercontent.com/joroKr21"
+            }
+        ],
+        "http://schema.org/isAccessibleForFree": [
+            {
+                "@value": true
+            }
+        ],
+        "http://schema.org/license": [
+            {
+                "@value": "https://spdx.org/licenses/Apache-2.0"
+            }
+        ],
+        "http://schema.org/name": [
+            {
+                "@value": "Scala 2"
+            }
+        ],
+        "http://schema.org/operatingSystem": [
+            {
+                "@value": "Linux"
+            },
+            {
+                "@value": "MacOS"
+            },
+            {
+                "@value": "Windows"
+            }
+        ],
+        "http://schema.org/programmingLanguage": [
+            {
+                "@value": "Scala"
+            },
+            {
+                "@value": "Java"
+            },
+            {
+                "@value": "Ruby"
+            }
+        ],
+        "https://w3id.org/okn/o/sd#readme": [
+            {
+                "@value": "https://github.com/scala/scala/blob/2.13.x/README.md"
+            }
+        ],
+        "https://imaging-plaza.epfl.ch/ontology#relatedToOrganization": [
+            {
+                "@value": "EPFL"
+            },
+            {
+                "@value": "Lightbend, Inc. dba Akka"
+            },
+            {
+                "@value": "Scala Center"
+            }
+        ],
+        "pulse:repositoryType": [
+            {
+                "@value": "software"
+            }
+        ],
+        "https://imaging-plaza.epfl.ch/ontology#requiresGPU": [
+            {
+                "@value": false
+            }
+        ],
+        "http://schema.org/softwareRequirements": [
+            {
+                "@value": "Java SDK 8+"
+            },
+            {
+                "@value": "sbt"
+            }
+        ],
+        "http://schema.org/url": [
+            {
+                "@value": "https://www.scala-lang.org"
+            }
+        ]
+    }
+}
