@@ -126,7 +126,8 @@ a sh:NodeShape ;
   sh:property schema:Thing-name ;
   sh:property md4i:orcidIdShape ;
   sh:property schema:Thing-affiliation ;
-  sh:property pulse:usernameShape
+  sh:property pulse:usernameShape ;
+  sh:property schema:memberOfShape 
 .
 
 schema:Person-familyName
