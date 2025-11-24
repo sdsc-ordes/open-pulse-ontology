@@ -9,3 +9,4 @@ software_instances.ttl
 # Ignore downloaded/third-party jars
 shacl-play-cli.jar
 
+shacl-play-app.log

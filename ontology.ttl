@@ -188,6 +188,24 @@ schema:username a rdf:Property ;
     rdfs:label "Username" ;
     rdfs:range xsd:string .
 
+schema:jobTitle a rdf:Property ;
+    rdfs:comment "The job title of a person (e.g., Financial Manager)." ;
+    rdfs:label "Job Title" ;
+    rdfs:range xsd:string ;
+    rdfs:domain schema:Person .
+
+schema:featureList a rdf:Property ;
+    rdfs:comment "Features or modules provided by this software or application." ;
+    rdfs:label "Feature List" ;
+    rdfs:range xsd:string ;
+    rdfs:domain schema:SoftwareSourceCode .
+
+schema:applicationCategory a rdf:Property ;
+    rdfs:comment "Type of software application, e.g., 'Game, Multimedia'." ;
+    rdfs:label "Application Category" ;
+    rdfs:range xsd:string ;
+    rdfs:domain schema:SoftwareSourceCode .
+
 pulse:hasRepository a rdf:Property ;
   rdfs:comment "A software repository that is part of a GitHub organization." ;
   rdfs:label "Has repository" ; 
@@ -248,10 +266,9 @@ pulse:uuid a rdf:Property ;
   rdfs:domain pulse:CatalogEntity ;
   rdfs:range xsd:string .
 
-pulse:email a rdf:Property ;
-  rdfs:comment "The email address of a person in the catalog." ;
+schema:email a rdf:Property ;
+  rdfs:comment "The email address of a person or organization." ;
   rdfs:label "Email" ;
-  rdfs:domain pulse:CatalogEntity ;
   rdfs:range xsd:string .
 
 pulse:profileUrl a rdf:Property ;

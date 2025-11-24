@@ -64,7 +64,9 @@ sh:property   schema:CreativeWork-citation ,
               pulse:relatedDatasetsShape ,
               pulse:totalCommitsShape ,
               pulse:commitsShape ,
-              pulse:metadataShape
+              pulse:metadataShape ,
+              schema:SoftwareSourceCode-featureList ,
+              schema:SoftwareSourceCode-applicationCategory 
 .
 
 schema:CreativeWork-citation
@@ -140,7 +142,9 @@ a sh:NodeShape ;
   sh:property md4i:orcidIdShape ;
   sh:property schema:Thing-affiliation ;
   sh:property pulse:usernameShape ;
-  sh:property schema:memberOfShape 
+  sh:property schema:memberOfShape ;
+  sh:property schema:Person-jobTitle ;
+  sh:property schema:Thing-email 
 .
 
 schema:Person-familyName
@@ -155,6 +159,12 @@ schema:Person-givenName
   sh:path schema:givenName ;
   sh:datatype xsd:string ;
   sh:minCount 1 ;
+.
+
+schema:Person-jobTitle
+  a sh:PropertyShape ;
+  sh:path schema:jobTitle ;
+  sh:datatype xsd:string ;
 .
 
 md4i:orcidIdShape
@@ -213,6 +223,19 @@ schema:SoftwareSourceCode-programmingLanguage
   sh:path schema:programmingLanguage ;
   sh:datatype xsd:string ;
 .
+
+schema:SoftwareSourceCode-featureList
+  a sh:PropertyShape ;
+  sh:path schema:featureList ;
+  sh:datatype xsd:string ;
+.
+
+schema:SoftwareSourceCode-applicationCategory
+  a sh:PropertyShape ;
+  sh:path schema:applicationCategory ;
+  sh:datatype xsd:string ;
+.
+
 
 schema:Thing-url
   a sh:PropertyShape ;
@@ -354,7 +377,7 @@ pulse:CatalogEntity
     a sh:NodeShape, rdfs:Class ;
     sh:property pulse:uuidShape ,
                 schema:Thing-name ,
-                pulse:emailShape ,
+                schema:Thing-email ,
                 md4i:orcidIdShape ,
                 schema:Thing-affiliation ,
                 pulse:profileUrlShape .
@@ -365,9 +388,9 @@ pulse:uuidShape
     sh:minCount 1 ;
     sh:maxCount 1 .
 
-pulse:emailShape
+schema:Thing-email
     a sh:PropertyShape ;
-    sh:path pulse:email ;
+    sh:path schema:email ;
     sh:datatype xsd:string ;
     sh:maxCount 1 .
 
