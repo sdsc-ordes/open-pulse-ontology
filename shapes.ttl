@@ -47,7 +47,6 @@ sh:property   schema:CreativeWork-citation ,
               schema:Thing-name ,
               schema:SoftwareSourceCode-programmingLanguage ,
               schema:Thing-url ,
-              schema:Thing-identifier ,
               sd:SoftwareApplication-readme , 
               pulse:disciplineShape ,
               pulse:repositoryTypeShape ,
@@ -56,13 +55,10 @@ sh:property   schema:CreativeWork-citation ,
               pulse:sourceShape ,
               pulse:linkedEntitiesShape ,
               pulse:relatedModelsShape ,
-              pulse:firstCommitDateShape ,
-              pulse:lastCommitDateShape ,
               pulse:gitAuthorsShape ,
               pulse:relatedPublicationsShape ,
               pulse:relatedAPIsShape ,
               pulse:relatedDatasetsShape ,
-              pulse:totalCommitsShape ,
               pulse:commitsShape ,
               pulse:metadataShape ,
               schema:SoftwareSourceCode-featureList ,
@@ -181,9 +177,7 @@ schema:Thing-affiliation
 
 schema:Organization
   a sh:NodeShape ;
-sh:property schema:Organization-legalName ;
-sh:property md4i:hasRorIdShape ;
-.
+sh:property schema:Organization-legalName .
 
 schema:GitHubOrganization
   a sh:NodeShape ;
@@ -199,7 +193,6 @@ sh:property schema:Thing-description ;
 sh:property schema:CreativeWork-author ;
 sh:property schema:CreativeWork-dateCreated ;
 sh:property schema:CreativeWork-datePublished ;
-sh:property schema:Thing-identifier ;
 sh:property schema:Thing-url ;
 .
 
@@ -263,13 +256,6 @@ schema:DataDownload-contentURL
   .
     
 
-schema:Thing-identifier
-  a sh:PropertyShape ;
-  sh:path schema:identifier ;
-  sh:datatype xsd:string ;
-  sh:minCount 1 ;
-.
-
 
 schema:Organization-legalName
   a sh:PropertyShape ;
@@ -277,13 +263,6 @@ schema:Organization-legalName
   sh:datatype xsd:string ;
   sh:minCount 1 ;
 .
-
-md4i:hasRorIdShape
-  a sh:PropertyShape ;
-  sh:path md4i:hasRorId ;
-  sh:pattern "^http.*" ;
-  .
-
 pulse:disciplineShape
     a sh:PropertyShape ;
     sh:path pulse:discipline ;
@@ -375,30 +354,14 @@ pulse:matchedOnShape
 
 pulse:CatalogEntity
     a sh:NodeShape, rdfs:Class ;
-    sh:property pulse:uuidShape ,
-                schema:Thing-name ,
-                schema:Thing-email ,
-                md4i:orcidIdShape ,
-                schema:Thing-affiliation ,
-                pulse:profileUrlShape .
-pulse:uuidShape
-    a sh:PropertyShape ;
-    sh:path pulse:uuid ;
-    sh:datatype xsd:string ;
-    sh:minCount 1 ;
-    sh:maxCount 1 .
-
+  sh:property schema:Thing-name ,
+        schema:Thing-email ,
+        md4i:orcidIdShape ,
+        schema:Thing-affiliation .
 schema:Thing-email
     a sh:PropertyShape ;
     sh:path schema:email ;
     sh:datatype xsd:string ;
-    sh:maxCount 1 .
-
-pulse:profileUrlShape
-    a sh:PropertyShape ;
-    sh:path pulse:profileUrl ;
-    sh:datatype xsd:anyURI ;
-    sh:pattern "^http.*" ;
     sh:maxCount 1 .
 
 pulse:hasAcademicCatalogRelationShape
@@ -430,18 +393,6 @@ pulse:relatedModelsShape
     sh:path pulse:relatedModels ;
     sh:datatype xsd:string .
 
-pulse:firstCommitDateShape
-    a sh:PropertyShape ;
-    sh:path pulse:firstCommitDate ;
-    sh:datatype xsd:date ;
-    sh:maxCount 1 .
-
-pulse:lastCommitDateShape
-    a sh:PropertyShape ;
-    sh:path pulse:lastCommitDate ;
-    sh:datatype xsd:date ;
-    sh:maxCount 1 .
-
 pulse:gitAuthorsShape
     a sh:PropertyShape ;
     sh:path pulse:gitAuthors ;
@@ -461,13 +412,6 @@ pulse:relatedDatasetsShape
     a sh:PropertyShape ;
     sh:path pulse:relatedDatasets ;
     sh:class schema:Dataset .
-
-pulse:totalCommitsShape
-    a sh:PropertyShape ;
-    sh:path pulse:totalCommits ;
-    sh:datatype xsd:integer ;
-    sh:minInclusive 0 ;
-    sh:maxCount 1 .
 
 pulse:commitsShape
     a sh:PropertyShape ;

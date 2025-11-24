@@ -1,3 +1,4 @@
+
 prefix schema: <http://schema.org/>
 prefix sd: <https://w3id.org/okn/o/sd#>
 prefix bio: <https://bioschemas.org/>
@@ -6,9 +7,9 @@ prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix sh:   <http://www.w3.org/ns/shacl#>
 prefix xsd:  <http://www.w3.org/2001/XMLSchema#>
 prefix shsh: <http://www.w3.org/ns/shacl-shacl#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix dcterms: <http://purl.org/dc/terms/>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 prefix md4i: <http://w3id.org/nfdi4ing/metadata4ing#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix dct: <http://purl.org/dc/terms/>
@@ -28,7 +29,7 @@ prefix wd: <http://www.wikidata.org/entity/>
     dct:creator "Robin Franken" ;
     dct:description "The Open Pulse ontology provides concepts (classes and properties) to model human and machine readable imaging software metadata. It is the result of re-using external pre-existing vocabularies such as schema.org and the software description ontology, together with custom imaging specific objects and properties. The ontology contains purely semantic information (labels, definitions etc.) and is meant to be used in conjuction with a graph of enumeration values and a graph containing SHACL shapes to provide more machine readable restrictions on values of properties." ;
     dct:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
-    dct:modified "2025-1-24"^^xsd:date ;
+    dct:modified "2025-11-24"^^xsd:date ;
     dct:title "Open pulse Ontology" ;
     vann:preferredNamespacePrefix "pulse" ;
     vann:preferredNamespaceUri "https://open-pulse.epfl.ch/ontology#"^^xsd:string ;
@@ -147,11 +148,6 @@ schema:name a rdf:Property;
 md4i:orcidId a rdf:Property ;
   rdfs:comment "The ORCID ID of a person" ;
   rdfs:label "Has ORCID ID" .
-
-md4i:hasRorId a rdf:Property ;
-  rdfs:comment "A Research Organization Registry identifier, that points to a research organization" ;
-  rdfs:label "Has ROR ID" .
-
 schema:legalName a rdf:Property;
   rdfs:comment "The official name of the organization, e.g. the registered company name.";
   rdfs:label "Legal name" .
@@ -163,11 +159,6 @@ schema:programmingLanguage a rdf:Property;
 schema:url a rdf:Property;
   rdfs:comment "Fill in any URL related to this repository. e.g. related lab or project website.";
   rdfs:label "URL" .
-
-schema:identifier a rdf:Property;
-  rdfs:comment "Represents any kind of unique string to identify something, such as ISBNs, GTIN codes, UUIDs etc.";
-  rdfs:label "Identifier" .
-
 sd:readme a rdf:Property;
   rdfs:comment "URL to the Readme file of a software component"@en;
   rdfs:label "Readme"@en .
@@ -263,22 +254,10 @@ pulse:confidence a rdf:Property ;
 
 # Properties for Catalog Entity
 
-pulse:uuid a rdf:Property ;
-  rdfs:comment "A universally unique identifier for the catalog entity." ;
-  rdfs:label "UUID" ;
-  rdfs:domain pulse:CatalogEntity ;
-  rdfs:range xsd:string .
-
 schema:email a rdf:Property ;
   rdfs:comment "The email address of a person or organization." ;
   rdfs:label "Email" ;
   rdfs:range xsd:string .
-
-pulse:profileUrl a rdf:Property ;
-  rdfs:comment "The URL to the entity's profile page in the academic catalog." ;
-  rdfs:label "Profile URL" ;
-  rdfs:domain pulse:CatalogEntity ;
-  rdfs:range xsd:anyURI .
 
 pulse:publicationCount a rdf:Property ;
   rdfs:comment "The number of publications associated with the entity in the catalog." ;
@@ -330,17 +309,6 @@ pulse:relatedModels a rdf:Property ;
   rdfs:domain schema:SoftwareSourceCode ;
   rdfs:range xsd:string .
 
-pulse:firstCommitDate a rdf:Property ;
-  rdfs:comment "The date of the first commit in the repository." ;
-  rdfs:label "First commit date" ;
-  rdfs:domain schema:SoftwareSourceCode ;
-  rdfs:range xsd:date .
-
-pulse:lastCommitDate a rdf:Property ;
-  rdfs:comment "The date of the most recent commit in the repository." ;
-  rdfs:label "Last commit date" ;
-  rdfs:domain schema:SoftwareSourceCode ;
-  rdfs:range xsd:date .
 
 pulse:gitAuthors a rdf:Property ;
   rdfs:comment "Authors who have contributed commits to the git repository." ;
@@ -366,12 +334,6 @@ pulse:relatedDatasets a rdf:Property ;
   rdfs:domain schema:SoftwareSourceCode ;
   rdfs:range schema:Dataset .
 
-pulse:totalCommits a rdf:Property ;
-  rdfs:comment "The total number of commits in the repository." ;
-  rdfs:label "Total commits" ;
-  rdfs:domain schema:SoftwareSourceCode ;
-  rdfs:range xsd:integer .
-
 pulse:commits a rdf:Property ;
   rdfs:comment "The number of commits, or detailed commit information." ;
   rdfs:label "Commits" ;
@@ -396,7 +358,6 @@ sh:property   schema:CreativeWork-citation ,
               schema:Thing-name ,
               schema:SoftwareSourceCode-programmingLanguage ,
               schema:Thing-url ,
-              schema:Thing-identifier ,
               sd:SoftwareApplication-readme , 
               pulse:disciplineShape ,
               pulse:repositoryTypeShape ,
@@ -405,13 +366,10 @@ sh:property   schema:CreativeWork-citation ,
               pulse:sourceShape ,
               pulse:linkedEntitiesShape ,
               pulse:relatedModelsShape ,
-              pulse:firstCommitDateShape ,
-              pulse:lastCommitDateShape ,
               pulse:gitAuthorsShape ,
               pulse:relatedPublicationsShape ,
               pulse:relatedAPIsShape ,
               pulse:relatedDatasetsShape ,
-              pulse:totalCommitsShape ,
               pulse:commitsShape ,
               pulse:metadataShape ,
               schema:SoftwareSourceCode-featureList ,
@@ -530,9 +488,7 @@ schema:Thing-affiliation
 
 schema:Organization
   a sh:NodeShape ;
-sh:property schema:Organization-legalName ;
-sh:property md4i:hasRorIdShape ;
-.
+sh:property schema:Organization-legalName .
 
 schema:GitHubOrganization
   a sh:NodeShape ;
@@ -548,7 +504,6 @@ sh:property schema:Thing-description ;
 sh:property schema:CreativeWork-author ;
 sh:property schema:CreativeWork-dateCreated ;
 sh:property schema:CreativeWork-datePublished ;
-sh:property schema:Thing-identifier ;
 sh:property schema:Thing-url ;
 .
 
@@ -612,13 +567,6 @@ schema:DataDownload-contentURL
   .
     
 
-schema:Thing-identifier
-  a sh:PropertyShape ;
-  sh:path schema:identifier ;
-  sh:datatype xsd:string ;
-  sh:minCount 1 ;
-.
-
 
 schema:Organization-legalName
   a sh:PropertyShape ;
@@ -626,13 +574,6 @@ schema:Organization-legalName
   sh:datatype xsd:string ;
   sh:minCount 1 ;
 .
-
-md4i:hasRorIdShape
-  a sh:PropertyShape ;
-  sh:path md4i:hasRorId ;
-  sh:pattern "^http.*" ;
-  .
-
 pulse:disciplineShape
     a sh:PropertyShape ;
     sh:path pulse:discipline ;
@@ -724,30 +665,14 @@ pulse:matchedOnShape
 
 pulse:CatalogEntity
     a sh:NodeShape, rdfs:Class ;
-    sh:property pulse:uuidShape ,
-                schema:Thing-name ,
-                schema:Thing-email ,
-                md4i:orcidIdShape ,
-                schema:Thing-affiliation ,
-                pulse:profileUrlShape .
-pulse:uuidShape
-    a sh:PropertyShape ;
-    sh:path pulse:uuid ;
-    sh:datatype xsd:string ;
-    sh:minCount 1 ;
-    sh:maxCount 1 .
-
+  sh:property schema:Thing-name ,
+        schema:Thing-email ,
+        md4i:orcidIdShape ,
+        schema:Thing-affiliation .
 schema:Thing-email
     a sh:PropertyShape ;
     sh:path schema:email ;
     sh:datatype xsd:string ;
-    sh:maxCount 1 .
-
-pulse:profileUrlShape
-    a sh:PropertyShape ;
-    sh:path pulse:profileUrl ;
-    sh:datatype xsd:anyURI ;
-    sh:pattern "^http.*" ;
     sh:maxCount 1 .
 
 pulse:hasAcademicCatalogRelationShape
@@ -779,18 +704,6 @@ pulse:relatedModelsShape
     sh:path pulse:relatedModels ;
     sh:datatype xsd:string .
 
-pulse:firstCommitDateShape
-    a sh:PropertyShape ;
-    sh:path pulse:firstCommitDate ;
-    sh:datatype xsd:date ;
-    sh:maxCount 1 .
-
-pulse:lastCommitDateShape
-    a sh:PropertyShape ;
-    sh:path pulse:lastCommitDate ;
-    sh:datatype xsd:date ;
-    sh:maxCount 1 .
-
 pulse:gitAuthorsShape
     a sh:PropertyShape ;
     sh:path pulse:gitAuthors ;
@@ -810,13 +723,6 @@ pulse:relatedDatasetsShape
     a sh:PropertyShape ;
     sh:path pulse:relatedDatasets ;
     sh:class schema:Dataset .
-
-pulse:totalCommitsShape
-    a sh:PropertyShape ;
-    sh:path pulse:totalCommits ;
-    sh:datatype xsd:integer ;
-    sh:minInclusive 0 ;
-    sh:maxCount 1 .
 
 pulse:commitsShape
     a sh:PropertyShape ;

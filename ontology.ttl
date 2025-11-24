@@ -25,11 +25,11 @@
     dct:creator "Robin Franken" ;
     dct:description "The Open Pulse ontology provides concepts (classes and properties) to model human and machine readable imaging software metadata. It is the result of re-using external pre-existing vocabularies such as schema.org and the software description ontology, together with custom imaging specific objects and properties. The ontology contains purely semantic information (labels, definitions etc.) and is meant to be used in conjuction with a graph of enumeration values and a graph containing SHACL shapes to provide more machine readable restrictions on values of properties." ;
     dct:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
-    dct:modified "2025-05-13"^^xsd:date ;
+    dct:modified "2025-11-24"^^xsd:date ;
     dct:title "Open pulse Ontology" ;
     vann:preferredNamespacePrefix "pulse" ;
     vann:preferredNamespaceUri "https://open-pulse.epfl.ch/ontology#"^^xsd:string ;
-    owl:versionInfo "0.0.1"^^xsd:string 
+    owl:versionInfo "0.1.0"^^xsd:string 
     .
 
 schema:SoftwareSourceCode
@@ -144,11 +144,6 @@ schema:name a rdf:Property;
 md4i:orcidId a rdf:Property ;
   rdfs:comment "The ORCID ID of a person" ;
   rdfs:label "Has ORCID ID" .
-
-md4i:hasRorId a rdf:Property ;
-  rdfs:comment "A Research Organization Registry identifier, that points to a research organization" ;
-  rdfs:label "Has ROR ID" .
-
 schema:legalName a rdf:Property;
   rdfs:comment "The official name of the organization, e.g. the registered company name.";
   rdfs:label "Legal name" .
@@ -160,11 +155,6 @@ schema:programmingLanguage a rdf:Property;
 schema:url a rdf:Property;
   rdfs:comment "Fill in any URL related to this repository. e.g. related lab or project website.";
   rdfs:label "URL" .
-
-schema:identifier a rdf:Property;
-  rdfs:comment "Represents any kind of unique string to identify something, such as ISBNs, GTIN codes, UUIDs etc.";
-  rdfs:label "Identifier" .
-
 sd:readme a rdf:Property;
   rdfs:comment "URL to the Readme file of a software component"@en;
   rdfs:label "Readme"@en .
@@ -260,22 +250,10 @@ pulse:confidence a rdf:Property ;
 
 # Properties for Catalog Entity
 
-pulse:uuid a rdf:Property ;
-  rdfs:comment "A universally unique identifier for the catalog entity." ;
-  rdfs:label "UUID" ;
-  rdfs:domain pulse:CatalogEntity ;
-  rdfs:range xsd:string .
-
 schema:email a rdf:Property ;
   rdfs:comment "The email address of a person or organization." ;
   rdfs:label "Email" ;
   rdfs:range xsd:string .
-
-pulse:profileUrl a rdf:Property ;
-  rdfs:comment "The URL to the entity's profile page in the academic catalog." ;
-  rdfs:label "Profile URL" ;
-  rdfs:domain pulse:CatalogEntity ;
-  rdfs:range xsd:anyURI .
 
 pulse:publicationCount a rdf:Property ;
   rdfs:comment "The number of publications associated with the entity in the catalog." ;
@@ -327,17 +305,6 @@ pulse:relatedModels a rdf:Property ;
   rdfs:domain schema:SoftwareSourceCode ;
   rdfs:range xsd:string .
 
-pulse:firstCommitDate a rdf:Property ;
-  rdfs:comment "The date of the first commit in the repository." ;
-  rdfs:label "First commit date" ;
-  rdfs:domain schema:SoftwareSourceCode ;
-  rdfs:range xsd:date .
-
-pulse:lastCommitDate a rdf:Property ;
-  rdfs:comment "The date of the most recent commit in the repository." ;
-  rdfs:label "Last commit date" ;
-  rdfs:domain schema:SoftwareSourceCode ;
-  rdfs:range xsd:date .
 
 pulse:gitAuthors a rdf:Property ;
   rdfs:comment "Authors who have contributed commits to the git repository." ;
@@ -362,12 +329,6 @@ pulse:relatedDatasets a rdf:Property ;
   rdfs:label "Related datasets" ;
   rdfs:domain schema:SoftwareSourceCode ;
   rdfs:range schema:Dataset .
-
-pulse:totalCommits a rdf:Property ;
-  rdfs:comment "The total number of commits in the repository." ;
-  rdfs:label "Total commits" ;
-  rdfs:domain schema:SoftwareSourceCode ;
-  rdfs:range xsd:integer .
 
 pulse:commits a rdf:Property ;
   rdfs:comment "The number of commits, or detailed commit information." ;
