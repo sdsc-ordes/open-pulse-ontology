@@ -1,0 +1,1419 @@
+<!DOCTYPE HTML><html lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <style>
+		
+			body {
+						margin: 0;
+						font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+							"Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+							"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+							"Noto Color Emoji";
+						background-color: #fff;
+					}
+					
+					.anchor {
+						float: left;
+						padding-right: 4px;
+						margin-left: -20px;
+						line-height: 1;
+						padding-top: 12px;
+					}
+							
+					a {
+						color: #007bff;
+						text-decoration: none;
+						background-color: transparent;
+					}
+					
+					a:-webkit-any-link {
+						cursor: pointer;
+					}
+					
+					.p {
+						font-size: 0.875em;
+					}
+					
+					h2 {
+						margin: 25px 0px 10px 0px;
+					}
+					
+					h3 {
+						font-size: 1.4em;
+					}
+
+					h4 {
+						font-size: 1.1em;
+						font-weight: bold;
+					}
+
+					.constraint_list li {
+						list-style:"> ";
+						font-style: italic;
+					}
+					
+					@media only print {
+					}
+					
+					@page {
+						size: A4 portrait;
+						margin-top: 1.2cm;
+						margin-bottom: 1.2cm;
+						margin-left: 1.2cm;
+						margin-right: 1.2cm;
+						background-repeat: no-repeat;
+						background-position: 40px 10px;
+						
+						@bottom-center
+						{
+						content
+						:
+						counter(
+						page
+						);
+					}
+					
+					}
+							
+					/* This section draw the format web */
+					.ul_type_none {
+						list-style-type: none;
+					}
+					
+					.sp_list_description_properties {
+						/* don't set it lower otherwise it gets hidden in PDF */
+						padding-left: 20px;
+					}
+					
+					dl, ol, ul {
+						margin-top: 0;
+						margin-bottom: 1rem;
+					}
+					
+					li {
+						display: list-item;
+						text-align: -webkit-match-parent;
+					}
+					
+					.sp_section_title_header {
+						font-family: Georgia, Garamond, serif;	
+						margin-top: 25px;
+						margin-bottom: 2.5rem;
+					    font-size: 1.5625rem;
+						display: block;
+						font-weight: 500;
+						color: #1e1e1f;
+						line-height: 1.2em;   
+					}
+					
+					.sp_section_subtitle {
+						font-family: Georgia, Garamond, serif;	
+						margin-top: 0;
+						margin-bottom: 0.5rem;
+						display: block;
+						font-weight: 500;
+						color: #1e1e1f;
+						line-height: 1.2em;  
+					}
+					
+					.sp_section_title_table {
+						font-family: Georgia, Garamond, serif;	
+						/* 0 because URI is right under */
+						margin-bottom: 0rem;
+						display: block;
+						font-weight: 500;
+						color: #1e1e1f;
+						line-height: 1.2em; 
+					}
+							
+
+					.sp_section_title_toc {
+						font-family: Georgia, Garamond, serif;	
+					}
+
+					/* URI below the title of the section */
+					.sp_section_uri	 {
+						margin-top: 0px;
+					}
+
+					/* div wrapping section title and URI below - same as a paragraph margin */
+					.sp_section_title_table_wrapper {
+						margin-bottom: 16px;
+						border-bottom: 1px solid;	
+					}
+					
+					.sp_section_nodeshape_diagram {
+						padding-bottom: 16px;
+					}
+					
+					.sp_section_nodeshape_center {
+						display: flex;
+						justify-content: center;
+					}
+					
+					table {
+						display: table;
+						border-spacing: 0px;
+						margin-bottom: 1rem;
+					}
+					
+					.table-striped tr:nth-child(even) {
+						background-color: #eee;
+					}
+							
+					.sp_table_prefixes table {
+						border-collapse: collapse;
+						margin-bottom: 1rem;
+						color: #212529;
+					}
+											
+					.sp_table_prefixes td {
+						padding: 0.25rem;
+						vertical-align: top;
+						border-top: 1px solid #dee2e6;
+					}
+					
+					.sp_table_propertyshapes {
+						border-collapse: collapse;
+						width: 100%;
+					}
+										
+					.sp_table_propertyshapes thead {
+						display: table-header-group;
+						vertical-align: middle;
+						border-color: inherit;
+					}
+													
+					.sp_table_propertyshapes tr {
+					    display: table-row;
+					    vertical-align: inherit;
+					    border-color: inherit;					    
+					}
+													
+					.sp_table_propertyshapes th:nth-child(4) {
+						width: 6%;
+					}
+													
+					.sp_table_propertyshapes td {
+						padding: 0.75rem;
+						border-top: 1px solid #dee2e6;
+					}
+													
+					.sp_table_propertyshapes tbody {
+						display: table-row-group;
+						vertical-align: middle;
+						border-color: inherit;
+					}
+										
+					.sp_table_propertyshapes_col_description {
+						word-break: break-word;
+					}
+					
+					tr.sp_propertyGroup {
+						font-style: italic;
+						background-color: #def0f7;
+					}
+					
+					tr.sp_propertyGroup td {
+						border-bottom: 1px solid black;
+						padding-bottom: 0.25 rem;
+					}
+					
+					.sp_serialization_badge {
+						margin-right: 0.5em;
+					}
+
+					.sp_nodeshape_description {
+						background: #efefef;
+						padding-top:1px;
+						padding-bottom:1px;
+						padding-left:10px;
+						padding-right:10px;
+						border-radius: 5px;
+						margin-bottom:10px;
+					}
+					
+					
+							.container {
+							    width: calc(100% - 40px);
+							    max-width: 1100px;
+							    margin-left: 300px;
+							    margin-right: auto;
+							}
+							.container {width: calc(100% - 500px);}
+							.toc {
+								position: fixed;
+								top: 0;
+								left: 0;
+								font-size: small;
+								padding: 10px 10px;
+								width: auto;
+								border-right: solid 2px #eeeeee;
+								bottom: 0;
+								overflow-y: scroll;
+								background-color:white;
+								max-width:255px;
+							}
+							.sp_list_toc {padding-left: 0px;}
+							.sp_list_toc_l2 {padding-left: 10px;}	
+							.sp_list_toc_l3 {padding-left: 8px;}					
+						</style>
+      <!--EXTRA CSS-->
+      <meta charset="UTF-8">
+      <meta name="lang" content="en">
+      <meta property="og:locale" content="en">
+      <title>Open pulse Ontology</title>
+      <meta name="apple-mobile-web-app-title" content="Open pulse Ontology">
+      <meta name="twitter:title" content="Open pulse Ontology">
+      <meta property="og:title" content="Open pulse Ontology"><script type="application/ld+json">{
+    "datePublished": "2025-05-13",
+    "license": ["https://spdx.org/licenses/CC-BY-SA-4.0.html"],
+    "@type": "TechArticle",
+    "author": [{
+        "@type": "Organization",
+        "name": "Robin Franken"
+    }],
+    "name": "Open pulse Ontology",
+    "@context": "https://schema.org",
+    "version": "0.0.1",
+    "url": "https://open-pulse.epfl.ch/ontology#"
+}</script></head>
+   <body>
+      <div class="sp_container_principal container pt-4">
+         <h1 class="mb-4 sp_section_title_header">Open pulse Ontology</h1>
+         <div><b>Creation date: </b>2025-05-13<br><b>Last updated: </b>2025-05-13<br><b>Version: </b>0.0.1<br><b>License: </b><a href="https://spdx.org/licenses/CC-BY-SA-4.0.html" target="_blank">https://spdx.org/licenses/CC-BY-SA-4.0.html</a><br><b>Creator: </b>Robin Franken<br><br></div>
+         <div class="row mt-3">
+            <div class="col">
+               <h2 id="abstract" class="sp_section_subtitle">Abstract</h2><p>The Open Pulse ontology provides concepts (classes and properties) to model human and machine readable imaging software metadata. It is the result of re-using external pre-existing vocabularies such as schema.org and the software description ontology, together with custom imaging specific objects and properties.</p>
+</div>
+         </div>
+         <div class="sp_section_title_toc toc">
+            <h2 id="index">Table of Contents</h2>
+            <ul role="list" class="sp_list_toc ul_type_none t-x-mode">
+               <li><a href="#prefixes">Namespaces</a></li>
+               <li><a href="#diagrams">Diagrams</a></li>
+               <li><a href="#description">Description</a></li>
+               <li><a href="#documentation">Model documentation</a><ul role="list" class="ul_type_none sp_list_toc_l2">
+                     <li><a href="#pulse:AcademicCatalogRelation">Academic Catalog Relation</a></li>
+                     <li><a href="#pulse:CatalogEntity">Catalog Entity</a></li>
+                     <li><a href="#schema:Dataset">Dataset</a></li>
+                     <li><a href="#pulse:DisciplineEnumeration">Discipline Enumeration</a></li>
+                     <li><a href="#schema:Organization">Organization</a></li>
+                     <li><a href="#schema:Person">Person</a></li>
+                     <li><a href="#pulse:RepositoryTypeEnumeration">Repository Type Enumeration</a></li>
+                     <li><a href="#schema:GitHubOrganization">schema:GitHubOrganization</a></li>
+                     <li><a href="#schema:ScholarlyArticle">Scholarly Article</a></li>
+                     <li><a href="#schema:SoftwareSourceCode">Software application</a></li>
+                  </ul>
+               </li>
+            </ul>
+         </div>
+         <div class="row mt-3">
+            <div class="col">
+               <section>
+                  <h2 id="prefixes" class="sp_section_subtitle">Namespaces</h2>
+                  <table class="sp_table_prefixes table table-striped table-responsive">
+                     <thead>
+                        <tr>
+                           <th>Prefix</th>
+                           <th>Namespace</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>md4i</td>
+                           <td><a href="http://w3id.org/nfdi4ing/metadata4ing#" target="_blank">http://w3id.org/nfdi4ing/metadata4ing#</a></td>
+                        </tr>
+                        <tr>
+                           <td>pulse</td>
+                           <td><a href="https://open-pulse.epfl.ch/ontology#" target="_blank">https://open-pulse.epfl.ch/ontology#</a></td>
+                        </tr>
+                        <tr>
+                           <td>schema</td>
+                           <td><a href="http://schema.org/" target="_blank">http://schema.org/</a></td>
+                        </tr>
+                        <tr>
+                           <td>sd</td>
+                           <td><a href="https://w3id.org/okn/o/sd#" target="_blank">https://w3id.org/okn/o/sd#</a></td>
+                        </tr>
+                        <tr>
+                           <td>xsd</td>
+                           <td><a href="http://www.w3.org/2001/XMLSchema#" target="_blank">http://www.w3.org/2001/XMLSchema#</a></td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </section>
+            </div>
+         </div><br><div class="sp_section_row mt-3">
+            <div class="sp_section_col">
+               <section>
+                  <h2 id="diagrams" class="sp_section_subtitle">Diagrams</h2>
+                  <div><?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1315px" preserveAspectRatio="none" style="width:1154px;height:1315px;background:#FFFFFF;" version="1.1" viewBox="0 0 1154 1315" width="1154px" zoomAndPan="magnify"><defs xmlns=""/><g><!--class schema:Organization--><a href="#schema:Organization" target="_top" title="#schema:Organization" xlink:actuate="onRequest" xlink:href="#schema:Organization" xlink:show="new" xlink:title="#schema:Organization" xlink:type="simple"><g id="elem_schema:Organization"><rect codeLine="8" fill="#F1F1F1" height="75.2038" id="uml_schema:Organization" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="274" x="70" y="1214"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="152" x="131" y="1233.9659">schema:Organization</text><line style="stroke:#181818;stroke-width:0.5;" x1="71" x2="343" y1="1243.0679" y2="1243.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="99" x="76" y="1262.0339">md4i:hasRorId</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="262" x="76" y="1281.1018">schema:legalName  : xsd:string  [1..*]</text></g></a><!--class schema:Person--><a href="#schema:Person" target="_top" title="#schema:Person" xlink:actuate="onRequest" xlink:href="#schema:Person" xlink:show="new" xlink:title="#schema:Person" xlink:type="simple"><g id="elem_schema:Person"><rect codeLine="11" fill="#F1F1F1" height="113.3396" id="uml_schema:Person" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="239" x="379.5" y="1195"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="444" y="1214.9659">schema:Person</text><line style="stroke:#181818;stroke-width:0.5;" x1="380.5" x2="617.5" y1="1224.0679" y2="1224.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169" x="385.5" y="1243.0339">md4i:orcidId  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="211" x="385.5" y="1262.1018">schema:affiliation  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="227" x="385.5" y="1281.1697">schema:name  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="215" x="385.5" y="1300.2376">schema:username  : xsd:string</text></g></a><!--class pulse:AcademicCatalogRelation--><a href="#pulse:AcademicCatalogRelation" target="_top" title="#pulse:AcademicCatalogRelation" xlink:actuate="onRequest" xlink:href="#pulse:AcademicCatalogRelation" xlink:show="new" xlink:title="#pulse:AcademicCatalogRelation" xlink:type="simple"><g id="elem_pulse:AcademicCatalogRelation"><rect codeLine="16" fill="#F1F1F1" height="151.4754" id="uml_pulse:AcademicCatalogRelation" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="265" x="570.5" y="735"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="212" x="597" y="754.9659">pulse:AcademicCatalogRelation</text><line style="stroke:#181818;stroke-width:0.5;" x1="571.5" x2="834.5" y1="764.0679" y2="764.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="247" x="576.5" y="783.0339">pulse:catalogType  : xsd:string  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="253" x="576.5" y="802.1018">pulse:confidence  : xsd:decimal  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="236" x="576.5" y="821.1697">pulse:entityType  : xsd:string  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="235" x="576.5" y="840.2376">pulse:externalId  : xsd:string  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="245" x="576.5" y="859.3055">pulse:justification  : xsd:string  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="203" x="576.5" y="878.3734">pulse:matchedOn  : xsd:string</text></g></a><!--class pulse:CatalogEntity--><a href="#pulse:CatalogEntity" target="_top" title="#pulse:CatalogEntity" xlink:actuate="onRequest" xlink:href="#pulse:CatalogEntity" xlink:show="new" xlink:title="#pulse:CatalogEntity" xlink:type="simple"><g id="elem_pulse:CatalogEntity"><rect codeLine="24" fill="#F1F1F1" height="151.4754" id="uml_pulse:CatalogEntity" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="250" x="578" y="983"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="638" y="1002.9659">pulse:CatalogEntity</text><line style="stroke:#181818;stroke-width:0.5;" x1="579" x2="827" y1="1012.0679" y2="1012.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169" x="584" y="1031.0339">md4i:orcidId  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="203" x="584" y="1050.1018">pulse:email  : xsd:string  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="238" x="584" y="1069.1697">pulse:profileUrl  : xsd:anyURI  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="197" x="584" y="1088.2376">pulse:uuid  : xsd:string  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="211" x="584" y="1107.3055">schema:affiliation  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="227" x="584" y="1126.3734">schema:name  : xsd:string  [1..*]</text></g></a><!--class schema:ScholarlyArticle--><a href="#schema:ScholarlyArticle" target="_top" title="#schema:ScholarlyArticle" xlink:actuate="onRequest" xlink:href="#schema:ScholarlyArticle" xlink:show="new" xlink:title="#schema:ScholarlyArticle" xlink:type="simple"><g id="elem_schema:ScholarlyArticle"><rect codeLine="31" fill="#F1F1F1" height="151.4754" id="uml_schema:ScholarlyArticle" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="288" x="7" y="735"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="168" x="67" y="754.9659">schema:ScholarlyArticle</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="294" y1="764.0679" y2="764.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="262" x="13" y="783.0339">schema:dateCreated  : xsd:date  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="276" x="13" y="802.1018">schema:datePublished  : xsd:date  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="265" x="13" y="821.1697">schema:description  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="251" x="13" y="840.2376">schema:identifier  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="227" x="13" y="859.3055">schema:name  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="13" y="878.3734">schema:url</text></g></a><polygon fill="#F1F1F1" points="207,1046.5,219,1058.5,207,1070.5,195,1058.5,207,1046.5" style="stroke:#181818;stroke-width:0.5;"/><!--class schema:Dataset--><a href="#schema:Dataset" target="_top" title="#schema:Dataset" xlink:actuate="onRequest" xlink:href="#schema:Dataset" xlink:show="new" xlink:title="#schema:Dataset" xlink:type="simple"><g id="elem_schema:Dataset"><rect codeLine="42" fill="#F1F1F1" height="94.2717" id="uml_schema:Dataset" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="277" x="870.5" y="763.5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="951.5" y="783.4659">schema:Dataset</text><line style="stroke:#181818;stroke-width:0.5;" x1="871.5" x2="1146.5" y1="792.5679" y2="792.5679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="265" x="876.5" y="811.5339">schema:description  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="227" x="876.5" y="830.6018">schema:name  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="876.5" y="849.6697">schema:url</text></g></a><!--class schema:SoftwareSourceCode--><a href="#schema:SoftwareSourceCode" target="_top" title="#schema:SoftwareSourceCode" xlink:actuate="onRequest" xlink:href="#schema:SoftwareSourceCode" xlink:show="new" xlink:title="#schema:SoftwareSourceCode" xlink:type="simple"><g id="elem_schema:SoftwareSourceCode"><rect codeLine="46" fill="#F1F1F1" height="494.6979" id="uml_schema:SoftwareSourceCode" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="410" x="312" y="161"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="203" x="415.5" y="180.9659">schema:SoftwareSourceCode</text><line style="stroke:#181818;stroke-width:0.5;" x1="313" x2="721" y1="190.0679" y2="190.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="232" x="332" y="209.0339">pulse:commits  : xsd:integer  [0..1]</text><ellipse cx="323" cy="224.1698" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="312" x="332" y="228.1018">pulse:discipline : pulse:DisciplineEnumeration</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="266" x="332" y="247.1697">pulse:firstCommitDate  : xsd:date  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="263" x="332" y="266.2376">pulse:lastCommitDate  : xsd:date  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="215" x="332" y="285.3055">pulse:linkedEntities  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="188" x="332" y="304.3734">pulse:metadata  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="201" x="332" y="323.4414">pulse:relatedAPIs  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="221" x="332" y="342.5093">pulse:relatedModels  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="274" x="332" y="361.5772">pulse:relatedToEPFL  : xsd:boolean  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="276" x="332" y="380.6451">pulse:relatedToOrganization  : xsd:string</text><ellipse cx="323" cy="395.781" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="384" x="332" y="399.713">pulse:repositoryType : pulse:RepositoryTypeEnumeration</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="211" x="332" y="418.7809">pulse:source  : xsd:string  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="264" x="332" y="437.8489">pulse:totalCommits  : xsd:integer  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="239" x="332" y="456.9168">schema:citation  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="209" x="332" y="475.9847">schema:codeRepository  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="262" x="332" y="495.0526">schema:dateCreated  : xsd:date  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="276" x="332" y="514.1205">schema:datePublished  : xsd:date  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="265" x="332" y="533.1884">schema:description  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="251" x="332" y="552.2564">schema:identifier  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="153" x="332" y="571.3243">schema:license  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="227" x="332" y="590.3922">schema:name  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="308" x="332" y="609.4601">schema:programmingLanguage  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="332" y="628.528">schema:url</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="332" y="647.5959">sd:readme</text></g></a><polygon fill="#F1F1F1" points="365,1046.5,377,1058.5,365,1070.5,353,1058.5,365,1046.5" style="stroke:#181818;stroke-width:0.5;"/><!--class schema:GitHubOrganization--><a href="#schema:GitHubOrganization" target="_top" title="#schema:GitHubOrganization" xlink:actuate="onRequest" xlink:href="#schema:GitHubOrganization" xlink:show="new" xlink:title="#schema:GitHubOrganization" xlink:type="simple"><g id="elem_schema:GitHubOrganization"><rect codeLine="79" fill="#F1F1F1" height="75.2038" id="uml_schema:GitHubOrganization" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="227" x="403.5" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="199" x="417.5" y="26.9659">schema:GitHubOrganization</text><line style="stroke:#181818;stroke-width:0.5;" x1="404.5" x2="629.5" y1="36.0679" y2="36.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="211" x="409.5" y="55.0339">schema:affiliation  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="215" x="409.5" y="74.1018">schema:username  : xsd:string</text></g></a><!--link pulse:AcademicCatalogRelation to pulse:CatalogEntity--><g id="link_pulse:AcademicCatalogRelation_pulse:CatalogEntity"><path codeLine="23" d="M703,886.31 C703,916.84 703,946.08 703,976.62 " fill="none" id="pulse:AcademicCatalogRelation-to-pulse:CatalogEntity" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="703,982.62,707,973.62,703,977.62,699,973.62,703,982.62" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="168" x="704" y="939.897">pulse:hasCatalogEntity&#xa0;[1..1]</text></g><!--link schema:ScholarlyArticle to diamond_ScholarlyArticle_CreativeWork_author--><g id="link_schema:ScholarlyArticle_diamond_ScholarlyArticle_CreativeWork_author"><path codeLine="33" d="M168.03,886.31 C181.48,945.4 197.6077,1016.2598 203.5677,1042.4298 " fill="none" id="schema:ScholarlyArticle-to-diamond_ScholarlyArticle_CreativeWork_author" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="204.9,1048.28,206.8016,1038.6165,203.7897,1043.4048,199.0014,1040.3929,204.9,1048.28" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="97" x="184" y="930.897">schema:author</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="28" x="218.5" y="948.603">[1..*]</text></g><!--link diamond_ScholarlyArticle_CreativeWork_author to schema:Organization--><g id="link_diamond_ScholarlyArticle_CreativeWork_author_schema:Organization"><path codeLine="34" d="M207,1070.59 C207,1097.98 207,1169.78 207,1213.95 " fill="none" id="diamond_ScholarlyArticle_CreativeWork_author-schema:Organization" style="stroke:#800000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--link diamond_ScholarlyArticle_CreativeWork_author to schema:Person--><g id="link_diamond_ScholarlyArticle_CreativeWork_author_schema:Person"><path codeLine="35" d="M213.93,1064.03 C240.79,1081.6 340.2,1146.63 414.11,1194.97 " fill="none" id="diamond_ScholarlyArticle_CreativeWork_author-schema:Person" style="stroke:#800000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--link schema:SoftwareSourceCode to diamond_SoftwareSourceCode_CreativeWork_author--><g id="link_schema:SoftwareSourceCode_diamond_SoftwareSourceCode_CreativeWork_author"><path codeLine="61" d="M414.04,656.04 C405.54,682.38 397.94,709.04 392,735 C364.6,854.67 364.2277,999.0004 364.7277,1040.4704 " fill="none" id="schema:SoftwareSourceCode-to-diamond_SoftwareSourceCode_CreativeWork_author" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="364.8,1046.47,368.6912,1037.4224,364.7397,1041.4704,360.6918,1037.5189,364.8,1046.47" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="97" x="393" y="806.897">schema:author</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="28" x="427.5" y="824.603">[1..*]</text></g><!--link diamond_SoftwareSourceCode_CreativeWork_author to schema:Organization--><g id="link_diamond_SoftwareSourceCode_CreativeWork_author_schema:Organization"><path codeLine="62" d="M359.74,1065.85 C340.95,1088.57 276.14,1166.92 237.24,1213.95 " fill="none" id="diamond_SoftwareSourceCode_CreativeWork_author-schema:Organization" style="stroke:#800000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--link diamond_SoftwareSourceCode_CreativeWork_author to schema:Person--><g id="link_diamond_SoftwareSourceCode_CreativeWork_author_schema:Person"><path codeLine="63" d="M369.79,1066.06 C381.76,1082.48 413.88,1126.67 440,1164 C446.98,1173.98 454.35,1184.66 461.43,1194.99 " fill="none" id="diamond_SoftwareSourceCode_CreativeWork_author-schema:Person" style="stroke:#800000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--link schema:SoftwareSourceCode to schema:Dataset--><g id="link_schema:SoftwareSourceCode_schema:Dataset"><path codeLine="75" d="M722.43,566.21 C771.61,604.75 823.59,646.35 871,686 C900.72,710.86 928.5907,735.6436 954.4807,759.1836 " fill="none" id="schema:SoftwareSourceCode-to-schema:Dataset" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="958.92,763.22,954.9519,754.2059,955.2206,759.8564,949.5701,760.125,958.92,763.22" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="129" x="891" y="700.897">pulse:relatedDatasets</text></g><!--link schema:SoftwareSourceCode to schema:ScholarlyArticle--><g id="link_schema:SoftwareSourceCode_schema:ScholarlyArticle"><path codeLine="76" d="M311.61,549.41 C265.3,589.01 220.1,635.31 187,686 C177.41,700.68 172.0888,712.2366 166.8688,729.1566 " fill="none" id="schema:SoftwareSourceCode-to-schema:ScholarlyArticle" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="165.1,734.89,171.5754,727.4692,166.574,730.1122,163.931,725.1108,165.1,734.89" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="150" x="188" y="700.897">pulse:relatedPublications</text></g><!--link schema:SoftwareSourceCode to schema:Person--><g id="link_schema:SoftwareSourceCode_schema:Person"><path codeLine="77" d="M511.72,656.15 C507.71,843.47 502.6383,1080.6714 500.3283,1188.6414 " fill="none" id="schema:SoftwareSourceCode-to-schema:Person" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="500.2,1194.64,504.3916,1185.7276,500.3069,1189.6411,496.3934,1185.5565,500.2,1194.64" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="99" x="508" y="939.897">pulse:gitAuthors</text></g><!--link schema:SoftwareSourceCode to pulse:AcademicCatalogRelation--><g id="link_schema:SoftwareSourceCode_pulse:AcademicCatalogRelation"><path codeLine="78" d="M631.75,656.28 C644.89,684.53 654.8899,706.0295 665.6699,729.2095 " fill="none" id="schema:SoftwareSourceCode-to-pulse:AcademicCatalogRelation" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="668.2,734.65,668.0318,724.8026,666.0916,730.1163,660.7779,728.1761,668.2,734.65" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="208" x="654" y="700.897">pulse:hasAcademicCatalogRelation</text></g><!--link schema:GitHubOrganization to schema:SoftwareSourceCode--><g id="link_schema:GitHubOrganization_schema:SoftwareSourceCode"><path codeLine="82" d="M517,82.2 C517,102.78 517,124.43 517,154.95 " fill="none" id="schema:GitHubOrganization-to-schema:SoftwareSourceCode" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="517,160.95,521,151.95,517,155.95,513,151.95,517,160.95" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="121" x="518" y="126.897">pulse:hasRepository</text></g><!--SRC=[hPXVJzim4C3VyoayzZOqr4vxgYQqgZ2610Ere3qWX8nzJMyuTcGxOzsddvCqRTCcZbFsrfvzFv_j- -SOi4JI14nA6SmWfPfQfObK4YBpWZ8N98G9Qimt9UqC_m8PVexUSPYZ179rUV7zxcOw_d5nlZrT9Qa3kEbsAO1aYVYqDVggQNeDnj0OVYAt2p8S3BQ6nrghruaIpehtrrGh9IFJRYI99hbjvCYm1IHqEBhHCPNubrfKyeWyFBnl6dXy956BneWa_3EE5jHCbRxan3EnaWk8gVZXx2DE-CVmaR4QPKp8m_3avCCZsRFn5hJPiQuKrUogPgqiKfeXpmsghz4qlvBG-Hm55lRsKPE-hNZqCWEwIRVQVfe90wCnenmIP1DggL3n5CJchhmpYiFfO8n8EO6L0tVBj74dms8deImbvyX1iZMA0yE4YWDOBYRGBl-BMV37viSjzbtYOT0JzIip5kV86Zsbjs49jSuX-4s3ptKGFduyhRnaDNPUdDU6xSAoDlBb_dWm60zErqRMN6q7idQmcdpBhVOMzGUUrr8N4IYwRgP5DzNA1IxSwpM0okNzz38Oa6N8k-vnJpKeQtJeoXvPSCOMIb0jbcDjaGcevSFTmVoMlfmIZZHHaZ_j3ZzDD3YBVyDFfL-UQ6ONIaUUbGfFwmEh7L0XgVOLzS6GanFIKglUm5cbOj-6DzPpQg4Wmjf5Sj6sWuHYRhDdWMRH1FeG3WB3DAPjgISSbEVeF8s1VXidhFpv25aUkBlkVkPYnZKoDIzVoMfbVptlm2Dgq0_RKODYuqPcQcvVgOQPoZI3YU8xaRitNDjUa_QcqYO9MbEPYj92dD_c9klvASSbXgDXc8gyFwt8PslHkSmIq6Ls2xDgZjhOIM7QMU7VDLyFDAr4kOFyNoIKBy2B18nWshix7oC1IztQz31jdPTjuEFRI_CcmBKJYhSXxjJvxRUh2l6ib00g-vxechMTbVkQTLonKcNGlL7ALgzQObeJz_T4KyZQcueGXbMkT4-w0csxrEx1Eefjm-BrSXi432cuGQ2Wadi0QR_eDfvwDShGqi0Qv-Uu_ni_QgpQNlq-vRyJ5Du0-56zMW0lgbSJu2K9P23D0Ri9x1-y3FS2Y3LrGIhZAohZZCRGDnNLQtZNPEvo5kMvuG6HtD0nr7BeIcxwi9hwgHgqyBNoYTeBlFbEKU9YjECYd8CeWMzUzovjcRFNFbsW_PuzjtwcsX-kjKzDsZq_-FWHhHznlFhrg_IKd_oxsYPxHGiNhuIXTXTU_dOzoK9nK_w19BLB9qgUtHr66XBr6yZNJ9RDppy0]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/hPXVJzim4C3VyoayzZOqr4vxgYQqgZ2610Ere3qWX8nzJMyuTcGxOzsddvCqRTCcZbFsrfvzFv_j--SOi4JI14nA6SmWfPfQfObK4YBpWZ8N98G9Qimt9UqC_m8PVexUSPYZ179rUV7zxcOw_d5nlZrT9Qa3kEbsAO1aYVYqDVggQNeDnj0OVYAt2p8S3BQ6nrghruaIpehtrrGh9IFJRYI99hbjvCYm1IHqEBhHCPNubrfKyeWyFBnl6dXy956BneWa_3EE5jHCbRxan3EnaWk8gVZXx2DE-CVmaR4QPKp8m_3avCCZsRFn5hJPiQuKrUogPgqiKfeXpmsghz4qlvBG-Hm55lRsKPE-hNZqCWEwIRVQVfe90wCnenmIP1DggL3n5CJchhmpYiFfO8n8EO6L0tVBj74dms8deImbvyX1iZMA0yE4YWDOBYRGBl-BMV37viSjzbtYOT0JzIip5kV86Zsbjs49jSuX-4s3ptKGFduyhRnaDNPUdDU6xSAoDlBb_dWm60zErqRMN6q7idQmcdpBhVOMzGUUrr8N4IYwRgP5DzNA1IxSwpM0okNzz38Oa6N8k-vnJpKeQtJeoXvPSCOMIb0jbcDjaGcevSFTmVoMlfmIZZHHaZ_j3ZzDD3YBVyDFfL-UQ6ONIaUUbGfFwmEh7L0XgVOLzS6GanFIKglUm5cbOj-6DzPpQg4Wmjf5Sj6sWuHYRhDdWMRH1FeG3WB3DAPjgISSbEVeF8s1VXidhFpv25aUkBlkVkPYnZKoDIzVoMfbVptlm2Dgq0_RKODYuqPcQcvVgOQPoZI3YU8xaRitNDjUa_QcqYO9MbEPYj92dD_c9klvASSbXgDXc8gyFwt8PslHkSmIq6Ls2xDgZjhOIM7QMU7VDLyFDAr4kOFyNoIKBy2B18nWshix7oC1IztQz31jdPTjuEFRI_CcmBKJYhSXxjJvxRUh2l6ib00g-vxechMTbVkQTLonKcNGlL7ALgzQObeJz_T4KyZQcueGXbMkT4-w0csxrEx1Eefjm-BrSXi432cuGQ2Wadi0QR_eDfvwDShGqi0Qv-Uu_ni_QgpQNlq-vRyJ5Du0-56zMW0lgbSJu2K9P23D0Ri9x1-y3FS2Y3LrGIhZAohZZCRGDnNLQtZNPEvo5kMvuG6HtD0nr7BeIcxwi9hwgHgqyBNoYTeBlFbEKU9YjECYd8CeWMzUzovjcRFNFbsW_PuzjtwcsX-kjKzDsZq_-FWHhHznlFhrg_IKd_oxsYPxHGiNhuIXTXTU_dOzoK9nK_w19BLB9qgUtHr66XBr6yZNJ9RDppy0" target="_blank">View as PNG</a></small>
+                  <!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "schema:Organization" [[#schema:Organization]] 
+"schema:Organization" : md4i:hasRorId  
+"schema:Organization" : schema:legalName  : xsd:string  [1..*]  
+Class "schema:Person" [[#schema:Person]] 
+"schema:Person" : md4i:orcidId  : xsd:string  
+"schema:Person" : schema:affiliation  : xsd:string  
+"schema:Person" : schema:name  : xsd:string  [1..*]  
+"schema:Person" : schema:username  : xsd:string  
+Class "pulse:AcademicCatalogRelation" [[#pulse:AcademicCatalogRelation]] 
+"pulse:AcademicCatalogRelation" : pulse:catalogType  : xsd:string  [1..1]  
+"pulse:AcademicCatalogRelation" : pulse:confidence  : xsd:decimal  [1..1]  
+"pulse:AcademicCatalogRelation" : pulse:entityType  : xsd:string  [1..1]  
+"pulse:AcademicCatalogRelation" : pulse:externalId  : xsd:string  [0..1]  
+"pulse:AcademicCatalogRelation" : pulse:justification  : xsd:string  [1..1]  
+"pulse:AcademicCatalogRelation" : pulse:matchedOn  : xsd:string  
+"pulse:AcademicCatalogRelation" - -> "pulse:CatalogEntity" : pulse:hasCatalogEntity<U+00A0>[1..1]  
+Class "pulse:CatalogEntity" [[#pulse:CatalogEntity]] 
+"pulse:CatalogEntity" : md4i:orcidId  : xsd:string  
+"pulse:CatalogEntity" : pulse:email  : xsd:string  [0..1]  
+"pulse:CatalogEntity" : pulse:profileUrl  : xsd:anyURI  [0..1]  
+"pulse:CatalogEntity" : pulse:uuid  : xsd:string  [1..1]  
+"pulse:CatalogEntity" : schema:affiliation  : xsd:string  
+"pulse:CatalogEntity" : schema:name  : xsd:string  [1..*]  
+Class "schema:ScholarlyArticle" [[#schema:ScholarlyArticle]] 
+<> diamond_ScholarlyArticle_CreativeWork_author
+"schema:ScholarlyArticle" - -> "diamond_ScholarlyArticle_CreativeWork_author" : schema:author [1..*] 
+diamond_ScholarlyArticle_CreativeWork_author ..  "schema:Organization"
+diamond_ScholarlyArticle_CreativeWork_author ..  "schema:Person"
+"schema:ScholarlyArticle" : schema:dateCreated  : xsd:date  [1..1]  
+"schema:ScholarlyArticle" : schema:datePublished  : xsd:date  [1..*]  
+"schema:ScholarlyArticle" : schema:description  : xsd:string  [1..*]  
+"schema:ScholarlyArticle" : schema:identifier  : xsd:string  [1..*]  
+"schema:ScholarlyArticle" : schema:name  : xsd:string  [1..*]  
+"schema:ScholarlyArticle" : schema:url  
+Class "schema:Dataset" [[#schema:Dataset]] 
+"schema:Dataset" : schema:description  : xsd:string  [1..*]  
+"schema:Dataset" : schema:name  : xsd:string  [1..*]  
+"schema:Dataset" : schema:url  
+Class "schema:SoftwareSourceCode" [[#schema:SoftwareSourceCode]] 
+"schema:SoftwareSourceCode" : pulse:commits  : xsd:integer  [0..1]  
+"schema:SoftwareSourceCode" : +pulse:discipline : pulse:DisciplineEnumeration 
+"schema:SoftwareSourceCode" : pulse:firstCommitDate  : xsd:date  [0..1]  
+"schema:SoftwareSourceCode" : pulse:lastCommitDate  : xsd:date  [0..1]  
+"schema:SoftwareSourceCode" : pulse:linkedEntities  : xsd:string  
+"schema:SoftwareSourceCode" : pulse:metadata  : xsd:string  
+"schema:SoftwareSourceCode" : pulse:relatedAPIs  : xsd:string  
+"schema:SoftwareSourceCode" : pulse:relatedModels  : xsd:string  
+"schema:SoftwareSourceCode" : pulse:relatedToEPFL  : xsd:boolean  [0..1]  
+"schema:SoftwareSourceCode" : pulse:relatedToOrganization  : xsd:string  
+"schema:SoftwareSourceCode" : +pulse:repositoryType : pulse:RepositoryTypeEnumeration 
+"schema:SoftwareSourceCode" : pulse:source  : xsd:string  [0..1]  
+"schema:SoftwareSourceCode" : pulse:totalCommits  : xsd:integer  [0..1]  
+<> diamond_SoftwareSourceCode_CreativeWork_author
+"schema:SoftwareSourceCode" - -> "diamond_SoftwareSourceCode_CreativeWork_author" : schema:author [1..*] 
+diamond_SoftwareSourceCode_CreativeWork_author ..  "schema:Organization"
+diamond_SoftwareSourceCode_CreativeWork_author ..  "schema:Person"
+"schema:SoftwareSourceCode" : schema:citation  : xsd:string  [1..*]  
+"schema:SoftwareSourceCode" : schema:codeRepository  [1..1]  
+"schema:SoftwareSourceCode" : schema:dateCreated  : xsd:date  [1..1]  
+"schema:SoftwareSourceCode" : schema:datePublished  : xsd:date  [1..*]  
+"schema:SoftwareSourceCode" : schema:description  : xsd:string  [1..*]  
+"schema:SoftwareSourceCode" : schema:identifier  : xsd:string  [1..*]  
+"schema:SoftwareSourceCode" : schema:license  [1..*]  
+"schema:SoftwareSourceCode" : schema:name  : xsd:string  [1..*]  
+"schema:SoftwareSourceCode" : schema:programmingLanguage  : xsd:string  
+"schema:SoftwareSourceCode" : schema:url  
+"schema:SoftwareSourceCode" : sd:readme  
+"schema:SoftwareSourceCode" - -> "schema:Dataset" : pulse:relatedDatasets 
+"schema:SoftwareSourceCode" - -> "schema:ScholarlyArticle" : pulse:relatedPublications 
+"schema:SoftwareSourceCode" - -> "schema:Person" : pulse:gitAuthors 
+"schema:SoftwareSourceCode" - -> "pulse:AcademicCatalogRelation" : pulse:hasAcademicCatalogRelation 
+Class "schema:GitHubOrganization" [[#schema:GitHubOrganization]] 
+"schema:GitHubOrganization" : schema:affiliation  : xsd:string  
+"schema:GitHubOrganization" : schema:username  : xsd:string  
+"schema:GitHubOrganization" - -> "schema:SoftwareSourceCode" : pulse:hasRepository 
+hide circle
+hide methods
+hide empty members
+remove @unlinked
+@enduml
+--></section>
+            </div>
+         </div>
+         <div>
+            <h2 id="description" class="sp_section_subtitle" style="margin-top: 1em;">Description</h2><p>The Open Pulse ontology provides concepts (classes and properties) to model human and machine readable imaging software metadata. It is the result of re-using external pre-existing vocabularies such as schema.org and the software description ontology, together with custom imaging specific objects and properties. The ontology contains purely semantic information (labels, definitions etc.) and is meant to be used in conjuction with a graph of enumeration values and a graph containing SHACL shapes to provide more machine readable restrictions on values of properties.</p>
+</div>
+         <h2 id="documentation" class="sp_section_subtitle">Model documentation</h2>
+         <div class="row mt-3">
+            <div class="col">
+               <section>
+                  <div class="sp_section_title_table_wrapper">
+                     <h3 id="pulse:AcademicCatalogRelation" class="sp_section_title_table">Academic Catalog Relation</h3><code class="sp_section_uri"><a href="https://open-pulse.epfl.ch/ontology#AcademicCatalogRelation">https://open-pulse.epfl.ch/ontology#AcademicCatalogRelation</a></code></div>
+                  <div class="sp_nodeshape_description"><p>A relation between a software repository or person and an entity in an academic catalog system (e.g., Infoscience).</p>
+</div>
+                  <div class="sp_section_nodeshape_diagram">
+                     <div class="sp_section_nodeshape_center"><?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="273px" preserveAspectRatio="none" style="width:316px;height:273px;background:#FFFFFF;" version="1.1" viewBox="0 0 316 273" width="316px" zoomAndPan="magnify"><defs xmlns=""/><g><!--class pulse:AcademicCatalogRelation--><a href="#pulse:AcademicCatalogRelation" target="_top" title="#pulse:AcademicCatalogRelation" xlink:actuate="onRequest" xlink:href="#pulse:AcademicCatalogRelation" xlink:show="new" xlink:title="#pulse:AcademicCatalogRelation" xlink:type="simple"><g id="elem_pulse:AcademicCatalogRelation"><rect codeLine="8" fill="#F1F1F1" height="151.4754" id="uml_pulse:AcademicCatalogRelation" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="265" x="7" y="115"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="212" x="33.5" y="134.9659">pulse:AcademicCatalogRelation</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="271" y1="144.0679" y2="144.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="247" x="13" y="163.0339">pulse:catalogType  : xsd:string  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="253" x="13" y="182.1018">pulse:confidence  : xsd:decimal  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="236" x="13" y="201.1697">pulse:entityType  : xsd:string  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="235" x="13" y="220.2376">pulse:externalId  : xsd:string  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="245" x="13" y="239.3055">pulse:justification  : xsd:string  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="203" x="13" y="258.3734">pulse:matchedOn  : xsd:string</text></g></a><!--class pulse:CatalogEntity--><a href="#pulse:CatalogEntity" target="_top" title="#pulse:CatalogEntity" xlink:actuate="onRequest" xlink:href="#pulse:CatalogEntity" xlink:show="new" xlink:title="#pulse:CatalogEntity" xlink:type="simple"><g id="elem_pulse:CatalogEntity"><rect codeLine="16" fill="#F1F1F1" height="29.0679" id="uml_pulse:CatalogEntity" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="136" x="71.5" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="74.5" y="26.9659">pulse:CatalogEntity</text></g></a><!--reverse link pulse:CatalogEntity to pulse:AcademicCatalogRelation--><g id="link_pulse:CatalogEntity_pulse:AcademicCatalogRelation"><path codeLine="15" d="M139.5,42.17 C139.5,59.54 139.5,84.86 139.5,114.7 " fill="none" id="pulse:CatalogEntity-backto-pulse:AcademicCatalogRelation" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="139.5,36.17,135.5,45.17,139.5,41.17,143.5,45.17,139.5,36.17" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="168" x="140.5" y="80.897">pulse:hasCatalogEntity&#xa0;[1..1]</text></g><!--SRC=[hP9FJm8n5CJl-ocUS3IGNUE96EA689A8983nG3WysmTRwPzDsnNMJ-_2wWeI9QYtTcRoowGTHnuqAd8fCXfJYXQziQ2Dfi0jXTu82fX4vswCzcFnIX1T1cUSva8JtFLxjvFXABxlTNVZHgK5e8ZxN19aIbxik2kBwO2SmmKz2kuJYC9mnuwjDQkEaKMB-W2jCJfmtvU4eBFf1hKqauvQCKDEIh0EUfHcCIA9NXXTW-cq_cDYDeFW6AC5PO2LnYHF2GfnxNZBUIlq0c0QDPlH34vW6JqNd3IhK9oOK2X_mIeUNFZyNshHsfFLAFly01MUY7hEd1TpmRRoduifz2mXFZmW7IKqiaRxOoRlPdVxO9_m1DsUS_Lm7ePnsAvQxctj2wHQs9w-sLLIV30mOPcaygp89uQxya8gzNaXgIUoBh2ap0l1TQQbq4lYRm00]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/hP9FJm8n5CJl-ocUS3IGNUE96EA689A8983nG3WysmTRwPzDsnNMJ-_2wWeI9QYtTcRoowGTHnuqAd8fCXfJYXQziQ2Dfi0jXTu82fX4vswCzcFnIX1T1cUSva8JtFLxjvFXABxlTNVZHgK5e8ZxN19aIbxik2kBwO2SmmKz2kuJYC9mnuwjDQkEaKMB-W2jCJfmtvU4eBFf1hKqauvQCKDEIh0EUfHcCIA9NXXTW-cq_cDYDeFW6AC5PO2LnYHF2GfnxNZBUIlq0c0QDPlH34vW6JqNd3IhK9oOK2X_mIeUNFZyNshHsfFLAFly01MUY7hEd1TpmRRoduifz2mXFZmW7IKqiaRxOoRlPdVxO9_m1DsUS_Lm7ePnsAvQxctj2wHQs9w-sLLIV30mOPcaygp89uQxya8gzNaXgIUoBh2ap0l1TQQbq4lYRm00" target="_blank">View as PNG</a></small>
+                     <!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "pulse:AcademicCatalogRelation" [[#pulse:AcademicCatalogRelation]] 
+"pulse:AcademicCatalogRelation" : pulse:catalogType  : xsd:string  [1..1]  
+"pulse:AcademicCatalogRelation" : pulse:confidence  : xsd:decimal  [1..1]  
+"pulse:AcademicCatalogRelation" : pulse:entityType  : xsd:string  [1..1]  
+"pulse:AcademicCatalogRelation" : pulse:externalId  : xsd:string  [0..1]  
+"pulse:AcademicCatalogRelation" : pulse:justification  : xsd:string  [1..1]  
+"pulse:AcademicCatalogRelation" : pulse:matchedOn  : xsd:string  
+"pulse:AcademicCatalogRelation" -u-> "pulse:CatalogEntity" : pulse:hasCatalogEntity<U+00A0>[1..1]  
+Class "pulse:CatalogEntity" [[#pulse:CatalogEntity]] 
+hide circle
+hide methods
+hide empty members
+remove @unlinked
+@enduml
+--></div>
+                  <table class="sp_table_propertyshapes table-striped table-responsive">
+                     <thead>
+                        <tr>
+                           <th>Property name</th>
+                           <th>URI</th>
+                           <th>Expected value</th>
+                           <th>Card.</th>
+                           <th class="sp_description_column">Description</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Catalog type</td>
+                           <td id="pulse:AcademicCatalogRelation_pulse:catalogType"><code><a href="https://open-pulse.epfl.ch/ontology#catalogType">pulse:catalogType</a></code></td>
+                           <td><code>xsd:string</code><br><p><small>infoscience, orcid, ror, wikidata</small></p><small></small></td>
+                           <td>
+                              <div style="width:30px">1..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The type of academic catalog system (e.g., 'infoscience').</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Confidence</td>
+                           <td id="pulse:AcademicCatalogRelation_pulse:confidence"><code><a href="https://open-pulse.epfl.ch/ontology#confidence">pulse:confidence</a></code></td>
+                           <td><code>xsd:decimal</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">A confidence score (0-1) indicating the reliability of the catalog relation match.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Entity type</td>
+                           <td id="pulse:AcademicCatalogRelation_pulse:entityType"><code><a href="https://open-pulse.epfl.ch/ontology#entityType">pulse:entityType</a></code></td>
+                           <td><code>xsd:string</code><br><p><small>person, organization, publication, project</small></p><small></small></td>
+                           <td>
+                              <div style="width:30px">1..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The type of entity in the catalog (e.g., 'person', 'publication', 'organization').</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>External ID</td>
+                           <td id="pulse:AcademicCatalogRelation_pulse:externalId"><code><a href="https://open-pulse.epfl.ch/ontology#externalId">pulse:externalId</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">An external identifier used for matching in a catalog system.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Has Catalog entity</td>
+                           <td id="pulse:AcademicCatalogRelation_pulse:hasCatalogEntity"><code><a href="https://open-pulse.epfl.ch/ontology#hasCatalogEntity">pulse:hasCatalogEntity</a></code></td>
+                           <td><code><a href="#pulse:CatalogEntity">Catalog Entity</a></code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The detailed entity information from the academic catalog.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Justification</td>
+                           <td id="pulse:AcademicCatalogRelation_pulse:justification"><code><a href="https://open-pulse.epfl.ch/ontology#justification">pulse:justification</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">An explanation of how a catalog relation or match was established.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Matched on</td>
+                           <td id="pulse:AcademicCatalogRelation_pulse:matchedOn"><code><a href="https://open-pulse.epfl.ch/ontology#matchedOn">pulse:matchedOn</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The fields or properties that were used to establish a match (e.g., 'name', 'email').</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </section>
+            </div>
+         </div><br><div class="row mt-3">
+            <div class="col">
+               <section>
+                  <div class="sp_section_title_table_wrapper">
+                     <h3 id="pulse:CatalogEntity" class="sp_section_title_table">Catalog Entity</h3><code class="sp_section_uri"><a href="https://open-pulse.epfl.ch/ontology#CatalogEntity">https://open-pulse.epfl.ch/ontology#CatalogEntity</a></code></div>
+                  <div class="sp_nodeshape_description"><p>An entity from an academic catalog system with detailed metadata.</p>
+</div>
+                  <div class="sp_section_nodeshape_diagram">
+                     <div class="sp_section_nodeshape_center"><?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="172px" preserveAspectRatio="none" style="width:271px;height:172px;background:#FFFFFF;" version="1.1" viewBox="0 0 271 172" width="271px" zoomAndPan="magnify"><defs xmlns=""/><g><!--class pulse:CatalogEntity--><a href="#pulse:CatalogEntity" target="_top" title="#pulse:CatalogEntity" xlink:actuate="onRequest" xlink:href="#pulse:CatalogEntity" xlink:show="new" xlink:title="#pulse:CatalogEntity" xlink:type="simple"><g id="elem_pulse:CatalogEntity"><rect codeLine="8" fill="#F1F1F1" height="151.4754" id="uml_pulse:CatalogEntity" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="250" x="7" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="67" y="26.9659">pulse:CatalogEntity</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="256" y1="36.0679" y2="36.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169" x="13" y="55.0339">md4i:orcidId  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="203" x="13" y="74.1018">pulse:email  : xsd:string  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="238" x="13" y="93.1697">pulse:profileUrl  : xsd:anyURI  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="197" x="13" y="112.2376">pulse:uuid  : xsd:string  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="211" x="13" y="131.3055">schema:affiliation  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="227" x="13" y="150.3734">schema:name  : xsd:string  [1..*]</text></g></a><!--SRC=[ZL5BQy904BxdLqprreEOuYat4Mk5se9MUWWUnkneXkwBdGqs_VNT82tIAdhR-UPx3IiKmQ8XyLZHYZm6Z2w0TPOo-M3R0GOgZIAFpiOLVn7ae-nEqOujmVDyzlJskXo_pAQdT6TyCaZqs6g2nkY7a-qXe5-G2ExfdLMi8HyEJzRZ4DnXudHgqLzWSCvcShaaP9Ek6_HyeuMA2KRKRZ-raMFRWxBidy4t6yZEymimQiI52nMhkO8qVueg90QsUxWiEi9aaFLVJJaS3FBDLQqFRiUQrk7N06sxNivlDcWQ_jUtpAz8fQfJwRp0NGfdZEpipJV_QBj_EHTytmNNh0Wg3fMcuzjGh9sIuq36npP1Paj1lW40]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/ZL5BQy904BxdLqprreEOuYat4Mk5se9MUWWUnkneXkwBdGqs_VNT82tIAdhR-UPx3IiKmQ8XyLZHYZm6Z2w0TPOo-M3R0GOgZIAFpiOLVn7ae-nEqOujmVDyzlJskXo_pAQdT6TyCaZqs6g2nkY7a-qXe5-G2ExfdLMi8HyEJzRZ4DnXudHgqLzWSCvcShaaP9Ek6_HyeuMA2KRKRZ-raMFRWxBidy4t6yZEymimQiI52nMhkO8qVueg90QsUxWiEi9aaFLVJJaS3FBDLQqFRiUQrk7N06sxNivlDcWQ_jUtpAz8fQfJwRp0NGfdZEpipJV_QBj_EHTytmNNh0Wg3fMcuzjGh9sIuq36npP1Paj1lW40" target="_blank">View as PNG</a></small>
+                     <!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "pulse:CatalogEntity" [[#pulse:CatalogEntity]] 
+"pulse:CatalogEntity" : md4i:orcidId  : xsd:string  
+"pulse:CatalogEntity" : pulse:email  : xsd:string  [0..1]  
+"pulse:CatalogEntity" : pulse:profileUrl  : xsd:anyURI  [0..1]  
+"pulse:CatalogEntity" : pulse:uuid  : xsd:string  [1..1]  
+"pulse:CatalogEntity" : schema:affiliation  : xsd:string  
+"pulse:CatalogEntity" : schema:name  : xsd:string  [1..*]  
+hide circle
+hide methods
+hide empty members
+@enduml
+--></div>
+                  <table class="sp_table_propertyshapes table-striped table-responsive">
+                     <thead>
+                        <tr>
+                           <th>Property name</th>
+                           <th>URI</th>
+                           <th>Expected value</th>
+                           <th>Card.</th>
+                           <th class="sp_description_column">Description</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Has ORCID ID</td>
+                           <td id="pulse:CatalogEntity_md4i:orcidId"><code><a href="http://w3id.org/nfdi4ing/metadata4ing#orcidId">md4i:orcidId</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The ORCID ID of a person</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Email</td>
+                           <td id="pulse:CatalogEntity_pulse:email"><code><a href="https://open-pulse.epfl.ch/ontology#email">pulse:email</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The email address of a person in the catalog.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Profile URL</td>
+                           <td id="pulse:CatalogEntity_pulse:profileUrl"><code><a href="https://open-pulse.epfl.ch/ontology#profileUrl">pulse:profileUrl</a></code></td>
+                           <td><code>xsd:anyURI</code><br><small>^http.*</small></td>
+                           <td>
+                              <div style="width:30px">0..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The URL to the entity's profile page in the academic catalog.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>UUID</td>
+                           <td id="pulse:CatalogEntity_pulse:uuid"><code><a href="https://open-pulse.epfl.ch/ontology#uuid">pulse:uuid</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">A universally unique identifier for the catalog entity.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Affiliation</td>
+                           <td id="pulse:CatalogEntity_schema:affiliation"><code><a href="http://schema.org/affiliation">schema:affiliation</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">An organization that this person is affiliated with. For example, a university (EPFL/ETHZ),
+                              lab, company.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Name</td>
+                           <td id="pulse:CatalogEntity_schema:name"><code><a href="http://schema.org/name">schema:name</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The name of a person, in the US their first and last name(s) seperated by spaces</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </section>
+            </div>
+         </div><br><div class="row mt-3">
+            <div class="col">
+               <section>
+                  <div class="sp_section_title_table_wrapper">
+                     <h3 id="schema:Dataset" class="sp_section_title_table">Dataset</h3><code class="sp_section_uri"><a href="http://schema.org/Dataset">http://schema.org/Dataset</a></code></div>
+                  <div class="sp_nodeshape_description"><p>A body of structured information describing some topic(s) of interest.</p>
+</div>
+                  <div class="sp_section_nodeshape_diagram">
+                     <div class="sp_section_nodeshape_center"><?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="115px" preserveAspectRatio="none" style="width:298px;height:115px;background:#FFFFFF;" version="1.1" viewBox="0 0 298 115" width="298px" zoomAndPan="magnify"><defs xmlns=""/><g><!--class schema:Dataset--><a href="#schema:Dataset" target="_top" title="#schema:Dataset" xlink:actuate="onRequest" xlink:href="#schema:Dataset" xlink:show="new" xlink:title="#schema:Dataset" xlink:type="simple"><g id="elem_schema:Dataset"><rect codeLine="8" fill="#F1F1F1" height="94.2717" id="uml_schema:Dataset" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="277" x="7" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="88" y="26.9659">schema:Dataset</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="283" y1="36.0679" y2="36.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="265" x="13" y="55.0339">schema:description  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="227" x="13" y="74.1018">schema:name  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="13" y="93.1697">schema:url</text></g></a><!--SRC=[dOx1IWD138Rl-nInlNaeNV6qjrAr2bR12XwMFQGpiJiuCncIARK-lRCKOL7qu2tv_Y_XLyeGCP0cDBIXX8AP1I97glJDnG44C1vLRpZcZViWg2-hCqklBXBStwrkdn-V5W-hwx7E8PK7HSz7Jx0F_cAK7WJJcbHnHo_EvXxg-NmKBqJui6HVMapNAConqjzBGhKSki54JKy1w-OACnP_0cqx_SQw3ggVNWDVo98QSIaxZb3mkzf6ixYu0sZhsUoyWx_lXuh_EjoBBqRlB85nOZoTva2vPwkdXKBAnuB2baG_0G00]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/dOx1IWD138Rl-nInlNaeNV6qjrAr2bR12XwMFQGpiJiuCncIARK-lRCKOL7qu2tv_Y_XLyeGCP0cDBIXX8AP1I97glJDnG44C1vLRpZcZViWg2-hCqklBXBStwrkdn-V5W-hwx7E8PK7HSz7Jx0F_cAK7WJJcbHnHo_EvXxg-NmKBqJui6HVMapNAConqjzBGhKSki54JKy1w-OACnP_0cqx_SQw3ggVNWDVo98QSIaxZb3mkzf6ixYu0sZhsUoyWx_lXuh_EjoBBqRlB85nOZoTva2vPwkdXKBAnuB2baG_0G00" target="_blank">View as PNG</a></small>
+                     <!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "schema:Dataset" [[#schema:Dataset]] 
+"schema:Dataset" : schema:description  : xsd:string  [1..*]  
+"schema:Dataset" : schema:name  : xsd:string  [1..*]  
+"schema:Dataset" : schema:url  
+hide circle
+hide methods
+hide empty members
+@enduml
+--></div>
+                  <table class="sp_table_propertyshapes table-striped table-responsive">
+                     <thead>
+                        <tr>
+                           <th>Property name</th>
+                           <th>URI</th>
+                           <th>Expected value</th>
+                           <th>Card.</th>
+                           <th class="sp_description_column">Description</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Description</td>
+                           <td id="schema:Dataset_schema:description"><code><a href="http://schema.org/description">schema:description</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">A description of the item.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Name</td>
+                           <td id="schema:Dataset_schema:name"><code><a href="http://schema.org/name">schema:name</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The name of a person, in the US their first and last name(s) seperated by spaces</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>URL</td>
+                           <td id="schema:Dataset_schema:url"><code><a href="http://schema.org/url">schema:url</a></code></td>
+                           <td><br><small>^http.*</small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Fill in any URL related to this repository. e.g. related lab or project website.</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </section>
+            </div>
+         </div><br><div class="row mt-3">
+            <div class="col">
+               <section>
+                  <div class="sp_section_title_table_wrapper">
+                     <h3 id="pulse:DisciplineEnumeration" class="sp_section_title_table">Discipline Enumeration</h3><code class="sp_section_uri"><a href="https://open-pulse.epfl.ch/ontology#DisciplineEnumeration">https://open-pulse.epfl.ch/ontology#DisciplineEnumeration</a></code></div>
+                  <div class="sp_nodeshape_description"><p>Enumeration of academic and scientific disciplines for categorizing software repositories., Enumeration of disciplines for categorizing software repositories.</p>
+</div>
+               </section>
+            </div>
+         </div><br><div class="row mt-3">
+            <div class="col">
+               <section>
+                  <div class="sp_section_title_table_wrapper">
+                     <h3 id="schema:Organization" class="sp_section_title_table">Organization</h3><code class="sp_section_uri"><a href="http://schema.org/Organization">http://schema.org/Organization</a></code></div>
+                  <div class="sp_nodeshape_description"><p>An organization such as a school, NGO, corporation, club, etc.</p>
+</div>
+                  <div class="sp_section_nodeshape_diagram">
+                     <div class="sp_section_nodeshape_center"><?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="96px" preserveAspectRatio="none" style="width:295px;height:96px;background:#FFFFFF;" version="1.1" viewBox="0 0 295 96" width="295px" zoomAndPan="magnify"><defs xmlns=""/><g><!--class schema:Organization--><a href="#schema:Organization" target="_top" title="#schema:Organization" xlink:actuate="onRequest" xlink:href="#schema:Organization" xlink:show="new" xlink:title="#schema:Organization" xlink:type="simple"><g id="elem_schema:Organization"><rect codeLine="8" fill="#F1F1F1" height="75.2038" id="uml_schema:Organization" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="274" x="7" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="152" x="68" y="26.9659">schema:Organization</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="280" y1="36.0679" y2="36.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="99" x="13" y="55.0339">md4i:hasRorId</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="262" x="13" y="74.1018">schema:legalName  : xsd:string  [1..*]</text></g></a><!--SRC=[VOvDQm9138Rl-ojIlVKWhdZQcqXh1Jz02pqiUqXtqjsXCvCXcMBrrtT42dkelINF-oOyIWa2UjA8BHqfec1YWS212lsquGeyj0vLdpcaexqGbFFYmT273GIRzUhbTNzOx5PFmphxc1_aUZexWY_lPeFq91Ytf8eTlLcJUYYdqq6y4E7Jabss66zHc4EXzoMXM5xTOAHjJnxBQYyT1dl1P3cCeAx7VmLD0yMTYmgycTkgHpsmh0tyK_pbZZfqk-m76NwhgJI93Hr0NKucZqr-qLj3q5ff7TrcJwbdexU5V4pdZFmxYVu0]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/VOvDQm9138Rl-ojIlVKWhdZQcqXh1Jz02pqiUqXtqjsXCvCXcMBrrtT42dkelINF-oOyIWa2UjA8BHqfec1YWS212lsquGeyj0vLdpcaexqGbFFYmT273GIRzUhbTNzOx5PFmphxc1_aUZexWY_lPeFq91Ytf8eTlLcJUYYdqq6y4E7Jabss66zHc4EXzoMXM5xTOAHjJnxBQYyT1dl1P3cCeAx7VmLD0yMTYmgycTkgHpsmh0tyK_pbZZfqk-m76NwhgJI93Hr0NKucZqr-qLj3q5ff7TrcJwbdexU5V4pdZFmxYVu0" target="_blank">View as PNG</a></small>
+                     <!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "schema:Organization" [[#schema:Organization]] 
+"schema:Organization" : md4i:hasRorId  
+"schema:Organization" : schema:legalName  : xsd:string  [1..*]  
+hide circle
+hide methods
+hide empty members
+@enduml
+--></div>
+                  <table class="sp_table_propertyshapes table-striped table-responsive">
+                     <thead>
+                        <tr>
+                           <th>Property name</th>
+                           <th>URI</th>
+                           <th>Expected value</th>
+                           <th>Card.</th>
+                           <th class="sp_description_column">Description</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Has ROR ID</td>
+                           <td id="schema:Organization_md4i:hasRorId"><code><a href="http://w3id.org/nfdi4ing/metadata4ing#hasRorId">md4i:hasRorId</a></code></td>
+                           <td><br><small>^http.*</small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">A Research Organization Registry identifier, that points to a research organization</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Legal name</td>
+                           <td id="schema:Organization_schema:legalName"><code><a href="http://schema.org/legalName">schema:legalName</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The official name of the organization, e.g. the registered company name.</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </section>
+            </div>
+         </div><br><div class="row mt-3">
+            <div class="col">
+               <section>
+                  <div class="sp_section_title_table_wrapper">
+                     <h3 id="schema:Person" class="sp_section_title_table">Person</h3><code class="sp_section_uri"><a href="http://schema.org/Person">http://schema.org/Person</a></code></div>
+                  <div class="sp_nodeshape_description"><p>A person (alive, dead, undead, or fictional).</p>
+</div>
+                  <div class="sp_section_nodeshape_diagram">
+                     <div class="sp_section_nodeshape_center"><?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="134px" preserveAspectRatio="none" style="width:260px;height:134px;background:#FFFFFF;" version="1.1" viewBox="0 0 260 134" width="260px" zoomAndPan="magnify"><defs xmlns=""/><g><!--class schema:Person--><a href="#schema:Person" target="_top" title="#schema:Person" xlink:actuate="onRequest" xlink:href="#schema:Person" xlink:show="new" xlink:title="#schema:Person" xlink:type="simple"><g id="elem_schema:Person"><rect codeLine="8" fill="#F1F1F1" height="113.3396" id="uml_schema:Person" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="239" x="7" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="71.5" y="26.9659">schema:Person</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="245" y1="36.0679" y2="36.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169" x="13" y="55.0339">md4i:orcidId  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="211" x="13" y="74.1018">schema:affiliation  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="227" x="13" y="93.1697">schema:name  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="215" x="13" y="112.2376">schema:username  : xsd:string</text></g></a><!--SRC=[bOz1ImCn48Nl-HLZU_DGkjBJtahHMh0gLl2mx25DPhk3IMR9fDJwwyrIX5Mhu6tUc-yDRmGJ1ErHEcrmWvsEEd64m06Ll5Be3G_6QP4R3cb3xmZ5J5rOR2WWtAsMjyyFJ_FxvVKGPz_b0nbFHuUmz-vgi3r4tQrHHE_mXMngePXE1-jvZ7nOiCijnciTcOEItqk2MlJTO2IcHQ-ByX6ZS1X1LOs_MdKDwWTLWhSpAZaQiYiBMR-9BIL52Ziuotywkcd8aKx4uJ-n_etlV5LC9fVrtxczO3oNLIrP14FHE3pD7bFBLau2VPUEsVBRVF43]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/bOz1ImCn48Nl-HLZU_DGkjBJtahHMh0gLl2mx25DPhk3IMR9fDJwwyrIX5Mhu6tUc-yDRmGJ1ErHEcrmWvsEEd64m06Ll5Be3G_6QP4R3cb3xmZ5J5rOR2WWtAsMjyyFJ_FxvVKGPz_b0nbFHuUmz-vgi3r4tQrHHE_mXMngePXE1-jvZ7nOiCijnciTcOEItqk2MlJTO2IcHQ-ByX6ZS1X1LOs_MdKDwWTLWhSpAZaQiYiBMR-9BIL52Ziuotywkcd8aKx4uJ-n_etlV5LC9fVrtxczO3oNLIrP14FHE3pD7bFBLau2VPUEsVBRVF43" target="_blank">View as PNG</a></small>
+                     <!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "schema:Person" [[#schema:Person]] 
+"schema:Person" : md4i:orcidId  : xsd:string  
+"schema:Person" : schema:affiliation  : xsd:string  
+"schema:Person" : schema:name  : xsd:string  [1..*]  
+"schema:Person" : schema:username  : xsd:string  
+hide circle
+hide methods
+hide empty members
+@enduml
+--></div>
+                  <table class="sp_table_propertyshapes table-striped table-responsive">
+                     <thead>
+                        <tr>
+                           <th>Property name</th>
+                           <th>URI</th>
+                           <th>Expected value</th>
+                           <th>Card.</th>
+                           <th class="sp_description_column">Description</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Has ORCID ID</td>
+                           <td id="schema:Person_md4i:orcidId"><code><a href="http://w3id.org/nfdi4ing/metadata4ing#orcidId">md4i:orcidId</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The ORCID ID of a person</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Affiliation</td>
+                           <td id="schema:Person_schema:affiliation"><code><a href="http://schema.org/affiliation">schema:affiliation</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">An organization that this person is affiliated with. For example, a university (EPFL/ETHZ),
+                              lab, company.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Name</td>
+                           <td id="schema:Person_schema:name"><code><a href="http://schema.org/name">schema:name</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The name of a person, in the US their first and last name(s) seperated by spaces</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Username</td>
+                           <td id="schema:Person_schema:username"><code><a href="http://schema.org/username">schema:username</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The username of a person or organization on GitHub or other similar platforms.</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </section>
+            </div>
+         </div><br><div class="row mt-3">
+            <div class="col">
+               <section>
+                  <div class="sp_section_title_table_wrapper">
+                     <h3 id="pulse:RepositoryTypeEnumeration" class="sp_section_title_table">Repository Type Enumeration</h3><code class="sp_section_uri"><a href="https://open-pulse.epfl.ch/ontology#RepositoryTypeEnumeration">https://open-pulse.epfl.ch/ontology#RepositoryTypeEnumeration</a></code></div>
+                  <div class="sp_nodeshape_description"><p>Enumeration of types of repositories (software, educational resource, documentation, data, other)., Enumeration of types of repositories.</p>
+</div>
+               </section>
+            </div>
+         </div><br><div class="row mt-3">
+            <div class="col">
+               <section>
+                  <div class="sp_section_title_table_wrapper">
+                     <h3 id="schema:GitHubOrganization" class="sp_section_title_table">schema:GitHubOrganization</h3><code class="sp_section_uri">http://schema.org/GitHubOrganization</code></div>
+                  <div class="sp_section_nodeshape_diagram">
+                     <div class="sp_section_nodeshape_center"><?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="197px" preserveAspectRatio="none" style="width:250px;height:197px;background:#FFFFFF;" version="1.1" viewBox="0 0 250 197" width="250px" zoomAndPan="magnify"><defs xmlns=""/><g><!--class schema:GitHubOrganization--><a href="#schema:GitHubOrganization" target="_top" title="#schema:GitHubOrganization" xlink:actuate="onRequest" xlink:href="#schema:GitHubOrganization" xlink:show="new" xlink:title="#schema:GitHubOrganization" xlink:type="simple"><g id="elem_schema:GitHubOrganization"><rect codeLine="8" fill="#F1F1F1" height="75.2038" id="uml_schema:GitHubOrganization" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="227" x="7" y="115"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="199" x="21" y="134.9659">schema:GitHubOrganization</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="233" y1="144.0679" y2="144.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="211" x="13" y="163.0339">schema:affiliation  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="215" x="13" y="182.1018">schema:username  : xsd:string</text></g></a><!--class schema:SoftwareSourceCode--><a href="#schema:SoftwareSourceCode" target="_top" title="#schema:SoftwareSourceCode" xlink:actuate="onRequest" xlink:href="#schema:SoftwareSourceCode" xlink:show="new" xlink:title="#schema:SoftwareSourceCode" xlink:type="simple"><g id="elem_schema:SoftwareSourceCode"><rect codeLine="12" fill="#F1F1F1" height="29.0679" id="uml_schema:SoftwareSourceCode" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="209" x="16" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="203" x="19" y="26.9659">schema:SoftwareSourceCode</text></g></a><!--reverse link schema:SoftwareSourceCode to schema:GitHubOrganization--><g id="link_schema:SoftwareSourceCode_schema:GitHubOrganization"><path codeLine="11" d="M120.5,42.31 C120.5,60.89 120.5,88.66 120.5,114.85 " fill="none" id="schema:SoftwareSourceCode-backto-schema:GitHubOrganization" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="120.5,36.31,116.5,45.31,120.5,41.31,124.5,45.31,120.5,36.31" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="121" x="121.5" y="80.897">pulse:hasRepository</text></g><!--SRC=[bL31JW913BtlLrGuau3nj0SZ8Gec8Wbhue5m67Qwx8IPwQIT4U7htPKODq6Ctjht-jhN9nZ1AuSIL8a51iKg4eCdZvdiZ6y11wLL8W_aOs6E2AERx4fZPJp2q-Dqzh9OZf-dzzrnSg5Pq8p7WqL8pbvts3shC4SHjSLNesCDe-6mGu-PQJyXsxZepnKJ-KmkcuHiqdg3dfGrEZNAfoREqcR1M-NDKKL3lWUhLVyolLv3zgiwXozMLPMnvXE61duNdKjauxVmvnL9aDjN_gSVfC7jzui5LN6l60jANEA4DBONGhA2UQraYO74D04TpiBvITa9vvnkmwcDHYWDbnPFjSDOavPJWox4GmEv3R9aZ8xU4EwIjyRlK7y0]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/bL31JW913BtlLrGuau3nj0SZ8Gec8Wbhue5m67Qwx8IPwQIT4U7htPKODq6Ctjht-jhN9nZ1AuSIL8a51iKg4eCdZvdiZ6y11wLL8W_aOs6E2AERx4fZPJp2q-Dqzh9OZf-dzzrnSg5Pq8p7WqL8pbvts3shC4SHjSLNesCDe-6mGu-PQJyXsxZepnKJ-KmkcuHiqdg3dfGrEZNAfoREqcR1M-NDKKL3lWUhLVyolLv3zgiwXozMLPMnvXE61duNdKjauxVmvnL9aDjN_gSVfC7jzui5LN6l60jANEA4DBONGhA2UQraYO74D04TpiBvITa9vvnkmwcDHYWDbnPFjSDOavPJWox4GmEv3R9aZ8xU4EwIjyRlK7y0" target="_blank">View as PNG</a></small>
+                     <!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "schema:GitHubOrganization" [[#schema:GitHubOrganization]] 
+"schema:GitHubOrganization" : schema:affiliation  : xsd:string  
+"schema:GitHubOrganization" : schema:username  : xsd:string  
+"schema:GitHubOrganization" -u-> "schema:SoftwareSourceCode" : pulse:hasRepository 
+Class "schema:SoftwareSourceCode" [[#schema:SoftwareSourceCode]] 
+hide circle
+hide methods
+hide empty members
+remove @unlinked
+@enduml
+--></div>
+                  <table class="sp_table_propertyshapes table-striped table-responsive">
+                     <thead>
+                        <tr>
+                           <th>Property name</th>
+                           <th>URI</th>
+                           <th>Expected value</th>
+                           <th>Card.</th>
+                           <th class="sp_description_column">Description</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Has repository</td>
+                           <td id="schema:GitHubOrganization_pulse:hasRepository"><code><a href="https://open-pulse.epfl.ch/ontology#hasRepository">pulse:hasRepository</a></code></td>
+                           <td><code><a href="#schema:SoftwareSourceCode">Software application</a></code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">A software repository that is part of a GitHub organization.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Affiliation</td>
+                           <td id="schema:GitHubOrganization_schema:affiliation"><code><a href="http://schema.org/affiliation">schema:affiliation</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">An organization that this person is affiliated with. For example, a university (EPFL/ETHZ),
+                              lab, company.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Username</td>
+                           <td id="schema:GitHubOrganization_schema:username"><code><a href="http://schema.org/username">schema:username</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The username of a person or organization on GitHub or other similar platforms.</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </section>
+            </div>
+         </div><br><div class="row mt-3">
+            <div class="col">
+               <section>
+                  <div class="sp_section_title_table_wrapper">
+                     <h3 id="schema:ScholarlyArticle" class="sp_section_title_table">Scholarly Article</h3><code class="sp_section_uri"><a href="http://schema.org/ScholarlyArticle">http://schema.org/ScholarlyArticle</a></code></div>
+                  <div class="sp_nodeshape_description"><p>A scholarly article, typically published in an academic journal or conference.</p>
+</div>
+                  <div class="sp_section_nodeshape_diagram">
+                     <div class="sp_section_nodeshape_center"><?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="375px" preserveAspectRatio="none" style="width:323px;height:375px;background:#FFFFFF;" version="1.1" viewBox="0 0 323 375" width="323px" zoomAndPan="magnify"><defs xmlns=""/><g><!--class schema:ScholarlyArticle--><a href="#schema:ScholarlyArticle" target="_top" title="#schema:ScholarlyArticle" xlink:actuate="onRequest" xlink:href="#schema:ScholarlyArticle" xlink:show="new" xlink:title="#schema:ScholarlyArticle" xlink:type="simple"><g id="elem_schema:ScholarlyArticle"><rect codeLine="8" fill="#F1F1F1" height="151.4754" id="uml_schema:ScholarlyArticle" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="288" x="28" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="168" x="88" y="26.9659">schema:ScholarlyArticle</text><line style="stroke:#181818;stroke-width:0.5;" x1="29" x2="315" y1="36.0679" y2="36.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="262" x="34" y="55.0339">schema:dateCreated  : xsd:date  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="276" x="34" y="74.1018">schema:datePublished  : xsd:date  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="265" x="34" y="93.1697">schema:description  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="251" x="34" y="112.2376">schema:identifier  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="227" x="34" y="131.3055">schema:name  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="34" y="150.3734">schema:url</text></g></a><polygon fill="#F1F1F1" points="172,255,184,267,172,279,160,267,172,255" style="stroke:#181818;stroke-width:0.5;"/><!--class schema:Organization--><a href="#schema:Organization" target="_top" title="#schema:Organization" xlink:actuate="onRequest" xlink:href="#schema:Organization" xlink:show="new" xlink:title="#schema:Organization" xlink:type="simple"><g id="elem_schema:Organization"><rect codeLine="19" fill="#F1F1F1" height="29.0679" id="uml_schema:Organization" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="158" x="7" y="340"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="152" x="10" y="359.9659">schema:Organization</text></g></a><!--class schema:Person--><a href="#schema:Person" target="_top" title="#schema:Person" xlink:actuate="onRequest" xlink:href="#schema:Person" xlink:show="new" xlink:title="#schema:Person" xlink:type="simple"><g id="elem_schema:Person"><rect codeLine="20" fill="#F1F1F1" height="29.0679" id="uml_schema:Person" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="116" x="200" y="340"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="203" y="359.9659">schema:Person</text></g></a><!--link schema:ScholarlyArticle to diamond_ScholarlyArticle_CreativeWork_author--><g id="link_schema:ScholarlyArticle_diamond_ScholarlyArticle_CreativeWork_author"><path codeLine="10" d="M172,158.26 C172,195.07 172,229.59 172,248.76 " fill="none" id="schema:ScholarlyArticle-to-diamond_ScholarlyArticle_CreativeWork_author" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="172,254.76,176,245.76,172,249.76,168,245.76,172,254.76" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="97" x="173" y="202.897">schema:author</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="28" x="207.5" y="220.603">[1..*]</text></g><!--link diamond_ScholarlyArticle_CreativeWork_author to schema:Organization--><g id="link_diamond_ScholarlyArticle_CreativeWork_author_schema:Organization"><path codeLine="11" d="M166.36,273.61 C152.98,286.91 119.02,320.67 99.81,339.77 " fill="none" id="diamond_ScholarlyArticle_CreativeWork_author-schema:Organization" style="stroke:#800000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--link diamond_ScholarlyArticle_CreativeWork_author to schema:Person--><g id="link_diamond_ScholarlyArticle_CreativeWork_author_schema:Person"><path codeLine="12" d="M177.64,273.61 C191.02,286.91 224.98,320.67 244.19,339.77 " fill="none" id="diamond_ScholarlyArticle_CreativeWork_author-schema:Person" style="stroke:#800000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--SRC=[fP9FQy904CNl-HJJU1CCflGafLIajOLQfHOyYCYQ7StY_Wcp6wr- -cwqOcghADwIDpE_VRFxB3hGJA7DM89zp1WnPmYqqHZOkT25e22HpDfderrVh17Yk-26urHeXBVNzijdzwFvtdugjnkLUO1lTok9a2jvMwekYMKTj9RDS22uIo6krqlb9f5PjepqBYeTHiRem1ut2K6hy0QXJL9KB6xqazH8HdBL92SIYI4CXvLZnT48Wli7u88fe_dui3nk4J8d5ZWmD1-ptAM6WXCdrMeF45u22w41EznMWM4SHLLlwn8CH17iRw1BCwR5sZSP7Lx1wI7PWd1YuRrxpXnkYCZ1or-MRoJOx1EF0Cx7zFA953Rz3rGz7uGs8P4LTx33M4T2pou52UvpBAO2wJfEaT_h23b9-1FtNuzTZdgvKCJyOExdSSiJMwdeJVtIa0Zo1hRV2dqykDt-eChSoajguWS2GcKM28-vbaBFaNy3]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/fP9FQy904CNl-HJJU1CCflGafLIajOLQfHOyYCYQ7StY_Wcp6wr--cwqOcghADwIDpE_VRFxB3hGJA7DM89zp1WnPmYqqHZOkT25e22HpDfderrVh17Yk-26urHeXBVNzijdzwFvtdugjnkLUO1lTok9a2jvMwekYMKTj9RDS22uIo6krqlb9f5PjepqBYeTHiRem1ut2K6hy0QXJL9KB6xqazH8HdBL92SIYI4CXvLZnT48Wli7u88fe_dui3nk4J8d5ZWmD1-ptAM6WXCdrMeF45u22w41EznMWM4SHLLlwn8CH17iRw1BCwR5sZSP7Lx1wI7PWd1YuRrxpXnkYCZ1or-MRoJOx1EF0Cx7zFA953Rz3rGz7uGs8P4LTx33M4T2pou52UvpBAO2wJfEaT_h23b9-1FtNuzTZdgvKCJyOExdSSiJMwdeJVtIa0Zo1hRV2dqykDt-eChSoajguWS2GcKM28-vbaBFaNy3" target="_blank">View as PNG</a></small>
+                     <!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "schema:ScholarlyArticle" [[#schema:ScholarlyArticle]] 
+<> diamond_ScholarlyArticle_CreativeWork_author
+"schema:ScholarlyArticle" - -> "diamond_ScholarlyArticle_CreativeWork_author" : schema:author [1..*] 
+diamond_ScholarlyArticle_CreativeWork_author ..  "schema:Organization"
+diamond_ScholarlyArticle_CreativeWork_author ..  "schema:Person"
+"schema:ScholarlyArticle" : schema:dateCreated  : xsd:date  [1..1]  
+"schema:ScholarlyArticle" : schema:datePublished  : xsd:date  [1..*]  
+"schema:ScholarlyArticle" : schema:description  : xsd:string  [1..*]  
+"schema:ScholarlyArticle" : schema:identifier  : xsd:string  [1..*]  
+"schema:ScholarlyArticle" : schema:name  : xsd:string  [1..*]  
+"schema:ScholarlyArticle" : schema:url  
+Class "schema:Organization" [[#schema:Organization]] 
+Class "schema:Person" [[#schema:Person]] 
+hide circle
+hide methods
+hide empty members
+remove @unlinked
+@enduml
+--></div>
+                  <table class="sp_table_propertyshapes table-striped table-responsive">
+                     <thead>
+                        <tr>
+                           <th>Property name</th>
+                           <th>URI</th>
+                           <th>Expected value</th>
+                           <th>Card.</th>
+                           <th class="sp_description_column">Description</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Author</td>
+                           <td id="schema:ScholarlyArticle_schema:author"><code><a href="http://schema.org/author">schema:author</a></code></td>
+                           <td><code><a href="#schema:Organization">Organization</a></code><code> or </code><code><a href="#schema:Person">Person</a></code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The author of the software, this can be organizations or people that are maintainers
+                              and/or producers of the software.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Date created</td>
+                           <td id="schema:ScholarlyArticle_schema:dateCreated"><code><a href="http://schema.org/dateCreated">schema:dateCreated</a></code></td>
+                           <td><code>xsd:date</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The date on which the repository was created.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Date published</td>
+                           <td id="schema:ScholarlyArticle_schema:datePublished"><code><a href="http://schema.org/datePublished">schema:datePublished</a></code></td>
+                           <td><code>xsd:date</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Latest published git release date, else, the publish date of the doi.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Description</td>
+                           <td id="schema:ScholarlyArticle_schema:description"><code><a href="http://schema.org/description">schema:description</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">A description of the item.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Identifier</td>
+                           <td id="schema:ScholarlyArticle_schema:identifier"><code><a href="http://schema.org/identifier">schema:identifier</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Represents any kind of unique string to identify something, such as ISBNs, GTIN codes,
+                              UUIDs etc.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Name</td>
+                           <td id="schema:ScholarlyArticle_schema:name"><code><a href="http://schema.org/name">schema:name</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The name of a person, in the US their first and last name(s) seperated by spaces</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>URL</td>
+                           <td id="schema:ScholarlyArticle_schema:url"><code><a href="http://schema.org/url">schema:url</a></code></td>
+                           <td><br><small>^http.*</small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Fill in any URL related to this repository. e.g. related lab or project website.</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </section>
+            </div>
+         </div><br><div class="row mt-3">
+            <div class="col">
+               <section>
+                  <div class="sp_section_title_table_wrapper">
+                     <h3 id="schema:SoftwareSourceCode" class="sp_section_title_table">Software application</h3><code class="sp_section_uri"><a href="http://schema.org/SoftwareSourceCode">http://schema.org/SoftwareSourceCode</a></code></div>
+                  <div class="sp_nodeshape_description"><p>A software application.</p>
+</div>
+                  <div class="sp_section_nodeshape_diagram">
+                     <div class="sp_section_nodeshape_center"><?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="794px" preserveAspectRatio="none" style="width:1097px;height:794px;background:#FFFFFF;" version="1.1" viewBox="0 0 1097 794" width="1097px" zoomAndPan="magnify"><defs xmlns=""/><g><!--class schema:SoftwareSourceCode--><a href="#schema:SoftwareSourceCode" target="_top" title="#schema:SoftwareSourceCode" xlink:actuate="onRequest" xlink:href="#schema:SoftwareSourceCode" xlink:show="new" xlink:title="#schema:SoftwareSourceCode" xlink:type="simple"><g id="elem_schema:SoftwareSourceCode"><rect codeLine="8" fill="#F1F1F1" height="456.5621" id="uml_schema:SoftwareSourceCode" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="320" x="98" y="115"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="203" x="156.5" y="134.9659">schema:SoftwareSourceCode</text><line style="stroke:#181818;stroke-width:0.5;" x1="99" x2="417" y1="144.0679" y2="144.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="232" x="104" y="163.0339">pulse:commits  : xsd:integer  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="266" x="104" y="182.1018">pulse:firstCommitDate  : xsd:date  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="263" x="104" y="201.1697">pulse:lastCommitDate  : xsd:date  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="215" x="104" y="220.2376">pulse:linkedEntities  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="188" x="104" y="239.3055">pulse:metadata  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="201" x="104" y="258.3734">pulse:relatedAPIs  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="221" x="104" y="277.4414">pulse:relatedModels  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="274" x="104" y="296.5093">pulse:relatedToEPFL  : xsd:boolean  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="276" x="104" y="315.5772">pulse:relatedToOrganization  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="211" x="104" y="334.6451">pulse:source  : xsd:string  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="264" x="104" y="353.713">pulse:totalCommits  : xsd:integer  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="239" x="104" y="372.7809">schema:citation  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="209" x="104" y="391.8489">schema:codeRepository  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="262" x="104" y="410.9168">schema:dateCreated  : xsd:date  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="276" x="104" y="429.9847">schema:datePublished  : xsd:date  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="265" x="104" y="449.0526">schema:description  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="251" x="104" y="468.1205">schema:identifier  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="153" x="104" y="487.1884">schema:license  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="227" x="104" y="506.2564">schema:name  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="308" x="104" y="525.3243">schema:programmingLanguage  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="104" y="544.3922">schema:url</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="104" y="563.4601">sd:readme</text></g></a><polygon fill="#F1F1F1" points="136,671.5,148,683.5,136,695.5,124,683.5,136,671.5" style="stroke:#181818;stroke-width:0.5;"/><!--class schema:Organization--><a href="#schema:Organization" target="_top" title="#schema:Organization" xlink:actuate="onRequest" xlink:href="#schema:Organization" xlink:show="new" xlink:title="#schema:Organization" xlink:type="simple"><g id="elem_schema:Organization"><rect codeLine="47" fill="#F1F1F1" height="29.0679" id="uml_schema:Organization" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="158" x="7" y="759"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="152" x="10" y="778.9659">schema:Organization</text></g></a><!--class schema:Person--><a href="#schema:Person" target="_top" title="#schema:Person" xlink:actuate="onRequest" xlink:href="#schema:Person" xlink:show="new" xlink:title="#schema:Person" xlink:type="simple"><g id="elem_schema:Person"><rect codeLine="42" fill="#F1F1F1" height="29.0679" id="uml_schema:Person" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="116" x="200" y="759"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="203" y="778.9659">schema:Person</text></g></a><!--class schema:Dataset--><a href="#schema:Dataset" target="_top" title="#schema:Dataset" xlink:actuate="onRequest" xlink:href="#schema:Dataset" xlink:show="new" xlink:title="#schema:Dataset" xlink:type="simple"><g id="elem_schema:Dataset"><rect codeLine="44" fill="#F1F1F1" height="29.0679" id="uml_schema:Dataset" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="121" x="316.5" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="319.5" y="26.9659">schema:Dataset</text></g></a><!--class pulse:DisciplineEnumeration--><a href="#pulse:DisciplineEnumeration" target="_top" title="#pulse:DisciplineEnumeration" xlink:actuate="onRequest" xlink:href="#pulse:DisciplineEnumeration" xlink:show="new" xlink:title="#pulse:DisciplineEnumeration" xlink:type="simple"><g id="elem_pulse:DisciplineEnumeration"><rect codeLine="41" fill="#F1F1F1" height="29.0679" id="uml_pulse:DisciplineEnumeration" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="200" x="394" y="669"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="194" x="397" y="688.9659">pulse:DisciplineEnumeration</text></g></a><!--class schema:ScholarlyArticle--><a href="#schema:ScholarlyArticle" target="_top" title="#schema:ScholarlyArticle" xlink:actuate="onRequest" xlink:href="#schema:ScholarlyArticle" xlink:show="new" xlink:title="#schema:ScholarlyArticle" xlink:type="simple"><g id="elem_schema:ScholarlyArticle"><rect codeLine="45" fill="#F1F1F1" height="29.0679" id="uml_schema:ScholarlyArticle" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="174" x="916" y="329"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="168" x="919" y="348.9659">schema:ScholarlyArticle</text></g></a><!--class pulse:RepositoryTypeEnumeration--><a href="#pulse:RepositoryTypeEnumeration" target="_top" title="#pulse:RepositoryTypeEnumeration" xlink:actuate="onRequest" xlink:href="#pulse:RepositoryTypeEnumeration" xlink:show="new" xlink:title="#pulse:RepositoryTypeEnumeration" xlink:type="simple"><g id="elem_pulse:RepositoryTypeEnumeration"><rect codeLine="46" fill="#F1F1F1" height="29.0679" id="uml_pulse:RepositoryTypeEnumeration" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="237" x="44.5" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="231" x="47.5" y="26.9659">pulse:RepositoryTypeEnumeration</text></g></a><!--class pulse:AcademicCatalogRelation--><a href="#pulse:AcademicCatalogRelation" target="_top" title="#pulse:AcademicCatalogRelation" xlink:actuate="onRequest" xlink:href="#pulse:AcademicCatalogRelation" xlink:show="new" xlink:title="#pulse:AcademicCatalogRelation" xlink:type="simple"><g id="elem_pulse:AcademicCatalogRelation"><rect codeLine="43" fill="#F1F1F1" height="29.0679" id="uml_pulse:AcademicCatalogRelation" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="218" x="663" y="329"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="212" x="666" y="348.9659">pulse:AcademicCatalogRelation</text></g></a><!--link schema:SoftwareSourceCode to diamond_SoftwareSourceCode_CreativeWork_author--><g id="link_schema:SoftwareSourceCode_diamond_SoftwareSourceCode_CreativeWork_author"><path codeLine="21" d="M141.07,572.11 C138,582.08 135.28,592.07 133,602 C127.23,627.08 130.2483,651.7847 132.9883,667.0247 " fill="none" id="schema:SoftwareSourceCode-to-diamond_SoftwareSourceCode_CreativeWork_author" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="134.05,672.93,136.3943,663.3642,133.1652,668.0089,128.5205,664.7798,134.05,672.93" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="97" x="134" y="616.897">schema:author</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="28" x="168.5" y="634.603">[1..*]</text></g><!--link diamond_SoftwareSourceCode_CreativeWork_author to schema:Organization--><g id="link_diamond_SoftwareSourceCode_CreativeWork_author_schema:Organization"><path codeLine="22" d="M131.91,691.7 C123.56,706.4 104.44,740.04 93.7,758.96 " fill="none" id="diamond_SoftwareSourceCode_CreativeWork_author-schema:Organization" style="stroke:#800000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--link diamond_SoftwareSourceCode_CreativeWork_author to schema:Person--><g id="link_diamond_SoftwareSourceCode_CreativeWork_author_schema:Person"><path codeLine="23" d="M142.56,689.23 C160.57,702.23 211.32,738.83 239.15,758.91 " fill="none" id="diamond_SoftwareSourceCode_CreativeWork_author-schema:Person" style="stroke:#800000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--reverse link schema:Dataset to schema:SoftwareSourceCode--><g id="link_schema:Dataset_schema:SoftwareSourceCode"><path codeLine="35" d="M369.7967,41.873 C363.8067,57.963 355.2,81.11 342.68,114.79 " fill="none" id="schema:Dataset-backto-schema:SoftwareSourceCode" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="371.89,36.25,365.0013,43.2889,370.1456,40.9358,372.4987,46.08,371.89,36.25" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="129" x="360" y="80.897">pulse:relatedDatasets</text></g><!--link schema:SoftwareSourceCode to pulse:DisciplineEnumeration--><g id="link_schema:SoftwareSourceCode_pulse:DisciplineEnumeration"><path codeLine="36" d="M417.05,572.29 C446.13,613.94 467.9742,645.2312 481.0642,663.9712 " fill="none" id="schema:SoftwareSourceCode-to-pulse:DisciplineEnumeration" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="484.5,668.89,482.6255,659.2212,481.6368,664.791,476.067,663.8023,484.5,668.89" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="90" x="460" y="625.897">pulse:discipline</text></g><!--link schema:SoftwareSourceCode to schema:ScholarlyArticle--><g id="link_schema:SoftwareSourceCode_schema:ScholarlyArticle"><path codeLine="37" d="M418.39,217.78 C482.89,174.76 560.32,131.96 638,110 C749.65,78.44 802.9,49.99 899,115 C974.81,166.29 995.4823,281.2368 1000.7323,323.0368 " fill="none" id="schema:SoftwareSourceCode-to-schema:ScholarlyArticle" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="1001.48,328.99,1004.3272,319.5617,1000.8569,324.029,996.3896,320.5586,1001.48,328.99" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="150" x="639" y="80.897">pulse:relatedPublications</text></g><!--reverse link pulse:RepositoryTypeEnumeration to schema:SoftwareSourceCode--><g id="link_pulse:RepositoryTypeEnumeration_schema:SoftwareSourceCode"><path codeLine="38" d="M168.7887,42.0016 C173.5687,58.0916 180.4,81.11 190.4,114.79 " fill="none" id="pulse:RepositoryTypeEnumeration-backto-schema:SoftwareSourceCode" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="167.08,36.25,165.8086,46.0165,168.5039,41.043,173.4774,43.7382,167.08,36.25" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="126" x="183" y="80.897">pulse:repositoryType</text></g><!--link schema:SoftwareSourceCode to schema:Person--><g id="link_schema:SoftwareSourceCode_schema:Person"><path codeLine="39" d="M258,572.28 C258,651.74 258,722.65 258,752.96 " fill="none" id="schema:SoftwareSourceCode-to-schema:Person" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="258,758.96,262,749.96,258,753.96,254,749.96,258,758.96" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="99" x="259" y="688.897">pulse:gitAuthors</text></g><!--link schema:SoftwareSourceCode to pulse:AcademicCatalogRelation--><g id="link_schema:SoftwareSourceCode_pulse:AcademicCatalogRelation"><path codeLine="40" d="M418.17,343.5 C497.72,343.5 585.76,343.5 656.9,343.5 " fill="none" id="schema:SoftwareSourceCode-to-pulse:AcademicCatalogRelation" style="stroke:#800000;stroke-width:1.0;"/><polygon fill="#800000" points="662.9,343.5,653.9,339.5,657.9,343.5,653.9,347.5,662.9,343.5" style="stroke:#800000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="208" x="436.5" y="336.397">pulse:hasAcademicCatalogRelation</text></g><!--SRC=[hLPBJ-Cm4BxtLtZBRIKgkjfJjK9RXS8YmL9H90uLGiQU9YFyY6m7jlpwdIGqX3wJbbioZs- -iSSpuo4mmpNub0kOGCeT3zOnOmrq_3EQNA2PKDpxSsl21D-0zNzslacOeG5sTNdnv-xcTlZtObGtjpeb038FSmKiq-f7JVlgU7eDtlCOxb66XFLFJchgeNFsDRAAM1nTSsUjwVZD95adohcnhXS9QDuVJEmil7874viv0P6Lq6NJwT5czSC3wspr7h0qKnu6b9N6u1a9_davG1CW1iVOzAJNwp-mXYWpT3v41TGP3x10ayLtEoXA_AkGq3o379c00Q7Aq0U79cwAeI5mYittytQWYBSSZY_zGG3N95I7GTpPqVZyQW7nPAq2RjgUQ8Lrus9ky8q7j6O_MhwGBVksenDiu2hQLS2_Jfb4hgsHZwjWZv43ok85xgrxVkHPIApR7lpu-9Hrsm7cZ1UGfOHD-xtUTtgZxO1OhyS-caBz4he78Ot1-HnZnwalj0B3sfj_Juerng7_MqYjHsfyyzA_ty8_Rmf5RY2N-iGUGEFiIQ5Fra6roKc25mxJhpWUb3HiS8PvDH-6f520yNjaay-dGuEdpiOq0ZKvNt4JPpGXsxQCXJPpge6nf3x5PKvynqlEygUyiA1fmsaahpIxTxdV1IPpiDBp3Bt0bCOFZ4ocmPKlj0AMbNeNfgiJd8Z4AkxKVEW22hNQbeiA5aKmtoZrqllZ1TxDq_MCtIUJHYUnr5egg1Z3iEX0lb7ofTDGS0aQHKHteMnyc-VxYM32_GQRQfNQUZMqIstHvylKqaAsIAksX9MYckqExbNC3HPhebOrMWlxBbjZlLemzPLnIRd2UqjPLCmtsgnXysbQrPdK5RbVGdsF2NH4gloc7IonqfS_eDCm9v5-ekFkED3s1TZlp9JBtdy0]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/hLPBJ-Cm4BxtLtZBRIKgkjfJjK9RXS8YmL9H90uLGiQU9YFyY6m7jlpwdIGqX3wJbbioZs--iSSpuo4mmpNub0kOGCeT3zOnOmrq_3EQNA2PKDpxSsl21D-0zNzslacOeG5sTNdnv-xcTlZtObGtjpeb038FSmKiq-f7JVlgU7eDtlCOxb66XFLFJchgeNFsDRAAM1nTSsUjwVZD95adohcnhXS9QDuVJEmil7874viv0P6Lq6NJwT5czSC3wspr7h0qKnu6b9N6u1a9_davG1CW1iVOzAJNwp-mXYWpT3v41TGP3x10ayLtEoXA_AkGq3o379c00Q7Aq0U79cwAeI5mYittytQWYBSSZY_zGG3N95I7GTpPqVZyQW7nPAq2RjgUQ8Lrus9ky8q7j6O_MhwGBVksenDiu2hQLS2_Jfb4hgsHZwjWZv43ok85xgrxVkHPIApR7lpu-9Hrsm7cZ1UGfOHD-xtUTtgZxO1OhyS-caBz4he78Ot1-HnZnwalj0B3sfj_Juerng7_MqYjHsfyyzA_ty8_Rmf5RY2N-iGUGEFiIQ5Fra6roKc25mxJhpWUb3HiS8PvDH-6f520yNjaay-dGuEdpiOq0ZKvNt4JPpGXsxQCXJPpge6nf3x5PKvynqlEygUyiA1fmsaahpIxTxdV1IPpiDBp3Bt0bCOFZ4ocmPKlj0AMbNeNfgiJd8Z4AkxKVEW22hNQbeiA5aKmtoZrqllZ1TxDq_MCtIUJHYUnr5egg1Z3iEX0lb7ofTDGS0aQHKHteMnyc-VxYM32_GQRQfNQUZMqIstHvylKqaAsIAksX9MYckqExbNC3HPhebOrMWlxBbjZlLemzPLnIRd2UqjPLCmtsgnXysbQrPdK5RbVGdsF2NH4gloc7IonqfS_eDCm9v5-ekFkED3s1TZlp9JBtdy0" target="_blank">View as PNG</a></small>
+                     <!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "schema:SoftwareSourceCode" [[#schema:SoftwareSourceCode]] 
+"schema:SoftwareSourceCode" : pulse:commits  : xsd:integer  [0..1]  
+"schema:SoftwareSourceCode" : pulse:firstCommitDate  : xsd:date  [0..1]  
+"schema:SoftwareSourceCode" : pulse:lastCommitDate  : xsd:date  [0..1]  
+"schema:SoftwareSourceCode" : pulse:linkedEntities  : xsd:string  
+"schema:SoftwareSourceCode" : pulse:metadata  : xsd:string  
+"schema:SoftwareSourceCode" : pulse:relatedAPIs  : xsd:string  
+"schema:SoftwareSourceCode" : pulse:relatedModels  : xsd:string  
+"schema:SoftwareSourceCode" : pulse:relatedToEPFL  : xsd:boolean  [0..1]  
+"schema:SoftwareSourceCode" : pulse:relatedToOrganization  : xsd:string  
+"schema:SoftwareSourceCode" : pulse:source  : xsd:string  [0..1]  
+"schema:SoftwareSourceCode" : pulse:totalCommits  : xsd:integer  [0..1]  
+<> diamond_SoftwareSourceCode_CreativeWork_author
+"schema:SoftwareSourceCode" - -> "diamond_SoftwareSourceCode_CreativeWork_author" : schema:author [1..*] 
+diamond_SoftwareSourceCode_CreativeWork_author ..  "schema:Organization"
+diamond_SoftwareSourceCode_CreativeWork_author ..  "schema:Person"
+"schema:SoftwareSourceCode" : schema:citation  : xsd:string  [1..*]  
+"schema:SoftwareSourceCode" : schema:codeRepository  [1..1]  
+"schema:SoftwareSourceCode" : schema:dateCreated  : xsd:date  [1..1]  
+"schema:SoftwareSourceCode" : schema:datePublished  : xsd:date  [1..*]  
+"schema:SoftwareSourceCode" : schema:description  : xsd:string  [1..*]  
+"schema:SoftwareSourceCode" : schema:identifier  : xsd:string  [1..*]  
+"schema:SoftwareSourceCode" : schema:license  [1..*]  
+"schema:SoftwareSourceCode" : schema:name  : xsd:string  [1..*]  
+"schema:SoftwareSourceCode" : schema:programmingLanguage  : xsd:string  
+"schema:SoftwareSourceCode" : schema:url  
+"schema:SoftwareSourceCode" : sd:readme  
+"schema:SoftwareSourceCode" -u-> "schema:Dataset" : pulse:relatedDatasets 
+"schema:SoftwareSourceCode" -d-> "pulse:DisciplineEnumeration" : pulse:discipline 
+"schema:SoftwareSourceCode" -r-> "schema:ScholarlyArticle" : pulse:relatedPublications 
+"schema:SoftwareSourceCode" -u-> "pulse:RepositoryTypeEnumeration" : pulse:repositoryType 
+"schema:SoftwareSourceCode" -d-> "schema:Person" : pulse:gitAuthors 
+"schema:SoftwareSourceCode" -r-> "pulse:AcademicCatalogRelation" : pulse:hasAcademicCatalogRelation 
+Class "pulse:DisciplineEnumeration" [[#pulse:DisciplineEnumeration]] 
+Class "schema:Person" [[#schema:Person]] 
+Class "pulse:AcademicCatalogRelation" [[#pulse:AcademicCatalogRelation]] 
+Class "schema:Dataset" [[#schema:Dataset]] 
+Class "schema:ScholarlyArticle" [[#schema:ScholarlyArticle]] 
+Class "pulse:RepositoryTypeEnumeration" [[#pulse:RepositoryTypeEnumeration]] 
+Class "schema:Organization" [[#schema:Organization]] 
+hide circle
+hide methods
+hide empty members
+remove @unlinked
+@enduml
+--></div>
+                  <table class="sp_table_propertyshapes table-striped table-responsive">
+                     <thead>
+                        <tr>
+                           <th>Property name</th>
+                           <th>URI</th>
+                           <th>Expected value</th>
+                           <th>Card.</th>
+                           <th class="sp_description_column">Description</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Commits</td>
+                           <td id="schema:SoftwareSourceCode_pulse:commits"><code><a href="https://open-pulse.epfl.ch/ontology#commits">pulse:commits</a></code></td>
+                           <td><code>xsd:integer</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The number of commits, or detailed commit information.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Discipline</td>
+                           <td id="schema:SoftwareSourceCode_pulse:discipline"><code><a href="https://open-pulse.epfl.ch/ontology#discipline">pulse:discipline</a></code></td>
+                           <td><code><a href="#pulse:DisciplineEnumeration">Discipline Enumeration</a></code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The academic or scientific discipline associated with the software or research.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>First commit date</td>
+                           <td id="schema:SoftwareSourceCode_pulse:firstCommitDate"><code><a href="https://open-pulse.epfl.ch/ontology#firstCommitDate">pulse:firstCommitDate</a></code></td>
+                           <td><code>xsd:date</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The date of the first commit in the repository.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Git authors</td>
+                           <td id="schema:SoftwareSourceCode_pulse:gitAuthors"><code><a href="https://open-pulse.epfl.ch/ontology#gitAuthors">pulse:gitAuthors</a></code></td>
+                           <td><code><a href="#schema:Person">Person</a></code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Authors who have contributed commits to the git repository.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Has academic catalog relation</td>
+                           <td id="schema:SoftwareSourceCode_pulse:hasAcademicCatalogRelation"><code><a href="https://open-pulse.epfl.ch/ontology#hasAcademicCatalogRelation">pulse:hasAcademicCatalogRelation</a></code></td>
+                           <td><code><a href="#pulse:AcademicCatalogRelation">Academic Catalog Relation</a></code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Links a resource to a relation with an academic catalog entity.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Last commit date</td>
+                           <td id="schema:SoftwareSourceCode_pulse:lastCommitDate"><code><a href="https://open-pulse.epfl.ch/ontology#lastCommitDate">pulse:lastCommitDate</a></code></td>
+                           <td><code>xsd:date</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The date of the most recent commit in the repository.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Linked entities</td>
+                           <td id="schema:SoftwareSourceCode_pulse:linkedEntities"><code><a href="https://open-pulse.epfl.ch/ontology#linkedEntities">pulse:linkedEntities</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Entities that are linked or associated with this resource.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Metadata</td>
+                           <td id="schema:SoftwareSourceCode_pulse:metadata"><code><a href="https://open-pulse.epfl.ch/ontology#metadata">pulse:metadata</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Additional metadata information about the resource.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Related APIs</td>
+                           <td id="schema:SoftwareSourceCode_pulse:relatedAPIs"><code><a href="https://open-pulse.epfl.ch/ontology#relatedAPIs">pulse:relatedAPIs</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">APIs (Application Programming Interfaces) that are related to or used by the software.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Related datasets</td>
+                           <td id="schema:SoftwareSourceCode_pulse:relatedDatasets"><code><a href="https://open-pulse.epfl.ch/ontology#relatedDatasets">pulse:relatedDatasets</a></code></td>
+                           <td><code><a href="#schema:Dataset">Dataset</a></code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Datasets that are related to, used by, or produced by the software.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Related models</td>
+                           <td id="schema:SoftwareSourceCode_pulse:relatedModels"><code><a href="https://open-pulse.epfl.ch/ontology#relatedModels">pulse:relatedModels</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Machine learning models or computational models related to the software.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Related publications</td>
+                           <td id="schema:SoftwareSourceCode_pulse:relatedPublications"><code><a href="https://open-pulse.epfl.ch/ontology#relatedPublications">pulse:relatedPublications</a></code></td>
+                           <td><code><a href="#schema:ScholarlyArticle">Scholarly Article</a></code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Academic publications related to or citing the software.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Related to EPFL</td>
+                           <td id="schema:SoftwareSourceCode_pulse:relatedToEPFL"><code><a href="https://open-pulse.epfl.ch/ontology#relatedToEPFL">pulse:relatedToEPFL</a></code></td>
+                           <td><code>xsd:boolean</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Indicates whether a software repository or entity is related to EPFL (École Polytechnique
+                              Fédérale de Lausanne).</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Related to organization</td>
+                           <td id="schema:SoftwareSourceCode_pulse:relatedToOrganization"><code><a href="https://open-pulse.epfl.ch/ontology#relatedToOrganization">pulse:relatedToOrganization</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The lab/institution/group/project/organization to which a software is related and/or
+                              affiliated to</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Repository Type</td>
+                           <td id="schema:SoftwareSourceCode_pulse:repositoryType"><code><a href="https://open-pulse.epfl.ch/ontology#repositoryType">pulse:repositoryType</a></code></td>
+                           <td><code><a href="#pulse:RepositoryTypeEnumeration">Repository Type Enumeration</a></code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The type of repository, such as software, educational resource, documentation, data
+                              or other .</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Source</td>
+                           <td id="schema:SoftwareSourceCode_pulse:source"><code><a href="https://open-pulse.epfl.ch/ontology#source">pulse:source</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The source or origin of the data or metadata.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Total commits</td>
+                           <td id="schema:SoftwareSourceCode_pulse:totalCommits"><code><a href="https://open-pulse.epfl.ch/ontology#totalCommits">pulse:totalCommits</a></code></td>
+                           <td><code>xsd:integer</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The total number of commits in the repository.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Author</td>
+                           <td id="schema:SoftwareSourceCode_schema:author"><code><a href="http://schema.org/author">schema:author</a></code></td>
+                           <td><code><a href="#schema:Organization">Organization</a></code><code> or </code><code><a href="#schema:Person">Person</a></code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The author of the software, this can be organizations or people that are maintainers
+                              and/or producers of the software.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Citation</td>
+                           <td id="schema:SoftwareSourceCode_schema:citation"><code><a href="http://schema.org/citation">schema:citation</a></code></td>
+                           <td><code>xsd:string</code><br><small>^http.*</small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">A citation or reference to another creative work, such as another publication, web
+                              page, scholarly article, etc.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Code repository</td>
+                           <td id="schema:SoftwareSourceCode_schema:codeRepository"><code><a href="http://schema.org/codeRepository">schema:codeRepository</a></code></td>
+                           <td><br><small>^http.*</small></td>
+                           <td>
+                              <div style="width:30px">1..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Primary link to the repository where the un-compiled, human readable code and related
+                              code is located (GitLab, GitHub, CodePlex etc.).</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Date created</td>
+                           <td id="schema:SoftwareSourceCode_schema:dateCreated"><code><a href="http://schema.org/dateCreated">schema:dateCreated</a></code></td>
+                           <td><code>xsd:date</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..1</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The date on which the repository was created.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Date published</td>
+                           <td id="schema:SoftwareSourceCode_schema:datePublished"><code><a href="http://schema.org/datePublished">schema:datePublished</a></code></td>
+                           <td><code>xsd:date</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Latest published git release date, else, the publish date of the doi.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Description</td>
+                           <td id="schema:SoftwareSourceCode_schema:description"><code><a href="http://schema.org/description">schema:description</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">A description of the item.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Identifier</td>
+                           <td id="schema:SoftwareSourceCode_schema:identifier"><code><a href="http://schema.org/identifier">schema:identifier</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Represents any kind of unique string to identify something, such as ISBNs, GTIN codes,
+                              UUIDs etc.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>License</td>
+                           <td id="schema:SoftwareSourceCode_schema:license"><code><a href="http://schema.org/license">schema:license</a></code></td>
+                           <td><br><small>.*spdx\.org.*</small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">A license document that applies to this content, typically indicated by URL.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Name</td>
+                           <td id="schema:SoftwareSourceCode_schema:name"><code><a href="http://schema.org/name">schema:name</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">1..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The name of a person, in the US their first and last name(s) seperated by spaces</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Programming Language</td>
+                           <td id="schema:SoftwareSourceCode_schema:programmingLanguage"><code><a href="http://schema.org/programmingLanguage">schema:programmingLanguage</a></code></td>
+                           <td><code>xsd:string</code><br><small></small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">The computer programming language.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>URL</td>
+                           <td id="schema:SoftwareSourceCode_schema:url"><code><a href="http://schema.org/url">schema:url</a></code></td>
+                           <td><br><small>^http.*</small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">Fill in any URL related to this repository. e.g. related lab or project website.</td>
+                        </tr>
+                        <tr style="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;''&#xA;&#x9;&#x9;&#x9;&#x9;">
+                           <td>Readme</td>
+                           <td id="schema:SoftwareSourceCode_sd:readme"><code><a href="https://w3id.org/okn/o/sd#readme">sd:readme</a></code></td>
+                           <td><br><small>^http.*</small></td>
+                           <td>
+                              <div style="width:30px">0..*</div>
+                           </td>
+                           <td class="sp_table_propertyshapes_col_description">URL to the Readme file of a software component</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </section>
+            </div>
+         </div><br></div><script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js">//</script><script>				
+					anchors.options = {
+	                    icon: '#'
+	                  };
+               		anchors.options.placement = 'left';
+					anchors.add('h2,h3');
+					// for links inside tables		
+					anchors.add('td[id]');
+				</script></body>
+</html>

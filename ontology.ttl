@@ -55,7 +55,44 @@ pulse:GitHubOrganization
   rdfs:comment "A GitHub organization." ;
   rdfs:label "GitHub organization" ;
 .
+
+schema:ScholarlyArticle
+  a rdfs:Class ;
+  rdfs:comment "A scholarly article, typically published in an academic journal or conference." ;
+  rdfs:label "Scholarly Article" ;
+  rdfs:subClassOf schema:CreativeWork ;
+.
+
+schema:Dataset
+  a rdfs:Class ;
+  rdfs:comment "A body of structured information describing some topic(s) of interest." ;
+  rdfs:label "Dataset" ;
+.
+
+schema:Enumeration
+  a rdfs:Class ;
+  rdfs:comment "Lists or enumerations for schema:Thing property values." ;
+  rdfs:label "Enumeration" ;
+.
+
+pulse:DisciplineEnumeration
+  a rdfs:Class ;
+  rdfs:comment "Enumeration of academic and scientific disciplines for categorizing software repositories." ;
+  rdfs:label "Discipline Enumeration" ;
+  rdfs:subClassOf schema:Enumeration ;
+.
+
+pulse:RepositoryTypeEnumeration
+  a rdfs:Class ;
+  rdfs:comment "Enumeration of types of repositories (software, educational resource, documentation, data, other)." ;
+  rdfs:label "Repository Type Enumeration" ;
+  rdfs:subClassOf schema:Enumeration ;
+.
 #####################################
+schema:citation a rdf:Property;
+  rdfs:comment "A citation or reference to another creative work, such as another publication, web page, scholarly article, etc.";
+  rdfs:label "Citation" .
+
 schema:license a rdf:Property;
   rdfs:comment "A license document that applies to this content, typically indicated by URL.";
   rdfs:label "License" .
@@ -87,10 +124,6 @@ schema:codeRepository a rdf:Property;
 schema:description a rdf:Property;
   rdfs:comment "A description of the item.";
   rdfs:label "Description" .
-
-schema:isBasedOn a rdf:Property;
-  rdfs:comment "A resource from which this work is derived or from which it is a modification or adaption.";
-  rdfs:label "Is based on" .
 
 pulse:relatedToOrganization a rdf:Property ;
   rdfs:comment "The lab/institution/group/project/organization to which a software is related and/or affiliated to" ;
@@ -167,6 +200,167 @@ schema:memberOf a rdf:Property ;
   rdfs:domain pulse:GitHubOrganization ;
   rdfs:range schema:Person .
 
+pulse:AcademicCatalogRelation a rdfs:Class ;
+  rdfs:comment "A relation between a software repository or person and an entity in an academic catalog system (e.g., Infoscience)." ;
+  rdfs:label "Academic Catalog Relation" .
 
+pulse:CatalogEntity a rdfs:Class ;
+  rdfs:comment "An entity from an academic catalog system with detailed metadata." ;
+  rdfs:label "Catalog Entity" .
+
+# Properties for Academic Catalog Relations
+
+pulse:hasAcademicCatalogRelation a rdf:Property ;
+  rdfs:comment "Links a resource to a relation with an academic catalog entity." ;
+  rdfs:label "Has academic catalog relation" ;
+  rdfs:domain schema:SoftwareSourceCode ;
+  rdfs:range pulse:AcademicCatalogRelation .
+
+pulse:catalogType a rdf:Property ;
+  rdfs:comment "The type of academic catalog system (e.g., 'infoscience')." ;
+  rdfs:label "Catalog type" ;
+  rdfs:domain pulse:AcademicCatalogRelation ;
+  rdfs:range xsd:string .
+
+pulse:entityType a rdf:Property ;
+  rdfs:comment "The type of entity in the catalog (e.g., 'person', 'publication', 'organization')." ;
+  rdfs:label "Entity type" ;
+  rdfs:domain pulse:AcademicCatalogRelation ;
+  rdfs:range xsd:string .
+
+pulse:hasCatalogEntity a rdf:Property ;
+  rdfs:comment "The detailed entity information from the academic catalog." ;
+  rdfs:label "Has Catalog entity" ;
+  rdfs:domain pulse:AcademicCatalogRelation ;
+  rdfs:range pulse:CatalogEntity .
+
+pulse:confidence a rdf:Property ;
+  rdfs:comment "A confidence score (0-1) indicating the reliability of the catalog relation match." ;
+  rdfs:label "Confidence" ;
+  rdfs:domain pulse:AcademicCatalogRelation ;
+  rdfs:range xsd:decimal .
+
+# Properties for Catalog Entity
+
+pulse:uuid a rdf:Property ;
+  rdfs:comment "A universally unique identifier for the catalog entity." ;
+  rdfs:label "UUID" ;
+  rdfs:domain pulse:CatalogEntity ;
+  rdfs:range xsd:string .
+
+pulse:email a rdf:Property ;
+  rdfs:comment "The email address of a person in the catalog." ;
+  rdfs:label "Email" ;
+  rdfs:domain pulse:CatalogEntity ;
+  rdfs:range xsd:string .
+
+pulse:profileUrl a rdf:Property ;
+  rdfs:comment "The URL to the entity's profile page in the academic catalog." ;
+  rdfs:label "Profile URL" ;
+  rdfs:domain pulse:CatalogEntity ;
+  rdfs:range xsd:anyURI .
+
+pulse:publicationCount a rdf:Property ;
+  rdfs:comment "The number of publications associated with the entity in the catalog." ;
+  rdfs:label "Publication count" ;
+  rdfs:domain pulse:CatalogEntity ;
+  rdfs:range xsd:integer .
+
+pulse:researchInterests a rdf:Property ;
+  rdfs:comment "Research interests or topics associated with the entity." ;
+  rdfs:label "Research interests" ;
+  rdfs:domain pulse:CatalogEntity ;
+  rdfs:range xsd:string .
+
+pulse:justification a rdf:Property ;
+  rdfs:comment "An explanation of how a catalog relation or match was established." ;
+  rdfs:label "Justification" ;
+  rdfs:range xsd:string .
+
+pulse:externalId a rdf:Property ;
+  rdfs:comment "An external identifier used for matching in a catalog system." ;
+  rdfs:label "External ID" ;
+  rdfs:domain pulse:AcademicCatalogRelation ;
+  rdfs:range xsd:string .
+
+pulse:matchedOn a rdf:Property ;
+  rdfs:comment "The fields or properties that were used to establish a match (e.g., 'name', 'email')." ;
+  rdfs:label "Matched on" ;
+  rdfs:domain pulse:AcademicCatalogRelation ;
+  rdfs:range xsd:string .
+
+pulse:relatedToEPFL a rdf:Property ;
+  rdfs:comment "Indicates whether a software repository or entity is related to EPFL (École Polytechnique Fédérale de Lausanne)." ;
+  rdfs:label "Related to EPFL" ;
+  rdfs:range xsd:boolean .
+
+pulse:source a rdf:Property ;
+  rdfs:comment "The source or origin of the data or metadata." ;
+  rdfs:label "Source" ;
+  rdfs:range xsd:string .
+
+pulse:linkedEntities a rdf:Property ;
+  rdfs:comment "Entities that are linked or associated with this resource." ;
+  rdfs:label "Linked entities" ;
+  rdfs:range xsd:string .
+
+pulse:relatedModels a rdf:Property ;
+  rdfs:comment "Machine learning models or computational models related to the software." ;
+  rdfs:label "Related models" ;
+  rdfs:domain schema:SoftwareSourceCode ;
+  rdfs:range xsd:string .
+
+pulse:firstCommitDate a rdf:Property ;
+  rdfs:comment "The date of the first commit in the repository." ;
+  rdfs:label "First commit date" ;
+  rdfs:domain schema:SoftwareSourceCode ;
+  rdfs:range xsd:date .
+
+pulse:lastCommitDate a rdf:Property ;
+  rdfs:comment "The date of the most recent commit in the repository." ;
+  rdfs:label "Last commit date" ;
+  rdfs:domain schema:SoftwareSourceCode ;
+  rdfs:range xsd:date .
+
+pulse:gitAuthors a rdf:Property ;
+  rdfs:comment "Authors who have contributed commits to the git repository." ;
+  rdfs:label "Git authors" ;
+  rdfs:domain schema:SoftwareSourceCode ;
+  rdfs:range schema:Person .
+
+pulse:relatedPublications a rdf:Property ;
+  rdfs:comment "Academic publications related to or citing the software." ;
+  rdfs:label "Related publications" ;
+  rdfs:domain schema:SoftwareSourceCode ;
+  rdfs:range schema:ScholarlyArticle .
+
+pulse:relatedAPIs a rdf:Property ;
+  rdfs:comment "APIs (Application Programming Interfaces) that are related to or used by the software." ;
+  rdfs:label "Related APIs" ;
+  rdfs:domain schema:SoftwareSourceCode ;
+  rdfs:range xsd:string .
+
+pulse:relatedDatasets a rdf:Property ;
+  rdfs:comment "Datasets that are related to, used by, or produced by the software." ;
+  rdfs:label "Related datasets" ;
+  rdfs:domain schema:SoftwareSourceCode ;
+  rdfs:range schema:Dataset .
+
+pulse:totalCommits a rdf:Property ;
+  rdfs:comment "The total number of commits in the repository." ;
+  rdfs:label "Total commits" ;
+  rdfs:domain schema:SoftwareSourceCode ;
+  rdfs:range xsd:integer .
+
+pulse:commits a rdf:Property ;
+  rdfs:comment "The number of commits, or detailed commit information." ;
+  rdfs:label "Commits" ;
+  rdfs:domain schema:SoftwareSourceCode ;
+  rdfs:range xsd:integer .
+
+pulse:metadata a rdf:Property ;
+  rdfs:comment "Additional metadata information about the resource." ;
+  rdfs:label "Metadata" ;
+  rdfs:range xsd:string .
 
 

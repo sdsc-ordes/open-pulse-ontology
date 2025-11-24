@@ -42,8 +42,7 @@ TTL_HEADER
 # Prepare arrays for programming languages and discipline choices.
 # These discipline IRIs were present in your pasted schema snippet.
 languages=(Python JavaScript "C++" Java R Go Rust MATLAB "C#")
-disciplines=(wd:Q34749 wd:Q7112556 wd:Q80083 wd:Q816264 wd:Q7991 wd:Q395 wd:Q420 wd:Q413 wd:Q83404 wd:Q843601)
-# Note: Q83404 not in your list? left intentionally to keep variety; if you want only listed IRIs, replace accordingly.
+disciplines=(wd:Q34749  wd:Q23404  wd:Q11680831  wd:Q8434  wd:Q8162  wd:Q42240  wd:Q21201  wd:Q1071  wd:Q9418  wd:Q7163  wd:Q8134  wd:Q7112556  wd:Q843601  wd:Q43035  wd:Q83588  wd:Q77590  wd:Q12271  wd:Q428691  wd:Q3353193  wd:Q192386  wd:Q18351432  wd:Q101333  wd:Q580689  wd:Q188847  wd:Q2167061  wd:Q3606845  wd:Q4830453  wd:Q80083  wd:Q309  wd:Q8242  wd:Q735  wd:Q9174  wd:Q5891  wd:Q7748  wd:Q816264  wd:Q395  wd:Q8078  wd:Q12483  wd:Q2878974  wd:Q7991  wd:Q413  wd:Q333  wd:Q420  wd:Q2329  wd:Q8008)
 
 # Iterate and append triples per software instance.
 # Use printf and a heredoc-like block to keep turtle formatting readable.

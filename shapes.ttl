@@ -41,7 +41,6 @@ sh:property   schema:CreativeWork-citation ,
               schema:CreativeWork-dateCreated ,
               schema:CreativeWork-datePublished ,
               schema:Thing-description ,
-              schema:CreativeWork-isBasedOn ,
               pulse:relatedToOrganizationShape, 
               schema:CreativeWork-license ,
               schema:CreativeWork-author ,
@@ -51,7 +50,21 @@ sh:property   schema:CreativeWork-citation ,
               schema:Thing-identifier ,
               sd:SoftwareApplication-readme , 
               pulse:disciplineShape ,
-              pulse:repositoryTypeShape
+              pulse:repositoryTypeShape ,
+              pulse:hasAcademicCatalogRelationShape ,
+              pulse:relatedToEPFLShape ,
+              pulse:sourceShape ,
+              pulse:linkedEntitiesShape ,
+              pulse:relatedModelsShape ,
+              pulse:firstCommitDateShape ,
+              pulse:lastCommitDateShape ,
+              pulse:gitAuthorsShape ,
+              pulse:relatedPublicationsShape ,
+              pulse:relatedAPIsShape ,
+              pulse:relatedDatasetsShape ,
+              pulse:totalCommitsShape ,
+              pulse:commitsShape ,
+              pulse:metadataShape
 .
 
 schema:CreativeWork-citation
@@ -169,7 +182,23 @@ sh:property pulse:hasRepositoryShape ;
 sh:property schema:Thing-affiliation ;
 .
 
+schema:ScholarlyArticle
+  a sh:NodeShape, rdfs:Class ;
+sh:property schema:Thing-name ;
+sh:property schema:Thing-description ;
+sh:property schema:CreativeWork-author ;
+sh:property schema:CreativeWork-dateCreated ;
+sh:property schema:CreativeWork-datePublished ;
+sh:property schema:Thing-identifier ;
+sh:property schema:Thing-url ;
+.
 
+schema:Dataset
+  a sh:NodeShape, rdfs:Class ;
+sh:property schema:Thing-name ;
+sh:property schema:Thing-description ;
+sh:property schema:Thing-url ;
+.
 
 schema:Thing-name
   a sh:PropertyShape ;
@@ -264,16 +293,187 @@ schema:memberOfShape
     sh:path schema:memberOf ;
     sh:class schema:GitHubOrganization ;
     .
-  
+# Academic Catalog Relation Shapes
+
+pulse:AcademicCatalogRelation
+    a sh:NodeShape, rdfs:Class ;
+    sh:property pulse:catalogTypeShape ,
+                pulse:entityTypeShape ,
+                pulse:hasCatalogEntityShape ,
+                pulse:confidenceShape ,
+                pulse:justificationShape ,
+                pulse:externalIdShape ,
+                pulse:matchedOnShape .
+
+pulse:catalogTypeShape
+    a sh:PropertyShape ;
+    sh:path pulse:catalogType ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:in ( "infoscience" "orcid" "ror" "wikidata" ) .
+
+pulse:entityTypeShape
+    a sh:PropertyShape ;
+    sh:path pulse:entityType ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:in ( "person" "organization" "publication" "project" ) .
+
+pulse:hasCatalogEntityShape
+    a sh:PropertyShape ;
+    sh:path pulse:hasCatalogEntity ;
+    sh:class pulse:CatalogEntity ;
+    sh:minCount 1 ;
+    sh:maxCount 1 .
+
+pulse:confidenceShape
+    a sh:PropertyShape ;
+    sh:path pulse:confidence ;
+    sh:datatype xsd:decimal ;
+    sh:minInclusive 0.0 ;
+    sh:maxInclusive 1.0 ;
+    sh:minCount 1 ;
+    sh:maxCount 1 .
+
+pulse:externalIdShape
+    a sh:PropertyShape ;
+    sh:path pulse:externalId ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 .
+
+pulse:matchedOnShape
+    a sh:PropertyShape ;
+    sh:path pulse:matchedOn ;
+    sh:datatype xsd:string .
+
+# Catalog Entity Shape
+
+pulse:CatalogEntity
+    a sh:NodeShape, rdfs:Class ;
+    sh:property pulse:uuidShape ,
+                schema:Thing-name ,
+                pulse:emailShape ,
+                md4i:orcidIdShape ,
+                schema:Thing-affiliation ,
+                pulse:profileUrlShape .
+pulse:uuidShape
+    a sh:PropertyShape ;
+    sh:path pulse:uuid ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 .
+
+pulse:emailShape
+    a sh:PropertyShape ;
+    sh:path pulse:email ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 .
+
+pulse:profileUrlShape
+    a sh:PropertyShape ;
+    sh:path pulse:profileUrl ;
+    sh:datatype xsd:anyURI ;
+    sh:pattern "^http.*" ;
+    sh:maxCount 1 .
+
+pulse:hasAcademicCatalogRelationShape
+    a sh:PropertyShape ;
+    sh:path pulse:hasAcademicCatalogRelation ;
+    sh:class pulse:AcademicCatalogRelation .
+
+# Additional Property Shapes for SoftwareSourceCode
+
+pulse:relatedToEPFLShape
+    a sh:PropertyShape ;
+    sh:path pulse:relatedToEPFL ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1 .
+
+pulse:sourceShape
+    a sh:PropertyShape ;
+    sh:path pulse:source ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 .
+
+pulse:linkedEntitiesShape
+    a sh:PropertyShape ;
+    sh:path pulse:linkedEntities ;
+    sh:datatype xsd:string .
+
+pulse:relatedModelsShape
+    a sh:PropertyShape ;
+    sh:path pulse:relatedModels ;
+    sh:datatype xsd:string .
+
+pulse:firstCommitDateShape
+    a sh:PropertyShape ;
+    sh:path pulse:firstCommitDate ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 .
+
+pulse:lastCommitDateShape
+    a sh:PropertyShape ;
+    sh:path pulse:lastCommitDate ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 .
+
+pulse:gitAuthorsShape
+    a sh:PropertyShape ;
+    sh:path pulse:gitAuthors ;
+    sh:class schema:Person .
+
+pulse:relatedPublicationsShape
+    a sh:PropertyShape ;
+    sh:path pulse:relatedPublications ;
+    sh:class schema:ScholarlyArticle .
+
+pulse:relatedAPIsShape
+    a sh:PropertyShape ;
+    sh:path pulse:relatedAPIs ;
+    sh:datatype xsd:string .
+
+pulse:relatedDatasetsShape
+    a sh:PropertyShape ;
+    sh:path pulse:relatedDatasets ;
+    sh:class schema:Dataset .
+
+pulse:totalCommitsShape
+    a sh:PropertyShape ;
+    sh:path pulse:totalCommits ;
+    sh:datatype xsd:integer ;
+    sh:minInclusive 0 ;
+    sh:maxCount 1 .
+
+pulse:commitsShape
+    a sh:PropertyShape ;
+    sh:path pulse:commits ;
+    sh:datatype xsd:integer ;
+    sh:minInclusive 0 ;
+    sh:maxCount 1 .
+
+pulse:metadataShape
+    a sh:PropertyShape ;
+    sh:path pulse:metadata ;
+    sh:datatype xsd:string .
+
+pulse:justificationShape
+    a sh:PropertyShape ;
+    sh:path pulse:justification ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 .
+
 pulse:DisciplineEnumeration
-    a rdfs:Class ;
+    a sh:NodeShape, rdfs:Class ;
     rdfs:label "Discipline Enumeration" ;
     rdfs:comment "Enumeration of disciplines for categorizing software repositories." ;
     rdfs:subClassOf schema:Enumeration ;
     .
 
 pulse:RepositoryTypeEnumeration
-    a rdfs:Class ;
+    a sh:NodeShape, rdfs:Class ;
     rdfs:label "Repository Type Enumeration" ;
     rdfs:comment "Enumeration of types of repositories." ;
     rdfs:subClassOf schema:Enumeration ;
