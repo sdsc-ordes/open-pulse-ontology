@@ -6,3 +6,6 @@ taxonomy/taxonomy.txt
 .venv/*
 software_instances.ttl
 
+# Ignore downloaded/third-party jars
+shacl-play-cli.jar
+
