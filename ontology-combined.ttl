@@ -316,11 +316,11 @@ pulse:gitAuthors a rdf:Property ;
   rdfs:domain schema:SoftwareSourceCode ;
   rdfs:range schema:Person .
 
-pulse:relatedPublications a rdf:Property ;
+pulse:relatedPublication a rdf:Property ;
   rdfs:comment "Academic publications related to or citing the software." ;
-  rdfs:label "Related publications" ;
+  rdfs:label "Related publication" ;
   rdfs:domain schema:SoftwareSourceCode ;
-  rdfs:range schema:ScholarlyArticle .
+  rdfs:range xsd:string .
 
 pulse:relatedAPIs a rdf:Property ;
   rdfs:comment "APIs (Application Programming Interfaces) that are related to or used by the software." ;
@@ -367,7 +367,7 @@ sh:property   schema:CreativeWork-citation ,
               pulse:linkedEntitiesShape ,
               pulse:relatedModelsShape ,
               pulse:gitAuthorsShape ,
-              pulse:relatedPublicationsShape ,
+              pulse:relatedPublicationShape ,
               pulse:relatedAPIsShape ,
               pulse:relatedDatasetsShape ,
               pulse:commitsShape ,
@@ -709,10 +709,10 @@ pulse:gitAuthorsShape
     sh:path pulse:gitAuthors ;
     sh:class schema:Person .
 
-pulse:relatedPublicationsShape
+pulse:relatedPublicationShape
     a sh:PropertyShape ;
-    sh:path pulse:relatedPublications ;
-    sh:class schema:ScholarlyArticle .
+    sh:path pulse:relatedPublication ;
+    sh:datatype xsd:string .
 
 pulse:relatedAPIsShape
     a sh:PropertyShape ;

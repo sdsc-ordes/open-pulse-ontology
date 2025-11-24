@@ -56,13 +56,6 @@ pulse:GitHubOrganization
   rdfs:label "GitHub organization" ;
 .
 
-schema:ScholarlyArticle
-  a rdfs:Class ;
-  rdfs:comment "A scholarly article, typically published in an academic journal or conference." ;
-  rdfs:label "Scholarly Article" ;
-  rdfs:subClassOf schema:CreativeWork ;
-.
-
 schema:Dataset
   a rdfs:Class ;
   rdfs:comment "A body of structured information describing some topic(s) of interest." ;
@@ -312,11 +305,11 @@ pulse:gitAuthors a rdf:Property ;
   rdfs:domain schema:SoftwareSourceCode ;
   rdfs:range schema:Person .
 
-pulse:relatedPublications a rdf:Property ;
+pulse:relatedPublication a rdf:Property ;
   rdfs:comment "Academic publications related to or citing the software." ;
-  rdfs:label "Related publications" ;
+  rdfs:label "Related publication" ;
   rdfs:domain schema:SoftwareSourceCode ;
-  rdfs:range schema:ScholarlyArticle .
+  rdfs:range xsd:string .
 
 pulse:relatedAPIs a rdf:Property ;
   rdfs:comment "APIs (Application Programming Interfaces) that are related to or used by the software." ;

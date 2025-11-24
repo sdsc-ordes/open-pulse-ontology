@@ -56,7 +56,7 @@ sh:property   schema:CreativeWork-citation ,
               pulse:linkedEntitiesShape ,
               pulse:relatedModelsShape ,
               pulse:gitAuthorsShape ,
-              pulse:relatedPublicationsShape ,
+              pulse:relatedPublicationShape ,
               pulse:relatedAPIsShape ,
               pulse:relatedDatasetsShape ,
               pulse:commitsShape ,
@@ -184,16 +184,6 @@ schema:GitHubOrganization
 sh:property pulse:usernameShape ;
 sh:property pulse:hasRepositoryShape ;
 sh:property schema:Thing-affiliation ;
-.
-
-schema:ScholarlyArticle
-  a sh:NodeShape, rdfs:Class ;
-sh:property schema:Thing-name ;
-sh:property schema:Thing-description ;
-sh:property schema:CreativeWork-author ;
-sh:property schema:CreativeWork-dateCreated ;
-sh:property schema:CreativeWork-datePublished ;
-sh:property schema:Thing-url ;
 .
 
 schema:Dataset
@@ -398,10 +388,10 @@ pulse:gitAuthorsShape
     sh:path pulse:gitAuthors ;
     sh:class schema:Person .
 
-pulse:relatedPublicationsShape
+pulse:relatedPublicationShape
     a sh:PropertyShape ;
-    sh:path pulse:relatedPublications ;
-    sh:class schema:ScholarlyArticle .
+    sh:path pulse:relatedPublication ;
+    sh:datatype xsd:string .
 
 pulse:relatedAPIsShape
     a sh:PropertyShape ;
