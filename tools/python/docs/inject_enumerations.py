@@ -239,9 +239,14 @@ def inject_into_html(html_file, enumeration_html, enumerations):
     # Add references to enumeration classes
     inject_references_to_enum_classes(soup, enumerations)
     
+    # Replace all occurrences of schema1 with schema
+    html_content = str(soup)
+    html_content = html_content.replace('schema1:', 'schema:')
+    html_content = html_content.replace('schema1', 'schema')
+    
     # Write back
     with open(html_file, 'w', encoding='utf-8') as f:
-        f.write(str(soup))
+        f.write(html_content)
 
 def main():
     if len(sys.argv) != 3:
