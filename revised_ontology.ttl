@@ -1,0 +1,154 @@
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix time:   <http://www.w3.org/2006/time#> .
+@prefix ex:     <http://example.org/> .
+
+# ---------------------------------------------------------
+# 1. CLASS & PROPERTY SECTION
+# ---------------------------------------------------------
+
+schema:Person a rdfs:Class ; rdfs:label "Person" .
+schema:ScholarlyArticle a rdfs:Class ; rdfs:label "Scholarly Article" .
+schema:SoftwareSourceCode a rdfs:Class ; rdfs:label "Software Repository" .
+org:Membership a rdfs:Class ; rdfs:label "Membership" .
+org:Organization a rdfs:Class ; rdfs:label "Organization" .
+ex:GitCommit a rdfs:Class ; rdfs:label "Git Commit" .
+
+# Properties defined for clarity
+schema:name a rdfs:Property .
+schema:email a rdfs:Property .
+schema:identifier a rdfs:Property .
+org:hasUnit a rdfs:Property .
+org:unitOf a rdfs:Property .
+ex:gitUsername a rdfs:Property .
+
+# ---------------------------------------------------------
+# 2. REUSABLE PROPERTY SHAPES
+# ---------------------------------------------------------
+
+ex:nameShape
+    a sh:PropertyShape ;
+    sh:path schema:name ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 .
+
+ex:GitUsernameShape
+    a sh:PropertyShape ;
+    sh:path ex:gitUsername ;
+    sh:datatype xsd:string ;
+    sh:description "The GitHub/Git handle of a person." .
+
+ex:DoiPropertyShape
+    a sh:PropertyShape ;
+    sh:path schema:identifier ;
+    sh:datatype xsd:string ;
+    sh:pattern "^10\\.\\d{4,9}/[-._;()/:a-zA-Z0-9]+$" ;
+    sh:description "Standard DOI validation." .
+
+ex:RorPropertyShape
+    a sh:PropertyShape ;
+    sh:path schema:identifier ;
+    sh:datatype xsd:string ;
+    sh:pattern "^https://ror\\.org/[0-9a-z]{9}$" ;
+    sh:description "Standard ROR ID validation." .
+
+ex:HasUnitPropertyShape
+    a sh:PropertyShape ;
+    sh:path org:hasUnit ;
+    sh:class org:Organization ; 
+    sh:description "Link to a subunit, project, or department." .
+
+ex:UnitOfPropertyShape
+    a sh:PropertyShape ;
+    sh:path org:unitOf ;
+    sh:class org:Organization ; 
+    sh:description "Link back to the managing/parent organization." .
+
+# ---------------------------------------------------------
+# 3. NODE SHAPES
+# ---------------------------------------------------------
+
+ex:PersonShape
+    a sh:NodeShape ;
+    sh:targetClass schema:Person ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property ex:nameShape ;
+    sh:property ex:GitUsernameShape ;
+    sh:property [ sh:path schema:email ; sh:nodeKind sh:Literal ; sh:pattern "^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" ] ;
+    sh:property [ sh:path schema:gender ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:in ( "Male" "Female" "N/A" ) ] ;
+    sh:property [ sh:path schema:url ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path ex:infoscienceUsername ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path org:hasMembership ; sh:node ex:MembershipShape ] .
+
+ex:ArticleShape
+    a sh:NodeShape ;
+    sh:targetClass schema:ScholarlyArticle ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property ex:nameShape ;
+    sh:property ex:DoiPropertyShape ;
+    sh:property [ sh:path schema:headline ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ] ;
+    sh:property [ sh:path schema:author ; sh:node ex:PersonShape ; sh:minCount 1 ] ;
+    sh:property [ sh:path schema:sourceOrganization ; sh:node ex:OrganizationShape ; sh:minCount 1 ] .
+
+ex:OrganizationShape
+    a sh:NodeShape ;
+    sh:targetClass org:Organization ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property ex:nameShape ;
+    sh:property ex:RorPropertyShape ;
+    sh:property [ sh:path schema:url ; sh:nodeKind sh:IRI ] ;
+    sh:property [ 
+        sh:path schema:publishingPrinciples ; 
+        sh:nodeKind sh:IRI ; 
+        sh:description "Link to the GitHub Organization URL." 
+    ] ;
+    sh:property [ 
+        sh:path schema:hasPart ; 
+        sh:node ex:RepositoryShape ; 
+    ] ;
+    sh:property ex:HasUnitPropertyShape ;
+    sh:property ex:UnitOfPropertyShape .
+
+ex:RepositoryShape
+    a sh:NodeShape ;
+    sh:targetClass schema:SoftwareSourceCode ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property ex:nameShape ; 
+    sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ] ; 
+    sh:property [ sh:path schema:citation ; sh:nodeKind sh:IRI ] ;
+    sh:property [ 
+        sh:path ex:hasCommit ; 
+        sh:node ex:CommitShape ;
+    ] .
+
+ex:CommitShape
+    a sh:NodeShape ;
+    sh:targetClass ex:GitCommit ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:path schema:identifier ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ] ;
+    sh:property [ 
+        sh:path schema:author ; 
+        sh:node ex:PersonShape ;
+    ] .
+
+ex:MembershipShape
+    a sh:NodeShape ;
+    sh:targetClass org:Membership ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:path org:organization ; sh:nodeKind sh:IRI ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path time:hasBeginning ; sh:datatype xsd:date ; sh:minCount 1 ; sh:lessThan time:hasEnd ] ;
+    sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ] .
