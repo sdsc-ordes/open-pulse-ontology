@@ -6,10 +6,18 @@
 @prefix org:    <http://www.w3.org/ns/org#> .
 @prefix time:   <http://www.w3.org/2006/time#> .
 @prefix ex:     <http://example.org/> .
+@prefix pulse:  <https://open-pulse.epfl.ch/ontology#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
 
 # ---------------------------------------------------------
 # 1. CLASS & PROPERTY SECTION
 # ---------------------------------------------------------
+<https://open-pulse.epfl.ch/ontology#> a owl:Ontology ;
+    dct:abstract "The Open Pulse Ontology to model contributions to open source scientific software and research articles from EPFL." ;
+    dct:license <https://spdx.org/licenses/CC-BY-4.0.html> ;
+    dct:title "Open Pulse Ontology" ;
+    owl:versionInfo "v.2.0"^^xsd:string .
 
 schema:Person a rdfs:Class ; rdfs:label "Person" .
 schema:ScholarlyArticle a rdfs:Class ; rdfs:label "Scholarly Article" .
@@ -17,14 +25,6 @@ schema:SoftwareSourceCode a rdfs:Class ; rdfs:label "Software Repository" .
 org:Membership a rdfs:Class ; rdfs:label "Membership" .
 org:Organization a rdfs:Class ; rdfs:label "Organization" .
 ex:GitCommit a rdfs:Class ; rdfs:label "Git Commit" .
-
-# Properties defined for clarity
-schema:name a rdfs:Property .
-schema:email a rdfs:Property .
-schema:identifier a rdfs:Property .
-org:hasUnit a rdfs:Property .
-org:unitOf a rdfs:Property .
-ex:gitUsername a rdfs:Property .
 
 # ---------------------------------------------------------
 # 2. REUSABLE PROPERTY SHAPES
@@ -41,6 +41,12 @@ ex:GitUsernameShape
     sh:path ex:gitUsername ;
     sh:datatype xsd:string ;
     sh:description "The GitHub/Git handle of a person." .
+
+ex:gitMetadataShape
+    a sh:PropertyShape ;
+    sh:path ex:metadata ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 .
 
 ex:DoiPropertyShape
     a sh:PropertyShape ;
@@ -83,7 +89,12 @@ ex:PersonShape
     sh:property [ sh:path schema:gender ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:in ( "Male" "Female" "N/A" ) ] ;
     sh:property [ sh:path schema:url ; sh:nodeKind sh:IRI ] ;
     sh:property [ sh:path ex:infoscienceUsername ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
-    sh:property [ sh:path org:hasMembership ; sh:node ex:MembershipShape ] .
+    sh:property [ sh:path org:hasMembership ; sh:node ex:MembershipShape ] ;
+    sh:property [ 
+        sh:path schema:creator ; 
+        sh:node ex:RepositoryShape ;
+        sh:description "Link to personal repositories owned by this user account." ;
+    ] .
 
 ex:ArticleShape
     a sh:NodeShape ;
@@ -123,12 +134,18 @@ ex:RepositoryShape
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property ex:nameShape ; 
+    sh:property ex:gitMetadataShape ;
     sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
     sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ] ; 
     sh:property [ sh:path schema:citation ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path schema:applicationCategory ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ] ;
+    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:dateTime ] ;
+    sh:property [ sh:path ex:hasCommit ; sh:node ex:CommitShape ] ;
     sh:property [ 
-        sh:path ex:hasCommit ; 
-        sh:node ex:CommitShape ;
+        sh:path schema:accountablePerson ; 
+        sh:node ex:PersonShape ;
+        sh:description "Links the repo back to the personal owner."
     ] .
 
 ex:CommitShape
@@ -148,7 +165,7 @@ ex:MembershipShape
     sh:targetClass org:Membership ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:path org:organization ; sh:nodeKind sh:IRI ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path org:Organization ; sh:nodeKind sh:IRI ; sh:minCount 1 ; sh:maxCount 1 ] ;
     sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:minCount 1 ] ;
     sh:property [ sh:path time:hasBeginning ; sh:datatype xsd:date ; sh:minCount 1 ; sh:lessThan time:hasEnd ] ;
     sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ] .
