@@ -22,6 +22,7 @@
 schema:Person a rdfs:Class ; rdfs:label "Person" .
 schema:ScholarlyArticle a rdfs:Class ; rdfs:label "Scholarly Article" .
 schema:SoftwareSourceCode a rdfs:Class ; rdfs:label "Software Repository" .
+schema:Dataset a rdfs:Class ; rdfs:label "Dataset" .
 org:Membership a rdfs:Class ; rdfs:label "Membership" .
 org:Organization a rdfs:Class ; rdfs:label "Organization" .
 ex:GitCommit a rdfs:Class ; rdfs:label "Git Commit" .
@@ -141,6 +142,11 @@ ex:RepositoryShape
     sh:ignoredProperties ( rdf:type ) ;
     sh:property ex:nameShape ; 
     sh:property ex:gitMetadataShape ;
+    sh:property [ 
+        sh:path schema:dataset ; 
+        sh:node ex:DatasetShape ;
+        sh:description "Link to a dataset associated with this software."
+    ] ;
     sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
     sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ] ; 
     sh:property [ sh:path schema:citation ; sh:nodeKind sh:IRI ] ;
@@ -153,6 +159,17 @@ ex:RepositoryShape
         sh:node ex:PersonShape ;
         sh:description "Links the repo back to the personal owner."
     ] .
+
+ex:DatasetShape
+    a sh:NodeShape ;
+    sh:targetClass schema:Dataset ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property ex:nameShape ;        # REUSED
+    sh:property ex:urlShape ;         # REUSED
+    sh:property ex:DoiPropertyShape ; # REUSED
+    sh:property [ sh:path schema:description ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ] .
 
 ex:CommitShape
     a sh:NodeShape ;
@@ -173,13 +190,12 @@ ex:MembershipShape
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ 
         sh:path org:organization ; 
-        sh:node ex:OrganizationShape ; # Connects directly to Organization Shape rules
-        sh:minCount 1 ;                # [1..*]
-        sh:maxCount 1 ;                # [..1]
+        sh:node ex:OrganizationShape ;
+        sh:minCount 1 ;                
+        sh:maxCount 1 ;                
         sh:nodeKind sh:IRI ;
         sh:description "The organization where the person holds this membership." ;
     ] ;
-    # sh:property [ sh:path org:Organization ; sh:nodeKind sh:IRI ; sh:minCount 1 ; sh:maxCount 1 ] ;
     sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:minCount 1 ] ;
     sh:property [ sh:path time:hasBeginning ; sh:datatype xsd:date ; sh:minCount 1 ; sh:lessThan time:hasEnd ] ;
     sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ] .
