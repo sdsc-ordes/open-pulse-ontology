@@ -165,7 +165,15 @@ ex:MembershipShape
     sh:targetClass org:Membership ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:path org:Organization ; sh:nodeKind sh:IRI ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ 
+        sh:path org:organization ; 
+        sh:node ex:OrganizationShape ; # Connects directly to Organization Shape rules
+        sh:minCount 1 ;                # [1..*]
+        sh:maxCount 1 ;                # [..1]
+        sh:nodeKind sh:IRI ;
+        sh:description "The organization where the person holds this membership." ;
+    ] ;
+    # sh:property [ sh:path org:Organization ; sh:nodeKind sh:IRI ; sh:minCount 1 ; sh:maxCount 1 ] ;
     sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:minCount 1 ] ;
     sh:property [ sh:path time:hasBeginning ; sh:datatype xsd:date ; sh:minCount 1 ; sh:lessThan time:hasEnd ] ;
     sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ] .
