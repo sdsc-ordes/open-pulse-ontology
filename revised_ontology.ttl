@@ -36,6 +36,12 @@ ex:nameShape
     sh:datatype xsd:string ;
     sh:minCount 1 .
 
+ex:urlShape
+    a sh:PropertyShape ;
+    sh:path schema:url ;
+    sh:nodeKind sh:IRI ;
+    sh:description "Standard validation for any web URL." .
+
 ex:GitUsernameShape
     a sh:PropertyShape ;
     sh:path ex:gitUsername ;
@@ -87,7 +93,7 @@ ex:PersonShape
     sh:property ex:GitUsernameShape ;
     sh:property [ sh:path schema:email ; sh:nodeKind sh:Literal ; sh:pattern "^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" ] ;
     sh:property [ sh:path schema:gender ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:in ( "Male" "Female" "N/A" ) ] ;
-    sh:property [ sh:path schema:url ; sh:nodeKind sh:IRI ] ;
+    sh:property ex:urlShape ;
     sh:property [ sh:path ex:infoscienceUsername ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
     sh:property [ sh:path org:hasMembership ; sh:node ex:MembershipShape ] ;
     sh:property [ 
@@ -115,7 +121,7 @@ ex:OrganizationShape
     sh:ignoredProperties ( rdf:type ) ;
     sh:property ex:nameShape ;
     sh:property ex:RorPropertyShape ;
-    sh:property [ sh:path schema:url ; sh:nodeKind sh:IRI ] ;
+    sh:property ex:urlShape ;
     sh:property [ 
         sh:path schema:publishingPrinciples ; 
         sh:nodeKind sh:IRI ; 
