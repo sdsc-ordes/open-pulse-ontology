@@ -19,9 +19,10 @@
     dct:title "Open Pulse Ontology" ;
     owl:versionInfo "v.2.0"^^xsd:string .
 
-schema:Person a rdfs:Class ; rdfs:label "Person" ; rdfs:comment "Represents an individual researcher or contributor." .
+# Classes
+schema:Person a rdfs:Class ; rdfs:label "Person" ; rdfs:comment "An individual researcher or contributor." .
 
-schema:ScholarlyArticle a rdfs:Class ; rdfs:label "Scholarly Article" ; rdfs:comment "A research publication or paper." .
+schema:ScholarlyArticle a rdfs:Class ; rdfs:label "Scholarly Article" ; rdfs:comment "A research paper or publication." .
 
 schema:SoftwareSourceCode a rdfs:Class ; rdfs:label "Software Repository" ; rdfs:comment "A software project or source code repository." .
 
@@ -33,12 +34,32 @@ org:Organization a rdfs:Class ; rdfs:label "Organization" ; rdfs:comment "A rese
 
 ex:GitCommit a rdfs:Class ; rdfs:label "Git Commit" ; rdfs:comment "A specific record of changes in a software repository." .
 
-# Linking Relationship Descriptions
-schema:creator rdfs:label "creator" ; rdfs:comment "Links a person to a repository they personally created or own." .
-schema:hasPart rdfs:label "has part" ; rdfs:comment "Links an organization to a repository that belongs to it officially." .
-schema:dataset rdfs:label "dataset" ; rdfs:comment "Links software to its associated data collections." .
-org:organization rdfs:label "organization" ; rdfs:comment "The specific organization a membership belongs to." .
-schema:accountablePerson rdfs:label "accountable person" ; rdfs:comment "The person responsible for the maintenance of a software project." .
+# Properties
+schema:name a rdfs:Property ; rdfs:label "name" ; rdfs:comment "The primary name or title of the entity." .
+schema:email a rdfs:Property ; rdfs:label "email" ; rdfs:comment "The electronic mail address of a person." .
+schema:url a rdfs:Property ; rdfs:label "url" ; rdfs:comment "The web address (URL) of the resource." .
+schema:identifier a rdfs:Property ; rdfs:label "identifier" ; rdfs:comment "A unique identifier such as a DOI or ROR ID." .
+schema:creator a rdfs:Property ; rdfs:label "creator" ; rdfs:comment "Links a person to a repository they personally created." .
+schema:accountablePerson a rdfs:Property ; rdfs:label "accountable person" ; rdfs:comment "The person responsible for maintaining the resource." .
+schema:hasPart a rdfs:Property ; rdfs:label "has part" ; rdfs:comment "Links an organization to a repository it officially contains." .
+schema:dataset a rdfs:Property ; rdfs:label "dataset" ; rdfs:comment "Links software to an associated dataset." .
+schema:programmingLanguage a rdfs:Property ; rdfs:label "programming language" ; rdfs:comment "The primary language used in the software project." .
+schema:codeRepository a rdfs:Property ; rdfs:label "code repository" ; rdfs:comment "Link to the version control system (e.g. GitHub)." .
+schema:citation a rdfs:Property ; rdfs:label "citation" ; rdfs:comment "References or publications related to this software." .
+schema:applicationCategory a rdfs:Property ; rdfs:label "application category" ; rdfs:comment "The high-level category of the software." .
+schema:dateCreated a rdfs:Property ; rdfs:label "date created" ; rdfs:comment "The timestamp of creation." .
+schema:datePublished a rdfs:Property ; rdfs:label "date published" ; rdfs:comment "The date the resource was made public." .
+org:hasUnit a rdfs:Property ; rdfs:label "has unit" ; rdfs:comment "Links to a sub-department or organizational unit." .
+org:unitOf a rdfs:Property ; rdfs:label "unit of" ; rdfs:comment "Links a unit back to its parent organization." .
+org:hasMembership a rdfs:Property ; rdfs:label "has membership" ; rdfs:comment "Links a person to their organizational membership records." .
+org:organization a rdfs:Property ; rdfs:label "organization" ; rdfs:comment "The organization associated with a membership." .
+org:role a rdfs:Property ; rdfs:label "role" ; rdfs:comment "The professional title or role held during a membership." .
+time:hasBeginning a rdfs:Property ; rdfs:label "has beginning" ; rdfs:comment "The start date of a time-bound period." .
+time:hasEnd a rdfs:Property ; rdfs:label "has end" ; rdfs:comment "The end date of a time-bound period." .
+ex:gitUsername a rdfs:Property ; rdfs:label "git username" ; rdfs:comment "The Git handle of a person." .
+ex:infoscienceUsername a rdfs:Property ; rdfs:label "infoscience username" ; rdfs:comment "The local institutional repository username." .
+ex:hasCommit a rdfs:Property ; rdfs:label "has commit" ; rdfs:comment "Links a repository to its individual commits." .
+ex:metadata a rdfs:Property ; rdfs:label "metadata" ; rdfs:comment "General metadata associated with a git repository." .
 
 # ---------------------------------------------------------
 # 2. REUSABLE PROPERTY SHAPES
@@ -105,15 +126,30 @@ ex:PersonShape
     sh:ignoredProperties ( rdf:type ) ;
     sh:property ex:nameShape ;
     sh:property ex:GitUsernameShape ;
-    sh:property [ sh:path schema:email ; sh:nodeKind sh:Literal ; sh:pattern "^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" ] ;
-    sh:property [ sh:path schema:gender ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:in ( "Male" "Female" "N/A" ) ] ;
-    sh:property ex:urlShape ;
-    sh:property [ sh:path ex:infoscienceUsername ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
-    sh:property [ sh:path org:hasMembership ; sh:node ex:MembershipShape ] ;
     sh:property [ 
-        sh:path schema:creator ; 
-        sh:node ex:RepositoryShape ;
-        sh:description "Link to personal repositories owned by this user account." ;
+        sh:path schema:email ; 
+        sh:nodeKind sh:Literal ; 
+        sh:pattern "^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" ;
+        sh:name "Email" ;
+        sh:description "Personal or institutional email address."
+    ] ;
+    sh:property [ 
+        sh:path schema:gender ; 
+        sh:datatype xsd:string ; 
+        sh:maxCount 1 ; 
+        sh:in ( "Male" "Female" "N/A" ) ;
+        sh:name "Gender" 
+    ] ;
+    sh:property ex:urlShape ;
+    sh:property [ sh:path ex:infoscienceUsername ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Infoscience Username"
+    ] ;
+    sh:property [ 
+        sh:path org:hasMembership ; 
+        sh:node ex:MembershipShape ;
+        sh:name "hasMembership"
+    ] ;
+    sh:property [ sh:path schema:creator ; sh:node ex:RepositoryShape ;sh:name "Personal Repositories" ;
+        sh:description "Link to repositories owned by the Person's user account." 
     ] .
 
 ex:ArticleShape
@@ -123,10 +159,10 @@ ex:ArticleShape
     sh:ignoredProperties ( rdf:type ) ;
     sh:property ex:nameShape ;
     sh:property ex:DoiPropertyShape ;
-    sh:property [ sh:path schema:headline ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ] ;
-    sh:property [ sh:path schema:author ; sh:node ex:PersonShape ; sh:minCount 1 ] ;
-    sh:property [ sh:path schema:sourceOrganization ; sh:node ex:OrganizationShape ; sh:minCount 1 ] .
+    sh:property [ sh:path schema:headline ; sh:datatype xsd:string ; sh:name "Headline" ] ;
+    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Publication Date" ] ;
+    sh:property [ sh:path schema:author ; sh:node ex:PersonShape ; sh:minCount 1 ; sh:name "Author" ] ;
+    sh:property [ sh:path schema:sourceOrganization ; sh:node ex:OrganizationShape ; sh:minCount 1 ; sh:name "Source Organization" ] .
 
 ex:OrganizationShape
     a sh:NodeShape ;
@@ -139,11 +175,13 @@ ex:OrganizationShape
     sh:property [ 
         sh:path schema:publishingPrinciples ; 
         sh:nodeKind sh:IRI ; 
+        sh:name "GitHub Org Link" ;
         sh:description "Link to the GitHub Organization URL." 
     ] ;
     sh:property [ 
         sh:path schema:hasPart ; 
         sh:node ex:RepositoryShape ; 
+        sh:name "Institutional Repositories"
     ] ;
     sh:property ex:HasUnitPropertyShape ;
     sh:property ex:UnitOfPropertyShape .
@@ -158,18 +196,20 @@ ex:RepositoryShape
     sh:property [ 
         sh:path schema:dataset ; 
         sh:node ex:DatasetShape ;
+        sh:name "Linked Dataset" ;
         sh:description "Link to a dataset associated with this software."
     ] ;
-    sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ] ; 
-    sh:property [ sh:path schema:citation ; sh:nodeKind sh:IRI ] ;
-    sh:property [ sh:path schema:applicationCategory ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ] ;
-    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:dateTime ] ;
-    sh:property [ sh:path ex:hasCommit ; sh:node ex:CommitShape ] ;
+    sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ; sh:name "Language" ] ;
+    sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ; sh:name "GitHub URL" ] ; 
+    sh:property [ sh:path schema:citation ; sh:nodeKind sh:IRI ; sh:name "Software Citation" ] ;
+    sh:property [ sh:path schema:applicationCategory ; sh:datatype xsd:string ; sh:name "Category" ] ;
+    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Date Created" ] ;
+    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:dateTime ; sh:name "Date Published" ] ;
+    sh:property [ sh:path ex:hasCommit ; sh:node ex:CommitShape ; sh:name "Commits" ] ;
     sh:property [ 
         sh:path schema:accountablePerson ; 
         sh:node ex:PersonShape ;
+        sh:name "Accountable Person" ;
         sh:description "Links the repo back to the personal owner."
     ] .
 
@@ -181,19 +221,20 @@ ex:DatasetShape
     sh:property ex:nameShape ;        
     sh:property ex:urlShape ;         
     sh:property ex:DoiPropertyShape ; 
-    sh:property [ sh:path schema:description ; sh:datatype xsd:string ; sh:minCount 1 ] ;
-    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ] .
+    sh:property [ sh:path schema:description ; sh:datatype xsd:string ; sh:minCount 1 ; sh:name "Description" ] ;
+    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Date Published" ] .
 
 ex:CommitShape
     a sh:NodeShape ;
     sh:targetClass ex:GitCommit ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:path schema:identifier ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ] ;
+    sh:property [ sh:path schema:identifier ; sh:datatype xsd:string ; sh:name "Commit ID" ] ;
+    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Commit Date" ] ;
     sh:property [ 
         sh:path schema:author ; 
         sh:node ex:PersonShape ;
+        sh:name "Author"
     ] .
 
 ex:MembershipShape
@@ -207,8 +248,15 @@ ex:MembershipShape
         sh:minCount 1 ;                
         sh:maxCount 1 ;                
         sh:nodeKind sh:IRI ;
-        sh:description "The organization where the person holds this membership." ;
+        sh:name "Organization" ;
+        sh:description "The organization where the person holds this membership and that owns Github organization/repos." 
     ] ;
-    sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:minCount 1 ] ;
-    sh:property [ sh:path time:hasBeginning ; sh:datatype xsd:date ; sh:minCount 1 ; sh:lessThan time:hasEnd ] ;
-    sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ] .
+    sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:minCount 1 ; sh:name "Role" ] ;
+    sh:property [ 
+        sh:path time:hasBeginning ; 
+        sh:datatype xsd:date ; 
+        sh:minCount 1 ; 
+        sh:lessThan time:hasEnd ;
+        sh:name "Start Date"
+    ] ;
+    sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ; sh:name "End Date" ] .
