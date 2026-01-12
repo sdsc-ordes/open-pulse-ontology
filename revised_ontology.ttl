@@ -89,6 +89,15 @@ ex:gitMetadataShape
     sh:datatype xsd:string ;
     sh:minCount 1 .
 
+ex:GitHashShape
+    a sh:PropertyShape ;
+    sh:path schema:identifier ;
+    sh:datatype xsd:string ;
+    # Regex allows short form (7 chars) or long form (40 chars) hex strings
+    sh:pattern "^([0-9a-f]{7}|[0-9a-f]{40})$" ;
+    sh:name "Git Commit Hash" ;
+    sh:description "A Git commit identifier in either short (7-character) or long (40-character) hex format." .
+
 ex:DoiPropertyShape
     a sh:PropertyShape ;
     sh:path schema:identifier ;
@@ -229,7 +238,7 @@ ex:CommitShape
     sh:targetClass ex:GitCommit ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:path schema:identifier ; sh:datatype xsd:string ; sh:name "Commit ID" ] ;
+    sh:property ex:GitHashShape ;
     sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Commit Date" ] ;
     sh:property [ 
         sh:path schema:author ; 
@@ -251,7 +260,7 @@ ex:MembershipShape
         sh:name "Organization" ;
         sh:description "The organization where the person holds this membership and that owns Github organization/repos." 
     ] ;
-    sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:minCount 1 ; sh:name "Role" ] ;
+    sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Role" ] ;
     sh:property [ 
         sh:path time:hasBeginning ; 
         sh:datatype xsd:date ; 
