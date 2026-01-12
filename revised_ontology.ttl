@@ -39,27 +39,25 @@ schema:name a rdfs:Property ; rdfs:label "name" ; rdfs:comment "The primary name
 schema:email a rdfs:Property ; rdfs:label "email" ; rdfs:comment "The electronic mail address of a person." .
 schema:url a rdfs:Property ; rdfs:label "url" ; rdfs:comment "The web address (URL) of the resource." .
 schema:identifier a rdfs:Property ; rdfs:label "identifier" ; rdfs:comment "A unique identifier such as a DOI or ROR ID." .
-schema:creator a rdfs:Property ; rdfs:label "creator" ; rdfs:comment "Links a person to a repository they personally created." .
+schema:creator a rdfs:Property ; rdfs:label "creator" ; rdfs:comment "The author/creator of this CreativeWork." .
 schema:accountablePerson a rdfs:Property ; rdfs:label "accountable person" ; rdfs:comment "The person responsible for maintaining the resource." .
 schema:hasPart a rdfs:Property ; rdfs:label "has part" ; rdfs:comment "Links an organization to a repository it officially contains." .
-schema:dataset a rdfs:Property ; rdfs:label "dataset" ; rdfs:comment "Links software to an associated dataset." .
-schema:programmingLanguage a rdfs:Property ; rdfs:label "programming language" ; rdfs:comment "The primary language used in the software project." .
-schema:codeRepository a rdfs:Property ; rdfs:label "code repository" ; rdfs:comment "Link to the version control system (e.g. GitHub)." .
-schema:citation a rdfs:Property ; rdfs:label "citation" ; rdfs:comment "References or publications related to this software." .
-schema:applicationCategory a rdfs:Property ; rdfs:label "application category" ; rdfs:comment "The high-level category of the software." .
-schema:dateCreated a rdfs:Property ; rdfs:label "date created" ; rdfs:comment "The timestamp of creation." .
-schema:datePublished a rdfs:Property ; rdfs:label "date published" ; rdfs:comment "The date the resource was made public." .
-org:hasUnit a rdfs:Property ; rdfs:label "has unit" ; rdfs:comment "Links to a sub-department or organizational unit." .
-org:unitOf a rdfs:Property ; rdfs:label "unit of" ; rdfs:comment "Links a unit back to its parent organization." .
-org:hasMembership a rdfs:Property ; rdfs:label "has membership" ; rdfs:comment "Links a person to their organizational membership records." .
-org:organization a rdfs:Property ; rdfs:label "organization" ; rdfs:comment "The organization associated with a membership." .
-org:role a rdfs:Property ; rdfs:label "role" ; rdfs:comment "The professional title or role held during a membership." .
-time:hasBeginning a rdfs:Property ; rdfs:label "has beginning" ; rdfs:comment "The start date of a time-bound period." .
-time:hasEnd a rdfs:Property ; rdfs:label "has end" ; rdfs:comment "The end date of a time-bound period." .
-ex:gitUsername a rdfs:Property ; rdfs:label "git username" ; rdfs:comment "The Git handle of a person." .
-ex:infoscienceUsername a rdfs:Property ; rdfs:label "infoscience username" ; rdfs:comment "The local institutional repository username." .
-ex:hasCommit a rdfs:Property ; rdfs:label "has commit" ; rdfs:comment "Links a repository to its individual commits." .
-ex:metadata a rdfs:Property ; rdfs:label "metadata" ; rdfs:comment "General metadata associated with a git repository." .
+ex:relatedDataset a rdfs:Property ; rdfs:label "related dataset" ; rdfs:comment "A dataset that is utilized, processed, or produced by this software source code." ; rdfs:subPropertyOf schema:isBasedOn .
+schema:programmingLanguage a rdfs:Property ; rdfs:label "programming language" .
+schema:codeRepository a rdfs:Property ; rdfs:label "code repository" .
+schema:dateCreated a rdfs:Property ; rdfs:label "date created" .
+schema:datePublished a rdfs:Property ; rdfs:label "date published" .
+org:hasUnit a rdfs:Property ; rdfs:label "has unit" .
+org:unitOf a rdfs:Property ; rdfs:label "unit of" .
+org:hasMembership a rdfs:Property ; rdfs:label "has membership" .
+org:organization a rdfs:Property ; rdfs:label "organization" .
+org:role a rdfs:Property ; rdfs:label "role" .
+time:hasBeginning a rdfs:Property ; rdfs:label "has beginning" .
+time:hasEnd a rdfs:Property ; rdfs:label "has end" .
+ex:gitUsername a rdfs:Property ; rdfs:label "git username" .
+ex:infoscienceUsername a rdfs:Property ; rdfs:label "infoscience username" .
+ex:hasCommit a rdfs:Property ; rdfs:label "has commit" .
+ex:metadata a rdfs:Property ; rdfs:label "metadata" .
 
 # ---------------------------------------------------------
 # 2. REUSABLE PROPERTY SHAPES
@@ -76,17 +74,14 @@ ex:EmailShape
     sh:path schema:email ;
     sh:nodeKind sh:Literal ;
     sh:pattern "^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" ;
-    sh:name "Email Shape" ;
-    sh:description "Reusable validation for institutional and personal email addresses using standard regex." .
+    sh:description "Reusable validation for institutional and personal email addresses." .
 
 ex:GenderShape
     a sh:PropertyShape ;
     sh:path schema:gender ;
     sh:datatype xsd:string ;
     sh:maxCount 1 ;
-    sh:in ( "Male" "Female" "N/A" ) ;
-    sh:name "Gender Shape" ;
-    sh:description "Controlled vocabulary for gender selection." .
+    sh:in ( "Male" "Female" "N/A" ) .
 
 ex:urlShape
     a sh:PropertyShape ;
@@ -212,9 +207,9 @@ ex:RepositoryShape
     sh:property ex:nameShape ; 
     sh:property ex:gitMetadataShape ;
     sh:property [ 
-        sh:path schema:dataset ; 
+        sh:path ex:relatedDataset ; 
         sh:node ex:DatasetShape ;
-        sh:name "Linked Dataset" ;
+        sh:name "Related Dataset" ;
         sh:description "Link to a dataset associated with this software."
     ] ;
     sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ; sh:name "Language" ] ;
@@ -224,7 +219,6 @@ ex:RepositoryShape
     sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Date Created" ] ;
     sh:property [ sh:path schema:datePublished ; sh:datatype xsd:dateTime ; sh:name "Date Published" ] ;
     sh:property [ sh:path ex:hasCommit ; sh:node ex:CommitShape ; sh:name "Commits" ] ;
-    # 1. INTELLECTUAL AUTHORSHIP (The Fix from your lead)
     sh:property [ 
         sh:path schema:creator ; 
         sh:node ex:PersonShape ;
@@ -232,8 +226,6 @@ ex:RepositoryShape
         sh:name "Creator" ;
         sh:description "The individual(s) who authored the software."
     ] ;
-
-    # 2. ADMINISTRATIVE RESPONSIBILITY (Keep this for Open Pulse)
     sh:property [ 
         sh:path schema:accountablePerson ; 
         sh:node ex:PersonShape ;
@@ -269,11 +261,7 @@ ex:CommitShape
     sh:ignoredProperties ( rdf:type ) ;
     sh:property ex:GitHashShape ;
     sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Commit Date" ] ;
-    sh:property [ 
-        sh:path schema:author ; 
-        sh:node ex:PersonShape ;
-        sh:name "Author"
-    ] .
+    sh:property [ sh:path schema:author ; sh:node ex:PersonShape ; sh:name "Author" ] .
 
 ex:MembershipShape
     a sh:NodeShape ;
@@ -286,8 +274,7 @@ ex:MembershipShape
         sh:minCount 1 ;                
         sh:maxCount 1 ;                
         sh:nodeKind sh:IRI ;
-        sh:name "Organization" ;
-        sh:description "The organization where the person holds this membership and that owns Github organization/repos." 
+        sh:name "Organization"
     ] ;
     sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Role" ] ;
     sh:property [ 
