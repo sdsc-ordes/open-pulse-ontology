@@ -71,6 +71,23 @@ ex:nameShape
     sh:datatype xsd:string ;
     sh:minCount 1 .
 
+ex:EmailShape
+    a sh:PropertyShape ;
+    sh:path schema:email ;
+    sh:nodeKind sh:Literal ;
+    sh:pattern "^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" ;
+    sh:name "Email Shape" ;
+    sh:description "Reusable validation for institutional and personal email addresses using standard regex." .
+
+ex:GenderShape
+    a sh:PropertyShape ;
+    sh:path schema:gender ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:in ( "Male" "Female" "N/A" ) ;
+    sh:name "Gender Shape" ;
+    sh:description "Controlled vocabulary for gender selection." .
+
 ex:urlShape
     a sh:PropertyShape ;
     sh:path schema:url ;
@@ -135,20 +152,8 @@ ex:PersonShape
     sh:ignoredProperties ( rdf:type ) ;
     sh:property ex:nameShape ;
     sh:property ex:GitUsernameShape ;
-    sh:property [ 
-        sh:path schema:email ; 
-        sh:nodeKind sh:Literal ; 
-        sh:pattern "^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" ;
-        sh:name "Email" ;
-        sh:description "Personal or institutional email address."
-    ] ;
-    sh:property [ 
-        sh:path schema:gender ; 
-        sh:datatype xsd:string ; 
-        sh:maxCount 1 ; 
-        sh:in ( "Male" "Female" "N/A" ) ;
-        sh:name "Gender" 
-    ] ;
+    sh:property ex:EmailShape ;
+    sh:property ex:GenderShape ;
     sh:property ex:urlShape ;
     sh:property [ sh:path ex:infoscienceUsername ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Infoscience Username"
     ] ;
@@ -157,8 +162,11 @@ ex:PersonShape
         sh:node ex:MembershipShape ;
         sh:name "hasMembership"
     ] ;
-    sh:property [ sh:path schema:creator ; sh:node ex:RepositoryShape ;sh:name "Personal Repositories" ;
-        sh:description "Link to repositories owned by the Person's user account." 
+    sh:property [ 
+        sh:path [ sh:inversePath schema:creator ] ; 
+        sh:node ex:RepositoryShape ;
+        sh:name "Created Repositories" ;
+        sh:description "Software repositories where this person is the primary creator/author."
     ] .
 
 ex:ArticleShape
@@ -190,7 +198,8 @@ ex:OrganizationShape
     sh:property [ 
         sh:path schema:hasPart ; 
         sh:node ex:RepositoryShape ; 
-        sh:name "Institutional Repositories"
+        sh:name "Institutional Repositories" ;
+        sh:description "Software projects that are part of this organization's official output."
     ] ;
     sh:property ex:HasUnitPropertyShape ;
     sh:property ex:UnitOfPropertyShape .
@@ -215,11 +224,31 @@ ex:RepositoryShape
     sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Date Created" ] ;
     sh:property [ sh:path schema:datePublished ; sh:datatype xsd:dateTime ; sh:name "Date Published" ] ;
     sh:property [ sh:path ex:hasCommit ; sh:node ex:CommitShape ; sh:name "Commits" ] ;
+    # 1. INTELLECTUAL AUTHORSHIP (The Fix from your lead)
+    sh:property [ 
+        sh:path schema:creator ; 
+        sh:node ex:PersonShape ;
+        sh:minCount 1 ;
+        sh:name "Creator" ;
+        sh:description "The individual(s) who authored the software."
+    ] ;
+
+    # 2. ADMINISTRATIVE RESPONSIBILITY (Keep this for Open Pulse)
     sh:property [ 
         sh:path schema:accountablePerson ; 
         sh:node ex:PersonShape ;
+        sh:maxCount 1 ;
         sh:name "Accountable Person" ;
-        sh:description "Links the repo back to the personal owner."
+        sh:description "The primary contact or lead maintainer responsible for this software."
+    ] ;
+
+    # 3. INSTITUTIONAL OWNERSHIP
+    sh:property [ 
+        sh:path [ sh:inversePath schema:hasPart ] ; 
+        sh:node ex:OrganizationShape ;
+        sh:maxCount 1 ;
+        sh:name "Owning Organization" ;
+        sh:description "The institutional parent (e.g., SDSC) of this repository."
     ] .
 
 ex:DatasetShape
