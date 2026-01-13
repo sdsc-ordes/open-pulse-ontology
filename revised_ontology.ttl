@@ -93,7 +93,7 @@ ex:gitMetadataShape
     a sh:PropertyShape ;
     sh:path ex:metadata ;
     sh:datatype xsd:string ;
-    sh:minCount 1 .
+    sh:minCount 0 .
 
 ex:GitHashShape
     a sh:PropertyShape ;
@@ -143,8 +143,7 @@ ex:PersonShape
     sh:property ex:EmailShape ;
     sh:property ex:GenderShape ;
     sh:property ex:urlShape ;
-    sh:property [ sh:path ex:infoscienceUsername ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Infoscience Username"
-    ] ;
+    sh:property [ sh:path ex:infoscienceUsername ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Infoscience Username" ] ;
     sh:property [ 
         sh:path org:hasMembership ; 
         sh:node ex:MembershipShape ;
@@ -152,7 +151,7 @@ ex:PersonShape
     ] ;
     sh:property [ 
         sh:path [ sh:inversePath schema:creator ] ; 
-        sh:node ex:RepositoryShape ;
+        sh:class schema:SoftwareSourceCode ; 
         sh:name "Created Repositories" ;
         sh:description "Software repositories where this person is the primary creator/author."
     ] .
@@ -185,7 +184,7 @@ ex:OrganizationShape
     ] ;
     sh:property [ 
         sh:path schema:hasPart ; 
-        sh:node ex:RepositoryShape ; 
+        sh:class schema:SoftwareSourceCode ; # Use class to avoid deep recursion
         sh:name "Institutional Repositories" ;
         sh:description "Software projects that are part of this organization's official output."
     ] ;
@@ -202,35 +201,27 @@ ex:RepositoryShape
     sh:property [ 
         sh:path ex:relatedDataset ; 
         sh:node ex:DatasetShape ;
-        sh:name "Related Dataset" ;
-        sh:description "Link to a dataset associated with this software."
+        sh:name "Related Dataset" 
     ] ;
-    sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ; sh:name "Language" ] ;
-    sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ; sh:name "GitHub URL" ] ; 
-    sh:property [ sh:path schema:citation ; sh:nodeKind sh:IRI ; sh:name "Software Citation" ] ;
-    sh:property [ sh:path schema:applicationCategory ; sh:datatype xsd:string ; sh:name "Category" ] ;
-    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Date Created" ] ;
-    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:dateTime ; sh:name "Date Published" ] ;
-    sh:property [ sh:path ex:hasCommit ; sh:node ex:CommitShape ; sh:name "Commits" ] ;
+    sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ] ; 
+    sh:property [ sh:path ex:hasCommit ; sh:node ex:CommitShape ] ;
     sh:property [ 
         sh:path schema:creator ; 
-        sh:node ex:PersonShape ;
+        sh:class schema:Person ; # FIXED: points to Class
         sh:minCount 1 ;
-        sh:name "Creator" ;
-        sh:description "The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork."
+        sh:name "Creator" 
     ] ;
     sh:property [ 
         sh:path schema:accountablePerson ; 
-        sh:node ex:PersonShape ;
-        sh:maxCount 1 ;
+        sh:class schema:Person ; # FIXED: points to Class
         sh:name "Accountable Person" ;
         sh:description "The primary contact or lead maintainer responsible for this software."
     ] ;
 
-    # 3. INSTITUTIONAL OWNERSHIP
     sh:property [ 
         sh:path [ sh:inversePath schema:hasPart ] ; 
-        sh:node ex:OrganizationShape ;
+        sh:class org:Organization ; # FIXED: points to Class
         sh:maxCount 1 ;
         sh:name "Owning Organization" ;
         sh:description "The institutional parent (e.g., SDSC) of this repository."
@@ -244,11 +235,11 @@ ex:DatasetShape
     sh:property ex:nameShape ;        
     sh:property ex:urlShape ;         
     sh:property ex:DoiPropertyShape ; 
-    sh:property [ sh:path schema:description ; sh:datatype xsd:string ; sh:minCount 1 ; sh:name "Description" ] ;
-    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Date Published" ] ;
+    sh:property [ sh:path schema:description ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ] ;
     sh:property [ 
         sh:path [ sh:inversePath ex:relatedDataset ] ; 
-        sh:node ex:RepositoryShape ;
+        sh:class schema:SoftwareSourceCode ; # FIXED: points to Class
         sh:name "Related Software" ;
         sh:description "Software repositories that use or are related to this dataset."
     ] .
@@ -259,8 +250,8 @@ ex:CommitShape
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property ex:GitHashShape ;
-    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Commit Date" ] ;
-    sh:property [ sh:path schema:author ; sh:node ex:PersonShape ; sh:name "Author" ] .
+    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ] ;
+    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:name "Author" ] . # FIXED: points to Class
 
 ex:MembershipShape
     a sh:NodeShape ;
@@ -269,13 +260,13 @@ ex:MembershipShape
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ 
         sh:path org:organization ; 
-        sh:node ex:OrganizationShape ;
+        sh:node ex:OrganizationShape ; # Safe to keep sh:node here as Organization doesn't point back to Membership
         sh:minCount 1 ;                
         sh:maxCount 1 ;                
         sh:nodeKind sh:IRI ;
         sh:name "Organization"
     ] ;
-    sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Role" ] ;
+    sh:property [ sh:path org:role ; sh:datatype xsd:string ] ;
     sh:property [ 
         sh:path time:hasBeginning ; 
         sh:datatype xsd:date ; 
@@ -283,4 +274,4 @@ ex:MembershipShape
         sh:lessThan time:hasEnd ;
         sh:name "Start Date"
     ] ;
-    sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ; sh:name "End Date" ] .
+    sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ] .
