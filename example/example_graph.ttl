@@ -1,0 +1,47 @@
+@prefix ex:     <http://example.org/> .
+@prefix schema: <http://schema.org/> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix time:   <http://www.w3.org/2006/time#> .
+
+# 1. THE PERSON
+ex:Alice a schema:Person ;
+    schema:name "Alice" ;
+    schema:email "Alice@sdsc.ethz.ch" ;
+    schema:gender "Female" ;
+    ex:gitUsername "Alice-dev" ;
+    org:hasMembership ex:AliceMember .
+
+# 2. THE ORGANIZATION (Institutional context)
+ex:SDSC a org:Organization ;
+    schema:name "SDSC" ;
+    schema:identifier "https://ror.org/02aj6n233" ;
+    schema:hasPart ex:RenkuRepo . # SDSC owns Renku
+
+# 3. THE INSTITUTIONAL REPOSITORY
+ex:RenkuRepo a schema:SoftwareSourceCode ;
+    schema:name "Renku" ;
+    schema:creator ex:Alice ; # Alice created it
+    ex:relatedDataset ex:ClimateData .
+
+# 4. THE PERSONAL REPOSITORY (Alice's side project)
+ex:MyPythonHelper a schema:SoftwareSourceCode ;
+    schema:name "Alice's Data Helper" ;
+    schema:creator ex:Alice ; # Alice also created this
+    schema:programmingLanguage "Python" ;
+    schema:codeRepository <https://github.com/Alice-dev/helper-tool> ;
+    schema:dateCreated "2025-06-01T09:00:00Z"^^xsd:dateTime .
+
+# 5. THE DATASET
+ex:ClimateData a schema:Dataset ;
+    schema:name "Climate Data" ;
+    schema:description "A research dataset." ;
+    schema:identifier "10.5281/zenodo.12345" ;
+    schema:datePublished "2024-10-10"^^xsd:date .
+
+# 6. THE MEMBERSHIP
+ex:AliceMember a org:Membership ;
+    org:organization ex:SDSC ;
+    org:role "Researcher" ;
+    time:hasBeginning "2024-01-01"^^xsd:date ;
+    time:hasEnd "2026-01-01"^^xsd:date .

@@ -198,6 +198,7 @@ ex:RepositoryShape
     sh:ignoredProperties ( rdf:type ) ;
     sh:property ex:nameShape ; 
     sh:property ex:gitMetadataShape ;
+    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Creation Date" ] ;
     sh:property [ 
         sh:path ex:relatedDataset ; 
         sh:node ex:DatasetShape ;
