@@ -36,7 +36,23 @@ schema:identifier a rdfs:Property ; rdfs:label "identifier" ; rdfs:comment "A un
 schema:creator a rdfs:Property ; rdfs:label "creator" ; rdfs:comment "The author/creator of this CreativeWork." .
 schema:accountablePerson a rdfs:Property ; rdfs:label "accountable person" ; rdfs:comment "The person responsible for maintaining the resource." .
 schema:hasPart a rdfs:Property ; rdfs:label "has part" ; rdfs:comment "Links an organization to a repository it officially contains." .
-ex:relatedDataset a rdfs:Property ; rdfs:label "related dataset" ; rdfs:comment "A dataset that is utilized, processed, or produced by this software source code." ; rdfs:subPropertyOf schema:relatedLink .
+
+ex:relatedDataset a rdfs:Property ;
+    rdfs:label "related dataset" ;
+    rdfs:comment "A dataset that is utilized, processed, or produced by this software source code." ;
+    rdfs:subPropertyOf schema:relatedLink ;
+    owl:inverseOf ex:relatedSoftware .
+
+ex:relatedSoftware a rdfs:Property ;
+    rdfs:label "related software" ;
+    rdfs:comment "The software project or source code that utilizes or produces this dataset." ;
+    rdfs:subPropertyOf schema:relatedLink .
+
+ex:githubOrgUrl a rdfs:Property ;
+    rdfs:label "GitHub Organization URL" ;
+    rdfs:comment "The official GitHub Organization URL for an EPFL unit." ;
+    rdfs:subPropertyOf schema:url .
+
 schema:programmingLanguage a rdfs:Property ; rdfs:label "programming language" .
 schema:codeRepository a rdfs:Property ; rdfs:label "code repository" .
 schema:dateCreated a rdfs:Property ; rdfs:label "date created" .
@@ -52,6 +68,16 @@ ex:gitUsername a rdfs:Property ; rdfs:label "git username" .
 ex:infoscienceUsername a rdfs:Property ; rdfs:label "infoscience username" .
 ex:hasCommit a rdfs:Property ; rdfs:label "has commit" .
 ex:metadata a rdfs:Property ; rdfs:label "metadata" .
+
+ex:discipline a rdf:Property ;
+    rdfs:comment "The academic or scientific discipline associated with the software or research." ;
+    rdfs:label "Discipline" .
+
+ex:repositoryType a rdf:Property ;
+    rdfs:comment "The type of repository, such as software, educational resource, documentation, data or other ." ;
+    rdfs:label "Repository Type" ;
+    rdfs:range xsd:string ;
+    rdfs:domain schema:SoftwareSourceCode .
 
 # ---------------------------------------------------------
 # 2. REUSABLE PROPERTY SHAPES
@@ -146,7 +172,7 @@ ex:PersonShape
     sh:property [ sh:path ex:infoscienceUsername ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Infoscience Username" ] ;
     sh:property [ 
         sh:path org:hasMembership ; 
-        sh:node ex:MembershipShape ;
+        sh:class org:Membership ;
         sh:name "hasMembership"
     ] ;
     sh:property [ 
@@ -165,8 +191,8 @@ ex:ArticleShape
     sh:property ex:DoiPropertyShape ;
     sh:property [ sh:path schema:headline ; sh:datatype xsd:string ; sh:name "Headline" ] ;
     sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Publication Date" ] ;
-    sh:property [ sh:path schema:author ; sh:node ex:PersonShape ; sh:minCount 1 ; sh:name "Author" ] ;
-    sh:property [ sh:path schema:sourceOrganization ; sh:node ex:OrganizationShape ; sh:minCount 1 ; sh:name "Source Organization" ] .
+    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author" ] ;
+    sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] .
 
 ex:OrganizationShape
     a sh:NodeShape ;
@@ -177,14 +203,16 @@ ex:OrganizationShape
     sh:property ex:RorPropertyShape ;
     sh:property ex:urlShape ;
     sh:property [ 
-        sh:path schema:publishingPrinciples ; 
+        sh:path ex:githubOrgUrl ; 
         sh:nodeKind sh:IRI ; 
-        sh:name "GitHub Org Link" ;
-        sh:description "Link to the GitHub Organization URL." 
+        sh:pattern "^https://github\\.com/[a-zA-Z0-9\\-_]+$" ;
+        sh:name "GitHub Organization URL" ;
+        sh:description "A valid GitHub Organization link (e.g., https://github.com/swissdatasciencecenter)."
     ] ;
+
     sh:property [ 
         sh:path schema:hasPart ; 
-        sh:class schema:SoftwareSourceCode ; # Use class to avoid deep recursion
+        sh:class schema:SoftwareSourceCode ; 
         sh:name "Institutional Repositories" ;
         sh:description "Software projects that are part of this organization's official output."
     ] ;
@@ -201,28 +229,23 @@ ex:RepositoryShape
     sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Creation Date" ] ;
     sh:property [ 
         sh:path ex:relatedDataset ; 
-        sh:node ex:DatasetShape ;
+        sh:class schema:Dataset ; 
         sh:name "Related Dataset" 
     ] ;
     sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
     sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ] ; 
-    sh:property [ sh:path ex:hasCommit ; sh:node ex:CommitShape ] ;
+    sh:property [ sh:path ex:hasCommit ; sh:class ex:GitCommit ] ;
     sh:property [ 
         sh:path schema:creator ; 
-        sh:class schema:Person ; # FIXED: points to Class
+        sh:class schema:Person ;
         sh:minCount 1 ;
         sh:name "Creator" 
     ] ;
-    sh:property [ 
-        sh:path schema:accountablePerson ; 
-        sh:class schema:Person ; # FIXED: points to Class
-        sh:name "Accountable Person" ;
-        sh:description "The primary contact or lead maintainer responsible for this software."
-    ] ;
-
+    sh:property [ sh:path ex:repositoryType ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path ex:discipline ; sh:datatype xsd:string ] ;
     sh:property [ 
         sh:path [ sh:inversePath schema:hasPart ] ; 
-        sh:class org:Organization ; # FIXED: points to Class
+        sh:class org:Organization ; 
         sh:maxCount 1 ;
         sh:name "Owning Organization" ;
         sh:description "The institutional parent (e.g., SDSC) of this repository."
@@ -239,10 +262,10 @@ ex:DatasetShape
     sh:property [ sh:path schema:description ; sh:datatype xsd:string ; sh:minCount 1 ] ;
     sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ] ;
     sh:property [ 
-        sh:path [ sh:inversePath ex:relatedDataset ] ; 
-        sh:class schema:SoftwareSourceCode ; # FIXED: points to Class
+        sh:path ex:relatedSoftware ; 
+        sh:class schema:SoftwareSourceCode ;
         sh:name "Related Software" ;
-        sh:description "Software repositories that use or are related to this dataset."
+        sh:description "The software project(s) associated with this dataset."
     ] .
 
 ex:CommitShape
@@ -252,7 +275,7 @@ ex:CommitShape
     sh:ignoredProperties ( rdf:type ) ;
     sh:property ex:GitHashShape ;
     sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ] ;
-    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:name "Author" ] . # FIXED: points to Class
+    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:name "Author" ] .
 
 ex:MembershipShape
     a sh:NodeShape ;
@@ -261,13 +284,13 @@ ex:MembershipShape
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ 
         sh:path org:organization ; 
-        sh:node ex:OrganizationShape ; # Safe to keep sh:node here as Organization doesn't point back to Membership
+        sh:class org:Organization ;
         sh:minCount 1 ;                
         sh:maxCount 1 ;                
         sh:nodeKind sh:IRI ;
         sh:name "Organization"
     ] ;
-    sh:property [ sh:path org:role ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Role" ] ;
     sh:property [ 
         sh:path time:hasBeginning ; 
         sh:datatype xsd:date ; 
@@ -275,4 +298,4 @@ ex:MembershipShape
         sh:lessThan time:hasEnd ;
         sh:name "Start Date"
     ] ;
-    sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ] .
+    sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ; sh:name "End Date" ] .
