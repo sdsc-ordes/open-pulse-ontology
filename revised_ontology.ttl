@@ -68,16 +68,8 @@ ex:gitUsername a rdfs:Property ; rdfs:label "git username" .
 ex:infoscienceUsername a rdfs:Property ; rdfs:label "infoscience username" .
 ex:hasCommit a rdfs:Property ; rdfs:label "has commit" .
 ex:metadata a rdfs:Property ; rdfs:label "metadata" .
-
-ex:discipline a rdf:Property ;
-    rdfs:comment "The academic or scientific discipline associated with the software or research." ;
-    rdfs:label "Discipline" .
-
-ex:repositoryType a rdf:Property ;
-    rdfs:comment "The type of repository, such as software, educational resource, documentation, data or other ." ;
-    rdfs:label "Repository Type" ;
-    rdfs:range xsd:string ;
-    rdfs:domain schema:SoftwareSourceCode .
+ex:discipline a rdf:Property ; rdfs:label "Discipline" ; rdfs:comment "The academic or scientific discipline associated with the resource." .
+ex:repositoryType a rdf:Property ; rdfs:label "Repository Type" ; rdfs:comment "The type or category of the repository (e.g., software, data, publication)." .
 
 # ---------------------------------------------------------
 # 2. REUSABLE PROPERTY SHAPES
@@ -211,10 +203,10 @@ ex:OrganizationShape
     ] ;
 
     sh:property [ 
-        sh:path schema:hasPart ; 
+        sh:path ex:managedRepository ; 
         sh:class schema:SoftwareSourceCode ; 
-        sh:name "Institutional Repositories" ;
-        sh:description "Software projects that are part of this organization's official output."
+        sh:name "Managed Repositories" ;
+        sh:description "Direct link to repositories managed by this organization."
     ] ;
     sh:property ex:HasUnitPropertyShape ;
     sh:property ex:UnitOfPropertyShape .
@@ -244,7 +236,7 @@ ex:RepositoryShape
     sh:property [ sh:path ex:repositoryType ; sh:datatype xsd:string ] ;
     sh:property [ sh:path ex:discipline ; sh:datatype xsd:string ] ;
     sh:property [ 
-        sh:path [ sh:inversePath schema:hasPart ] ; 
+        sh:path ex:managedBy ; 
         sh:class org:Organization ; 
         sh:maxCount 1 ;
         sh:name "Owning Organization" ;
