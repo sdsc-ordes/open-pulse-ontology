@@ -29,13 +29,21 @@ org:Organization a rdfs:Class ; rdfs:label "Organization" ; rdfs:comment "A rese
 ex:GitCommit a rdfs:Class ; rdfs:label "Git Commit" ; rdfs:comment "A specific record of changes in a software repository." .
 
 # Properties
-schema:name a rdfs:Property ; rdfs:label "name" ; rdfs:comment "The primary name or title of the entity." .
-schema:email a rdfs:Property ; rdfs:label "email" ; rdfs:comment "The electronic mail address of a person." .
-schema:url a rdfs:Property ; rdfs:label "url" ; rdfs:comment "The web address (URL) of the resource." .
-schema:identifier a rdfs:Property ; rdfs:label "identifier" ; rdfs:comment "A unique identifier such as a DOI or ROR ID." .
-schema:creator a rdfs:Property ; rdfs:label "creator" ; rdfs:comment "The author/creator of this CreativeWork." .
-schema:accountablePerson a rdfs:Property ; rdfs:label "accountable person" ; rdfs:comment "The person responsible for maintaining the resource." .
-schema:hasPart a rdfs:Property ; rdfs:label "has part" ; rdfs:comment "Links an organization to a repository it officially contains." .
+schema:name a rdfs:Property ; rdfs:label "name" .
+schema:email a rdfs:Property ; rdfs:label "email" .
+schema:url a rdfs:Property ; rdfs:label "url" .
+schema:identifier a rdfs:Property ; rdfs:label "identifier" .
+schema:creator a rdfs:Property ; rdfs:label "creator" .
+
+# Custom Organization <-> Repository Links
+ex:managedRepository a rdfs:Property ;
+    rdfs:label "managed repository" ;
+    rdfs:comment "Links an organization to a software repository it officially manages or owns." ;
+    owl:inverseOf ex:managedBy .
+
+ex:managedBy a rdfs:Property ;
+    rdfs:label "managed by" ;
+    rdfs:comment "Links a software repository to its managing or owning organization." .
 
 ex:relatedDataset a rdfs:Property ;
     rdfs:label "related dataset" ;
