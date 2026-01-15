@@ -75,7 +75,6 @@ time:hasEnd a rdfs:Property ; rdfs:label "has end" .
 ex:gitUsername a rdfs:Property ; rdfs:label "git username" .
 ex:infoscienceUsername a rdfs:Property ; rdfs:label "infoscience username" .
 ex:hasCommit a rdfs:Property ; rdfs:label "has commit" .
-ex:metadata a rdfs:Property ; rdfs:label "metadata" .
 ex:discipline a rdf:Property ; rdfs:label "Discipline" ; rdfs:comment "The academic or scientific discipline associated with the resource." .
 ex:repositoryType a rdf:Property ; rdfs:label "Repository Type" ; rdfs:comment "The type or category of the repository (e.g., software, data, publication)." .
 
@@ -114,12 +113,6 @@ ex:GitUsernameShape
     sh:path ex:gitUsername ;
     sh:datatype xsd:string ;
     sh:description "The GitHub/Git handle of a person." .
-
-ex:gitMetadataShape
-    a sh:PropertyShape ;
-    sh:path ex:metadata ;
-    sh:datatype xsd:string ;
-    sh:minCount 0 .
 
 ex:GitHashShape
     a sh:PropertyShape ;
@@ -224,31 +217,20 @@ ex:RepositoryShape
     sh:targetClass schema:SoftwareSourceCode ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property ex:nameShape ; 
-    sh:property ex:gitMetadataShape ;
+    sh:property ex:nameShape ;
     sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Creation Date" ] ;
-    sh:property [ 
-        sh:path ex:relatedDataset ; 
-        sh:class schema:Dataset ; 
-        sh:name "Related Dataset" 
-    ] ;
-    sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
     sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ] ; 
+    sh:property [sh:path schema:license ; sh:nodeKind sh:IRI ; sh:name "License" ] ;
+    sh:property [sh:path schema:citation ; sh:nodeKind sh:IRI ; sh:name "Citation" ] ;
+    sh:property [ sh:path ex:relatedDataset ; sh:class schema:Dataset ; sh:name "Related Dataset" ; sh:description "The dataset(s) associated with this software repository."] ;
+    sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
     sh:property [ sh:path ex:hasCommit ; sh:class ex:GitCommit ] ;
-    sh:property [ 
-        sh:path schema:creator ; 
-        sh:class schema:Person ;
-        sh:minCount 1 ;
-        sh:name "Creator" 
-    ] ;
+    sh:property [ sh:path schema:creator ; sh:class schema:Person ;sh:minCount 1 ;sh:name "Creator" ] ;
     sh:property [ sh:path ex:repositoryType ; sh:datatype xsd:string ] ;
     sh:property [ sh:path ex:discipline ; sh:datatype xsd:string ] ;
-    sh:property [ 
-        sh:path ex:managedBy ; 
-        sh:class org:Organization ; 
-        sh:maxCount 1 ;
-        sh:name "Owning Organization" ;
-        sh:description "The institutional parent (e.g., SDSC) of this repository."
+    sh:property [ sh:path ex:managedBy ; sh:class org:Organization ; sh:maxCount 1 ;
+        sh:name "Managing Organization" ;
+        sh:description "The organization that officially manages this repository."
     ] .
 
 ex:DatasetShape
