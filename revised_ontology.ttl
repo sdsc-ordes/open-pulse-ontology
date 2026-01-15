@@ -9,6 +9,7 @@
 @prefix pulse:  <https://open-pulse.epfl.ch/ontology#> .
 @prefix owl:    <http://www.w3.org/2002/07/owl#> .
 @prefix dct:    <http://purl.org/dc/terms/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
 
 # ---------------------------------------------------------
 # 1. CLASS & PROPERTY SECTION
@@ -27,6 +28,215 @@ schema:Dataset a rdfs:Class ; rdfs:label "Dataset" ; rdfs:comment "Data collecti
 org:Membership a rdfs:Class ; rdfs:label "Membership" ; rdfs:comment "A affiliation between a Person and an Organization." .
 org:Organization a rdfs:Class ; rdfs:label "Organization" ; rdfs:comment "A research center, university, or lab." .
 ex:GitCommit a rdfs:Class ; rdfs:label "Git Commit" ; rdfs:comment "A specific record of changes in a software repository." .
+
+# Enumeration Classes
+schema:Enumeration a rdfs:Class ; rdfs:label "Enumeration" .
+ex:DisciplineEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; rdfs:label "Discipline Enumeration" .
+ex:RepositoryTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; rdfs:label "Repository Type Enumeration" .
+
+ex:Software a ex:RepositoryTypeEnumeration ;
+    rdfs:label "Software" ;
+    rdfs:comment "A repository that contains software source code." .
+
+ex:EducationalResource a ex:RepositoryTypeEnumeration ;
+    rdfs:label "Educational Resource" ;
+    rdfs:comment "A repository that contains educational materials." .
+
+ex:Documentation a ex:RepositoryTypeEnumeration ;
+    rdfs:label "Documentation" ;
+    rdfs:comment "A repository that contains documentation." .
+
+ex:Data a ex:RepositoryTypeEnumeration ;
+    rdfs:label "Data" ;
+    rdfs:comment "A repository that contains datasets." .
+
+ex:Other a ex:RepositoryTypeEnumeration ;
+    rdfs:label "Other" ;
+    rdfs:comment "A repository that does not fit into the other categories." .
+
+wd:Q34749 a ex:DisciplineEnumeration;
+  rdfs:label "Social sciences"@en;
+  rdfs:subClassOf wd:Q11862829 .
+
+wd:Q23404 a ex:DisciplineEnumeration;
+  rdfs:label "Anthropology"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q11680831 a ex:DisciplineEnumeration;
+  rdfs:label "Communication studies"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q8434 a ex:DisciplineEnumeration;
+  rdfs:label "Education"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q8162 a ex:DisciplineEnumeration;
+  rdfs:label "Linguistics"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q42240 a ex:DisciplineEnumeration;
+  rdfs:label "Research"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q21201 a ex:DisciplineEnumeration;
+  rdfs:label "Sociology"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q1071 a ex:DisciplineEnumeration;
+  rdfs:label "Geography"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q9418 a ex:DisciplineEnumeration;
+  rdfs:label "Psychology"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q7163 a ex:DisciplineEnumeration;
+  rdfs:label "Politics"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q8134 a ex:DisciplineEnumeration;
+  rdfs:label "Economics"@en;
+  rdfs:subClassOf wd:Q34749 .
+
+wd:Q7112556 a ex:DisciplineEnumeration;
+  rdfs:label "Applied sciences"@en;
+  rdfs:subClassOf wd:Q11862829 .
+
+wd:Q843601 a ex:DisciplineEnumeration;
+  rdfs:label "Health sciences"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q43035 a ex:DisciplineEnumeration;
+  rdfs:label "Electrical engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q83588 a ex:DisciplineEnumeration;
+  rdfs:label "Chemical engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q77590 a ex:DisciplineEnumeration;
+  rdfs:label "Civil engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q12271 a ex:DisciplineEnumeration;
+  rdfs:label "Architecture"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q428691 a ex:DisciplineEnumeration;
+  rdfs:label "Computer engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q3353193 a ex:DisciplineEnumeration;
+  rdfs:label "Energy engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q192386 a ex:DisciplineEnumeration;
+  rdfs:label "Military science"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q18351432 a ex:DisciplineEnumeration;
+  rdfs:label "Industrial and production engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q101333 a ex:DisciplineEnumeration;
+  rdfs:label "Mechanical engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q580689 a ex:DisciplineEnumeration;
+  rdfs:label "Biological engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q188847 a ex:DisciplineEnumeration;
+  rdfs:label "Environmental science"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q2167061 a ex:DisciplineEnumeration;
+  rdfs:label "Systems science and engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+<http://www.wikipedia.org/wiki/Information_engineering> a ex:DisciplineEnumeration;
+  rdfs:label "Information engineering"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q3606845 a ex:DisciplineEnumeration;
+  rdfs:label "Agricultural and food sciences"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q4830453 a ex:DisciplineEnumeration;
+  rdfs:label "Business"@en;
+  rdfs:subClassOf wd:Q7112556 .
+
+wd:Q80083 a ex:DisciplineEnumeration;
+  rdfs:label "Humanities"@en;
+  rdfs:subClassOf wd:Q11862829 .
+
+wd:Q309 a ex:DisciplineEnumeration;
+  rdfs:label "History"@en;
+  rdfs:subClassOf wd:Q80083 .
+
+wd:Q8242 a ex:DisciplineEnumeration;
+  rdfs:label "Literature"@en;
+  rdfs:subClassOf wd:Q80083 .
+
+wd:Q735 a ex:DisciplineEnumeration;
+  rdfs:label "Art"@en;
+  rdfs:subClassOf wd:Q80083 .
+
+wd:Q9174 a ex:DisciplineEnumeration;
+  rdfs:label "Religion"@en;
+  rdfs:subClassOf wd:Q80083 .
+
+wd:Q5891 a ex:DisciplineEnumeration;
+  rdfs:label "Philosophy"@en;
+  rdfs:subClassOf wd:Q80083 .
+
+wd:Q7748 a ex:DisciplineEnumeration;
+  rdfs:label "Law"@en;
+  rdfs:subClassOf wd:Q80083 .
+
+wd:Q816264 a ex:DisciplineEnumeration;
+  rdfs:label "Formal sciences"@en;
+  rdfs:subClassOf wd:Q11862829 .
+
+wd:Q395 a ex:DisciplineEnumeration;
+  rdfs:label "Mathematics"@en;
+  rdfs:subClassOf wd:Q816264 .
+
+wd:Q8078 a ex:DisciplineEnumeration;
+  rdfs:label "Logic"@en;
+  rdfs:subClassOf wd:Q816264 .
+
+wd:Q12483 a ex:DisciplineEnumeration;
+  rdfs:label "Statistics"@en;
+  rdfs:subClassOf wd:Q816264 .
+
+wd:Q2878974 a ex:DisciplineEnumeration;
+  rdfs:label "Theoretical computer science"@en;
+  rdfs:subClassOf wd:Q816264 .
+
+wd:Q7991 a ex:DisciplineEnumeration;
+  rdfs:label "Natural sciences"@en;
+  rdfs:subClassOf wd:Q11862829 .
+
+wd:Q413 a ex:DisciplineEnumeration;
+  rdfs:label "Physics"@en;
+  rdfs:subClassOf wd:Q7991 .
+
+wd:Q333 a ex:DisciplineEnumeration;
+  rdfs:label "Astronomy"@en;
+  rdfs:subClassOf wd:Q7991 .
+
+wd:Q420 a ex:DisciplineEnumeration;
+  rdfs:label "Biology"@en;
+  rdfs:subClassOf wd:Q7991 .
+
+wd:Q2329 a ex:DisciplineEnumeration;
+  rdfs:label "Chemistry"@en;
+  rdfs:subClassOf wd:Q7991 .
+
+wd:Q8008 a ex:DisciplineEnumeration;
+  rdfs:label "Earth science"@en;
+  rdfs:subClassOf wd:Q7991 .
 
 # Properties
 schema:name a rdfs:Property ; rdfs:label "name" .
@@ -121,6 +331,21 @@ ex:GitHashShape
     sh:pattern "^([0-9a-f]{7}|[0-9a-f]{40})$" ;
     sh:name "Git Commit Hash" ;
     sh:description "A Git commit identifier in either short (7-character) or long (40-character) hex format." .
+
+ex:DisciplineShape
+    a sh:PropertyShape ;
+    sh:path ex:discipline ;
+    sh:class ex:DisciplineEnumeration ;
+    sh:name "Discipline" ;
+    sh:description "Must be a valid IRI from the Wikidata-based Discipline enumeration." .
+
+ex:RepositoryTypeShape
+    a sh:PropertyShape ;
+    sh:path ex:repositoryType ;
+    sh:class ex:RepositoryTypeEnumeration ;
+    sh:name "Repository Type" ;
+    sh:description "Must be a valid IRI from the Repository Type enumeration (e.g., ex:Software)." .
+
 
 ex:DoiPropertyShape
     a sh:PropertyShape ;
@@ -226,12 +451,12 @@ ex:RepositoryShape
     sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
     sh:property [ sh:path ex:hasCommit ; sh:class ex:GitCommit ] ;
     sh:property [ sh:path schema:creator ; sh:class schema:Person ;sh:minCount 1 ;sh:name "Creator" ] ;
-    sh:property [ sh:path ex:repositoryType ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path ex:discipline ; sh:datatype xsd:string ] ;
     sh:property [ sh:path ex:managedBy ; sh:class org:Organization ; sh:maxCount 1 ;
         sh:name "Managing Organization" ;
         sh:description "The organization that officially manages this repository."
-    ] .
+    ] ;
+    sh:property ex:RepositoryTypeShape ;
+    sh:property ex:DisciplineShape    .
 
 ex:DatasetShape
     a sh:NodeShape ;
