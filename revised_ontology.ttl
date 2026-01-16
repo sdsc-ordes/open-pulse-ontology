@@ -199,8 +199,7 @@ wd:Q816264 a ex:DisciplineEnumeration;
   rdfs:subClassOf wd:Q11862829 .
 
 wd:Q395 a ex:DisciplineEnumeration;
-  rdfs:label "Mathematics"@en;
-  rdfs:subClassOf wd:Q816264 .
+  rdfs:label "Mathematics"@en .
 
 wd:Q8078 a ex:DisciplineEnumeration;
   rdfs:label "Logic"@en;
@@ -219,8 +218,7 @@ wd:Q7991 a ex:DisciplineEnumeration;
   rdfs:subClassOf wd:Q11862829 .
 
 wd:Q413 a ex:DisciplineEnumeration;
-  rdfs:label "Physics"@en;
-  rdfs:subClassOf wd:Q7991 .
+  rdfs:label "Physics"@en .
 
 wd:Q333 a ex:DisciplineEnumeration;
   rdfs:label "Astronomy"@en;
