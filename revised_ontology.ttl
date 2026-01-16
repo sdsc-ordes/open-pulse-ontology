@@ -320,6 +320,7 @@ ex:GitUsernameShape
     a sh:PropertyShape ;
     sh:path ex:gitUsername ;
     sh:datatype xsd:string ;
+    sh:minCount 1 ;
     sh:description "The GitHub/Git handle of a person." .
 
 ex:GitHashShape
