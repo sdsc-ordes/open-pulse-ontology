@@ -1,0 +1,25 @@
+@prefix schema: <http://schema.org/> .
+@prefix ex: <http://example.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# INVALID GIT COMMIT - Should FAIL validation
+# Git commit hash doesn't match pattern, ex:GitHashShape has pattern "^([0-9a-f]{7}|[0-9a-f]{40})$"
+
+ex:InvalidCommitRepo a schema:SoftwareSourceCode ;
+    schema:name "Invalid Commit Test" ;
+    schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
+    schema:codeRepository <https://github.com/example/invalid-commit> ;
+    schema:license <https://spdx.org/licenses/MIT.html> ;
+    schema:citation <https://doi.org/10.1234/example.citation> ;
+    schema:creator ex:CommitAuthor ;
+    ex:hasCommit ex:InvalidCommit .
+
+ex:InvalidCommit a ex:GitCommit ;
+    schema:identifier "12345" ;
+    schema:dateCreated "2024-01-10T14:30:00"^^xsd:dateTime ;
+    schema:author ex:CommitAuthor .
+
+ex:CommitAuthor a schema:Person ;
+    schema:name "Dave Developer" ;
+    schema:email "dave@example.com" ;
+    ex:gitUsername "davedeveloper" .
