@@ -1,0 +1,25 @@
+@prefix schema: <http://schema.org/> .
+@prefix ex: <http://example.org/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+wd:Q413 a ex:DisciplineEnumeration .
+ex:Software a ex:RepositoryTypeEnumeration .
+
+# INVALID REPOSITORY - Should FAIL validation
+# Here I swapped the licence with codeRepository URL 
+
+ex:InvalidLicenseRepoPattern a schema:SoftwareSourceCode ;
+    schema:name "Invalid License Test" ;
+    schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
+    schema:license <https://github.com/example/invalid-license> ;
+    schema:codeRepository <https://opensource.org/licenses/MIT> ; 
+    schema:citation <https://doi.org/10.1234/example.citation> ;
+    schema:creator ex:Author2 ;
+    ex:repositoryType ex:Software ;
+    ex:discipline wd:Q413 .  # Physics
+
+ex:Author2 a schema:Person ;
+    schema:name "Alice Johnson" ;
+    schema:email "alice@example.com" ;
+    ex:gitUsername "alicejohnson" .

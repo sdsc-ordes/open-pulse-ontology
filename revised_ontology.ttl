@@ -444,7 +444,7 @@ ex:RepositoryShape
     sh:ignoredProperties ( rdf:type ) ;
     sh:property ex:nameShape ;
     sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Creation Date" ] ;
-    sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ] ; 
+    sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ;sh:pattern "^https?://(github|gitlab|bitbucket)\\.com/" ;  sh:flags "i" ; sh:name "Code Repository URL" ] ; 
     sh:property [sh:path schema:license ; sh:nodeKind sh:IRI ; sh:name "License" ] ;
     sh:property [sh:path schema:citation ; sh:nodeKind sh:IRI ; sh:name "Citation" ] ;
     sh:property [ sh:path ex:relatedDataset ; sh:class schema:Dataset ; sh:name "Related Dataset" ; sh:description "The dataset(s) associated with this software repository."] ;
