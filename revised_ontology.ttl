@@ -237,11 +237,11 @@ wd:Q8008 a ex:DisciplineEnumeration;
   rdfs:subClassOf wd:Q7991 .
 
 # Properties
-schema:name a rdfs:Property ; rdfs:label "name" .
-schema:email a rdfs:Property ; rdfs:label "email" .
-schema:url a rdfs:Property ; rdfs:label "url" .
-schema:identifier a rdfs:Property ; rdfs:label "identifier" .
-schema:creator a rdfs:Property ; rdfs:label "creator" .
+schema:name a rdfs:Property ; rdfs:label "name"; rdfs:description "The name of the item." .
+schema:email a rdfs:Property ; rdfs:label "email" ; rdfs:description "Email address." .
+schema:url a rdfs:Property ; rdfs:label "url" ; rdfs:description "	URL of the item." .
+schema:identifier a rdfs:Property ; rdfs:label "identifier" ; rdfs:description "The identifier (URL/Text) property represents any kind of identifier for any kind of Thing" .
+schema:creator a rdfs:Property ; rdfs:label "creator" ; rdfs:description "The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork." .
 
 # Custom Organization <-> Repository Links
 ex:managedRepository a rdfs:Property ;
@@ -269,20 +269,20 @@ ex:githubOrgUrl a rdfs:Property ;
     rdfs:comment "The official GitHub Organization URL for an EPFL unit." ;
     rdfs:subPropertyOf schema:url .
 
-schema:programmingLanguage a rdfs:Property ; rdfs:label "programming language" .
-schema:codeRepository a rdfs:Property ; rdfs:label "code repository" .
-schema:dateCreated a rdfs:Property ; rdfs:label "date created" .
-schema:datePublished a rdfs:Property ; rdfs:label "date published" .
-org:hasUnit a rdfs:Property ; rdfs:label "has unit" .
-org:unitOf a rdfs:Property ; rdfs:label "unit of" .
-org:hasMembership a rdfs:Property ; rdfs:label "has membership" .
+schema:programmingLanguage a rdfs:Property ; rdfs:label "programming language" ; rdfs:description "The computer programming language." .
+schema:codeRepository a rdfs:Property ; rdfs:label "code repository" ; rdfs:description "Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex)."   .
+schema:dateCreated a rdfs:Property ; rdfs:label "date created" ;  rdfs:description "The date on which the CreativeWork was created or the item was added to a DataFeed." .
+schema:datePublished a rdfs:Property ; rdfs:label "date published" ; rdfs:description "Date of first publication or broadcast" .
+org:hasUnit a rdfs:Property ; rdfs:label "has unit"; rdfs:description "Indicates a unit which is part of this Organization, e.g. a Department within a larger Organization.".
+org:unitOf a rdfs:Property ; rdfs:label "unit of"; rdfs:description "Indicates an Organization of which this Unit is a part, e.g. a Department within a larger Organization.".
+org:hasMembership a rdfs:Property ; rdfs:label "has membership"; rdfs:description "Indicates a membership relationship that the Agent plays." .
 org:organization a rdfs:Property ; rdfs:label "organization" .
 org:role a rdfs:Property ; rdfs:label "role" .
 time:hasBeginning a rdfs:Property ; rdfs:label "has beginning" .
 time:hasEnd a rdfs:Property ; rdfs:label "has end" .
 ex:gitUsername a rdfs:Property ; rdfs:label "git username" .
-ex:infoscienceUsername a rdfs:Property ; rdfs:label "infoscience username" .
-ex:hasCommit a rdfs:Property ; rdfs:label "has commit" .
+ex:infoscienceUsername a rdfs:Property ; rdfs:label "infoscience username" ; rdfs:description "The Infoscience username of a person." .
+ex:hasCommit a rdfs:Property ; rdfs:label "has commit" ; rdfs:description "Links a person to a specific commit they have made in a software repository." .
 ex:discipline a rdf:Property ; rdfs:label "Discipline" ; rdfs:comment "The academic or scientific discipline associated with the resource." .
 ex:repositoryType a rdf:Property ; rdfs:label "Repository Type" ; rdfs:comment "The type or category of the repository (e.g., software, data, publication)." .
 
@@ -396,7 +396,8 @@ ex:PersonShape
         sh:path [ sh:inversePath schema:creator ] ; 
         sh:class schema:SoftwareSourceCode ; 
         sh:name "Created Repositories" ;
-        sh:description "Software repositories where this person is the primary creator/author."
+        sh:comment "Repositories created by this person." ;
+        sh:description "The creator/author of this CreativeWork."
     ] .
 
 ex:ArticleShape
