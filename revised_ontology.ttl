@@ -33,6 +33,7 @@ ex:GitCommit a rdfs:Class ; rdfs:label "Git Commit" ; rdfs:comment "A specific r
 schema:Enumeration a rdfs:Class ; rdfs:label "Enumeration" .
 ex:DisciplineEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; rdfs:label "Discipline Enumeration" .
 ex:RepositoryTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; rdfs:label "Repository Type Enumeration" .
+ex:OrganizationTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; rdfs:label "Organization Type Enumeration" .
 
 # Enumeration Instances - Repository Types
 ex:Software a ex:RepositoryTypeEnumeration ; rdfs:label "Software" ; rdfs:comment "A repository that contains software source code." .
@@ -41,6 +42,15 @@ ex:Documentation a ex:RepositoryTypeEnumeration ; rdfs:label "Documentation" ; r
 ex:Data a ex:RepositoryTypeEnumeration ; rdfs:label "Data" ; rdfs:comment "A repository that contains datasets." .
 ex:Other a ex:RepositoryTypeEnumeration ; rdfs:label "Other" ; rdfs:comment "A repository that does not fit into the other categories." .
 
+# Enumeration Instances - Organization Types
+ex:University a ex:OrganizationTypeEnumeration ; rdfs:label "University" ; rdfs:comment "An educational institution." .
+ex:ResearchInstitution a ex:OrganizationTypeEnumeration ; rdfs:label "Research Institution" ; rdfs:comment "a research institution is one that has made conducting research a vital part of its mission and goals." .
+ex:GovernmentAgency a ex:OrganizationTypeEnumeration ; rdfs:label "Government Agency" ; rdfs:comment "A government organization." .
+ex:SoftwareProject a ex:OrganizationTypeEnumeration ; rdfs:label "Software Project" ; rdfs:comment "An organization focused on development of specific software." .
+ex:PrivateCompany a ex:OrganizationTypeEnumeration ; rdfs:label "Private Company" ; rdfs:comment "A privately owned business organization." .
+ex:NonProfitOrganization a ex:OrganizationTypeEnumeration ; rdfs:label "Non-Profit Organization" ; rdfs:comment "An organization that operates for a charitable or social purpose rather than for profit." .
+ex:CommunitySpace a ex:OrganizationTypeEnumeration ; rdfs:label "Community Space" ; rdfs:comment "A community-driven organization or space." .
+ex:OtherOrganizationType a ex:OrganizationTypeEnumeration ; rdfs:label "Other" ; rdfs:comment "An organization type that does not fit into the other categories." .
 
 # Enumeration Instances - Disciplines
 wd:Q34749 a ex:DisciplineEnumeration; rdfs:label "Social sciences"@en; rdfs:subClassOf wd:Q11862829 .
@@ -114,32 +124,14 @@ ex:infoscienceUsername a rdfs:Property ; rdfs:label "infoscience username" ; rdf
 ex:hasCommit a rdfs:Property ; rdfs:label "has commit" ; rdfs:comment "Links a person to a specific commit they have made in a software repository." .
 ex:discipline a rdf:Property ; rdfs:label "Discipline" ; rdfs:comment "The academic or scientific discipline associated with the resource." .
 ex:repositoryType a rdf:Property ; rdfs:label "Repository Type" ; rdfs:comment "The type or category of the repository (e.g., software, data, publication)." .
+ex:OrganizationType a rdf:Property ; rdfs:label "Organization Type" ; rdfs:comment "The type or category of the organization (e.g., university, research institute, company)." .
 
 # Custom Organization <-> Repository Links
-ex:managedRepository a rdfs:Property ;
-    rdfs:label "managed repository" ;
-    rdfs:comment "Links an organization to a software repository it officially manages or owns." ;
-    owl:inverseOf ex:managedBy .
-
-ex:managedBy a rdfs:Property ;
-    rdfs:label "managed by" ;
-    rdfs:comment "Links a software repository to its managing or owning organization." .
-
-ex:relatedDataset a rdfs:Property ;
-    rdfs:label "related dataset" ;
-    rdfs:comment "A dataset that is utilized, processed, or produced by this software source code." ;
-    rdfs:subPropertyOf schema:relatedLink ;
-    owl:inverseOf ex:relatedSoftware .
-
-ex:relatedSoftware a rdfs:Property ;
-    rdfs:label "related software" ;
-    rdfs:comment "The software project or source code that utilizes or produces this dataset." ;
-    rdfs:subPropertyOf schema:relatedLink .
-
-ex:githubOrgUrl a rdfs:Property ;
-    rdfs:label "GitHub Organization URL" ;
-    rdfs:comment "The official GitHub Organization URL for an EPFL unit." ;
-    rdfs:subPropertyOf schema:url .
+ex:managedRepository a rdfs:Property ; rdfs:label "managed repository" ; rdfs:comment "Links an organization to a software repository it officially manages or owns." ; owl:inverseOf ex:managedBy .
+ex:managedBy a rdfs:Property ; rdfs:label "managed by" ; rdfs:comment "Links a software repository to its managing or owning organization." .
+ex:relatedDataset a rdfs:Property ; rdfs:label "related dataset" ; rdfs:comment "A dataset that is utilized, processed, or produced by this software source code." ; rdfs:subPropertyOf schema:relatedLink ; owl:inverseOf ex:relatedSoftware .
+ex:relatedSoftware a rdfs:Property ; rdfs:label "related software" ; rdfs:comment "The software project or source code that utilizes or produces this dataset." ; rdfs:subPropertyOf schema:relatedLink .
+ex:githubOrgUrl a rdfs:Property ; rdfs:label "GitHub Organization URL" ; rdfs:comment "The official GitHub Organization URL for an EPFL unit." ; rdfs:subPropertyOf schema:url .
 # ---------------------------------------------------------
 # 2. REUSABLE PROPERTY SHAPES
 # ---------------------------------------------------------
@@ -169,6 +161,13 @@ ex:urlShape
     sh:path schema:url ;
     sh:nodeKind sh:IRI ;
     sh:description "Standard validation for any web URL." .
+
+ex:OrganizationTypeShape
+    a sh:PropertyShape ;
+    sh:path ex:OrganizationType ;
+    sh:class ex:OrganizationTypeEnumeration ;
+    sh:name "Organization Type" ;
+    sh:description "Must be a valid IRI from the Organization Type enumeration (e.g., ex:University)." .
 
 ex:GitUsernameShape
     a sh:PropertyShape ;
@@ -274,6 +273,7 @@ ex:OrganizationShape
     sh:property ex:nameShape ;
     sh:property ex:RorPropertyShape ;
     sh:property ex:urlShape ;
+    sh:property ex:OrganizationTypeShape ;
     sh:property [ 
         sh:path ex:githubOrgUrl ; 
         sh:nodeKind sh:IRI ; 
@@ -281,7 +281,6 @@ ex:OrganizationShape
         sh:name "GitHub Organization URL" ;
         sh:description "A valid GitHub Organization link (e.g., https://github.com/swissdatasciencecenter)."
     ] ;
-
     sh:property [ 
         sh:path ex:managedRepository ; 
         sh:class schema:SoftwareSourceCode ; 
