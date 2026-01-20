@@ -36,21 +36,21 @@ ex:RepositoryTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ;
 ex:OrganizationTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; rdfs:label "Organization Type Enumeration" .
 
 # Enumeration Instances - Repository Types
-ex:Software a ex:RepositoryTypeEnumeration ; rdfs:label "Software" ; rdfs:comment "A repository that contains software source code." .
-ex:EducationalResource a ex:RepositoryTypeEnumeration ; rdfs:label "Educational Resource" ; rdfs:comment "A repository that contains educational materials." .
-ex:Documentation a ex:RepositoryTypeEnumeration ; rdfs:label "Documentation" ; rdfs:comment "A repository that contains documentation." .
-ex:Data a ex:RepositoryTypeEnumeration ; rdfs:label "Data" ; rdfs:comment "A repository that contains datasets." .
-ex:Other a ex:RepositoryTypeEnumeration ; rdfs:label "Other" ; rdfs:comment "A repository that does not fit into the other categories." .
+ex:Software a ex:RepositoryTypeEnumeration ; skos:prefLabel "Software"@en ; skos:definition "A repository that contains software source code."@en .
+ex:EducationalResource a ex:RepositoryTypeEnumeration ; skos:prefLabel "Educational Resource"@en ; skos:definition "A repository that contains educational materials."@en .
+ex:Documentation a ex:RepositoryTypeEnumeration ; skos:prefLabel "Documentation"@en ; skos:definition "A repository that contains documentation."@en .
+ex:Data a ex:RepositoryTypeEnumeration ; skos:prefLabel "Data"@en ; skos:definition "A repository that contains datasets."@en .
+ex:Other a ex:RepositoryTypeEnumeration ; skos:prefLabel "Other"@en ; skos:definition "A repository that does not fit into the other categories."@en .
 
 # Enumeration Instances - Organization Types
-ex:University a ex:OrganizationTypeEnumeration ; rdfs:label "University" ; rdfs:comment "An educational institution." .
-ex:ResearchInstitution a ex:OrganizationTypeEnumeration ; rdfs:label "Research Institution" ; rdfs:comment "a research institution is one that has made conducting research a vital part of its mission and goals." .
-ex:GovernmentAgency a ex:OrganizationTypeEnumeration ; rdfs:label "Government Agency" ; rdfs:comment "A government organization." .
-ex:SoftwareProject a ex:OrganizationTypeEnumeration ; rdfs:label "Software Project" ; rdfs:comment "An organization focused on development of specific software." .
-ex:PrivateCompany a ex:OrganizationTypeEnumeration ; rdfs:label "Private Company" ; rdfs:comment "A privately owned business organization." .
-ex:NonProfitOrganization a ex:OrganizationTypeEnumeration ; rdfs:label "Non-Profit Organization" ; rdfs:comment "An organization that operates for a charitable or social purpose rather than for profit." .
-ex:CommunitySpace a ex:OrganizationTypeEnumeration ; rdfs:label "Community Space" ; rdfs:comment "A community-driven organization or space." .
-ex:OtherOrganizationType a ex:OrganizationTypeEnumeration ; rdfs:label "Other" ; rdfs:comment "An organization type that does not fit into the other categories." .
+ex:University a ex:OrganizationTypeEnumeration ; skos:prefLabel "University"@en ; skos:definition "An educational institution."@en .
+ex:ResearchInstitution a ex:OrganizationTypeEnumeration ; skos:prefLabel "Research Institution"@en ; skos:definition "a research institution is one that has made conducting research a vital part of its mission and goals."@en .
+ex:GovernmentAgency a ex:OrganizationTypeEnumeration ; skos:prefLabel "Government Agency"@en ; skos:definition "A government organization."@en .
+ex:SoftwareProject a ex:OrganizationTypeEnumeration ; skos:prefLabel "Software Project"@en ; skos:definition "An organization focused on development of specific software."@en .
+ex:PrivateCompany a ex:OrganizationTypeEnumeration ; skos:prefLabel "Private Company"@en ; skos:definition "A privately owned business organization."@en .
+ex:NonProfitOrganization a ex:OrganizationTypeEnumeration ; skos:prefLabel "Non-Profit Organization"@en ; skos:definition "An organization that operates for a charitable or social purpose rather than for profit."@en .
+ex:CommunitySpace a ex:OrganizationTypeEnumeration ; skos:prefLabel "Community Space"@en ; skos:definition "A community-driven organization or space."@en .
+ex:OtherOrganizationType a ex:OrganizationTypeEnumeration ; skos:prefLabel "Other"@en ; skos:definition "An organization type that does not fit into the other categories."@en .
 
 # Enumeration Instances - Disciplines
 wd:Q34749 a ex:DisciplineEnumeration; rdfs:label "Social sciences"@en; rdfs:subClassOf wd:Q11862829 .
