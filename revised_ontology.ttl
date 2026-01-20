@@ -242,6 +242,8 @@ schema:email a rdfs:Property ; rdfs:label "email" ; rdfs:comment "Email address.
 schema:url a rdfs:Property ; rdfs:label "url" ; rdfs:comment "	URL of the item." .
 schema:identifier a rdfs:Property ; rdfs:label "identifier" ; rdfs:comment "The identifier (URL/Text) property represents any kind of identifier for any kind of Thing" .
 schema:creator a rdfs:Property ; rdfs:label "creator" ; rdfs:comment "The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork." .
+schema:headline a rdfs:Property ; rdfs:label "headline" ; rdfs:comment "The headline of the article." .
+schema:gender a rdfs:Property ; rdfs:label "gender" ; rdfs:comment "The gender of the person." .
 
 # Custom Organization <-> Repository Links
 ex:managedRepository a rdfs:Property ;
