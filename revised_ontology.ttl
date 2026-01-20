@@ -234,6 +234,27 @@ ex:relatedToEPFLShape
     sh:datatype xsd:boolean ;
     sh:maxCount 1 .
 
+ex:githubOrgFollowersShape
+    a sh:PropertyShape ;
+    sh:path ex:githubOrgFollowers ;
+    sh:datatype xsd:integer ;
+    sh:maxCount 1 ;
+    sh:description "Number of followers for the GitHub organization." .
+
+ex:githubRepoStarsShape
+    a sh:PropertyShape ;
+    sh:path ex:githubRepoStars ;
+    sh:datatype xsd:integer ;
+    sh:maxCount 1 ;
+    sh:description "Number of stars for the Software GitHub repository." .
+
+ex:githubRepoForksShape
+    a sh:PropertyShape ;
+    sh:path ex:githubRepoForks ;  
+    sh:datatype xsd:integer ;
+    sh:maxCount 1 ;
+    sh:description "Number of forks for the Software GitHub repository." .
+
 # ---------------------------------------------------------
 # 3. NODE SHAPES
 # ---------------------------------------------------------
@@ -283,7 +304,9 @@ ex:OrganizationShape
     sh:property ex:RorPropertyShape ;
     sh:property ex:urlShape ;
     sh:property ex:OrganizationTypeShape ;
-    sh:property ex:githubOrgFollowers ;
+    sh:property ex:githubOrgFollowersShape ;
+    sh:property ex:HasUnitPropertyShape ;
+    sh:property ex:UnitOfPropertyShape ;
     sh:property [ 
         sh:path ex:githubOrgUrl ; 
         sh:nodeKind sh:IRI ; 
@@ -296,9 +319,7 @@ ex:OrganizationShape
         sh:class schema:SoftwareSourceCode ; 
         sh:name "Managed Repositories" ;
         sh:description "Direct link to repositories managed by this organization."
-    ] ;
-    sh:property ex:HasUnitPropertyShape ;
-    sh:property ex:UnitOfPropertyShape .
+    ] .
 
 ex:RepositoryShape
     a sh:NodeShape ;
@@ -307,22 +328,19 @@ ex:RepositoryShape
     sh:ignoredProperties ( rdf:type ) ;
     sh:property ex:nameShape ;
     sh:property ex:relatedToEPFLShape ;
+    sh:property ex:RepositoryTypeShape ;
+    sh:property ex:DisciplineShape ;
+    sh:property ex:githubRepoStarsShape ;
+    sh:property ex:githubRepoForksShape ;
     sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Creation Date" ] ;
     sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ;sh:pattern "^https?://(github|gitlab|bitbucket)\\.com/" ;  sh:flags "i" ; sh:name "Code Repository URL" ] ; 
-    sh:property [sh:path schema:license ; sh:nodeKind sh:IRI ; sh:name "License" ] ;
-    sh:property [sh:path schema:citation ; sh:nodeKind sh:IRI ; sh:name "Citation" ] ;
+    sh:property [ sh:path schema:license ; sh:nodeKind sh:IRI ; sh:name "License" ] ;
+    sh:property [ sh:path schema:citation ; sh:nodeKind sh:IRI ; sh:name "Citation" ] ;
     sh:property [ sh:path ex:relatedDataset ; sh:class schema:Dataset ; sh:name "Related Dataset" ; sh:description "The dataset(s) associated with this software repository."] ;
     sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
     sh:property [ sh:path ex:hasCommit ; sh:class ex:GitCommit ] ;
     sh:property [ sh:path schema:creator ; sh:class schema:Person ;sh:minCount 1 ;sh:name "Creator" ] ;
-    sh:property [ sh:path ex:managedBy ; sh:class org:Organization ; sh:maxCount 1 ;
-        sh:name "Managing Organization" ;
-        sh:description "The organization that officially manages this repository."
-    ] ;
-    sh:property ex:RepositoryTypeShape ;
-    sh:property ex:DisciplineShape    ;
-    sh:property ex:githubRepoStars ;
-    sh:property ex:githubRepoForks .
+    sh:property [ sh:path ex:managedBy ; sh:class org:Organization ; sh:maxCount 1 ; sh:name "Managing Organization" ; sh:description "The organization that officially manages this repository."] .
 
 ex:DatasetShape
     a sh:NodeShape ;
