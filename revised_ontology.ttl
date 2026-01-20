@@ -34,207 +34,61 @@ schema:Enumeration a rdfs:Class ; rdfs:label "Enumeration" .
 ex:DisciplineEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; rdfs:label "Discipline Enumeration" .
 ex:RepositoryTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; rdfs:label "Repository Type Enumeration" .
 
-ex:Software a ex:RepositoryTypeEnumeration ;
-    rdfs:label "Software" ;
-    rdfs:comment "A repository that contains software source code." .
+# Enumeration Instances - Repository Types
+ex:Software a ex:RepositoryTypeEnumeration ; rdfs:label "Software" ; rdfs:comment "A repository that contains software source code." .
+ex:EducationalResource a ex:RepositoryTypeEnumeration ; rdfs:label "Educational Resource" ; rdfs:comment "A repository that contains educational materials." .
+ex:Documentation a ex:RepositoryTypeEnumeration ; rdfs:label "Documentation" ; rdfs:comment "A repository that contains documentation." .
+ex:Data a ex:RepositoryTypeEnumeration ; rdfs:label "Data" ; rdfs:comment "A repository that contains datasets." .
+ex:Other a ex:RepositoryTypeEnumeration ; rdfs:label "Other" ; rdfs:comment "A repository that does not fit into the other categories." .
 
-ex:EducationalResource a ex:RepositoryTypeEnumeration ;
-    rdfs:label "Educational Resource" ;
-    rdfs:comment "A repository that contains educational materials." .
 
-ex:Documentation a ex:RepositoryTypeEnumeration ;
-    rdfs:label "Documentation" ;
-    rdfs:comment "A repository that contains documentation." .
-
-ex:Data a ex:RepositoryTypeEnumeration ;
-    rdfs:label "Data" ;
-    rdfs:comment "A repository that contains datasets." .
-
-ex:Other a ex:RepositoryTypeEnumeration ;
-    rdfs:label "Other" ;
-    rdfs:comment "A repository that does not fit into the other categories." .
-
-wd:Q34749 a ex:DisciplineEnumeration;
-  rdfs:label "Social sciences"@en;
-  rdfs:subClassOf wd:Q11862829 .
-
-wd:Q23404 a ex:DisciplineEnumeration;
-  rdfs:label "Anthropology"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q11680831 a ex:DisciplineEnumeration;
-  rdfs:label "Communication studies"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q8434 a ex:DisciplineEnumeration;
-  rdfs:label "Education"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q8162 a ex:DisciplineEnumeration;
-  rdfs:label "Linguistics"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q42240 a ex:DisciplineEnumeration;
-  rdfs:label "Research"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q21201 a ex:DisciplineEnumeration;
-  rdfs:label "Sociology"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q1071 a ex:DisciplineEnumeration;
-  rdfs:label "Geography"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q9418 a ex:DisciplineEnumeration;
-  rdfs:label "Psychology"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q7163 a ex:DisciplineEnumeration;
-  rdfs:label "Politics"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q8134 a ex:DisciplineEnumeration;
-  rdfs:label "Economics"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q7112556 a ex:DisciplineEnumeration;
-  rdfs:label "Applied sciences"@en;
-  rdfs:subClassOf wd:Q11862829 .
-
-wd:Q843601 a ex:DisciplineEnumeration;
-  rdfs:label "Health sciences"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q43035 a ex:DisciplineEnumeration;
-  rdfs:label "Electrical engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q83588 a ex:DisciplineEnumeration;
-  rdfs:label "Chemical engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q77590 a ex:DisciplineEnumeration;
-  rdfs:label "Civil engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q12271 a ex:DisciplineEnumeration;
-  rdfs:label "Architecture"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q428691 a ex:DisciplineEnumeration;
-  rdfs:label "Computer engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q3353193 a ex:DisciplineEnumeration;
-  rdfs:label "Energy engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q192386 a ex:DisciplineEnumeration;
-  rdfs:label "Military science"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q18351432 a ex:DisciplineEnumeration;
-  rdfs:label "Industrial and production engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q101333 a ex:DisciplineEnumeration;
-  rdfs:label "Mechanical engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q580689 a ex:DisciplineEnumeration;
-  rdfs:label "Biological engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q188847 a ex:DisciplineEnumeration;
-  rdfs:label "Environmental science"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q2167061 a ex:DisciplineEnumeration;
-  rdfs:label "Systems science and engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-<http://www.wikipedia.org/wiki/Information_engineering> a ex:DisciplineEnumeration;
-  rdfs:label "Information engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q3606845 a ex:DisciplineEnumeration;
-  rdfs:label "Agricultural and food sciences"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q4830453 a ex:DisciplineEnumeration;
-  rdfs:label "Business"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q80083 a ex:DisciplineEnumeration;
-  rdfs:label "Humanities"@en;
-  rdfs:subClassOf wd:Q11862829 .
-
-wd:Q309 a ex:DisciplineEnumeration;
-  rdfs:label "History"@en;
-  rdfs:subClassOf wd:Q80083 .
-
-wd:Q8242 a ex:DisciplineEnumeration;
-  rdfs:label "Literature"@en;
-  rdfs:subClassOf wd:Q80083 .
-
-wd:Q735 a ex:DisciplineEnumeration;
-  rdfs:label "Art"@en;
-  rdfs:subClassOf wd:Q80083 .
-
-wd:Q9174 a ex:DisciplineEnumeration;
-  rdfs:label "Religion"@en;
-  rdfs:subClassOf wd:Q80083 .
-
-wd:Q5891 a ex:DisciplineEnumeration;
-  rdfs:label "Philosophy"@en;
-  rdfs:subClassOf wd:Q80083 .
-
-wd:Q7748 a ex:DisciplineEnumeration;
-  rdfs:label "Law"@en;
-  rdfs:subClassOf wd:Q80083 .
-
-wd:Q816264 a ex:DisciplineEnumeration;
-  rdfs:label "Formal sciences"@en;
-  rdfs:subClassOf wd:Q11862829 .
-
-wd:Q395 a ex:DisciplineEnumeration;
-  rdfs:label "Mathematics"@en .
-
-wd:Q8078 a ex:DisciplineEnumeration;
-  rdfs:label "Logic"@en;
-  rdfs:subClassOf wd:Q816264 .
-
-wd:Q12483 a ex:DisciplineEnumeration;
-  rdfs:label "Statistics"@en;
-  rdfs:subClassOf wd:Q816264 .
-
-wd:Q2878974 a ex:DisciplineEnumeration;
-  rdfs:label "Theoretical computer science"@en;
-  rdfs:subClassOf wd:Q816264 .
-
-wd:Q7991 a ex:DisciplineEnumeration;
-  rdfs:label "Natural sciences"@en;
-  rdfs:subClassOf wd:Q11862829 .
-
-wd:Q413 a ex:DisciplineEnumeration;
-  rdfs:label "Physics"@en .
-
-wd:Q333 a ex:DisciplineEnumeration;
-  rdfs:label "Astronomy"@en;
-  rdfs:subClassOf wd:Q7991 .
-
-wd:Q420 a ex:DisciplineEnumeration;
-  rdfs:label "Biology"@en;
-  rdfs:subClassOf wd:Q7991 .
-
-wd:Q2329 a ex:DisciplineEnumeration;
-  rdfs:label "Chemistry"@en;
-  rdfs:subClassOf wd:Q7991 .
-
-wd:Q8008 a ex:DisciplineEnumeration;
-  rdfs:label "Earth science"@en;
-  rdfs:subClassOf wd:Q7991 .
+# Enumeration Instances - Disciplines
+wd:Q34749 a ex:DisciplineEnumeration; rdfs:label "Social sciences"@en; rdfs:subClassOf wd:Q11862829 .
+wd:Q23404 a ex:DisciplineEnumeration; rdfs:label "Anthropology"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q11680831 a ex:DisciplineEnumeration; rdfs:label "Communication studies"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q8434 a ex:DisciplineEnumeration; rdfs:label "Education"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q8162 a ex:DisciplineEnumeration; rdfs:label "Linguistics"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q42240 a ex:DisciplineEnumeration; rdfs:label "Research"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q21201 a ex:DisciplineEnumeration; rdfs:label "Sociology"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q1071 a ex:DisciplineEnumeration; rdfs:label "Geography"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q9418 a ex:DisciplineEnumeration; rdfs:label "Psychology"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q7163 a ex:DisciplineEnumeration; rdfs:label "Politics"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q8134 a ex:DisciplineEnumeration; rdfs:label "Economics"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q7112556 a ex:DisciplineEnumeration; rdfs:label "Applied sciences"@en; rdfs:subClassOf wd:Q11862829 .
+wd:Q843601 a ex:DisciplineEnumeration; rdfs:label "Health sciences"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q43035 a ex:DisciplineEnumeration; rdfs:label "Electrical engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q83588 a ex:DisciplineEnumeration; rdfs:label "Chemical engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q77590 a ex:DisciplineEnumeration; rdfs:label "Civil engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q12271 a ex:DisciplineEnumeration; rdfs:label "Architecture"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q428691 a ex:DisciplineEnumeration; rdfs:label "Computer engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q3353193 a ex:DisciplineEnumeration; rdfs:label "Energy engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q192386 a ex:DisciplineEnumeration; rdfs:label "Military science"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q18351432 a ex:DisciplineEnumeration; rdfs:label "Industrial and production engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q101333 a ex:DisciplineEnumeration; rdfs:label "Mechanical engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q580689 a ex:DisciplineEnumeration; rdfs:label "Biological engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q188847 a ex:DisciplineEnumeration; rdfs:label "Environmental science"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q2167061 a ex:DisciplineEnumeration; rdfs:label "Systems science and engineering"@en; rdfs:subClassOf wd:Q7112556 .
+<http://www.wikipedia.org/wiki/Information_engineering> a ex:DisciplineEnumeration; rdfs:label "Information engineering"@en;rdfs:subClassOf wd:Q7112556 .
+wd:Q3606845 a ex:DisciplineEnumeration; rdfs:label "Agricultural and food sciences"@en;rdfs:subClassOf wd:Q7112556 .
+wd:Q4830453 a ex:DisciplineEnumeration; rdfs:label "Business"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q80083 a ex:DisciplineEnumeration; rdfs:label "Humanities"@en; rdfs:subClassOf wd:Q11862829 .
+wd:Q309 a ex:DisciplineEnumeration; rdfs:label "History"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q8242 a ex:DisciplineEnumeration; rdfs:label "Literature"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q735 a ex:DisciplineEnumeration; rdfs:label "Art"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q9174 a ex:DisciplineEnumeration; rdfs:label "Religion"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q5891 a ex:DisciplineEnumeration; rdfs:label "Philosophy"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q7748 a ex:DisciplineEnumeration; rdfs:label "Law"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q816264 a ex:DisciplineEnumeration; rdfs:label "Formal sciences"@en; rdfs:subClassOf wd:Q11862829 .
+wd:Q395 a ex:DisciplineEnumeration; rdfs:label "Mathematics"@en .
+wd:Q8078 a ex:DisciplineEnumeration; rdfs:label "Logic"@en; rdfs:subClassOf wd:Q816264 .
+wd:Q12483 a ex:DisciplineEnumeration; rdfs:label "Statistics"@en; rdfs:subClassOf wd:Q816264 .
+wd:Q2878974 a ex:DisciplineEnumeration; rdfs:label "Theoretical computer science"@en; rdfs:subClassOf wd:Q816264 .
+wd:Q7991 a ex:DisciplineEnumeration; rdfs:label "Natural sciences"@en; rdfs:subClassOf wd:Q11862829 .
+wd:Q413 a ex:DisciplineEnumeration; rdfs:label "Physics"@en .
+wd:Q333 a ex:DisciplineEnumeration; rdfs:label "Astronomy"@en; rdfs:subClassOf wd:Q7991 .
+wd:Q420 a ex:DisciplineEnumeration; rdfs:label "Biology"@en; rdfs:subClassOf wd:Q7991 .
+wd:Q2329 a ex:DisciplineEnumeration; rdfs:label "Chemistry"@en; rdfs:subClassOf wd:Q7991 .
+wd:Q8008 a ex:DisciplineEnumeration; rdfs:label "Earth science"@en; rdfs:subClassOf wd:Q7991 .
 
 # Properties
 schema:name a rdfs:Property ; rdfs:label "name"; rdfs:comment "The name of the item." .
@@ -244,6 +98,22 @@ schema:identifier a rdfs:Property ; rdfs:label "identifier" ; rdfs:comment "The 
 schema:creator a rdfs:Property ; rdfs:label "creator" ; rdfs:comment "The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork." .
 schema:headline a rdfs:Property ; rdfs:label "headline" ; rdfs:comment "The headline of the article." .
 schema:gender a rdfs:Property ; rdfs:label "gender" ; rdfs:comment "The gender of the person." .
+schema:programmingLanguage a rdfs:Property ; rdfs:label "programming language" ; rdfs:comment "The computer programming language." .
+schema:codeRepository a rdfs:Property ; rdfs:label "code repository" ; rdfs:comment "Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex)."   .
+schema:dateCreated a rdfs:Property ; rdfs:label "date created" ;  rdfs:comment "The date on which the CreativeWork was created or the item was added to a DataFeed." .
+schema:datePublished a rdfs:Property ; rdfs:label "date published" ; rdfs:comment "Date of first publication or broadcast" .
+org:hasUnit a rdfs:Property ; rdfs:label "has unit"; rdfs:comment "Indicates a unit which is part of this Organization, e.g. a Department within a larger Organization.".
+org:unitOf a rdfs:Property ; rdfs:label "unit of"; rdfs:comment "Indicates an Organization of which this Unit is a part, e.g. a Department within a larger Organization.".
+org:hasMembership a rdfs:Property ; rdfs:label "has membership"; rdfs:comment "Indicates a membership relationship that the Agent plays." .
+org:organization a rdfs:Property ; rdfs:label "organization" .
+org:role a rdfs:Property ; rdfs:label "role" .
+time:hasBeginning a rdfs:Property ; rdfs:label "has beginning" ; rdfs:comment "The beginning of the temporal entity." .
+time:hasEnd a rdfs:Property ; rdfs:label "has end" ; rdfs:comment "The end of the temporal entity." .
+ex:gitUsername a rdfs:Property ; rdfs:label "git username" ; rdfs:comment "The GitHub/Git handle of a person." .
+ex:infoscienceUsername a rdfs:Property ; rdfs:label "infoscience username" ; rdfs:comment "The Infoscience username of a person." .
+ex:hasCommit a rdfs:Property ; rdfs:label "has commit" ; rdfs:comment "Links a person to a specific commit they have made in a software repository." .
+ex:discipline a rdf:Property ; rdfs:label "Discipline" ; rdfs:comment "The academic or scientific discipline associated with the resource." .
+ex:repositoryType a rdf:Property ; rdfs:label "Repository Type" ; rdfs:comment "The type or category of the repository (e.g., software, data, publication)." .
 
 # Custom Organization <-> Repository Links
 ex:managedRepository a rdfs:Property ;
@@ -270,24 +140,6 @@ ex:githubOrgUrl a rdfs:Property ;
     rdfs:label "GitHub Organization URL" ;
     rdfs:comment "The official GitHub Organization URL for an EPFL unit." ;
     rdfs:subPropertyOf schema:url .
-
-schema:programmingLanguage a rdfs:Property ; rdfs:label "programming language" ; rdfs:comment "The computer programming language." .
-schema:codeRepository a rdfs:Property ; rdfs:label "code repository" ; rdfs:comment "Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex)."   .
-schema:dateCreated a rdfs:Property ; rdfs:label "date created" ;  rdfs:comment "The date on which the CreativeWork was created or the item was added to a DataFeed." .
-schema:datePublished a rdfs:Property ; rdfs:label "date published" ; rdfs:comment "Date of first publication or broadcast" .
-org:hasUnit a rdfs:Property ; rdfs:label "has unit"; rdfs:comment "Indicates a unit which is part of this Organization, e.g. a Department within a larger Organization.".
-org:unitOf a rdfs:Property ; rdfs:label "unit of"; rdfs:comment "Indicates an Organization of which this Unit is a part, e.g. a Department within a larger Organization.".
-org:hasMembership a rdfs:Property ; rdfs:label "has membership"; rdfs:comment "Indicates a membership relationship that the Agent plays." .
-org:organization a rdfs:Property ; rdfs:label "organization" .
-org:role a rdfs:Property ; rdfs:label "role" .
-time:hasBeginning a rdfs:Property ; rdfs:label "has beginning" ; rdfs:comment "The beginning of the temporal entity." .
-time:hasEnd a rdfs:Property ; rdfs:label "has end" ; rdfs:comment "The end of the temporal entity." .
-ex:gitUsername a rdfs:Property ; rdfs:label "git username" ; rdfs:comment "The GitHub/Git handle of a person." .
-ex:infoscienceUsername a rdfs:Property ; rdfs:label "infoscience username" ; rdfs:comment "The Infoscience username of a person." .
-ex:hasCommit a rdfs:Property ; rdfs:label "has commit" ; rdfs:comment "Links a person to a specific commit they have made in a software repository." .
-ex:discipline a rdf:Property ; rdfs:label "Discipline" ; rdfs:comment "The academic or scientific discipline associated with the resource." .
-ex:repositoryType a rdf:Property ; rdfs:label "Repository Type" ; rdfs:comment "The type or category of the repository (e.g., software, data, publication)." .
-
 # ---------------------------------------------------------
 # 2. REUSABLE PROPERTY SHAPES
 # ---------------------------------------------------------
@@ -411,7 +263,7 @@ ex:ArticleShape
     sh:property ex:DoiPropertyShape ;
     sh:property [ sh:path schema:headline ; sh:datatype xsd:string ; sh:name "Headline" ] ;
     sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Publication Date" ] ;
-    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author" ] ;
+    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this content or rating."   ] ;
     sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] .
 
 ex:OrganizationShape
@@ -499,7 +351,7 @@ ex:MembershipShape
         sh:nodeKind sh:IRI ;
         sh:name "Organization"
     ] ;
-    sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Role" ] ;
+    sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Role"; ] ;
     sh:property [ 
         sh:path time:hasBeginning ; 
         sh:datatype xsd:date ; 
