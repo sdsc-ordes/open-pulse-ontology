@@ -228,6 +228,12 @@ ex:UnitOfPropertyShape
     sh:class org:Organization ; 
     sh:description "Link back to the managing/parent organization." .
 
+ex:relatedToEPFLShape
+    a sh:PropertyShape ;
+    sh:path ex:relatedToEPFL ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1 .
+
 # ---------------------------------------------------------
 # 3. NODE SHAPES
 # ---------------------------------------------------------
@@ -300,6 +306,7 @@ ex:RepositoryShape
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property ex:nameShape ;
+    sh:property ex:relatedToEPFLShape ;
     sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Creation Date" ] ;
     sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ;sh:pattern "^https?://(github|gitlab|bitbucket)\\.com/" ;  sh:flags "i" ; sh:name "Code Repository URL" ] ; 
     sh:property [sh:path schema:license ; sh:nodeKind sh:IRI ; sh:name "License" ] ;
