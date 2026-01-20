@@ -139,7 +139,7 @@ ex:githubOrgUrl a rdfs:Property ; rdfs:label "GitHub Organization URL" ; rdfs:co
 # 2. REUSABLE PROPERTY SHAPES
 # ---------------------------------------------------------
 
-ex:nameShape
+ex:NameShape
     a sh:PropertyShape ;
     sh:path schema:name ;
     sh:datatype xsd:string ;
@@ -159,7 +159,7 @@ ex:GenderShape
     sh:maxCount 1 ;
     sh:in ( "Male" "Female" "N/A" ) .
 
-ex:urlShape
+ex:UrlShape
     a sh:PropertyShape ;
     sh:path schema:url ;
     sh:nodeKind sh:IRI ;
@@ -228,27 +228,27 @@ ex:UnitOfPropertyShape
     sh:class org:Organization ; 
     sh:description "Link back to the managing/parent organization." .
 
-ex:relatedToEPFLShape
+ex:RelatedToEPFLShape
     a sh:PropertyShape ;
     sh:path ex:relatedToEPFL ;
     sh:datatype xsd:boolean ;
     sh:maxCount 1 .
 
-ex:githubOrgFollowersShape
+ex:GithubOrgFollowersShape
     a sh:PropertyShape ;
     sh:path ex:githubOrgFollowers ;
     sh:datatype xsd:integer ;
     sh:maxCount 1 ;
     sh:description "Number of followers for the GitHub organization." .
 
-ex:githubRepoStarsShape
+ex:GithubRepoStarsShape
     a sh:PropertyShape ;
     sh:path ex:githubRepoStars ;
     sh:datatype xsd:integer ;
     sh:maxCount 1 ;
     sh:description "Number of stars for the Software GitHub repository." .
 
-ex:githubRepoForksShape
+ex:GithubRepoForksShape
     a sh:PropertyShape ;
     sh:path ex:githubRepoForks ;  
     sh:datatype xsd:integer ;
@@ -264,11 +264,11 @@ ex:PersonShape
     sh:targetClass schema:Person ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property ex:nameShape ;
+    sh:property ex:NameShape ;
     sh:property ex:GitUsernameShape ;
     sh:property ex:EmailShape ;
     sh:property ex:GenderShape ;
-    sh:property ex:urlShape ;
+    sh:property ex:UrlShape ;
     sh:property [ sh:path ex:infoscienceUsername ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Infoscience Username" ] ;
     sh:property [ 
         sh:path org:hasMembership ; 
@@ -288,7 +288,7 @@ ex:ArticleShape
     sh:targetClass schema:ScholarlyArticle ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property ex:nameShape ;
+    sh:property ex:NameShape ;
     sh:property ex:DoiPropertyShape ;
     sh:property [ sh:path schema:headline ; sh:datatype xsd:string ; sh:name "Headline" ] ;
     sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Publication Date" ] ;
@@ -300,11 +300,11 @@ ex:OrganizationShape
     sh:targetClass org:Organization ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property ex:nameShape ;
+    sh:property ex:NameShape ;
     sh:property ex:RorPropertyShape ;
-    sh:property ex:urlShape ;
+    sh:property ex:UrlShape ;
     sh:property ex:OrganizationTypeShape ;
-    sh:property ex:githubOrgFollowersShape ;
+    sh:property ex:GithubOrgFollowersShape ;
     sh:property ex:HasUnitPropertyShape ;
     sh:property ex:UnitOfPropertyShape ;
     sh:property [ 
@@ -326,12 +326,12 @@ ex:RepositoryShape
     sh:targetClass schema:SoftwareSourceCode ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property ex:nameShape ;
-    sh:property ex:relatedToEPFLShape ;
+    sh:property ex:NameShape ;
+    sh:property ex:RelatedToEPFLShape ;
     sh:property ex:RepositoryTypeShape ;
     sh:property ex:DisciplineShape ;
-    sh:property ex:githubRepoStarsShape ;
-    sh:property ex:githubRepoForksShape ;
+    sh:property ex:GithubRepoStarsShape ;
+    sh:property ex:GithubRepoForksShape ;
     sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Creation Date" ] ;
     sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ;sh:pattern "^https?://(github|gitlab|bitbucket)\\.com/" ;  sh:flags "i" ; sh:name "Code Repository URL" ] ; 
     sh:property [ sh:path schema:license ; sh:nodeKind sh:IRI ; sh:name "License" ] ;
@@ -347,8 +347,8 @@ ex:DatasetShape
     sh:targetClass schema:Dataset ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property ex:nameShape ;        
-    sh:property ex:urlShape ;         
+    sh:property ex:NameShape ;        
+    sh:property ex:UrlShape ;         
     sh:property ex:DoiPropertyShape ; 
     sh:property [ sh:path schema:description ; sh:datatype xsd:string ; sh:minCount 1 ] ;
     sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ] ;
