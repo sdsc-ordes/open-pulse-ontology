@@ -125,7 +125,10 @@ ex:hasCommit a rdfs:Property ; rdfs:label "has commit" ; rdfs:comment "Links a p
 ex:discipline a rdf:Property ; rdfs:label "Discipline" ; rdfs:comment "The academic or scientific discipline associated with the resource." .
 ex:repositoryType a rdf:Property ; rdfs:label "Repository Type" ; rdfs:comment "The type or category of the repository (e.g., software, data, publication)." .
 ex:OrganizationType a rdf:Property ; rdfs:label "Organization Type" ; rdfs:comment "The type or category of the organization (e.g., university, research institute, company)." .
-
+ex:relatedToEPFL a rdf:Property ;rdfs:range xsd:boolean; rdfs:label "Related to EPFL" ;rdfs:comment "Indicates whether a software repository or entity is related to EPFL (École Polytechnique Fédérale de Lausanne)." .
+ex:githubOrgFollowers a rdf:Property ; rdfs:range xsd:integer ; rdfs:label "GitHub Organization Followers" ; rdfs:comment "The number of followers of a GitHub organization." .
+ex:githubRepoStars a rdf:Property ; rdfs:range xsd:integer ; rdfs:label "GitHub Repository Stars" ; rdfs:comment "The number of stars (likes) a GitHub repository has received." .
+ex:githubRepoForks a rdf:Property ; rdfs:range xsd:integer ; rdfs:label "GitHub Repository Forks" ; rdfs:comment "The number of forks (copies) of a GitHub repository." .
 # Custom Organization <-> Repository Links
 ex:managedRepository a rdfs:Property ; rdfs:label "managed repository" ; rdfs:comment "Links an organization to a software repository it officially manages or owns." ; owl:inverseOf ex:managedBy .
 ex:managedBy a rdfs:Property ; rdfs:label "managed by" ; rdfs:comment "Links a software repository to its managing or owning organization." .
@@ -274,6 +277,7 @@ ex:OrganizationShape
     sh:property ex:RorPropertyShape ;
     sh:property ex:urlShape ;
     sh:property ex:OrganizationTypeShape ;
+    sh:property ex:githubOrgFollowers ;
     sh:property [ 
         sh:path ex:githubOrgUrl ; 
         sh:nodeKind sh:IRI ; 
@@ -309,7 +313,9 @@ ex:RepositoryShape
         sh:description "The organization that officially manages this repository."
     ] ;
     sh:property ex:RepositoryTypeShape ;
-    sh:property ex:DisciplineShape    .
+    sh:property ex:DisciplineShape    ;
+    sh:property ex:githubRepoStars ;
+    sh:property ex:githubRepoForks .
 
 ex:DatasetShape
     a sh:NodeShape ;
