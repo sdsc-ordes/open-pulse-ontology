@@ -1,0 +1,26 @@
+@prefix schema: <http://schema.org/> .
+@prefix ex: <http://example.org/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+ex:Software a ex:RepositoryTypeEnumeration .
+wd:Q420 a ex:DisciplineEnumeration .
+
+# INVALID PERSON - Should FAIL validation
+# Contains extra properties not allowed by closed shape, ex:PersonShape has sh:closed true
+
+ex:InvalidExtraPropsRepo a schema:SoftwareSourceCode ;
+    schema:name "Invalid Extra Props Test" ;
+    schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
+    schema:codeRepository <https://github.com/example/invalid-extra> ;
+    schema:license <https://spdx.org/licenses/MIT.html> ;
+    schema:citation <https://doi.org/10.1234/example.citation> ;
+    schema:creator ex:PersonWithExtraProps ;
+    ex:repositoryType ex:Software ;
+    ex:discipline wd:Q420 .
+
+ex:PersonWithExtraProps a schema:Person ;
+    schema:name "Eve Extra" ;
+    schema:email "eve@example.com" ;
+    ex:gitUsername "eveextra" ;
+    ex:notAllowedProperty "This property is not defined in the shape" .

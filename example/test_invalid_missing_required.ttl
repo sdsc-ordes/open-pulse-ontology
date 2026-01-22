@@ -1,0 +1,19 @@
+@prefix schema: <http://schema.org/> .
+@prefix ex: <http://example.org/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# INVALID REPOSITORY - Should FAIL validation
+# Missing 2 required properties:
+# - missing schema:name (required, minCount 1)
+# - missing schema:creator (required, minCount 1)
+
+ex:InvalidMissingRequired a schema:SoftwareSourceCode ;
+    schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
+    schema:codeRepository <https://github.com/example/invalid-repo> ;
+    schema:programmingLanguage "Python" .
+
+ex:InvalidPerson a schema:Person ;
+    schema:email "invalid@example.com" ;
+    ex:gitUsername "invaliduser" ;
+    schema:name "Invalid Person" .
