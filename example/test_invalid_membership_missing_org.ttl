@@ -1,0 +1,32 @@
+@prefix schema: <http://schema.org/> .
+@prefix ex: <http://example.org/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+ex:Software a ex:RepositoryTypeEnumeration .
+wd:Q2329 a ex:DisciplineEnumeration .
+
+# INVALID MEMBERSHIP - Missing org:organization (minCount 1)
+
+ex:MissingOrgRepo a schema:SoftwareSourceCode ;
+    schema:name "Membership Missing Org Repo" ;
+    schema:dateCreated "2024-05-10T08:00:00"^^xsd:dateTime ;
+    schema:codeRepository <https://github.com/example/missing-org> ;
+    schema:license <https://spdx.org/licenses/BSD-3-Clause.html> ;
+    schema:citation <https://doi.org/10.1234/example.missingorg> ;
+    schema:creator ex:MemberlessPerson ;
+    ex:repositoryType ex:Software ;
+    ex:discipline wd:Q2329 ;
+    ex:relatedToEPFL true .
+
+ex:MemberlessPerson a schema:Person ;
+    schema:name "Morgan Missing" ;
+    schema:email "morgan.missing@example.com" ;
+    ex:gitUsername "memmissing" ;
+    org:hasMembership ex:MembershipWithoutOrg .
+
+ex:MembershipWithoutOrg a org:Membership ; # Missing org:organization
+    org:role "Researcher" ;
+    time:hasBeginning "2024-05-01"^^xsd:date ;
+    time:hasEnd "2024-12-31"^^xsd:date .  
