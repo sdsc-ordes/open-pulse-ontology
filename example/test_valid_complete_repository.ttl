@@ -6,6 +6,7 @@
 @prefix wd: <http://www.wikidata.org/entity/> .
 wd:Q2329 a ex:DisciplineEnumeration .
 ex:Software a ex:RepositoryTypeEnumeration .
+ex:ResearchInstitution a ex:OrganizationTypeEnumeration .
 
 # VALID COMPLETE REPOSITORY - Should PASS validation
 # This is a comprehensive example with all optional properties correctly set
@@ -17,6 +18,9 @@ ex:CompleteRepo a schema:SoftwareSourceCode ;
     schema:license <https://spdx.org/licenses/BSD-3-Clause.html> ;
     schema:citation <https://doi.org/10.5281/zenodo.1234567> ;
     schema:programmingLanguage "Python" ;
+    ex:relatedToEPFL true ;
+    ex:githubRepoStars "128"^^xsd:integer ;
+    ex:githubRepoForks "14"^^xsd:integer ;
     schema:creator ex:LeadResearcher ;
     ex:managedBy ex:EPFLLab ;
     ex:repositoryType ex:Software ;
@@ -43,6 +47,8 @@ ex:EPFLLab a org:Organization ;
     schema:name "EPFL Computational Lab" ;
     schema:identifier "https://ror.org/02s376052" ;
     schema:url <https://www.epfl.ch/labs/lab> ;
+    ex:OrganizationType ex:ResearchInstitution ;
+    ex:githubOrgFollowers "320"^^xsd:integer ;
     ex:githubOrgUrl <https://github.com/epfl-lab> ;
     ex:managedRepository ex:CompleteRepo .
 

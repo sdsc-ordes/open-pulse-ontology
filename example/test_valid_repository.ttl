@@ -25,6 +25,8 @@ ex:ValidRepo a schema:SoftwareSourceCode ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.citation> ;
     schema:programmingLanguage "Python" ;
+    ex:relatedToEPFL true ;
+    ex:githubRepoStars "12"^^xsd:integer ;
     schema:creator ex:ValidAuthor ;
     ex:managedBy ex:ValidOrganization ;
     ex:repositoryType ex:Software ;
