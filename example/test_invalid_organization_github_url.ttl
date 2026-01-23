@@ -1,27 +1,27 @@
 @prefix schema: <http://schema.org/> .
-@prefix ex: <http://example.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # INVALID ORGANIZATION - Should FAIL validation
-# GitHub Organization URL doesn't match required pattern, ex:githubOrgUrl has pattern "^https://github\\.com/[a-zA-Z0-9\\-_]+$"
+# GitHub Organization URL doesn't match required pattern, pulse:githubOrgUrl has pattern "^https://github\\.com/[a-zA-Z0-9\\-_]+$"
 
-ex:InvalidGithubUrlRepo a schema:SoftwareSourceCode ;
+pulse:InvalidGithubUrlRepo a schema:SoftwareSourceCode ;
     schema:name "Invalid GitHub URL Test" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
     schema:codeRepository <https://github.com/example/test-repo> ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.citation> ;
-    schema:creator ex:AuthorForGithubTest ;
-    ex:managedBy ex:InvalidGithubOrg .
+    schema:creator pulse:AuthorForGithubTest ;
+    pulse:managedBy pulse:InvalidGithubOrg .
 
-ex:InvalidGithubOrg a org:Organization ;
+pulse:InvalidGithubOrg a org:Organization ;
     schema:name "Invalid GitHub Org" ;
     schema:identifier "https://ror.org/012345678" ;
     schema:url <https://example.org> ;
-    ex:githubOrgUrl <https://gitlab.com/example-org> .  # Wrong domain, should be github.com
+    pulse:githubOrgUrl <https://gitlab.com/example-org> .  # Wrong domain, should be github.com
 
-ex:AuthorForGithubTest a schema:Person ;
+pulse:AuthorForGithubTest a schema:Person ;
     schema:name "Frank Test" ;
     schema:email "frank@example.com" ;
-    ex:gitUsername "franktest" .
+    pulse:gitUsername "franktest" .

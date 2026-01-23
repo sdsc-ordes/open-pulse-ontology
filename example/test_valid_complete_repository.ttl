@@ -1,71 +1,71 @@
 @prefix schema: <http://schema.org/> .
-@prefix ex: <http://example.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wd: <http://www.wikidata.org/entity/> .
-wd:Q2329 a ex:DisciplineEnumeration .
-ex:Software a ex:RepositoryTypeEnumeration .
-ex:ResearchInstitution a ex:OrganizationTypeEnumeration .
+wd:Q2329 a pulse:DisciplineEnumeration .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
 
 # VALID COMPLETE REPOSITORY - Should PASS validation
 # This is a comprehensive example with all optional properties correctly set
 
-ex:CompleteRepo a schema:SoftwareSourceCode ;
+pulse:CompleteRepo a schema:SoftwareSourceCode ;
     schema:name "Complete Research Software" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
     schema:codeRepository <https://github.com/epfl/research-software> ;
     schema:license <https://spdx.org/licenses/BSD-3-Clause.html> ;
     schema:citation <https://doi.org/10.5281/zenodo.1234567> ;
     schema:programmingLanguage "Python" ;
-    ex:relatedToEPFL true ;
-    ex:githubRepoStars "128"^^xsd:integer ;
-    ex:githubRepoForks "14"^^xsd:integer ;
-    schema:creator ex:LeadResearcher ;
-    ex:managedBy ex:EPFLLab ;
-    ex:repositoryType ex:Software ;
-    ex:discipline wd:Q2329 ;  # Chemistry
-    ex:hasCommit ex:ValidCommit1, ex:ValidCommit2 ;
-    ex:relatedDataset ex:ResearchDataset .
+    pulse:relatedToEPFL true ;
+    pulse:githubRepoStars "128"^^xsd:integer ;
+    pulse:githubRepoForks "14"^^xsd:integer ;
+    schema:creator pulse:LeadResearcher ;
+    pulse:managedBy pulse:EPFLLab ;
+    pulse:repositoryType pulse:Software ;
+    pulse:discipline wd:Q2329 ;  # Chemistry
+    pulse:hasCommit pulse:ValidCommit1, pulse:ValidCommit2 ;
+    pulse:relatedDataset pulse:ResearchDataset .
 
-ex:LeadResearcher a schema:Person ;
+pulse:LeadResearcher a schema:Person ;
     schema:name "Dr. Sarah Smith" ;
     schema:email "sarah.smith@epfl.ch" ;
-    ex:gitUsername "sarahsmith" ;
-    ex:infoscienceUsername "sarah.smith" ;
+    pulse:gitUsername "sarahsmith" ;
+    pulse:infoscienceUsername "sarah.smith" ;
     schema:gender "Female" ;
     schema:url <https://people.epfl.ch/sarah.smith> ;
-    org:hasMembership ex:Membership1 .
+    org:hasMembership pulse:Membership1 .
 
-ex:Membership1 a org:Membership ;
-    org:organization ex:EPFLLab ;
+pulse:Membership1 a org:Membership ;
+    org:organization pulse:EPFLLab ;
     org:role "Principal Investigator" ;
     time:hasBeginning "2020-01-01"^^xsd:date ;
     time:hasEnd "2025-12-31"^^xsd:date .
 
-ex:EPFLLab a org:Organization ;
+pulse:EPFLLab a org:Organization ;
     schema:name "EPFL Computational Lab" ;
     schema:identifier "https://ror.org/02s376052" ;
     schema:url <https://www.epfl.ch/labs/lab> ;
-    ex:OrganizationType ex:ResearchInstitution ;
-    ex:githubOrgFollowers "320"^^xsd:integer ;
-    ex:githubOrgUrl <https://github.com/epfl-lab> ;
-    ex:managedRepository ex:CompleteRepo .
+    pulse:OrganizationType pulse:ResearchInstitution ;
+    pulse:githubOrgFollowers "320"^^xsd:integer ;
+    pulse:githubOrgUrl <https://github.com/epfl-lab> ;
+    pulse:managedRepository pulse:CompleteRepo .
 
-ex:ValidCommit1 a ex:GitCommit ;
+pulse:ValidCommit1 a pulse:GitCommit ;
     schema:identifier "a1b2c3d" ;  # 7-character hash (valid)
     schema:dateCreated "2024-01-10T09:00:00"^^xsd:dateTime ;
-    schema:author ex:LeadResearcher .
+    schema:author pulse:LeadResearcher .
 
-ex:ValidCommit2 a ex:GitCommit ;
+pulse:ValidCommit2 a pulse:GitCommit ;
     schema:identifier "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" ;  # 40-character hash (valid)
     schema:dateCreated "2024-01-12T14:30:00"^^xsd:dateTime ;
-    schema:author ex:LeadResearcher .
+    schema:author pulse:LeadResearcher .
 
-ex:ResearchDataset a schema:Dataset ;
+pulse:ResearchDataset a schema:Dataset ;
     schema:name "Chemistry Research Dataset" ;
     schema:url <https://zenodo.org/record/7654321> ;
     schema:identifier "10.5281/zenodo.7654321" ;
     schema:description "A comprehensive dataset of chemical compounds and reactions" ;
     schema:datePublished "2024-01-05"^^xsd:date ;
-    ex:relatedSoftware ex:CompleteRepo .
+    pulse:relatedSoftware pulse:CompleteRepo .

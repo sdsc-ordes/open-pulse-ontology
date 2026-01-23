@@ -1,17 +1,17 @@
 @prefix schema: <http://schema.org/> .
-@prefix ex: <http://example.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wd: <http://www.wikidata.org/entity/> .
-ex:Software a ex:RepositoryTypeEnumeration .
-wd:Q395 a ex:DisciplineEnumeration .
-ex:ResearchInstitution a ex:OrganizationTypeEnumeration .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+wd:Q395 a pulse:DisciplineEnumeration .
+pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
 
 # INVALID TEMPORAL ALIGNMENT - Should FAIL validation
 # Membership interval is independent of commit timing
 
-ex:InvalidTemporalRepo a schema:SoftwareSourceCode ;
+pulse:InvalidTemporalRepo a schema:SoftwareSourceCode ;
     schema:name "Temporal Misaligned Repo" ;
     schema:dateCreated "2024-02-01T08:00:00"^^xsd:dateTime ;
     schema:codeRepository <https://github.com/epfl/temporal-misaligned> ;
@@ -20,34 +20,34 @@ ex:InvalidTemporalRepo a schema:SoftwareSourceCode ;
     schema:programmingLanguage "Scala" ;
     schema:programmingLanguage "Python" ;
     schema:programmingLanguage "C++" ;
-    ex:relatedToEPFL true ;
-    schema:creator ex:TemporalAuthor ;
-    ex:managedBy ex:TemporalLab ;
-    ex:repositoryType ex:Software ;
-    ex:discipline wd:Q395 ;  # Mathematics
-    ex:hasCommit ex:LateCommit .
+    pulse:relatedToEPFL true ;
+    schema:creator pulse:TemporalAuthor ;
+    pulse:managedBy pulse:TemporalLab ;
+    pulse:repositoryType pulse:Software ;
+    pulse:discipline wd:Q395 ;  # Mathematics
+    pulse:hasCommit pulse:LateCommit .
 
-ex:TemporalAuthor a schema:Person ;
+pulse:TemporalAuthor a schema:Person ;
     schema:name "Alex Temporal" ;
     schema:email "alex.temporal@epfl.ch" ;
-    ex:gitUsername "alextemporal" ;
-    org:hasMembership ex:BrokenMembership .
+    pulse:gitUsername "alextemporal" ;
+    org:hasMembership pulse:BrokenMembership .
 
-ex:BrokenMembership a org:Membership ;
-    org:organization ex:TemporalLab ;
+pulse:BrokenMembership a org:Membership ;
+    org:organization pulse:TemporalLab ;
     org:role "Contributor" ;
     time:hasBeginning "2024-06-01"^^xsd:date ;
     time:hasEnd "2024-07-01"^^xsd:date . 
 
-ex:TemporalLab a org:Organization ;
+pulse:TemporalLab a org:Organization ;
     schema:name "EPFL Temporal Lab" ;
     schema:identifier "https://ror.org/02s376052" ;
     schema:url <https://www.epfl.ch/labs/temporal> ;
-    ex:OrganizationType ex:ResearchInstitution ;
-    ex:githubOrgUrl <https://github.com/epfl-temporal> ;
-    ex:managedRepository ex:InvalidTemporalRepo .
+    pulse:OrganizationType pulse:ResearchInstitution ;
+    pulse:githubOrgUrl <https://github.com/epfl-temporal> ;
+    pulse:managedRepository pulse:InvalidTemporalRepo .
 
-ex:LateCommit a ex:GitCommit ;
+pulse:LateCommit a pulse:GitCommit ;
     schema:identifier "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" ;
     schema:dateCreated "2024-07-15T12:00:00"^^xsd:dateTime ;
-    schema:author ex:TemporalAuthor .
+    schema:author pulse:TemporalAuthor .

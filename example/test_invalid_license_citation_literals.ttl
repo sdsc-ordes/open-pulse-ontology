@@ -1,25 +1,25 @@
 @prefix schema: <http://schema.org/> .
-@prefix ex: <http://example.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wd: <http://www.wikidata.org/entity/> .
-ex:Software a ex:RepositoryTypeEnumeration .
-wd:Q413 a ex:DisciplineEnumeration .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+wd:Q413 a pulse:DisciplineEnumeration .
 
 # INVALID LICENSE/CITATION NODEKIND - Should FAIL (must be IRIs, not literals)
 
-ex:InvalidLicenseCitationRepo a schema:SoftwareSourceCode ;
+pulse:InvalidLicenseCitationRepo a schema:SoftwareSourceCode ;
     schema:name "Literal License/Citation Repo" ;
     schema:dateCreated "2024-04-01T09:00:00"^^xsd:dateTime ;
     schema:codeRepository <https://github.com/example/literal-license> ;
     schema:license "MIT" ;             # invalid: expected IRI
     schema:citation "10.1000/foo" ;    # invalid: expected IRI
-    schema:creator ex:LiteralAuthor ;
-    ex:repositoryType ex:Software ;
-    ex:discipline wd:Q413 ;
-    ex:relatedToEPFL false .
+    schema:creator pulse:LiteralAuthor ;
+    pulse:repositoryType pulse:Software ;
+    pulse:discipline wd:Q413 ;
+    pulse:relatedToEPFL false .
 
-ex:LiteralAuthor a schema:Person ;
+pulse:LiteralAuthor a schema:Person ;
     schema:name "Casey Literal" ;
     schema:email "casey.literal@example.com" ;
-    ex:gitUsername "cliteral" .
+    pulse:gitUsername "cliteral" .

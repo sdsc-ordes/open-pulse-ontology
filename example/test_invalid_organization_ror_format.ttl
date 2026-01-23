@@ -1,33 +1,33 @@
 @prefix schema: <http://schema.org/> .
-@prefix ex: <http://example.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wd: <http://www.wikidata.org/entity/> .
-ex:Software a ex:RepositoryTypeEnumeration .
-ex:ResearchInstitution a ex:OrganizationTypeEnumeration .
-wd:Q8008 a ex:DisciplineEnumeration .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
+wd:Q8008 a pulse:DisciplineEnumeration .
 
 # INVALID ROR IDENTIFIER - Should FAIL (does not match https://ror.org/[0-9a-z]{9})
 
-ex:BadRORRepo a schema:SoftwareSourceCode ;
+pulse:BadRORRepo a schema:SoftwareSourceCode ;
     schema:name "Bad ROR Repo" ;
     schema:dateCreated "2024-06-20T12:00:00"^^xsd:dateTime ;
     schema:codeRepository <https://github.com/example/bad-ror> ;
     schema:license <https://spdx.org/licenses/Apache-2.0.html> ;
     schema:citation <https://doi.org/10.1234/example.badror> ;
-    schema:creator ex:BadRORAuthor ;
-    ex:managedBy ex:BadROROrg ;
-    ex:repositoryType ex:Software ;
-    ex:discipline wd:Q8008 ;
-    ex:relatedToEPFL false .
+    schema:creator pulse:BadRORAuthor ;
+    pulse:managedBy pulse:BadROROrg ;
+    pulse:repositoryType pulse:Software ;
+    pulse:discipline wd:Q8008 ;
+    pulse:relatedToEPFL false .
 
-ex:BadRORAuthor a schema:Person ;
+pulse:BadRORAuthor a schema:Person ;
     schema:name "Rory Identifier" ;
     schema:email "rory.identifier@example.com" ;
-    ex:gitUsername "roryid" .
+    pulse:gitUsername "roryid" .
 
-ex:BadROROrg a org:Organization ;
+pulse:BadROROrg a org:Organization ;
     schema:name "Org With Bad ROR" ;
     schema:identifier "https://ror.org/123" ;  # invalid format
     schema:url <https://example.org/badror> ;
-    ex:OrganizationType ex:ResearchInstitution .
+    pulse:OrganizationType pulse:ResearchInstitution .

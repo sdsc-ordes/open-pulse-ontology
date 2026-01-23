@@ -1,33 +1,33 @@
 @prefix schema: <http://schema.org/> .
-@prefix ex: <http://example.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wd: <http://www.wikidata.org/entity/> .
-ex:Software a ex:RepositoryTypeEnumeration .
-wd:Q395 a ex:DisciplineEnumeration .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+wd:Q395 a pulse:DisciplineEnumeration .
 
 # INVALID GITHUB METRICS - Should FAIL (Github stats must be xsd:integer)
 
-ex:InvalidMetricsRepo a schema:SoftwareSourceCode ;
+pulse:InvalidMetricsRepo a schema:SoftwareSourceCode ;
     schema:name "Bad Metrics Repo" ;
     schema:dateCreated "2024-03-01T10:00:00"^^xsd:dateTime ;
     schema:codeRepository <https://github.com/example/bad-metrics> ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.badmetrics> ;
-    schema:creator ex:MetricsAuthor ;
-    ex:repositoryType ex:Software ;
-    ex:discipline wd:Q395 ;
-    ex:relatedToEPFL true ;
-    ex:githubRepoStars "12k" ;      # invalid datatype
-    ex:githubRepoForks "forty" ;    # invalid datatype
-    ex:hasCommit ex:MetricsCommit .
+    schema:creator pulse:MetricsAuthor ;
+    pulse:repositoryType pulse:Software ;
+    pulse:discipline wd:Q395 ;
+    pulse:relatedToEPFL true ;
+    pulse:githubRepoStars "12k" ;      # invalid datatype
+    pulse:githubRepoForks "forty" ;    # invalid datatype
+    pulse:hasCommit pulse:MetricsCommit .
 
-ex:MetricsAuthor a schema:Person ;
+pulse:MetricsAuthor a schema:Person ;
     schema:name "Pat Metrics" ;
     schema:email "pat.metrics@example.com" ;
-    ex:gitUsername "patmetrics" .
+    pulse:gitUsername "patmetrics" .
 
-ex:MetricsCommit a ex:GitCommit ;
+pulse:MetricsCommit a pulse:GitCommit ;
     schema:identifier "abc1234" ;
     schema:dateCreated "2024-03-02T12:00:00"^^xsd:dateTime ;
-    schema:author ex:MetricsAuthor .
+    schema:author pulse:MetricsAuthor .
