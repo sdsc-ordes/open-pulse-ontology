@@ -102,27 +102,30 @@ wd:Q2329 a pulse:DisciplineEnumeration; skos:prefLabel "Chemistry"@en; rdfs:subC
 wd:Q8008 a pulse:DisciplineEnumeration; skos:prefLabel "Earth science"@en; rdfs:subClassOf wd:Q7991 .
 
 # Properties
-schema:name a rdfs:Property ; skos:prefLabel "name"; skos:definition "The name of the item." .
-schema:email a rdfs:Property ; skos:prefLabel "email" ; skos:definition "Email address." .
-schema:url a rdfs:Property ; skos:prefLabel "url" ; skos:definition "	URL of the item." .
-schema:identifier a rdfs:Property ; skos:prefLabel "identifier" ; skos:definition "The identifier (URL/Text) property represents any kind of identifier for any kind of Thing" .
-schema:creator a rdfs:Property ; skos:prefLabel "creator" ; skos:definition "The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork." .
-schema:headline a rdfs:Property ; skos:prefLabel "headline" ; skos:definition "The headline of the article." .
-schema:gender a rdfs:Property ; skos:prefLabel "gender" ; skos:definition "The gender of the person." .
-schema:programmingLanguage a rdfs:Property ; skos:prefLabel "programming language" ; skos:definition "The computer programming language." .
-schema:codeRepository a rdfs:Property ; skos:prefLabel "code repository" ; skos:definition "Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex)."   .
-schema:dateCreated a rdfs:Property ; skos:prefLabel "date created" ;  skos:definition "The date on which the CreativeWork was created or the item was added to a DataFeed." .
-schema:datePublished a rdfs:Property ; skos:prefLabel "date published" ; skos:definition "Date of first publication or broadcast" .
-org:hasUnit a rdfs:Property ; skos:prefLabel "has unit"; skos:definition "Indicates a unit which is part of this Organization, e.g. a Department within a larger Organization.".
-org:unitOf a rdfs:Property ; skos:prefLabel "unit of"; skos:definition "Indicates an Organization of which this Unit is a part, e.g. a Department within a larger Organization.".
-org:hasMembership a rdfs:Property ; skos:prefLabel "has membership"; skos:definition "Indicates a membership relationship that the Agent plays." .
-org:organization a rdfs:Property ; skos:prefLabel "organization" .
-org:role a rdfs:Property ; skos:prefLabel "role"; skos:definition "Indicates the Role that the Agent plays in a Membership relationship with an Organization." .
-time:hasBeginning a rdfs:Property ; skos:prefLabel "has beginning" ; skos:definition "The beginning of the temporal entity." .
-time:hasEnd a rdfs:Property ; skos:prefLabel "has end" ; skos:definition "The end of the temporal entity." .
-pulse:gitUsername a rdfs:Property ; skos:prefLabel "git username" ; skos:definition "The GitHub/Git handle of a person." .
-pulse:infoscienceUsername a rdfs:Property ; skos:prefLabel "infoscience username" ; skos:definition "The Infoscience username of a person." .
-pulse:hasCommit a rdfs:Property ; skos:prefLabel "has commit" ; skos:definition "Links a person to a specific commit they have made in a software repository." .
+schema:name a rdf:Property ; skos:prefLabel "name"; skos:definition "The name of the item." .
+schema:email a rdf:Property ; skos:prefLabel "email" ; skos:definition "Email address." .
+schema:url a rdf:Property ; skos:prefLabel "url" ; skos:definition "	URL of the item." .
+schema:identifier a rdf:Property ; skos:prefLabel "identifier" ; skos:definition "The identifier (URL/Text) property represents any kind of identifier for any kind of Thing" .
+schema:creator a rdf:Property ; skos:prefLabel "creator" ; skos:definition "The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork." .
+schema:headline a rdf:Property ; skos:prefLabel "headline" ; skos:definition "The headline of the article." .
+schema:gender a rdf:Property ; skos:prefLabel "gender" ; skos:definition "The gender of the person." .
+schema:programmingLanguage a rdf:Property ; skos:prefLabel "programming language" ; skos:definition "The computer programming language." .
+schema:codeRepository a rdf:Property ; skos:prefLabel "code repository" ; skos:definition "Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex)."   .
+schema:dateCreated a rdf:Property ; skos:prefLabel "date created" ;  skos:definition "The date on which the CreativeWork was created or the item was added to a DataFeed." .
+schema:datePublished a rdf:Property ; skos:prefLabel "date published" ; skos:definition "Date of first publication or broadcast" .
+schema:author a rdf:Property ; skos:prefLabel "author" ; skos:definition "The author of this content or rating." .
+schema:sourceOrganization a rdf:Property ; skos:prefLabel "source organization" ; skos:definition "The organization where the work was created or published." .
+schema:description a rdf:Property ; skos:prefLabel "description" ; skos:definition "A description of the item." .
+org:hasUnit a rdf:Property ; skos:prefLabel "has unit"; skos:definition "Indicates a unit which is part of this Organization, e.g. a Department within a larger Organization.".
+org:unitOf a rdf:Property ; skos:prefLabel "unit of"; skos:definition "Indicates an Organization of which this Unit is a part, e.g. a Department within a larger Organization.".
+org:hasMembership a rdf:Property ; skos:prefLabel "has membership"; skos:definition "Indicates a membership relationship that the Agent plays." .
+org:organization a rdf:Property ; skos:prefLabel "organization" .
+org:role a rdf:Property ; skos:prefLabel "role"; skos:definition "Indicates the Role that the Agent plays in a Membership relationship with an Organization." .
+time:hasBeginning a rdf:Property ; skos:prefLabel "has beginning" ; skos:definition "The beginning of the temporal entity." .
+time:hasEnd a rdf:Property ; skos:prefLabel "has end" ; skos:definition "The end of the temporal entity." .
+pulse:gitUsername a rdf:Property ; skos:prefLabel "git username" ; skos:definition "The GitHub/Git handle of a person." .
+pulse:infoscienceUsername a rdf:Property ; skos:prefLabel "infoscience username" ; skos:definition "The Infoscience username of a person." .
+pulse:hasCommit a rdf:Property ; skos:prefLabel "has commit" ; skos:definition "Links a person to a specific commit they have made in a software repository." .
 pulse:discipline a rdf:Property ; skos:prefLabel "discipline" ; skos:definition "The academic or scientific discipline associated with the resource." .
 pulse:repositoryType a rdf:Property ; skos:prefLabel "repository type" ; skos:definition "The type or category of the repository (e.g., software, data, publication)." .
 pulse:OrganizationType a rdf:Property ; skos:prefLabel "organization type" ; skos:definition "The type or category of the organization (e.g., university, research institute, company)." .
@@ -131,11 +134,11 @@ pulse:githubOrgFollowers a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabe
 pulse:githubRepoStars a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github repository stars" ; skos:definition "The number of stars (likes) a GitHub repository has received." .
 pulse:githubRepoForks a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github repository forks" ; skos:definition "The number of forks (copies) of a GitHub repository." .
 # Custom Organization <-> Repository Links
-pulse:managedRepository a rdfs:Property ; skos:prefLabel "managed repository" ; skos:definition "Links an organization to a software repository it officially manages or owns." ; owl:inverseOf pulse:managedBy .
-pulse:managedBy a rdfs:Property ; skos:prefLabel "managed by" ; skos:definition "Links a software repository to its managing or owning organization." .
-pulse:relatedDataset a rdfs:Property ; skos:prefLabel "related dataset" ; skos:definition "A dataset that is utilized, processed, or produced by this software source code." ; rdfs:subPropertyOf schema:relatedLink ; owl:inverseOf pulse:relatedSoftware .
-pulse:relatedSoftware a rdfs:Property ; skos:prefLabel "related software" ; skos:definition "The software project or source code that utilizes or produces this dataset." ; rdfs:subPropertyOf schema:relatedLink .
-pulse:githubOrgUrl a rdfs:Property ; skos:prefLabel "github organization URL" ; skos:definition "The official GitHub Organization URL for an EPFL unit." ; rdfs:subPropertyOf schema:url .
+pulse:managedRepository a rdf:Property ; skos:prefLabel "managed repository" ; skos:definition "Links an organization to a software repository it officially manages or owns." ; owl:inverseOf pulse:managedBy .
+pulse:managedBy a rdf:Property ; skos:prefLabel "managed by" ; skos:definition "Links a software repository to its managing or owning organization." .
+pulse:relatedDataset a rdf:Property ; skos:prefLabel "related dataset" ; skos:definition "A dataset that is utilized, processed, or produced by this software source code." ; rdfs:subPropertyOf schema:relatedLink ; owl:inverseOf pulse:relatedSoftware .
+pulse:relatedSoftware a rdf:Property ; skos:prefLabel "related software" ; skos:definition "The software project or source code that utilizes or produces this dataset." ; rdfs:subPropertyOf schema:relatedLink .
+pulse:githubOrgUrl a rdf:Property ; skos:prefLabel "github organization URL" ; skos:definition "The official GitHub Organization URL for an EPFL unit." ; rdfs:subPropertyOf schema:url .
 # ---------------------------------------------------------
 # 2. REUSABLE PROPERTY SHAPES
 # ---------------------------------------------------------
