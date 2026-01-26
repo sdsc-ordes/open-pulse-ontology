@@ -1,10 +1,10 @@
 @prefix schema: <http://schema.org/> .
-@prefix ex: <http://example.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wd: <http://www.wikidata.org/entity/> .
-wd:Q395 a ex:DisciplineEnumeration .
-ex:Software a ex:RepositoryTypeEnumeration .
+wd:Q395 a pulse:DisciplineEnumeration .
+pulse:Software a pulse:RepositoryTypeEnumeration .
 
 # VALID REPOSITORY - Should PASS validation
 # This repository satisfies all required constraints:
@@ -18,26 +18,26 @@ ex:Software a ex:RepositoryTypeEnumeration .
 # - has repositoryType from enumeration
 # - has discipline from enumeration
 
-ex:ValidRepo a schema:SoftwareSourceCode ;
+pulse:ValidRepo a schema:SoftwareSourceCode ;
     schema:name "Valid Test Repository" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
     schema:codeRepository <https://github.com/example/valid-repo> ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.citation> ;
     schema:programmingLanguage "Python" ;
-    ex:relatedToEPFL true ;
-    ex:githubRepoStars "12"^^xsd:integer ;
-    schema:creator ex:ValidAuthor ;
-    ex:managedBy ex:ValidOrganization ;
-    ex:repositoryType ex:Software ;
-    ex:discipline wd:Q395 .  # Mathematics
+    pulse:relatedToEPFL true ;
+    pulse:githubRepoStars "12"^^xsd:integer ;
+    schema:creator pulse:ValidAuthor ;
+    pulse:managedBy pulse:ValidOrganization ;
+    pulse:repositoryType pulse:Software ;
+    pulse:discipline wd:Q395 .  # Mathematics
 
-ex:ValidAuthor a schema:Person ;
+pulse:ValidAuthor a schema:Person ;
     schema:name "Jane Doe" ;
     schema:email "jane.doe@example.com" ;
-    ex:gitUsername "janedoe" .
+    pulse:gitUsername "janedoe" .
 
-ex:ValidOrganization a org:Organization ;
+pulse:ValidOrganization a org:Organization ;
     schema:name "Example Research Lab" ;
     schema:identifier "https://ror.org/012345678" ;
     schema:url <https://example.org> .

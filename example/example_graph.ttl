@@ -1,4 +1,4 @@
-@prefix ex:     <http://example.org/> .
+@prefix pulse:     <https://open-pulse.epfl.ch/ontology#> .
 @prefix schema: <http://schema.org/> .
 @prefix org:    <http://www.w3.org/ns/org#> .
 @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
@@ -6,62 +6,62 @@
 @prefix time:   <http://www.w3.org/2006/time#> .
 @prefix wd:     <http://www.wikidata.org/entity/> .
 
-ex:Software a ex:RepositoryTypeEnumeration .
-wd:Q395 a ex:DisciplineEnumeration .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+wd:Q395 a pulse:DisciplineEnumeration .
 
-ex:Alice a schema:Person ;
+pulse:Alice a schema:Person ;
     schema:name "Alice" ;
     schema:email "alice@epfl.ch" ;
     schema:gender "Female" ;
-    ex:gitUsername "alice-dev" ;
-    org:hasMembership ex:AliceEPFLMembership , ex:AliceSDSCMembership .
+    pulse:gitUsername "alice-dev" ;
+    org:hasMembership pulse:AliceEPFLMembership , pulse:AliceSDSCMembership .
 
-ex:EPFL a org:Organization ;
+pulse:EPFL a org:Organization ;
     schema:name "EPFL" ;
     schema:identifier "https://ror.org/02aj6n233" ;
     schema:url <https://www.epfl.ch> .
 
-ex:SDSC a org:Organization ;
+pulse:SDSC a org:Organization ;
     schema:name "Swiss Data Science Center" ;
     schema:identifier "https://ror.org/02aj6n233" ;
     schema:url <https://datascience.ch> ;
-    ex:managedRepository ex:RenkuRepo .
+    pulse:managedRepository pulse:RenkuRepo .
 
-ex:AliceEPFLMembership a org:Membership ;
-    org:organization ex:EPFL ;
+pulse:AliceEPFLMembership a org:Membership ;
+    org:organization pulse:EPFL ;
     org:role "PhD Student" ;
     time:hasBeginning "2022-09-01"^^xsd:date .
 
-ex:AliceSDSCMembership a org:Membership ;
-    org:organization ex:SDSC ;
+pulse:AliceSDSCMembership a org:Membership ;
+    org:organization pulse:SDSC ;
     org:role "Affiliated Researcher" ;
     time:hasBeginning "2024-01-01"^^xsd:date .
 
-ex:RenkuRepo a schema:SoftwareSourceCode ;
+pulse:RenkuRepo a schema:SoftwareSourceCode ;
     schema:name "Renku" ;
     schema:dateCreated "2024-05-13T10:00:00Z"^^xsd:dateTime ;
     schema:codeRepository <https://github.com/swissdatasciencecenter/renku> ;
     schema:license <https://spdx.org/licenses/Apache-2.0.html> ;
-    schema:creator ex:Alice ;
-    ex:managedBy ex:SDSC ;
-    ex:repositoryType ex:Software ; 
-    ex:discipline wd:Q395 ;
+    schema:creator pulse:Alice ;
+    pulse:managedBy pulse:SDSC ;
+    pulse:repositoryType pulse:Software ; 
+    pulse:discipline wd:Q395 ;
     schema:programmingLanguage "Python" ;
-    ex:hasCommit ex:Commit_001 , ex:Commit_002 .
+    pulse:hasCommit pulse:Commit_001 , pulse:Commit_002 .
 
-ex:Commit_001 a ex:GitCommit ;
+pulse:Commit_001 a pulse:GitCommit ;
     schema:identifier "a1b2c3d" ;
     schema:dateCreated "2026-01-10T14:30:00Z"^^xsd:dateTime ;
-    schema:author ex:Alice .
+    schema:author pulse:Alice .
 
-ex:Commit_002 a ex:GitCommit ;
+pulse:Commit_002 a pulse:GitCommit ;
     schema:identifier "f9e8d7c" ;
     schema:dateCreated "2026-01-12T09:15:00Z"^^xsd:dateTime ;
-    schema:author ex:Alice .
+    schema:author pulse:Alice .
 
-ex:ClimateData a schema:Dataset ;
+pulse:ClimateData a schema:Dataset ;
     schema:name "Alpine Temp Records" ;
     schema:description "Records used in Renku projects." ;
     schema:identifier "10.5281/zenodo.12345" ;
     schema:datePublished "2025-11-01"^^xsd:date ;
-    ex:relatedSoftware ex:RenkuRepo .
+    pulse:relatedSoftware pulse:RenkuRepo .

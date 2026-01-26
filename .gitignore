@@ -10,3 +10,6 @@ software_instances.ttl
 shacl-play-cli.jar
 
 shacl-play-app.log
+
+*.bak
+*.log

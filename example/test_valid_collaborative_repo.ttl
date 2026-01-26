@@ -1,17 +1,17 @@
 @prefix schema: <http://schema.org/> .
-@prefix ex: <http://example.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wd: <http://www.wikidata.org/entity/> .
-ex:Software a ex:RepositoryTypeEnumeration .
-wd:Q420 a ex:DisciplineEnumeration .
-ex:ResearchInstitution a ex:OrganizationTypeEnumeration .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+wd:Q420 a pulse:DisciplineEnumeration .
+pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
 
 # VALID COLLABORATIVE REPOSITORY - Should PASS validation
 # Two contributors with memberships and commits within their membership windows
 
-ex:CollabRepo a schema:SoftwareSourceCode ;
+pulse:CollabRepo a schema:SoftwareSourceCode ;
     schema:name "Collaborative EPFL Toolkit" ;
     schema:dateCreated "2024-06-15T10:00:00"^^xsd:dateTime ;
     schema:codeRepository <https://github.com/epfl/collab-toolkit> ;
@@ -20,66 +20,66 @@ ex:CollabRepo a schema:SoftwareSourceCode ;
     schema:programmingLanguage "Python" ;
     schema:programmingLanguage "C++" ;
     schema:programmingLanguage "Javascript" ;
-    ex:relatedToEPFL true ;
-    ex:githubRepoStars "45"^^xsd:integer ;
-    ex:githubRepoForks "6"^^xsd:integer ;
-    schema:creator ex:LeadDev , ex:Contributor ;
-    ex:managedBy ex:EPFLCenter ;
-    ex:repositoryType ex:Software ;
-    ex:discipline wd:Q420 ;  # Biology
-    ex:hasCommit ex:CollabCommit1 , ex:CollabCommit2 ;
-    ex:relatedDataset ex:CollabDataset .
+    pulse:relatedToEPFL true ;
+    pulse:githubRepoStars "45"^^xsd:integer ;
+    pulse:githubRepoForks "6"^^xsd:integer ;
+    schema:creator pulse:LeadDev , pulse:Contributor ;
+    pulse:managedBy pulse:EPFLCenter ;
+    pulse:repositoryType pulse:Software ;
+    pulse:discipline wd:Q420 ;  # Biology
+    pulse:hasCommit pulse:CollabCommit1 , pulse:CollabCommit2 ;
+    pulse:relatedDataset pulse:CollabDataset .
 
-ex:LeadDev a schema:Person ;
+pulse:LeadDev a schema:Person ;
     schema:name "Dr. Lina Morel" ;
     schema:email "lina.morel@epfl.ch" ;
-    ex:gitUsername "linam" ;
+    pulse:gitUsername "linam" ;
     schema:gender "Female" ;
     schema:url <https://people.epfl.ch/lina.morel> ;
-    org:hasMembership ex:LeadMembership .
+    org:hasMembership pulse:LeadMembership .
 
-ex:Contributor a schema:Person ;
+pulse:Contributor a schema:Person ;
     schema:name "Marco Ruiz" ;
     schema:email "marco.ruiz@epfl.ch" ;
-    ex:gitUsername "marcor" ;
+    pulse:gitUsername "marcor" ;
     schema:gender "Male" ;
-    org:hasMembership ex:ContributorMembership .
+    org:hasMembership pulse:ContributorMembership .
 
-ex:LeadMembership a org:Membership ;
-    org:organization ex:EPFLCenter ;
+pulse:LeadMembership a org:Membership ;
+    org:organization pulse:EPFLCenter ;
     org:role "Principal Investigator" ;
     time:hasBeginning "2022-01-01"^^xsd:date ;
     time:hasEnd "2025-12-31"^^xsd:date .
 
-ex:ContributorMembership a org:Membership ;
-    org:organization ex:EPFLCenter ;
+pulse:ContributorMembership a org:Membership ;
+    org:organization pulse:EPFLCenter ;
     org:role "Research Engineer" ;
     time:hasBeginning "2024-03-01"^^xsd:date ;
     time:hasEnd "2024-12-31"^^xsd:date .
 
-ex:EPFLCenter a org:Organization ;
+pulse:EPFLCenter a org:Organization ;
     schema:name "EPFL Center for Systems Biology" ;
     schema:identifier "https://ror.org/02s376052" ;
     schema:url <https://www.epfl.ch/research/domains/systems-biology> ;
-    ex:OrganizationType ex:ResearchInstitution ;
-    ex:githubOrgFollowers "410"^^xsd:integer ;
-    ex:githubOrgUrl <https://github.com/epfl-sysbio> ;
-    ex:managedRepository ex:CollabRepo .
+    pulse:OrganizationType pulse:ResearchInstitution ;
+    pulse:githubOrgFollowers "410"^^xsd:integer ;
+    pulse:githubOrgUrl <https://github.com/epfl-sysbio> ;
+    pulse:managedRepository pulse:CollabRepo .
 
-ex:CollabCommit1 a ex:GitCommit ;
+pulse:CollabCommit1 a pulse:GitCommit ;
     schema:identifier "abc1234" ;
     schema:dateCreated "2024-07-10T09:30:00"^^xsd:dateTime ;
-    schema:author ex:LeadDev .
+    schema:author pulse:LeadDev .
 
-ex:CollabCommit2 a ex:GitCommit ;
+pulse:CollabCommit2 a pulse:GitCommit ;
     schema:identifier "def5678" ;
     schema:dateCreated "2024-08-05T15:00:00"^^xsd:dateTime ;
-    schema:author ex:Contributor .
+    schema:author pulse:Contributor .
 
-ex:CollabDataset a schema:Dataset ;
+pulse:CollabDataset a schema:Dataset ;
     schema:name "Systems Biology Training Data" ;
     schema:url <https://zenodo.org/record/9999999> ;
     schema:identifier "10.5281/zenodo.9999999" ;
     schema:description "Datasets used for collaborative EPFL systems biology models" ;
     schema:datePublished "2024-06-10"^^xsd:date ;
-    ex:relatedSoftware ex:CollabRepo .
+    pulse:relatedSoftware pulse:CollabRepo .

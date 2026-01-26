@@ -1,21 +1,21 @@
 @prefix schema: <http://schema.org/> .
-@prefix ex: <http://example.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-ex:ResearchInstitution a ex:OrganizationTypeEnumeration .
+pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
 
 # INVALID ARTICLE AUTHOR TYPE - Should FAIL (schema:author must be a schema:Person)
 
-ex:InvalidArticle a schema:ScholarlyArticle ;
+pulse:InvalidArticle a schema:ScholarlyArticle ;
     schema:name "Article With Org Author" ;
     schema:identifier "10.1234/invalid.author" ;
     schema:headline "Testing author type" ;
     schema:datePublished "2024-05-15"^^xsd:date ;
-    schema:author ex:OrgAuthor ;   # invalid type
-    schema:sourceOrganization ex:OrgAuthor .
+    schema:author pulse:OrgAuthor ;   # invalid type
+    schema:sourceOrganization pulse:OrgAuthor .
 
-ex:OrgAuthor a org:Organization ;
+pulse:OrgAuthor a org:Organization ;
     schema:name "Publishing Org" ;
     schema:identifier "https://ror.org/02s376052" ;
     schema:url <https://example.org/publishing> ;
-    ex:OrganizationType ex:ResearchInstitution .
+    pulse:OrganizationType pulse:ResearchInstitution .

@@ -1,962 +1,390 @@
-
-prefix schema: <http://schema.org/>
-prefix sd: <https://w3id.org/okn/o/sd#>
-prefix bio: <https://bioschemas.org/>
-prefix spe: <https://openschemas.github.io/spec-container/specifications/>
-prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix sh:   <http://www.w3.org/ns/shacl#>
-prefix xsd:  <http://www.w3.org/2001/XMLSchema#>
-prefix shsh: <http://www.w3.org/ns/shacl-shacl#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-prefix owl: <http://www.w3.org/2002/07/owl#>
-prefix dcterms: <http://purl.org/dc/terms/>
-prefix md4i: <http://w3id.org/nfdi4ing/metadata4ing#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix dct: <http://purl.org/dc/terms/>
-prefix vann: <http://purl.org/vocab/vann/>
-prefix sphn: <https://biomedit.ch/rdf/sphn-schema/sphn#>
-prefix dmib: <https://biomedit.ch/rdf/sphn-schema/dmib#>
-prefix skos: <http://www.w3.org/2004/02/skos/core#>
-
-prefix pulse: <https://open-pulse.epfl.ch/ontology#>
-prefix wd: <http://www.wikidata.org/entity/> 
-
-<https://open-pulse.epfl.ch/ontology#>
-    a owl:Ontology ;
-    dct:abstract "The Open Pulse ontology provides concepts (classes and properties) to model human and machine readable imaging software metadata. It is the result of re-using external pre-existing vocabularies such as schema.org and the software description ontology, together with custom imaging specific objects and properties." ;
-    dct:contributor "Robin Franken", "Carlos Vivar Rios" ;
-    dct:created "2025-05-13"^^xsd:date ;
-    dct:creator "Robin Franken" ;
-    dct:description "The Open Pulse ontology provides concepts (classes and properties) to model human and machine readable imaging software metadata. It is the result of re-using external pre-existing vocabularies such as schema.org and the software description ontology, together with custom imaging specific objects and properties. The ontology contains purely semantic information (labels, definitions etc.) and is meant to be used in conjuction with a graph of enumeration values and a graph containing SHACL shapes to provide more machine readable restrictions on values of properties." ;
-    dct:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
-    dct:modified "2025-11-24"^^xsd:date ;
-    dct:title "Open pulse Ontology" ;
-    vann:preferredNamespacePrefix "pulse" ;
-    vann:preferredNamespaceUri "https://open-pulse.epfl.ch/ontology#"^^xsd:string ;
-    owl:versionInfo "0.1.0"^^xsd:string 
-    .
-
-schema:SoftwareSourceCode
-  a rdfs:Class ;
-  rdfs:comment "A software application." ;
-  rdfs:label "Software application" ;
-  rdfs:subClassOf schema:CreativeWork .
-
-schema:Person
-  a rdfs:Class ;
-  rdfs:comment "A person (alive, dead, undead, or fictional)." ;
-  rdfs:label "Person" ;
-.
-
-schema:Organization
-  a rdfs:Class ;
-  rdfs:comment "An organization such as a school, NGO, corporation, club, etc." ;
-  rdfs:label "Organization" ;
-.
-
-pulse:GitHubOrganization
-  a rdfs:Class ;
-  rdfs:comment "A GitHub organization." ;
-  rdfs:label "GitHub organization" ;
-.
-
-schema:ScholarlyArticle
-  a rdfs:Class ;
-  rdfs:comment "A scholarly article, typically published in an academic journal or conference." ;
-  rdfs:label "Scholarly Article" ;
-  rdfs:subClassOf schema:CreativeWork ;
-.
-
-schema:Dataset
-  a rdfs:Class ;
-  rdfs:comment "A body of structured information describing some topic(s) of interest." ;
-  rdfs:label "Dataset" ;
-.
-
-schema:Enumeration
-  a rdfs:Class ;
-  rdfs:comment "Lists or enumerations for schema:Thing property values." ;
-  rdfs:label "Enumeration" ;
-.
-
-pulse:DisciplineEnumeration
-  a rdfs:Class ;
-  rdfs:comment "Enumeration of academic and scientific disciplines for categorizing software repositories." ;
-  rdfs:label "Discipline Enumeration" ;
-  rdfs:subClassOf schema:Enumeration ;
-.
-
-pulse:RepositoryTypeEnumeration
-  a rdfs:Class ;
-  rdfs:comment "Enumeration of types of repositories (software, educational resource, documentation, data, other)." ;
-  rdfs:label "Repository Type Enumeration" ;
-  rdfs:subClassOf schema:Enumeration ;
-.
-#####################################
-schema:citation a rdf:Property;
-  rdfs:comment "A citation or reference to another creative work, such as another publication, web page, scholarly article, etc.";
-  rdfs:label "Citation" .
-
-schema:license a rdf:Property;
-  rdfs:comment "A license document that applies to this content, typically indicated by URL.";
-  rdfs:label "License" .
-
-schema:contentUrl a rdf:Property;
-  rdfs:comment "Actual bytes of the media object, for example the image file or video file.";
-  rdfs:label "Content URL".
-
-schema:dateCreated a rdf:Property;
-  rdfs:comment "The date on which the repository was created.";
-  rdfs:label "Date created" .
-
-schema:datePublished a rdf:Property;
-  rdfs:comment "Latest published git release date, else, the publish date of the doi.";
-  rdfs:label "Date published" .
-
-schema:author a rdf:Property;
-  rdfs:comment "The author of the software, this can be organizations or people that are maintainers and/or producers of the software.";
-  rdfs:label "Author" .
-
-schema:affiliation a rdf:Property;
-  rdfs:comment "An organization that this person is affiliated with. For example, a university (EPFL/ETHZ), lab, company." ;
-  rdfs:label "Affiliation". 
-
-schema:codeRepository a rdf:Property;
-  rdfs:comment "Primary link to the repository where the un-compiled, human readable code and related code is located (GitLab, GitHub, CodePlex etc.).";
-  rdfs:label "Code repository" .
-
-schema:description a rdf:Property;
-  rdfs:comment "A description of the item.";
-  rdfs:label "Description" .
-
-pulse:relatedToOrganization a rdf:Property ;
-  rdfs:comment "The lab/institution/group/project/organization to which a software is related and/or affiliated to" ;
-  rdfs:label "Related to organization" .
-
-schema:familyName a rdf:Property;
-  rdfs:comment "Family name. In the U.S., the last name of a Person.";
-  rdfs:label "Family name" .
-
-schema:givenName a rdf:Property;
-  rdfs:comment "Given name. In the U.S., the first name of a Person.";
-  rdfs:label "Given name" .
-
-schema:name a rdf:Property;
-  rdfs:comment "The name of a person, in the US their first and last name(s) seperated by spaces";
-  rdfs:label "Name" .
-
-md4i:orcidId a rdf:Property ;
-  rdfs:comment "The ORCID ID of a person" ;
-  rdfs:label "Has ORCID ID" .
-schema:legalName a rdf:Property;
-  rdfs:comment "The official name of the organization, e.g. the registered company name.";
-  rdfs:label "Legal name" .
-
-schema:programmingLanguage a rdf:Property;
-  rdfs:comment "The computer programming language.";
-  rdfs:label "Programming Language" .
-
-schema:url a rdf:Property;
-  rdfs:comment "Fill in any URL related to this repository. e.g. related lab or project website.";
-  rdfs:label "URL" .
-sd:readme a rdf:Property;
-  rdfs:comment "URL to the Readme file of a software component"@en;
-  rdfs:label "Readme"@en .
-
-sd:hasAcknowledgements a rdf:Property;
-  rdfs:comment "String with the people, organizations and other contributors acknowledged by the authors."@en;
-  rdfs:label "Has acknowledgements"@en .
-
-pulse:discipline a rdf:Property ;
-    rdfs:comment "The academic or scientific discipline associated with the software or research." ;
-    rdfs:label "Discipline" .
-
-pulse:repositoryType a rdf:Property ;
-    rdfs:comment "The type of repository, such as software, educational resource, documentation, data or other ." ;
-    rdfs:label "Repository Type" ;
-    rdfs:range xsd:string ;
-    rdfs:domain schema:SoftwareSourceCode .
-
-schema:username a rdf:Property ;
-    rdfs:comment "The username of a person or organization on GitHub or other similar platforms." ;
-    rdfs:label "Username" ;
-    rdfs:range xsd:string .
-
-schema:jobTitle a rdf:Property ;
-    rdfs:comment "The job title of a person (e.g., Financial Manager)." ;
-    rdfs:label "Job Title" ;
-    rdfs:range xsd:string ;
-    rdfs:domain schema:Person .
-
-schema:featureList a rdf:Property ;
-    rdfs:comment "Features or modules provided by this software or application." ;
-    rdfs:label "Feature List" ;
-    rdfs:range xsd:string ;
-    rdfs:domain schema:SoftwareSourceCode .
-
-schema:applicationCategory a rdf:Property ;
-    rdfs:comment "Type of software application, e.g., 'Game, Multimedia'." ;
-    rdfs:label "Application Category" ;
-    rdfs:range xsd:string ;
-    rdfs:domain schema:SoftwareSourceCode .
-
-pulse:hasRepository a rdf:Property ;
-  rdfs:comment "A software repository that is part of a GitHub organization." ;
-  rdfs:label "Has repository" ; 
-  rdfs:domain pulse:GitHubOrganization ;
-  rdfs:range schema:SoftwareSourceCode .
-
-schema:memberOf a rdf:Property ;
-  rdfs:comment "A person or organization that is a member of a GitHub organization." ;
-  rdfs:label "Member of" ;
-  rdfs:domain pulse:GitHubOrganization ;
-  rdfs:range schema:Person .
-
-pulse:AcademicCatalogRelation a rdfs:Class ;
-  rdfs:comment "A relation between a software repository or person and an entity in an academic catalog system (e.g., Infoscience)." ;
-  rdfs:label "Academic Catalog Relation" .
-
-pulse:CatalogEntity a rdfs:Class ;
-  rdfs:comment "An entity from an academic catalog system with detailed metadata." ;
-  rdfs:label "Catalog Entity" .
-
-# Properties for Academic Catalog Relations
-
-pulse:hasAcademicCatalogRelation a rdf:Property ;
-  rdfs:comment "Links a resource to a relation with an academic catalog entity." ;
-  rdfs:label "Has academic catalog relation" ;
-  rdfs:domain schema:SoftwareSourceCode ;
-  rdfs:range pulse:AcademicCatalogRelation .
-
-pulse:catalogType a rdf:Property ;
-  rdfs:comment "The type of academic catalog system (e.g., 'infoscience')." ;
-  rdfs:label "Catalog type" ;
-  rdfs:domain pulse:AcademicCatalogRelation ;
-  rdfs:range xsd:string .
-
-pulse:entityType a rdf:Property ;
-  rdfs:comment "The type of entity in the catalog (e.g., 'person', 'publication', 'organization')." ;
-  rdfs:label "Entity type" ;
-  rdfs:domain pulse:AcademicCatalogRelation ;
-  rdfs:range xsd:string .
-
-pulse:hasCatalogEntity a rdf:Property ;
-  rdfs:comment "The detailed entity information from the academic catalog." ;
-  rdfs:label "Has Catalog entity" ;
-  rdfs:domain pulse:AcademicCatalogRelation ;
-  rdfs:range pulse:CatalogEntity .
-
-pulse:confidence a rdf:Property ;
-  rdfs:comment "A confidence score (0-1) indicating the reliability of the catalog relation match." ;
-  rdfs:label "Confidence" ;
-  rdfs:domain pulse:AcademicCatalogRelation ;
-  rdfs:range xsd:decimal .
-
-# Properties for Catalog Entity
-
-schema:email a rdf:Property ;
-  rdfs:comment "The email address of a person or organization." ;
-  rdfs:label "Email" ;
-  rdfs:range xsd:string .
-
-pulse:publicationCount a rdf:Property ;
-  rdfs:comment "The number of publications associated with the entity in the catalog." ;
-  rdfs:label "Publication count" ;
-  rdfs:domain pulse:CatalogEntity ;
-  rdfs:range xsd:integer .
-
-pulse:researchInterests a rdf:Property ;
-  rdfs:comment "Research interests or topics associated with the entity." ;
-  rdfs:label "Research interests" ;
-  rdfs:domain pulse:CatalogEntity ;
-  rdfs:range xsd:string .
-
-pulse:justification a rdf:Property ;
-  rdfs:comment "An explanation of how a catalog relation or match was established." ;
-  rdfs:label "Justification" ;
-  rdfs:range xsd:string .
-
-pulse:externalId a rdf:Property ;
-  rdfs:comment "An external identifier used for matching in a catalog system." ;
-  rdfs:label "External ID" ;
-  rdfs:domain pulse:AcademicCatalogRelation ;
-  rdfs:range xsd:string .
-
-pulse:matchedOn a rdf:Property ;
-  rdfs:comment "The fields or properties that were used to establish a match (e.g., 'name', 'email')." ;
-  rdfs:label "Matched on" ;
-  rdfs:domain pulse:AcademicCatalogRelation ;
-  rdfs:range xsd:string .
-
-pulse:relatedToEPFL a rdf:Property ;
-  rdfs:comment "Indicates whether a software repository or entity is related to EPFL (École Polytechnique Fédérale de Lausanne)." ;
-  rdfs:label "Related to EPFL" ;
-  rdfs:range xsd:boolean .
-
-pulse:source a rdf:Property ;
-  rdfs:comment "The source or origin of the data or metadata." ;
-  rdfs:label "Source" ;
-  rdfs:range xsd:string .
-
-pulse:linkedEntities a rdf:Property ;
-  rdfs:comment "Entities that are linked or associated with this resource." ;
-  rdfs:label "Linked entities" ;
-  rdfs:range xsd:string .
-
-pulse:relatedModels a rdf:Property ;
-  rdfs:comment "Machine learning models or computational models related to the software." ;
-  rdfs:label "Related models" ;
-  rdfs:domain schema:SoftwareSourceCode ;
-  rdfs:range xsd:string .
-
-
-pulse:gitAuthors a rdf:Property ;
-  rdfs:comment "Authors who have contributed commits to the git repository." ;
-  rdfs:label "Git authors" ;
-  rdfs:domain schema:SoftwareSourceCode ;
-  rdfs:range schema:Person .
-
-pulse:relatedPublication a rdf:Property ;
-  rdfs:comment "Academic publications related to or citing the software." ;
-  rdfs:label "Related publication" ;
-  rdfs:domain schema:SoftwareSourceCode ;
-  rdfs:range xsd:string .
-
-pulse:relatedAPIs a rdf:Property ;
-  rdfs:comment "APIs (Application Programming Interfaces) that are related to or used by the software." ;
-  rdfs:label "Related APIs" ;
-  rdfs:domain schema:SoftwareSourceCode ;
-  rdfs:range xsd:string .
-
-pulse:relatedDatasets a rdf:Property ;
-  rdfs:comment "Datasets that are related to, used by, or produced by the software." ;
-  rdfs:label "Related datasets" ;
-  rdfs:domain schema:SoftwareSourceCode ;
-  rdfs:range schema:Dataset .
-
-pulse:commits a rdf:Property ;
-  rdfs:comment "The number of commits, or detailed commit information." ;
-  rdfs:label "Commits" ;
-  rdfs:domain schema:SoftwareSourceCode ;
-  rdfs:range xsd:integer .
-
-pulse:metadata a rdf:Property ;
-  rdfs:comment "Additional metadata information about the resource." ;
-  rdfs:label "Metadata" ;
-  rdfs:range xsd:string .
-
-schema:SoftwareSourceCode
-a sh:NodeShape, rdfs:Class ;
-sh:property   schema:CreativeWork-citation ,
-              schema:SoftwareSourceCode-codeRepository ,
-              schema:CreativeWork-dateCreated ,
-              schema:CreativeWork-datePublished ,
-              schema:Thing-description ,
-              pulse:relatedToOrganizationShape, 
-              schema:CreativeWork-license ,
-              schema:CreativeWork-author ,
-              schema:Thing-name ,
-              schema:SoftwareSourceCode-programmingLanguage ,
-              schema:Thing-url ,
-              sd:SoftwareApplication-readme , 
-              pulse:disciplineShape ,
-              pulse:repositoryTypeShape ,
-              pulse:hasAcademicCatalogRelationShape ,
-              pulse:relatedToEPFLShape ,
-              pulse:sourceShape ,
-              pulse:linkedEntitiesShape ,
-              pulse:relatedModelsShape ,
-              pulse:gitAuthorsShape ,
-              pulse:relatedPublicationShape ,
-              pulse:relatedAPIsShape ,
-              pulse:relatedDatasetsShape ,
-              pulse:commitsShape ,
-              pulse:metadataShape ,
-              schema:SoftwareSourceCode-featureList ,
-              schema:SoftwareSourceCode-applicationCategory 
-.
-
-schema:CreativeWork-citation
-  a sh:PropertyShape ;
-  sh:path schema:citation ;
-  sh:minCount 1 ;
-  sh:datatype xsd:string ;
-  sh:pattern "^http.*" ;
-.
-
-schema:SoftwareSourceCode-codeRepository
-  a sh:PropertyShape ;
-  sh:path schema:codeRepository ;
-  sh:pattern "^http.*" ;
-  sh:minCount 1 ;
-  sh:maxCount 1 ;
-.
-        
-
-schema:CreativeWork-dateCreated
-  a sh:PropertyShape ;
-  sh:path schema:dateCreated ;
-  sh:minCount 1 ;
-  sh:maxCount 1 ;
-  sh:datatype xsd:date ;
-  .
-
-schema:CreativeWork-datePublished
-  a sh:PropertyShape ;
-  sh:path schema:datePublished ;
-  sh:datatype xsd:date ;  
-  sh:minCount 1 ;
-.
-
-schema:Thing-description
-  a sh:PropertyShape ;
-  sh:path schema:description ;
-  sh:datatype xsd:string ;
-  sh:maxLength 2000 ;
-  sh:minCount 1 ;
-.
-
-pulse:relatedToOrganizationShape
-  a sh:PropertyShape ;
-  sh:path pulse:relatedToOrganization ;
-  sh:datatype xsd:string ;
-  .
-
-schema:CreativeWork-license
-  a sh:PropertyShape ;
-  sh:path schema:license ;
-  sh:pattern ".*spdx\\.org.*" ;
-  sh:minCount 1 ;
-.
-
-schema:CreativeWork-author
-  a sh:PropertyShape ;
-  sh:path schema:author ;
-  sh:minCount 1 ;
-  sh:or (
-      [
-        sh:class schema:Organization ;
-      ]
-      [
-        sh:class schema:Person ;
-      ]
-    ) ;
-.
-
-schema:Person
-a sh:NodeShape ;
-  sh:property schema:Thing-name ;
-  sh:property md4i:orcidIdShape ;
-  sh:property schema:Thing-affiliation ;
-  sh:property pulse:usernameShape ;
-  sh:property schema:memberOfShape ;
-  sh:property schema:Person-jobTitle ;
-  sh:property schema:Thing-email 
-.
-
-schema:Person-familyName
-  a sh:PropertyShape ;
-  sh:path schema:familyName ;
-  sh:datatype xsd:string ;
-  sh:minCount 1 ;
-  .
-
-schema:Person-givenName
-  a sh:PropertyShape ;
-  sh:path schema:givenName ;
-  sh:datatype xsd:string ;
-  sh:minCount 1 ;
-.
-
-schema:Person-jobTitle
-  a sh:PropertyShape ;
-  sh:path schema:jobTitle ;
-  sh:datatype xsd:string ;
-.
-
-md4i:orcidIdShape
-  a sh:PropertyShape ;
-  sh:path md4i:orcidId ;
-  sh:datatype xsd:string ;
-  .
-
-schema:Thing-affiliation
-  a sh:PropertyShape ;
-  sh:path schema:affiliation ;
-  sh:datatype xsd:string ;
-.
-
-schema:Organization
-  a sh:NodeShape ;
-sh:property schema:Organization-legalName .
-
-schema:GitHubOrganization
-  a sh:NodeShape ;
-sh:property pulse:usernameShape ;
-sh:property pulse:hasRepositoryShape ;
-sh:property schema:Thing-affiliation ;
-.
-
-schema:ScholarlyArticle
-  a sh:NodeShape, rdfs:Class ;
-sh:property schema:Thing-name ;
-sh:property schema:Thing-description ;
-sh:property schema:CreativeWork-author ;
-sh:property schema:CreativeWork-dateCreated ;
-sh:property schema:CreativeWork-datePublished ;
-sh:property schema:Thing-url ;
-.
-
-schema:Dataset
-  a sh:NodeShape, rdfs:Class ;
-sh:property schema:Thing-name ;
-sh:property schema:Thing-description ;
-sh:property schema:Thing-url ;
-.
-
-schema:Thing-name
-  a sh:PropertyShape ;
-  sh:path schema:name ;
-  sh:datatype xsd:string ;
-  sh:minCount 1 ;
-  sh:maxLength 60
-.
-
-schema:SoftwareSourceCode-programmingLanguage
-  a sh:PropertyShape ;
-  sh:path schema:programmingLanguage ;
-  sh:datatype xsd:string ;
-.
-
-schema:SoftwareSourceCode-featureList
-  a sh:PropertyShape ;
-  sh:path schema:featureList ;
-  sh:datatype xsd:string ;
-.
-
-schema:SoftwareSourceCode-applicationCategory
-  a sh:PropertyShape ;
-  sh:path schema:applicationCategory ;
-  sh:datatype xsd:string ;
-.
-
-
-schema:Thing-url
-  a sh:PropertyShape ;
-  sh:path schema:url ;
-  sh:pattern "^http.*" ;
-.
-
-sd:SoftwareApplication-hasAcknowledgements
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix time:   <http://www.w3.org/2006/time#> .
+@prefix pulse:     <https://open-pulse.epfl.ch/ontology#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# ---------------------------------------------------------
+# 1. CLASS & PROPERTY SECTION
+# ---------------------------------------------------------
+<https://open-pulse.epfl.ch/ontology#> a owl:Ontology ;
+    dct:abstract "The Open Pulse Ontology to model contributions to open source scientific software and research articles from EPFL." ;
+    dct:license <https://spdx.org/licenses/CC-BY-4.0.html> ;
+    dct:title "Open Pulse Ontology" ;
+    owl:versionInfo "v.2.0"^^xsd:string .
+
+# Classes
+schema:Person a rdfs:Class ; skos:prefLabel "Person" ; skos:definition "An individual researcher or contributor." .
+schema:ScholarlyArticle a rdfs:Class ; skos:prefLabel "Scholarly Article" ; skos:definition "A research paper or publication." .
+schema:SoftwareSourceCode a rdfs:Class ; skos:prefLabel "Software Repository" ; skos:definition "A software project or source code." .
+schema:Dataset a rdfs:Class ; skos:prefLabel "Dataset" ; skos:definition "Data collections used or generated by research software." .
+org:Membership a rdfs:Class ; skos:prefLabel "Membership" ; skos:definition "An affiliation between a Person and an Organization." .
+org:Organization a rdfs:Class ; skos:prefLabel "Organization" ; skos:definition "Represents a collection of people organized together into a community or other social, commercial or political structure. The group has some common purpose or reason for existence which goes beyond the set of people belonging to it and can act as an Agent. Organizations are often decomposable into hierarchical structures." .
+pulse:GitCommit a rdfs:Class ; skos:prefLabel "Git Commit" ; skos:definition "A specific record of changes in a software repository." .
+
+# Enumeration Classes
+schema:Enumeration a rdfs:Class ; skos:prefLabel "Enumeration" ; skos:definition "A type that defines a set of discrete values." .
+pulse:DisciplineEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Discipline Enumeration" ; skos:definition "Enumeration of academic and scientific disciplines." .
+pulse:RepositoryTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Repository Type Enumeration" ; skos:definition "Enumeration of repository types used within the ontology." .
+pulse:OrganizationTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Organization Type Enumeration" ; skos:definition "Enumeration of organization types used within the ontology." .
+
+# Enumeration Instances - Repository Types
+pulse:Software a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Software"@en ; skos:definition "A repository that contains software source code."@en .
+pulse:EducationalResource a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Educational Resource"@en ; skos:definition "A repository that contains educational materials."@en .
+pulse:Documentation a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Documentation"@en ; skos:definition "A repository that contains documentation."@en .
+pulse:Data a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Data"@en ; skos:definition "A repository that contains datasets."@en .
+pulse:Other a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Other"@en ; skos:definition "A repository that does not fit into the other categories."@en .
+
+# Enumeration Instances - Organization Types
+pulse:University a pulse:OrganizationTypeEnumeration ; skos:prefLabel "University"@en ; skos:definition "An educational institution."@en .
+pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Research Institution"@en ; skos:definition "a research institution is one that has made conducting research a vital part of its mission and goals."@en .
+pulse:GovernmentAgency a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Government Agency"@en ; skos:definition "A government organization."@en .
+pulse:SoftwareProject a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Software Project"@en ; skos:definition "An organization focused on development of specific software."@en .
+pulse:PrivateCompany a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Private Company"@en ; skos:definition "A privately owned business organization."@en .
+pulse:NonProfitOrganization a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Non-Profit Organization"@en ; skos:definition "An organization that operates for a charitable or social purpose rather than for profit."@en .
+pulse:CommunitySpace a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Community Space"@en ; skos:definition "A community-driven organization or space."@en .
+pulse:OtherOrganizationType a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Other"@en ; skos:definition "An organization type that does not fit into the other categories."@en .
+
+# Enumeration Instances - Disciplines
+wd:Q34749 a pulse:DisciplineEnumeration; skos:prefLabel "Social sciences"@en; rdfs:subClassOf wd:Q11862829 .
+wd:Q23404 a pulse:DisciplineEnumeration; skos:prefLabel "Anthropology"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q11680831 a pulse:DisciplineEnumeration; skos:prefLabel "Communication studies"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q8434 a pulse:DisciplineEnumeration; skos:prefLabel "Education"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q8162 a pulse:DisciplineEnumeration; skos:prefLabel "Linguistics"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q42240 a pulse:DisciplineEnumeration; skos:prefLabel "Research"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q21201 a pulse:DisciplineEnumeration; skos:prefLabel "Sociology"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q1071 a pulse:DisciplineEnumeration; skos:prefLabel "Geography"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q9418 a pulse:DisciplineEnumeration; skos:prefLabel "Psychology"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q7163 a pulse:DisciplineEnumeration; skos:prefLabel "Politics"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q8134 a pulse:DisciplineEnumeration; skos:prefLabel "Economics"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q7112556 a pulse:DisciplineEnumeration; skos:prefLabel "Applied sciences"@en; rdfs:subClassOf wd:Q11862829 .
+wd:Q843601 a pulse:DisciplineEnumeration; skos:prefLabel "Health sciences"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q43035 a pulse:DisciplineEnumeration; skos:prefLabel "Electrical engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q83588 a pulse:DisciplineEnumeration; skos:prefLabel "Chemical engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q77590 a pulse:DisciplineEnumeration; skos:prefLabel "Civil engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q12271 a pulse:DisciplineEnumeration; skos:prefLabel "Architecture"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q428691 a pulse:DisciplineEnumeration; skos:prefLabel "Computer engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q3353193 a pulse:DisciplineEnumeration; skos:prefLabel "Energy engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q192386 a pulse:DisciplineEnumeration; skos:prefLabel "Military science"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q18351432 a pulse:DisciplineEnumeration; skos:prefLabel "Industrial and production engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q101333 a pulse:DisciplineEnumeration; skos:prefLabel "Mechanical engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q580689 a pulse:DisciplineEnumeration; skos:prefLabel "Biological engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q188847 a pulse:DisciplineEnumeration; skos:prefLabel "Environmental science"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q2167061 a pulse:DisciplineEnumeration; skos:prefLabel "Systems science and engineering"@en; rdfs:subClassOf wd:Q7112556 .
+<http://www.wikipedia.org/wiki/Information_engineering> a pulse:DisciplineEnumeration; skos:prefLabel "Information engineering"@en;rdfs:subClassOf wd:Q7112556 .
+wd:Q3606845 a pulse:DisciplineEnumeration; skos:prefLabel "Agricultural and food sciences"@en;rdfs:subClassOf wd:Q7112556 .
+wd:Q4830453 a pulse:DisciplineEnumeration; skos:prefLabel "Business"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q80083 a pulse:DisciplineEnumeration; skos:prefLabel "Humanities"@en; rdfs:subClassOf wd:Q11862829 .
+wd:Q309 a pulse:DisciplineEnumeration; skos:prefLabel "History"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q8242 a pulse:DisciplineEnumeration; skos:prefLabel "Literature"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q735 a pulse:DisciplineEnumeration; skos:prefLabel "Art"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q9174 a pulse:DisciplineEnumeration; skos:prefLabel "Religion"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q5891 a pulse:DisciplineEnumeration; skos:prefLabel "Philosophy"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q7748 a pulse:DisciplineEnumeration; skos:prefLabel "Law"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q816264 a pulse:DisciplineEnumeration; skos:prefLabel "Formal sciences"@en; rdfs:subClassOf wd:Q11862829 .
+wd:Q395 a pulse:DisciplineEnumeration; skos:prefLabel "Mathematics"@en .
+wd:Q8078 a pulse:DisciplineEnumeration; skos:prefLabel "Logic"@en; rdfs:subClassOf wd:Q816264 .
+wd:Q12483 a pulse:DisciplineEnumeration; skos:prefLabel "Statistics"@en; rdfs:subClassOf wd:Q816264 .
+wd:Q2878974 a pulse:DisciplineEnumeration; skos:prefLabel "Theoretical computer science"@en; rdfs:subClassOf wd:Q816264 .
+wd:Q7991 a pulse:DisciplineEnumeration; skos:prefLabel "Natural sciences"@en; rdfs:subClassOf wd:Q11862829 .
+wd:Q413 a pulse:DisciplineEnumeration; skos:prefLabel "Physics"@en .
+wd:Q333 a pulse:DisciplineEnumeration; skos:prefLabel "Astronomy"@en; rdfs:subClassOf wd:Q7991 .
+wd:Q420 a pulse:DisciplineEnumeration; skos:prefLabel "Biology"@en; rdfs:subClassOf wd:Q7991 .
+wd:Q2329 a pulse:DisciplineEnumeration; skos:prefLabel "Chemistry"@en; rdfs:subClassOf wd:Q7991 .
+wd:Q8008 a pulse:DisciplineEnumeration; skos:prefLabel "Earth science"@en; rdfs:subClassOf wd:Q7991 .
+
+# Properties
+schema:license a rdf:Property ; skos:prefLabel "license" ; skos:definition "A license document that applies to this content, typically indicated by URL." .
+schema:name a rdf:Property ; skos:prefLabel "name"; skos:definition "The name of the item." .
+schema:email a rdf:Property ; skos:prefLabel "email" ; skos:definition "Email address." .
+schema:url a rdf:Property ; skos:prefLabel "url" ; skos:definition "	URL of the item." .
+schema:identifier a rdf:Property ; skos:prefLabel "identifier" ; skos:definition "The identifier (URL/Text) property represents any kind of identifier for any kind of Thing" .
+schema:creator a rdf:Property ; skos:prefLabel "creator" ; skos:definition "The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork." .
+schema:headline a rdf:Property ; skos:prefLabel "headline" ; skos:definition "The headline of the article." .
+schema:gender a rdf:Property ; skos:prefLabel "gender" ; skos:definition "The gender of the person." .
+schema:programmingLanguage a rdf:Property ; skos:prefLabel "programming language" ; skos:definition "The computer programming language." .
+schema:codeRepository a rdf:Property ; skos:prefLabel "code repository" ; skos:definition "Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex)."   .
+schema:dateCreated a rdf:Property ; skos:prefLabel "date created" ;  skos:definition "The date on which the CreativeWork was created or the item was added to a DataFeed." .
+schema:datePublished a rdf:Property ; skos:prefLabel "date published" ; skos:definition "Date of first publication or broadcast" .
+schema:author a rdf:Property ; skos:prefLabel "author" ; skos:definition "The author of this content or rating." .
+schema:sourceOrganization a rdf:Property ; skos:prefLabel "source organization" ; skos:definition "The organization where the work was created or published." .
+schema:description a rdf:Property ; skos:prefLabel "description" ; skos:definition "A description of the item." .
+schema:citation a rdf:Property ; skos:prefLabel "citation" ; skos:definition "A citation or reference to a creative work such as a publication or dataset." .
+org:hasUnit a rdf:Property ; skos:prefLabel "has unit"; skos:definition "Indicates a unit which is part of this Organization, e.g. a Department within a larger Organization.".
+org:unitOf a rdf:Property ; skos:prefLabel "unit of"; skos:definition "Indicates an Organization of which this Unit is a part, e.g. a Department within a larger Organization.".
+org:hasMembership a rdf:Property ; skos:prefLabel "has membership"; skos:definition "Indicates a membership relationship that the Agent plays." .
+org:organization a rdf:Property ; skos:prefLabel "organization" ; skos:definition "Indicates the organization in which the agent is a member." .
+org:role a rdf:Property ; skos:prefLabel "role"; skos:definition "Indicates the Role that the Agent plays in a Membership relationship with an Organization." .
+time:hasBeginning a rdf:Property ; skos:prefLabel "has beginning" ; skos:definition "The beginning of the temporal entity." .
+time:hasEnd a rdf:Property ; skos:prefLabel "has end" ; skos:definition "The end of the temporal entity." .
+pulse:gitUsername a rdf:Property ; skos:prefLabel "git username" ; skos:definition "The GitHub/Git handle of a person." .
+pulse:infoscienceUsername a rdf:Property ; skos:prefLabel "infoscience username" ; skos:definition "The Infoscience username of a person." .
+pulse:hasCommit a rdf:Property ; skos:prefLabel "has commit" ; skos:definition "Links a person to a specific commit they have made in a software repository." .
+pulse:discipline a rdf:Property ; skos:prefLabel "discipline" ; skos:definition "The academic or scientific discipline associated with the resource." .
+pulse:repositoryType a rdf:Property ; skos:prefLabel "repository type" ; skos:definition "The type or category of the repository (e.g., software, data, publication)." .
+pulse:OrganizationType a rdf:Property ; skos:prefLabel "organization type" ; skos:definition "The type or category of the organization (e.g., university, research institute, company)." .
+pulse:relatedToEPFL a rdf:Property ;rdfs:range xsd:boolean; skos:prefLabel "related to EPFL" ;skos:definition "Indicates whether a software repository or entity is related to EPFL (École Polytechnique Fédérale de Lausanne)." .
+pulse:githubOrgFollowers a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github organization followers" ; skos:definition "The number of followers of a GitHub organization." .
+pulse:githubRepoStars a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github repository stars" ; skos:definition "The number of stars (likes) a GitHub repository has received." .
+pulse:githubRepoForks a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github repository forks" ; skos:definition "The number of forks (copies) of a GitHub repository." .
+# Custom Organization <-> Repository Links
+pulse:managedRepository a rdf:Property ; skos:prefLabel "managed repository" ; skos:definition "Links an organization to a software repository it officially manages or owns." ; owl:inverseOf pulse:managedBy .
+pulse:managedBy a rdf:Property ; skos:prefLabel "managed by" ; skos:definition "Links a software repository to its managing or owning organization." .
+pulse:relatedDataset a rdf:Property ; skos:prefLabel "related dataset" ; skos:definition "A dataset that is utilized, processed, or produced by this software source code." ; rdfs:subPropertyOf schema:relatedLink ; owl:inverseOf pulse:relatedSoftware .
+pulse:relatedSoftware a rdf:Property ; skos:prefLabel "related software" ; skos:definition "The software project or source code that utilizes or produces this dataset." ; rdfs:subPropertyOf schema:relatedLink .
+pulse:githubOrgUrl a rdf:Property ; skos:prefLabel "github organization URL" ; skos:definition "The official GitHub Organization URL for an EPFL unit." ; rdfs:subPropertyOf schema:url .
+# ---------------------------------------------------------
+# 2. REUSABLE PROPERTY SHAPES
+# ---------------------------------------------------------
+
+pulse:NameShape
     a sh:PropertyShape ;
-    sh:path sd:hasAcknowledgements ;
+    sh:path schema:name ;
     sh:datatype xsd:string ;
-    .
+    sh:minCount 1 .
 
-sd:SoftwareApplication-readme
-    a sh:PropertyShape ;
-    sh:path sd:readme ;
-    sh:pattern "^http.*" ;
-  .
-
-schema:DataDownload-contentURL
-  a sh:PropertyShape ;
-  sh:path schema:contentUrl ;
-  sh:pattern "^http.*" ;
-  sh:minCount 1 ;
-  .
-    
-
-
-schema:Organization-legalName
-  a sh:PropertyShape ;
-  sh:path schema:legalName ;
-  sh:datatype xsd:string ;
-  sh:minCount 1 ;
-.
-pulse:disciplineShape
-    a sh:PropertyShape ;
-    sh:path pulse:discipline ;
-    sh:datatype xsd:string ;
-    sh:class pulse:DisciplineEnumeration ;
-    .
-
-
-pulse:repositoryTypeShape
-    a sh:PropertyShape ;
-    sh:path pulse:repositoryType ;
-    sh:class pulse:RepositoryTypeEnumeration
-    .
-
-
-pulse:usernameShape
-    a sh:PropertyShape ;
-    sh:path schema:username ;
-    sh:datatype xsd:string ;
-    .
-
-pulse:hasRepositoryShape
-    a sh:PropertyShape ;
-    sh:path pulse:hasRepository ;
-    sh:class schema:SoftwareSourceCode ;
-    .
-
-schema:memberOfShape 
-    a sh:PropertyShape ;
-    sh:path schema:memberOf ;
-    sh:class schema:GitHubOrganization ;
-    .
-# Academic Catalog Relation Shapes
-
-pulse:AcademicCatalogRelation
-    a sh:NodeShape, rdfs:Class ;
-    sh:property pulse:catalogTypeShape ,
-                pulse:entityTypeShape ,
-                pulse:hasCatalogEntityShape ,
-                pulse:confidenceShape ,
-                pulse:justificationShape ,
-                pulse:externalIdShape ,
-                pulse:matchedOnShape .
-
-pulse:catalogTypeShape
-    a sh:PropertyShape ;
-    sh:path pulse:catalogType ;
-    sh:datatype xsd:string ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
-    sh:in ( "infoscience" "orcid" "ror" "wikidata" ) .
-
-pulse:entityTypeShape
-    a sh:PropertyShape ;
-    sh:path pulse:entityType ;
-    sh:datatype xsd:string ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
-    sh:in ( "person" "organization" "publication" "project" ) .
-
-pulse:hasCatalogEntityShape
-    a sh:PropertyShape ;
-    sh:path pulse:hasCatalogEntity ;
-    sh:class pulse:CatalogEntity ;
-    sh:minCount 1 ;
-    sh:maxCount 1 .
-
-pulse:confidenceShape
-    a sh:PropertyShape ;
-    sh:path pulse:confidence ;
-    sh:datatype xsd:decimal ;
-    sh:minInclusive 0.0 ;
-    sh:maxInclusive 1.0 ;
-    sh:minCount 1 ;
-    sh:maxCount 1 .
-
-pulse:externalIdShape
-    a sh:PropertyShape ;
-    sh:path pulse:externalId ;
-    sh:datatype xsd:string ;
-    sh:maxCount 1 .
-
-pulse:matchedOnShape
-    a sh:PropertyShape ;
-    sh:path pulse:matchedOn ;
-    sh:datatype xsd:string .
-
-# Catalog Entity Shape
-
-pulse:CatalogEntity
-    a sh:NodeShape, rdfs:Class ;
-  sh:property schema:Thing-name ,
-        schema:Thing-email ,
-        md4i:orcidIdShape ,
-        schema:Thing-affiliation .
-schema:Thing-email
+pulse:EmailShape
     a sh:PropertyShape ;
     sh:path schema:email ;
-    sh:datatype xsd:string ;
-    sh:maxCount 1 .
+    sh:nodeKind sh:Literal ;
+    sh:pattern "^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" ;
+    sh:description "Reusable validation for institutional and personal email addresses." .
 
-pulse:hasAcademicCatalogRelationShape
+pulse:GenderShape
     a sh:PropertyShape ;
-    sh:path pulse:hasAcademicCatalogRelation ;
-    sh:class pulse:AcademicCatalogRelation .
+    sh:path schema:gender ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:in ( "Male" "Female" "N/A" ) .
 
-# Additional Property Shapes for SoftwareSourceCode
+pulse:UrlShape
+    a sh:PropertyShape ;
+    sh:path schema:url ;
+    sh:nodeKind sh:IRI ;
+    sh:description "Standard validation for any web URL." .
 
-pulse:relatedToEPFLShape
+pulse:OrganizationTypeShape
+    a sh:PropertyShape ;
+    sh:path pulse:OrganizationType ;
+    sh:class pulse:OrganizationTypeEnumeration ;
+    sh:name "Organization Type" ;
+    sh:description "Must be a valid IRI from the Organization Type enumeration (e.g., pulse:University)." .
+
+pulse:GitUsernameShape
+    a sh:PropertyShape ;
+    sh:path pulse:gitUsername ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:description "The GitHub/Git handle of a person." .
+
+pulse:GitHashShape
+    a sh:PropertyShape ;
+    sh:path schema:identifier ;
+    sh:datatype xsd:string ;
+    sh:pattern "^([0-9a-f]{7}|[0-9a-f]{40})$" ;
+    sh:name "Git Commit Hash" ;
+    sh:description "A Git commit identifier in either short (7-character) or long (40-character) hex format." .
+
+pulse:DisciplineShape
+    a sh:PropertyShape ;
+    sh:path pulse:discipline ;
+    sh:class pulse:DisciplineEnumeration ;
+    sh:name "Discipline" ;
+    sh:description "Must be a valid IRI from the Wikidata-based Discipline enumeration." .
+
+pulse:RepositoryTypeShape
+    a sh:PropertyShape ;
+    sh:path pulse:repositoryType ;
+    sh:class pulse:RepositoryTypeEnumeration ;
+    sh:name "Repository Type" ;
+    sh:description "Must be a valid IRI from the Repository Type enumeration (e.g., pulse:Software)." .
+
+
+pulse:DoiPropertyShape
+    a sh:PropertyShape ;
+    sh:path schema:identifier ;
+    sh:datatype xsd:string ;
+    sh:pattern "^10\\.\\d{4,9}/[-._;()/:a-zA-Z0-9]+$" ;
+    sh:description "Standard DOI validation." .
+
+pulse:RorPropertyShape
+    a sh:PropertyShape ;
+    sh:path schema:identifier ;
+    sh:datatype xsd:string ;
+    sh:pattern "^https://ror\\.org/[0-9a-z]{9}$" ;
+    sh:description "Standard ROR ID validation." .
+
+pulse:HasUnitPropertyShape
+    a sh:PropertyShape ;
+    sh:path org:hasUnit ;
+    sh:class org:Organization ; 
+    sh:description "Link to a subunit, project, or department." .
+
+pulse:UnitOfPropertyShape
+    a sh:PropertyShape ;
+    sh:path org:unitOf ;
+    sh:class org:Organization ; 
+    sh:description "Link back to the managing/parent organization." .
+
+pulse:RelatedToEPFLShape
     a sh:PropertyShape ;
     sh:path pulse:relatedToEPFL ;
     sh:datatype xsd:boolean ;
     sh:maxCount 1 .
 
-pulse:sourceShape
+pulse:GithubOrgFollowersShape
     a sh:PropertyShape ;
-    sh:path pulse:source ;
-    sh:datatype xsd:string ;
-    sh:maxCount 1 .
-
-pulse:linkedEntitiesShape
-    a sh:PropertyShape ;
-    sh:path pulse:linkedEntities ;
-    sh:datatype xsd:string .
-
-pulse:relatedModelsShape
-    a sh:PropertyShape ;
-    sh:path pulse:relatedModels ;
-    sh:datatype xsd:string .
-
-pulse:gitAuthorsShape
-    a sh:PropertyShape ;
-    sh:path pulse:gitAuthors ;
-    sh:class schema:Person .
-
-pulse:relatedPublicationShape
-    a sh:PropertyShape ;
-    sh:path pulse:relatedPublication ;
-    sh:datatype xsd:string .
-
-pulse:relatedAPIsShape
-    a sh:PropertyShape ;
-    sh:path pulse:relatedAPIs ;
-    sh:datatype xsd:string .
-
-pulse:relatedDatasetsShape
-    a sh:PropertyShape ;
-    sh:path pulse:relatedDatasets ;
-    sh:class schema:Dataset .
-
-pulse:commitsShape
-    a sh:PropertyShape ;
-    sh:path pulse:commits ;
+    sh:path pulse:githubOrgFollowers ;
     sh:datatype xsd:integer ;
-    sh:minInclusive 0 ;
-    sh:maxCount 1 .
+    sh:maxCount 1 ;
+    sh:description "Number of followers for the GitHub organization." .
 
-pulse:metadataShape
+pulse:GithubRepoStarsShape
     a sh:PropertyShape ;
-    sh:path pulse:metadata ;
-    sh:datatype xsd:string .
+    sh:path pulse:githubRepoStars ;
+    sh:datatype xsd:integer ;
+    sh:maxCount 1 ;
+    sh:description "Number of stars for the Software GitHub repository." .
 
-pulse:justificationShape
+pulse:GithubRepoForksShape
     a sh:PropertyShape ;
-    sh:path pulse:justification ;
-    sh:datatype xsd:string ;
-    sh:minCount 1 ;
-    sh:maxCount 1 .
+    sh:path pulse:githubRepoForks ;  
+    sh:datatype xsd:integer ;
+    sh:maxCount 1 ;
+    sh:description "Number of forks for the Software GitHub repository." .
 
-pulse:DisciplineEnumeration
-    a sh:NodeShape, rdfs:Class ;
-    rdfs:label "Discipline Enumeration" ;
-    rdfs:comment "Enumeration of disciplines for categorizing software repositories." ;
-    rdfs:subClassOf schema:Enumeration ;
-    .
+# ---------------------------------------------------------
+# 3. NODE SHAPES
+# ---------------------------------------------------------
 
-pulse:RepositoryTypeEnumeration
-    a sh:NodeShape, rdfs:Class ;
-    rdfs:label "Repository Type Enumeration" ;
-    rdfs:comment "Enumeration of types of repositories." ;
-    rdfs:subClassOf schema:Enumeration ;
-    .
+pulse:PersonShape
+    a sh:NodeShape ;
+    sh:targetClass schema:Person ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property pulse:NameShape ;
+    sh:property pulse:GitUsernameShape ;
+    sh:property pulse:EmailShape ;
+    sh:property pulse:GenderShape ;
+    sh:property pulse:UrlShape ;
+    sh:property [ sh:path pulse:infoscienceUsername ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Infoscience Username" ] ;
+    sh:property [ 
+        sh:path org:hasMembership ; 
+        sh:class org:Membership ;
+        sh:name "hasMembership"
+    ].
 
-pulse:Software a pulse:RepositoryTypeEnumeration ;
-    rdfs:label "Software" ;
-    rdfs:comment "A repository that contains software source code." .
+pulse:ArticleShape
+    a sh:NodeShape ;
+    sh:targetClass schema:ScholarlyArticle ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property pulse:NameShape ;
+    sh:property pulse:DoiPropertyShape ;
+    sh:property [ sh:path schema:headline ; sh:datatype xsd:string ; sh:name "Headline" ] ;
+    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Publication Date" ] ;
+    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this content or rating."   ] ;
+    sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] .
 
-pulse:EducationalResource a pulse:RepositoryTypeEnumeration ;
-    rdfs:label "Educational Resource" ;
-    rdfs:comment "A repository that contains educational materials." .
+pulse:OrganizationShape
+    a sh:NodeShape ;
+    sh:targetClass org:Organization ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property pulse:NameShape ;
+    sh:property pulse:RorPropertyShape ;
+    sh:property pulse:UrlShape ;
+    sh:property pulse:OrganizationTypeShape ;
+    sh:property pulse:GithubOrgFollowersShape ;
+    sh:property pulse:HasUnitPropertyShape ;
+    sh:property pulse:UnitOfPropertyShape ;
+    sh:property [ 
+        sh:path pulse:githubOrgUrl ; 
+        sh:nodeKind sh:IRI ; 
+        sh:pattern "^https://github\\.com/[a-zA-Z0-9\\-_]+$" ;
+        sh:name "GitHub Organization URL" ;
+        sh:description "A valid GitHub Organization link (e.g., https://github.com/swissdatasciencecenter)."
+    ] ;
+    sh:property [ 
+        sh:path pulse:managedRepository ; 
+        sh:class schema:SoftwareSourceCode ; 
+        sh:name "Managed Repositories" ;
+        sh:description "Direct link to repositories managed by this organization."
+    ] .
 
-pulse:Documentation a pulse:RepositoryTypeEnumeration ;
-    rdfs:label "Documentation" ;
-    rdfs:comment "A repository that contains documentation." .
+pulse:RepositoryShape
+    a sh:NodeShape ;
+    sh:targetClass schema:SoftwareSourceCode ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property pulse:NameShape ;
+    sh:property pulse:RelatedToEPFLShape ;
+    sh:property pulse:RepositoryTypeShape ;
+    sh:property pulse:DisciplineShape ;
+    sh:property pulse:GithubRepoStarsShape ;
+    sh:property pulse:GithubRepoForksShape ;
+    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Creation Date" ] ;
+    sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ;sh:pattern "^https?://(github|gitlab|bitbucket)\\.com/" ;  sh:flags "i" ; sh:name "Code Repository URL" ] ; 
+    sh:property [ sh:path schema:license ; sh:nodeKind sh:IRI ; sh:name "License" ] ;
+    sh:property [ sh:path schema:citation ; sh:nodeKind sh:IRI ; sh:name "Citation" ] ;
+    sh:property [ sh:path pulse:relatedDataset ; sh:class schema:Dataset ; sh:name "Related Dataset" ; sh:description "The dataset(s) associated with this software repository."] ;
+    sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path pulse:hasCommit ; sh:class pulse:GitCommit ] ;
+    sh:property [ sh:path schema:creator ; sh:class schema:Person ;sh:minCount 1 ;sh:name "Creator" ] ;
+    sh:property [ sh:path pulse:managedBy ; sh:class org:Organization ; sh:maxCount 1 ; sh:name "Managing Organization" ; sh:description "The organization that officially manages this repository."] .
 
-pulse:Data a pulse:RepositoryTypeEnumeration ;
-    rdfs:label "Data" ;
-    rdfs:comment "A repository that contains datasets." .
+pulse:DatasetShape
+    a sh:NodeShape ;
+    sh:targetClass schema:Dataset ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property pulse:NameShape ;        
+    sh:property pulse:UrlShape ;         
+    sh:property pulse:DoiPropertyShape ; 
+    sh:property [ sh:path schema:description ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ] ;
+    sh:property [ 
+        sh:path pulse:relatedSoftware ; 
+        sh:class schema:SoftwareSourceCode ;
+        sh:name "Related Software" ;
+        sh:description "The software project(s) associated with this dataset."
+    ] .
 
-pulse:Other a pulse:RepositoryTypeEnumeration ;
-    rdfs:label "Other" ;
-    rdfs:comment "A repository that does not fit into the other categories." .
+pulse:CommitShape
+    a sh:NodeShape ;
+    sh:targetClass pulse:GitCommit ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property pulse:GitHashShape ;
+    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ] ;
+    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:name "Author" ] .
 
-wd:Q34749 a pulse:DisciplineEnumeration;
-  rdfs:label "Social sciences"@en;
-  rdfs:subClassOf wd:Q11862829 .
-
-wd:Q23404 a pulse:DisciplineEnumeration;
-  rdfs:label "Anthropology"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q11680831 a pulse:DisciplineEnumeration;
-  rdfs:label "Communication studies"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q8434 a pulse:DisciplineEnumeration;
-  rdfs:label "Education"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q8162 a pulse:DisciplineEnumeration;
-  rdfs:label "Linguistics"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q42240 a pulse:DisciplineEnumeration;
-  rdfs:label "Research"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q21201 a pulse:DisciplineEnumeration;
-  rdfs:label "Sociology"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q1071 a pulse:DisciplineEnumeration;
-  rdfs:label "Geography"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q9418 a pulse:DisciplineEnumeration;
-  rdfs:label "Psychology"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q7163 a pulse:DisciplineEnumeration;
-  rdfs:label "Politics"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q8134 a pulse:DisciplineEnumeration;
-  rdfs:label "Economics"@en;
-  rdfs:subClassOf wd:Q34749 .
-
-wd:Q7112556 a pulse:DisciplineEnumeration;
-  rdfs:label "Applied sciences"@en;
-  rdfs:subClassOf wd:Q11862829 .
-
-wd:Q843601 a pulse:DisciplineEnumeration;
-  rdfs:label "Health sciences"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q43035 a pulse:DisciplineEnumeration;
-  rdfs:label "Electrical engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q83588 a pulse:DisciplineEnumeration;
-  rdfs:label "Chemical engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q77590 a pulse:DisciplineEnumeration;
-  rdfs:label "Civil engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q12271 a pulse:DisciplineEnumeration;
-  rdfs:label "Architecture"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q428691 a pulse:DisciplineEnumeration;
-  rdfs:label "Computer engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q3353193 a pulse:DisciplineEnumeration;
-  rdfs:label "Energy engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q192386 a pulse:DisciplineEnumeration;
-  rdfs:label "Military science"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q18351432 a pulse:DisciplineEnumeration;
-  rdfs:label "Industrial and production engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q101333 a pulse:DisciplineEnumeration;
-  rdfs:label "Mechanical engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q580689 a pulse:DisciplineEnumeration;
-  rdfs:label "Biological engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q188847 a pulse:DisciplineEnumeration;
-  rdfs:label "Environmental science"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q2167061 a pulse:DisciplineEnumeration;
-  rdfs:label "Systems science and engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-<http://www.wikipedia.org/wiki/Information_engineering> a pulse:DisciplineEnumeration;
-  rdfs:label "Information engineering"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q3606845 a pulse:DisciplineEnumeration;
-  rdfs:label "Agricultural and food sciences"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q4830453 a pulse:DisciplineEnumeration;
-  rdfs:label "Business"@en;
-  rdfs:subClassOf wd:Q7112556 .
-
-wd:Q80083 a pulse:DisciplineEnumeration;
-  rdfs:label "Humanities"@en;
-  rdfs:subClassOf wd:Q11862829 .
-
-wd:Q309 a pulse:DisciplineEnumeration;
-  rdfs:label "History"@en;
-  rdfs:subClassOf wd:Q80083 .
-
-wd:Q8242 a pulse:DisciplineEnumeration;
-  rdfs:label "Literature"@en;
-  rdfs:subClassOf wd:Q80083 .
-
-wd:Q735 a pulse:DisciplineEnumeration;
-  rdfs:label "Art"@en;
-  rdfs:subClassOf wd:Q80083 .
-
-wd:Q9174 a pulse:DisciplineEnumeration;
-  rdfs:label "Religion"@en;
-  rdfs:subClassOf wd:Q80083 .
-
-wd:Q5891 a pulse:DisciplineEnumeration;
-  rdfs:label "Philosophy"@en;
-  rdfs:subClassOf wd:Q80083 .
-
-wd:Q7748 a pulse:DisciplineEnumeration;
-  rdfs:label "Law"@en;
-  rdfs:subClassOf wd:Q80083 .
-
-wd:Q816264 a pulse:DisciplineEnumeration;
-  rdfs:label "Formal sciences"@en;
-  rdfs:subClassOf wd:Q11862829 .
-
-wd:Q395 a pulse:DisciplineEnumeration;
-  rdfs:label "Mathematics"@en;
-  rdfs:subClassOf wd:Q816264 .
-
-wd:Q8078 a pulse:DisciplineEnumeration;
-  rdfs:label "Logic"@en;
-  rdfs:subClassOf wd:Q816264 .
-
-wd:Q12483 a pulse:DisciplineEnumeration;
-  rdfs:label "Statistics"@en;
-  rdfs:subClassOf wd:Q816264 .
-
-wd:Q2878974 a pulse:DisciplineEnumeration;
-  rdfs:label "Theoretical computer science"@en;
-  rdfs:subClassOf wd:Q816264 .
-
-wd:Q7991 a pulse:DisciplineEnumeration;
-  rdfs:label "Natural sciences"@en;
-  rdfs:subClassOf wd:Q11862829 .
-
-wd:Q413 a pulse:DisciplineEnumeration;
-  rdfs:label "Physics"@en;
-  rdfs:subClassOf wd:Q7991 .
-
-wd:Q333 a pulse:DisciplineEnumeration;
-  rdfs:label "Astronomy"@en;
-  rdfs:subClassOf wd:Q7991 .
-
-wd:Q420 a pulse:DisciplineEnumeration;
-  rdfs:label "Biology"@en;
-  rdfs:subClassOf wd:Q7991 .
-
-wd:Q2329 a pulse:DisciplineEnumeration;
-  rdfs:label "Chemistry"@en;
-  rdfs:subClassOf wd:Q7991 .
-
-wd:Q8008 a pulse:DisciplineEnumeration;
-  rdfs:label "Earth science"@en;
-  rdfs:subClassOf wd:Q7991 .
+pulse:MembershipShape
+    a sh:NodeShape ;
+    sh:targetClass org:Membership ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ 
+        sh:path org:organization ; 
+        sh:class org:Organization ;
+        sh:minCount 1 ;                
+        sh:maxCount 1 ;                
+        sh:nodeKind sh:IRI ;
+        sh:name "Organization"
+    ] ;
+    sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Role"; ] ;
+    sh:property [ 
+        sh:path time:hasBeginning ; 
+        sh:datatype xsd:date ; 
+        sh:minCount 1 ; 
+        sh:lessThan time:hasEnd ;
+        sh:name "Start Date"
+    ] ;
+    sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ; sh:name "End Date" ] .

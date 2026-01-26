@@ -1,0 +1,39 @@
+name: SHACL Validation Tests
+
+on:
+  push:
+    branches: [main, master, develop, ontology-revision]
+  pull_request:
+    branches: [main, master, develop, ontology-revision]
+  workflow_dispatch:
+
+jobs:
+  validate-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r tools/python/requirements.txt
+
+      - name: Run SHACL validation test suite
+        run: |
+          python tools/python/checks/test_validation.py
+
+      - name: Upload test results on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-test-results
+          path: |
+            example/test_*.ttl
+            ontology-combined.ttl
