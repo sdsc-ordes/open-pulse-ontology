@@ -279,14 +279,7 @@ pulse:PersonShape
         sh:path org:hasMembership ; 
         sh:class org:Membership ;
         sh:name "hasMembership"
-    ] ;
-    sh:property [ 
-        sh:path [ sh:inversePath schema:creator ] ; 
-        sh:class schema:SoftwareSourceCode ; 
-        sh:name "Created Repositories" ;
-        sh:comment "Repositories created by this person." ;
-        sh:description "The creator/author of this CreativeWork."
-    ] .
+    ].
 
 pulse:ArticleShape
     a sh:NodeShape ;

@@ -10,14 +10,14 @@ echo ""
 mkdir -p docs
 
 echo "Step 1: Enriching ontology with SPARQL transformations..."
-/home/rmfranken/open-pulse-ontology/.venv/bin/python tools/python/docs/sparql.py
+.venv/bin/python tools/python/docs/sparql.py
 echo "✓ Enriched ontology saved to /tmp/enriched.ttl"
 echo ""
 
 echo "Step 2: Checking if SHACL Play CLI exists..."
 if [ ! -f "shacl-play-cli.jar" ]; then
     echo "  Downloading SHACL Play CLI..."
-    wget -q https://github.com/sparna-git/shacl-play/releases/download/0.10.2/shacl-play-app-0.10.2-onejar.jar -O shacl-play-cli.jar
+    curl -L -o shacl-play-cli.jar https://github.com/sparna-git/shacl-play/releases/download/0.10.2/shacl-play-app-0.10.2-onejar.jar
     echo "  ✓ Downloaded"
 else
     echo "  ✓ Already exists"
@@ -43,7 +43,7 @@ echo "✓ Generated docs/ontology.svg"
 echo ""
 
 echo "Step 5: Injecting enumeration lists into HTML..."
-/home/rmfranken/open-pulse-ontology/.venv/bin/python tools/python/docs/inject_enumerations.py ontology-combined.ttl docs/index.html
+.venv/bin/python tools/python/docs/inject_enumerations.py ontology-combined.ttl docs/index.html
 echo "✓ Enumerations injected"
 echo ""
 
