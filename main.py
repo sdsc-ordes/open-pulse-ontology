@@ -5,8 +5,9 @@ app = Flask(__name__)
 
 # Disk-backed RDF Graph using SQLAlchemy (SQLite)
 # Make sure: pip install rdflib rdflib-sqlalchemy flask setuptools
-graph = Graph('SQLAlchemy')
-graph.open('sqlite:///rdfstore.sqlite', create=True)
+graph = Graph("SQLAlchemy")
+graph.open("sqlite:///rdfstore.sqlite", create=True)
+
 
 @app.route("/sparql", methods=["GET", "POST"])
 def sparql_endpoint():
@@ -30,6 +31,7 @@ def sparql_endpoint():
     except Exception as e:
         return str(e), 500
 
+
 @app.route("/upload", methods=["POST"])
 def upload_ttl():
     """Upload TTL file into the graph"""
@@ -43,6 +45,7 @@ def upload_ttl():
         return f"Loaded {len(graph)} triples", 200
     except Exception as e:
         return f"Error parsing file: {e}", 500
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=3030)

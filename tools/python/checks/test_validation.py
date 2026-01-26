@@ -2,6 +2,7 @@
 Test runner for SHACL validation test suite.
 Validates that 'valid' test files pass (conforms=true) and 'invalid' test files fail (conforms=false).
 """
+
 import sys
 import os
 from pathlib import Path
@@ -18,9 +19,7 @@ def validate_test_file(test_file, shapes_file):
     shapes_graph.parse(shapes_file, format="turtle")
 
     conforms, results_graph, results_text = validate(
-        data_graph=data_graph,
-        shacl_graph=shapes_graph,
-        debug=False
+        data_graph=data_graph, shacl_graph=shapes_graph, debug=False
     )
 
     return conforms, results_text
@@ -47,7 +46,8 @@ def main():
     invalid_tests = sorted(example_dir.glob("test_invalid_*.ttl"))
 
     print(
-        f"🔍 Found {len(valid_tests)} valid tests and {len(invalid_tests)} invalid tests\n")
+        f"🔍 Found {len(valid_tests)} valid tests and {len(invalid_tests)} invalid tests\n"
+    )
 
     passed = 0
     failed = 0
@@ -65,11 +65,11 @@ def main():
                 passed += 1
             else:
                 print(
-                    f"❌ {test_name}: FAILED (expected conforms=true, got conforms=false)")
+                    f"❌ {test_name}: FAILED (expected conforms=true, got conforms=false)"
+                )
                 print(f"   Validation errors:\n{results_text}")
                 failed += 1
-                errors.append(
-                    f"{test_name}: Expected to pass but failed validation")
+                errors.append(f"{test_name}: Expected to pass but failed validation")
         except Exception as e:
             print(f"❌ {test_name}: ERROR - {e}")
             failed += 1
@@ -89,10 +89,10 @@ def main():
                 passed += 1
             else:
                 print(
-                    f"❌ {test_name}: FAILED (expected conforms=false, got conforms=true)")
+                    f"❌ {test_name}: FAILED (expected conforms=false, got conforms=true)"
+                )
                 failed += 1
-                errors.append(
-                    f"{test_name}: Expected to fail but passed validation")
+                errors.append(f"{test_name}: Expected to fail but passed validation")
         except Exception as e:
             print(f"❌ {test_name}: ERROR - {e}")
             failed += 1

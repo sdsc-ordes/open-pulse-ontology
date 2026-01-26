@@ -27,7 +27,7 @@ def extract_enumerations(ttl_file):
     enum_classes = [
         PULSE.DisciplineEnumeration,
         PULSE.RepositoryTypeEnumeration,
-        PULSE.OrganizationTypeEnumeration
+        PULSE.OrganizationTypeEnumeration,
     ]
 
     for enum_class in enum_classes:
@@ -39,18 +39,19 @@ def extract_enumerations(ttl_file):
             comment = g.value(s, SKOS.definition)
 
             # Get the local name or use full URI
-            if hasattr(s, 'fragment'):
-                name = s.fragment or str(s).split('/')[-1]
+            if hasattr(s, "fragment"):
+                name = s.fragment or str(s).split("/")[-1]
             else:
-                name = str(s).split(
-                    '#')[-1] if '#' in str(s) else str(s).split('/')[-1]
+                name = str(s).split("#")[-1] if "#" in str(s) else str(s).split("/")[-1]
 
-            values.append({
-                'uri': str(s),
-                'name': name,
-                'label': str(label) if label else name,
-                'comment': str(comment) if comment else None
-            })
+            values.append(
+                {
+                    "uri": str(s),
+                    "name": name,
+                    "label": str(label) if label else name,
+                    "comment": str(comment) if comment else None,
+                }
+            )
 
         if values:
             # Get enum class info
@@ -58,9 +59,9 @@ def extract_enumerations(ttl_file):
             enum_comment = g.value(enum_class, SKOS.definition)
 
             enumerations[str(enum_class)] = {
-                'label': str(enum_label) if enum_label else enum_class.split('#')[-1],
-                'comment': str(enum_comment) if enum_comment else None,
-                'values': sorted(values, key=lambda x: x['label'])
+                "label": str(enum_label) if enum_label else enum_class.split("#")[-1],
+                "comment": str(enum_comment) if enum_comment else None,
+                "values": sorted(values, key=lambda x: x["label"]),
             }
 
     return enumerations
@@ -70,57 +71,60 @@ def generate_enumeration_html(enumerations):
     """Generate HTML for enumeration sections."""
     html_parts = []
 
-    html_parts.append('''
+    html_parts.append("""
     <section id="enumerations">
         <h2>Enumerations</h2>
         <p>The following enumerations define controlled vocabularies used in the ontology.</p>
-    ''')
+    """)
 
     for enum_uri, enum_data in enumerations.items():
-        enum_id = enum_uri.split(
-            '#')[-1] if '#' in enum_uri else enum_uri.split('/')[-1]
+        enum_id = (
+            enum_uri.split("#")[-1] if "#" in enum_uri else enum_uri.split("/")[-1]
+        )
 
-        html_parts.append(f'''
+        html_parts.append(f"""
         <section id="enum-values-{enum_id}" class="enumeration">
             <h3>{enum_data['label']}</h3>
-        ''')
+        """)
 
-        if enum_data['comment']:
+        if enum_data["comment"]:
             html_parts.append(f'<p class="comment">{enum_data["comment"]}</p>')
 
         html_parts.append('<table class="enum-values">')
         html_parts.append(
-            '<thead><tr><th>Value</th><th>Label</th><th>Description</th></tr></thead>')
-        html_parts.append('<tbody>')
+            "<thead><tr><th>Value</th><th>Label</th><th>Description</th></tr></thead>"
+        )
+        html_parts.append("<tbody>")
 
-        for value in enum_data['values']:
-            comment = value['comment'] if value['comment'] else ''
-            html_parts.append(f'''
+        for value in enum_data["values"]:
+            comment = value["comment"] if value["comment"] else ""
+            html_parts.append(f"""
             <tr>
                 <td><code><a href="{value['uri']}" target="_blank">{value['uri']}</a></code></td>
                 <td>{value['label']}</td>
                 <td>{comment}</td>
             </tr>
-            ''')
+            """)
 
-        html_parts.append('</tbody></table>')
-        html_parts.append('</section>')
+        html_parts.append("</tbody></table>")
+        html_parts.append("</section>")
 
-    html_parts.append('</section>')
+    html_parts.append("</section>")
 
-    return '\n'.join(html_parts)
+    return "\n".join(html_parts)
 
 
 def inject_references_to_enum_classes(soup, enumerations):
     """Add references to enumeration value tables in their class sections."""
     for enum_uri, enum_data in enumerations.items():
-        enum_id = enum_uri.split(
-            '#')[-1] if '#' in enum_uri else enum_uri.split('/')[-1]
+        enum_id = (
+            enum_uri.split("#")[-1] if "#" in enum_uri else enum_uri.split("/")[-1]
+        )
 
         # Try to find the section for this enumeration class
         # Look for headings or sections that contain the class name
         possible_selectors = [
-            f'#{enum_id}',
+            f"#{enum_id}",
             f'[id*="{enum_id}"]',
             f'section:has(h3:contains("{enum_data["label"]}"))',
             f'h3:contains("{enum_data["label"]}")',
@@ -130,9 +134,9 @@ def inject_references_to_enum_classes(soup, enumerations):
         for selector in possible_selectors:
             try:
                 # BeautifulSoup doesn't support :contains, so we'll search manually
-                if 'contains' in selector:
-                    for elem in soup.find_all(['h2', 'h3', 'h4']):
-                        if elem.get_text() and enum_data['label'] in elem.get_text():
+                if "contains" in selector:
+                    for elem in soup.find_all(["h2", "h3", "h4"]):
+                        if elem.get_text() and enum_data["label"] in elem.get_text():
                             target_element = elem
                             break
                 else:
@@ -145,14 +149,14 @@ def inject_references_to_enum_classes(soup, enumerations):
 
         if target_element:
             # Create a reference note
-            reference = soup.new_tag('div', **{'class': 'enum-reference'})
+            reference = soup.new_tag("div", **{"class": "enum-reference"})
             reference.string = f"See enumeration values in the "
-            link = soup.new_tag('a', href=f'#enum-values-{enum_id}')
+            link = soup.new_tag("a", href=f"#enum-values-{enum_id}")
             link.string = "Enumerations section"
             reference.append(link)
 
             # Insert after the heading or at the start of the section
-            if target_element.name in ['h2', 'h3', 'h4']:
+            if target_element.name in ["h2", "h3", "h4"]:
                 # Insert after the heading
                 target_element.insert_after(reference)
             else:
@@ -162,21 +166,22 @@ def inject_references_to_enum_classes(soup, enumerations):
 
 def inject_into_html(html_file, enumeration_html, enumerations):
     """Inject enumeration HTML into the generated documentation."""
-    with open(html_file, 'r', encoding='utf-8') as f:
-        soup = BeautifulSoup(f.read(), 'html.parser')
+    with open(html_file, "r", encoding="utf-8") as f:
+        soup = BeautifulSoup(f.read(), "html.parser")
 
     # Find the main content area (adjust selector based on SHACL Play's structure)
     # Try to find the container after the main content sections
-    main_content = soup.find('div', class_='container') or soup.find(
-        'main') or soup.find('body')
+    main_content = (
+        soup.find("div", class_="container") or soup.find("main") or soup.find("body")
+    )
 
     if main_content:
         # Create a new div for enumerations
-        enum_section = BeautifulSoup(enumeration_html, 'html.parser')
+        enum_section = BeautifulSoup(enumeration_html, "html.parser")
 
         # Add some CSS for styling
-        style_tag = soup.new_tag('style')
-        style_tag.string = '''
+        style_tag = soup.new_tag("style")
+        style_tag.string = """
         #enumerations {
             margin-top: 2rem;
             border-top: 2px solid #ccc;
@@ -237,10 +242,10 @@ def inject_into_html(html_file, enumeration_html, enumerations):
         .enum-reference a:hover {
             text-decoration: underline;
         }
-        '''
+        """
 
         # Add style to head
-        head = soup.find('head')
+        head = soup.find("head")
         if head:
             head.append(style_tag)
 
@@ -252,11 +257,11 @@ def inject_into_html(html_file, enumeration_html, enumerations):
 
     # Replace all occurrences of schema1 with schema
     html_content = str(soup)
-    html_content = html_content.replace('schema1:', 'schema:')
-    html_content = html_content.replace('schema1', 'schema')
+    html_content = html_content.replace("schema1:", "schema:")
+    html_content = html_content.replace("schema1", "schema")
 
     # Write back
-    with open(html_file, 'w', encoding='utf-8') as f:
+    with open(html_file, "w", encoding="utf-8") as f:
         f.write(html_content)
 
 
