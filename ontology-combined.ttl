@@ -30,8 +30,8 @@ org:Organization a rdfs:Class ; skos:prefLabel "Organization" ; skos:definition 
 pulse:GitCommit a rdfs:Class ; skos:prefLabel "Git Commit" ; skos:definition "A specific record of changes in a software repository." .
 
 # Enumeration Classes
-schema:Enumeration a rdfs:Class ; skos:prefLabel "Enumeration" .
-pulse:DisciplineEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Discipline Enumeration" .
+schema:Enumeration a rdfs:Class ; skos:prefLabel "Enumeration" ; skos:definition "A type that defines a set of discrete values." .
+pulse:DisciplineEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Discipline Enumeration" ; skos:definition "Enumeration of academic and scientific disciplines." .
 pulse:RepositoryTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Repository Type Enumeration" ; skos:definition "Enumeration of repository types used within the ontology." .
 pulse:OrganizationTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Organization Type Enumeration" ; skos:definition "Enumeration of organization types used within the ontology." .
 
@@ -101,6 +101,7 @@ wd:Q2329 a pulse:DisciplineEnumeration; skos:prefLabel "Chemistry"@en; rdfs:subC
 wd:Q8008 a pulse:DisciplineEnumeration; skos:prefLabel "Earth science"@en; rdfs:subClassOf wd:Q7991 .
 
 # Properties
+schema:license a rdf:Property ; skos:prefLabel "license" ; skos:definition "A license document that applies to this content, typically indicated by URL." .
 schema:name a rdf:Property ; skos:prefLabel "name"; skos:definition "The name of the item." .
 schema:email a rdf:Property ; skos:prefLabel "email" ; skos:definition "Email address." .
 schema:url a rdf:Property ; skos:prefLabel "url" ; skos:definition "	URL of the item." .
@@ -119,7 +120,7 @@ schema:citation a rdf:Property ; skos:prefLabel "citation" ; skos:definition "A 
 org:hasUnit a rdf:Property ; skos:prefLabel "has unit"; skos:definition "Indicates a unit which is part of this Organization, e.g. a Department within a larger Organization.".
 org:unitOf a rdf:Property ; skos:prefLabel "unit of"; skos:definition "Indicates an Organization of which this Unit is a part, e.g. a Department within a larger Organization.".
 org:hasMembership a rdf:Property ; skos:prefLabel "has membership"; skos:definition "Indicates a membership relationship that the Agent plays." .
-org:organization a rdf:Property ; skos:prefLabel "organization" .
+org:organization a rdf:Property ; skos:prefLabel "organization" ; skos:definition "Indicates the organization in which the agent is a member." .
 org:role a rdf:Property ; skos:prefLabel "role"; skos:definition "Indicates the Role that the Agent plays in a Membership relationship with an Organization." .
 time:hasBeginning a rdf:Property ; skos:prefLabel "has beginning" ; skos:definition "The beginning of the temporal entity." .
 time:hasEnd a rdf:Property ; skos:prefLabel "has end" ; skos:definition "The end of the temporal entity." .
