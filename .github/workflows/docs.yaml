@@ -3,14 +3,14 @@ name: SHACL Documentation Generation
 on:
   push:
     paths:
-      - 'ontology-combined.ttl'
-      - 'ontology.ttl'
-      - 'shapes.ttl'
+      - "ontology-combined.ttl"
+      - "ontology.ttl"
+      - "shapes.ttl"
   pull_request:
     paths:
-      - 'ontology-combined.ttl'
-      - 'ontology.ttl'
-      - 'shapes.ttl'
+      - "ontology-combined.ttl"
+      - "ontology.ttl"
+      - "shapes.ttl"
 
 jobs:
   generate-docs:
@@ -30,13 +30,12 @@ jobs:
         run: |
           python tools/python/docs/sparql.py
           echo "enriched_file=/tmp/enriched.ttl" >> $GITHUB_ENV
-          
 
       - name: Set up Java 11
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '11'
+          distribution: "temurin"
+          java-version: "11"
 
       - name: Install Graphviz
         run: |
@@ -64,13 +63,14 @@ jobs:
           java -jar shacl-play-cli.jar \
             draw \
             -i ${{ env.enriched_file }} \
-            -o docs/ontology.svg 
+            -o docs/ontology.svg
 
       - name: Inject Enumerations into HTML
         run: |
           python tools/python/docs/inject_enumerations.py ontology-combined.ttl docs/index.html
 
-      - name: Commit generated docs
+      - name: Commit generated docs (for push events only)
+        if: github.event_name == 'push'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
