@@ -6,7 +6,6 @@
 @prefix org:    <http://www.w3.org/ns/org#> .
 @prefix time:   <http://www.w3.org/2006/time#> .
 @prefix pulse:     <https://open-pulse.epfl.ch/ontology#> .
-@prefix pulse:  <https://open-pulse.epfl.ch/ontology#> .
 @prefix owl:    <http://www.w3.org/2002/07/owl#> .
 @prefix dct:    <http://purl.org/dc/terms/> .
 @prefix wd: <http://www.wikidata.org/entity/> .
@@ -33,8 +32,8 @@ pulse:GitCommit a rdfs:Class ; skos:prefLabel "Git Commit" ; skos:definition "A 
 # Enumeration Classes
 schema:Enumeration a rdfs:Class ; skos:prefLabel "Enumeration" .
 pulse:DisciplineEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Discipline Enumeration" .
-pulse:RepositoryTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Repository Type Enumeration" .
-pulse:OrganizationTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Organization Type Enumeration" .
+pulse:RepositoryTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Repository Type Enumeration" ; skos:definition "Enumeration of repository types used within the ontology." .
+pulse:OrganizationTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Organization Type Enumeration" ; skos:definition "Enumeration of organization types used within the ontology." .
 
 # Enumeration Instances - Repository Types
 pulse:Software a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Software"@en ; skos:definition "A repository that contains software source code."@en .
@@ -116,6 +115,7 @@ schema:datePublished a rdf:Property ; skos:prefLabel "date published" ; skos:def
 schema:author a rdf:Property ; skos:prefLabel "author" ; skos:definition "The author of this content or rating." .
 schema:sourceOrganization a rdf:Property ; skos:prefLabel "source organization" ; skos:definition "The organization where the work was created or published." .
 schema:description a rdf:Property ; skos:prefLabel "description" ; skos:definition "A description of the item." .
+schema:citation a rdf:Property ; skos:prefLabel "citation" ; skos:definition "A citation or reference to a creative work such as a publication or dataset." .
 org:hasUnit a rdf:Property ; skos:prefLabel "has unit"; skos:definition "Indicates a unit which is part of this Organization, e.g. a Department within a larger Organization.".
 org:unitOf a rdf:Property ; skos:prefLabel "unit of"; skos:definition "Indicates an Organization of which this Unit is a part, e.g. a Department within a larger Organization.".
 org:hasMembership a rdf:Property ; skos:prefLabel "has membership"; skos:definition "Indicates a membership relationship that the Agent plays." .
