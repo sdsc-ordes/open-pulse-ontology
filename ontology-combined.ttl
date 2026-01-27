@@ -410,7 +410,7 @@ pulse:MembershipShape
         sh:nodeKind sh:IRI ;
         sh:name "Organization"
     ] ;
-    sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Role"; ] ;
+    sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Role" ] ;
     sh:property [ 
         sh:path time:hasBeginning ; 
         sh:datatype xsd:date ; 
