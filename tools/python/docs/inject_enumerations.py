@@ -144,7 +144,8 @@ def inject_references_to_enum_classes(soup, enumerations):
 
                 if target_element:
                     break
-            except:
+            except Exception as e:
+                print(f"Warning: Failed to process selector '{selector}': {e}")
                 continue
 
         if target_element:
