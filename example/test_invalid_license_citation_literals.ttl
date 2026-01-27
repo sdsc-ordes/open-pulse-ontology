@@ -14,12 +14,12 @@ pulse:InvalidLicenseCitationRepo a schema:SoftwareSourceCode ;
     schema:codeRepository <https://github.com/example/literal-license> ;
     schema:license "MIT" ;             # invalid: expected IRI
     schema:citation "10.1000/foo" ;    # invalid: expected IRI
-    schema:creator pulse:LiteralAuthor ;
+    schema:author pulse:LiteralAuthor ;
     pulse:repositoryType pulse:Software ;
-    pulse:discipline wd:Q413 ;
-    pulse:relatedToEPFL false .
+    pulse:discipline wd:Q413 .
 
 pulse:LiteralAuthor a schema:Person ;
     schema:name "Casey Literal" ;
     schema:email "casey.literal@example.com" ;
+    pulse:orcidIdentifier "0000-0001-2345-6789" ;
     pulse:gitUsername "cliteral" .
