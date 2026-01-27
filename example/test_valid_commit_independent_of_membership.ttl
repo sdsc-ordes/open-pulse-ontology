@@ -8,7 +8,7 @@ pulse:Software a pulse:RepositoryTypeEnumeration .
 wd:Q395 a pulse:DisciplineEnumeration .
 pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
 
-# INVALID TEMPORAL ALIGNMENT - Should FAIL validation
+# VALID TEMPORAL ALIGNMENT - Should PASS validation
 # Membership interval is independent of commit timing
 
 pulse:InvalidTemporalRepo a schema:SoftwareSourceCode ;
@@ -20,17 +20,16 @@ pulse:InvalidTemporalRepo a schema:SoftwareSourceCode ;
     schema:programmingLanguage "Scala" ;
     schema:programmingLanguage "Python" ;
     schema:programmingLanguage "C++" ;
-    pulse:relatedToEPFL true ;
-    schema:creator pulse:TemporalAuthor ;
-    pulse:managedBy pulse:TemporalLab ;
+    schema:author pulse:TemporalAuthor ;
+    pulse:ownedBy pulse:TemporalLab ;
     pulse:repositoryType pulse:Software ;
-    pulse:discipline wd:Q395 ;  # Mathematics
-    pulse:hasCommit pulse:LateCommit .
+    pulse:discipline wd:Q395 .  # Mathematics
 
 pulse:TemporalAuthor a schema:Person ;
     schema:name "Alex Temporal" ;
     schema:email "alex.temporal@epfl.ch" ;
     pulse:gitUsername "alextemporal" ;
+    pulse:orcidIdentifier "0000-0001-8888-9999" ;
     org:hasMembership pulse:BrokenMembership .
 
 pulse:BrokenMembership a org:Membership ;
@@ -44,10 +43,4 @@ pulse:TemporalLab a org:Organization ;
     schema:identifier "https://ror.org/02s376052" ;
     schema:url <https://www.epfl.ch/labs/temporal> ;
     pulse:OrganizationType pulse:ResearchInstitution ;
-    pulse:githubOrgUrl <https://github.com/epfl-temporal> ;
-    pulse:managedRepository pulse:InvalidTemporalRepo .
-
-pulse:LateCommit a pulse:GitCommit ;
-    schema:identifier "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" ;
-    schema:dateCreated "2024-07-15T12:00:00"^^xsd:dateTime ;
-    schema:author pulse:TemporalAuthor .
+    pulse:owns pulse:InvalidTemporalRepo .

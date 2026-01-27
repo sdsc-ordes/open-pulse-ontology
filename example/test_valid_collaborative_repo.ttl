@@ -9,7 +9,7 @@ wd:Q420 a pulse:DisciplineEnumeration .
 pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
 
 # VALID COLLABORATIVE REPOSITORY - Should PASS validation
-# Two contributors with memberships and commits within their membership windows
+# Two contributors with memberships
 
 pulse:CollabRepo a schema:SoftwareSourceCode ;
     schema:name "Collaborative EPFL Toolkit" ;
@@ -20,21 +20,19 @@ pulse:CollabRepo a schema:SoftwareSourceCode ;
     schema:programmingLanguage "Python" ;
     schema:programmingLanguage "C++" ;
     schema:programmingLanguage "Javascript" ;
-    pulse:relatedToEPFL true ;
     pulse:githubRepoStars "45"^^xsd:integer ;
     pulse:githubRepoForks "6"^^xsd:integer ;
-    schema:creator pulse:LeadDev , pulse:Contributor ;
-    pulse:managedBy pulse:EPFLCenter ;
+    schema:author pulse:LeadDev ;
+    schema:author pulse:Contributor ;
+    pulse:ownedBy pulse:EPFLCenter ;
     pulse:repositoryType pulse:Software ;
-    pulse:discipline wd:Q420 ;  # Biology
-    pulse:hasCommit pulse:CollabCommit1 , pulse:CollabCommit2 ;
-    pulse:relatedDataset pulse:CollabDataset .
+    pulse:discipline wd:Q420 .  # Biology
 
 pulse:LeadDev a schema:Person ;
     schema:name "Dr. Lina Morel" ;
     schema:email "lina.morel@epfl.ch" ;
     pulse:gitUsername "linam" ;
-    schema:gender "Female" ;
+    pulse:orcidIdentifier "0000-0003-1234-5678" ;
     schema:url <https://people.epfl.ch/lina.morel> ;
     org:hasMembership pulse:LeadMembership .
 
@@ -42,7 +40,7 @@ pulse:Contributor a schema:Person ;
     schema:name "Marco Ruiz" ;
     schema:email "marco.ruiz@epfl.ch" ;
     pulse:gitUsername "marcor" ;
-    schema:gender "Male" ;
+    pulse:orcidIdentifier "0000-0002-9876-5432" ;
     org:hasMembership pulse:ContributorMembership .
 
 pulse:LeadMembership a org:Membership ;
@@ -63,23 +61,4 @@ pulse:EPFLCenter a org:Organization ;
     schema:url <https://www.epfl.ch/research/domains/systems-biology> ;
     pulse:OrganizationType pulse:ResearchInstitution ;
     pulse:githubOrgFollowers "410"^^xsd:integer ;
-    pulse:githubOrgUrl <https://github.com/epfl-sysbio> ;
-    pulse:managedRepository pulse:CollabRepo .
-
-pulse:CollabCommit1 a pulse:GitCommit ;
-    schema:identifier "abc1234" ;
-    schema:dateCreated "2024-07-10T09:30:00"^^xsd:dateTime ;
-    schema:author pulse:LeadDev .
-
-pulse:CollabCommit2 a pulse:GitCommit ;
-    schema:identifier "def5678" ;
-    schema:dateCreated "2024-08-05T15:00:00"^^xsd:dateTime ;
-    schema:author pulse:Contributor .
-
-pulse:CollabDataset a schema:Dataset ;
-    schema:name "Systems Biology Training Data" ;
-    schema:url <https://zenodo.org/record/9999999> ;
-    schema:identifier "10.5281/zenodo.9999999" ;
-    schema:description "Datasets used for collaborative EPFL systems biology models" ;
-    schema:datePublished "2024-06-10"^^xsd:date ;
-    pulse:relatedSoftware pulse:CollabRepo .
+    pulse:owns pulse:CollabRepo .

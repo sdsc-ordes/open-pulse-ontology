@@ -18,24 +18,28 @@ pulse:CompleteRepo a schema:SoftwareSourceCode ;
     schema:license <https://spdx.org/licenses/BSD-3-Clause.html> ;
     schema:citation <https://doi.org/10.5281/zenodo.1234567> ;
     schema:programmingLanguage "Python" ;
-    pulse:relatedToEPFL true ;
     pulse:githubRepoStars "128"^^xsd:integer ;
     pulse:githubRepoForks "14"^^xsd:integer ;
-    schema:creator pulse:LeadResearcher ;
-    pulse:managedBy pulse:EPFLLab ;
+    schema:author pulse:LeadResearcher ;
+    pulse:ownedBy pulse:EPFLLab ;
     pulse:repositoryType pulse:Software ;
-    pulse:discipline wd:Q2329 ;  # Chemistry
-    pulse:hasCommit pulse:ValidCommit1, pulse:ValidCommit2 ;
-    pulse:relatedDataset pulse:ResearchDataset .
+    pulse:discipline wd:Q2329 .  # Chemistry
 
 pulse:LeadResearcher a schema:Person ;
     schema:name "Dr. Sarah Smith" ;
     schema:email "sarah.smith@epfl.ch" ;
     pulse:gitUsername "sarahsmith" ;
     pulse:infoscienceUsername "sarah.smith" ;
-    schema:gender "Female" ;
+    pulse:orcidIdentifier "0000-0001-5109-3700" ;
     schema:url <https://people.epfl.ch/sarah.smith> ;
+    pulse:hasContribution pulse:SarahContribution ;
     org:hasMembership pulse:Membership1 .
+
+pulse:SarahContribution a pulse:Contribution ;
+    schema:author pulse:LeadResearcher ;
+    pulse:contributionCount "256"^^xsd:integer ;
+    pulse:firstContributionDate "2024-01-10T09:00:00"^^xsd:dateTime ;
+    pulse:lastContributionDate "2024-12-15T17:30:00"^^xsd:dateTime .
 
 pulse:Membership1 a org:Membership ;
     org:organization pulse:EPFLLab ;
@@ -49,23 +53,4 @@ pulse:EPFLLab a org:Organization ;
     schema:url <https://www.epfl.ch/labs/lab> ;
     pulse:OrganizationType pulse:ResearchInstitution ;
     pulse:githubOrgFollowers "320"^^xsd:integer ;
-    pulse:githubOrgUrl <https://github.com/epfl-lab> ;
-    pulse:managedRepository pulse:CompleteRepo .
-
-pulse:ValidCommit1 a pulse:GitCommit ;
-    schema:identifier "a1b2c3d" ;  # 7-character hash (valid)
-    schema:dateCreated "2024-01-10T09:00:00"^^xsd:dateTime ;
-    schema:author pulse:LeadResearcher .
-
-pulse:ValidCommit2 a pulse:GitCommit ;
-    schema:identifier "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" ;  # 40-character hash (valid)
-    schema:dateCreated "2024-01-12T14:30:00"^^xsd:dateTime ;
-    schema:author pulse:LeadResearcher .
-
-pulse:ResearchDataset a schema:Dataset ;
-    schema:name "Chemistry Research Dataset" ;
-    schema:url <https://zenodo.org/record/7654321> ;
-    schema:identifier "10.5281/zenodo.7654321" ;
-    schema:description "A comprehensive dataset of chemical compounds and reactions" ;
-    schema:datePublished "2024-01-05"^^xsd:date ;
-    pulse:relatedSoftware pulse:CompleteRepo .
+    pulse:owns pulse:CompleteRepo .

@@ -1,0 +1,33 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+wd:Q413 a pulse:DisciplineEnumeration .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+
+# INVALID CONTRIBUTION - Should FAIL validation
+# Missing required contributionCount field (minCount 1)
+
+pulse:InvalidContributionRepo a schema:SoftwareSourceCode ;
+    schema:name "Invalid Contribution Test" ;
+    schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
+    schema:codeRepository <https://github.com/example/invalid-contrib> ;
+    schema:license <https://spdx.org/licenses/MIT.html> ;
+    schema:citation <https://doi.org/10.1234/example.invalid> ;
+    schema:programmingLanguage "JavaScript" ;
+    schema:author pulse:ContribAuthor ;
+    pulse:repositoryType pulse:Software ;
+    pulse:discipline wd:Q413 .  # Physics
+
+pulse:ContribAuthor a schema:Person ;
+    schema:name "Charlie Contributor" ;
+    schema:email "charlie@example.com" ;
+    pulse:gitUsername "charliec" ;
+    pulse:orcidIdentifier "0000-0003-4567-8901" ;
+    pulse:hasContribution pulse:InvalidContribution .
+
+# Invalid: missing contributionCount (required, minCount 1)
+pulse:InvalidContribution a pulse:Contribution ;
+    schema:author pulse:ContribAuthor ;
+    pulse:firstContributionDate "2024-01-15T10:30:00"^^xsd:dateTime ;
+    pulse:lastContributionDate "2024-12-20T16:45:00"^^xsd:dateTime .
