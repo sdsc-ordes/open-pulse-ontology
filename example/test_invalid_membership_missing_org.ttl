@@ -15,15 +15,15 @@ pulse:MissingOrgRepo a schema:SoftwareSourceCode ;
     schema:codeRepository <https://github.com/example/missing-org> ;
     schema:license <https://spdx.org/licenses/BSD-3-Clause.html> ;
     schema:citation <https://doi.org/10.1234/example.missingorg> ;
-    schema:creator pulse:MemberlessPerson ;
+    schema:author pulse:MemberlessPerson ;
     pulse:repositoryType pulse:Software ;
-    pulse:discipline wd:Q2329 ;
-    pulse:relatedToEPFL true .
+    pulse:discipline wd:Q2329 .
 
 pulse:MemberlessPerson a schema:Person ;
     schema:name "Morgan Missing" ;
     schema:email "morgan.missing@example.com" ;
     pulse:gitUsername "memmissing" ;
+    pulse:orcidIdentifier "0000-0007-8901-2345" ;
     org:hasMembership pulse:MembershipWithoutOrg .
 
 pulse:MembershipWithoutOrg a org:Membership ; # Missing org:organization

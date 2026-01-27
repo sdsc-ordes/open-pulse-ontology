@@ -15,10 +15,11 @@ pulse:InvalidMissingGitUsernameRepo a schema:SoftwareSourceCode ;
     schema:codeRepository <https://github.com/example/invalid-git-username> ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.citation> ;
-    schema:creator pulse:PersonMissingGitUsername ;
+    schema:author pulse:PersonMissingGitUsername ;
     pulse:repositoryType pulse:Software ;
     pulse:discipline wd:Q395 . 
 
 pulse:PersonMissingGitUsername a schema:Person ;
     schema:name "George NoUsername" ;
-    schema:email "george@example.com" .
+    schema:email "george@example.com" ;
+    pulse:orcidIdentifier "0000-0002-1825-0097" .

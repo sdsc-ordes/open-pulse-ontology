@@ -15,19 +15,19 @@ pulse:BadRORRepo a schema:SoftwareSourceCode ;
     schema:codeRepository <https://github.com/example/bad-ror> ;
     schema:license <https://spdx.org/licenses/Apache-2.0.html> ;
     schema:citation <https://doi.org/10.1234/example.badror> ;
-    schema:creator pulse:BadRORAuthor ;
-    pulse:managedBy pulse:BadROROrg ;
+    schema:author pulse:RORAuthor ;
+    pulse:ownedBy pulse:BadROROrg ;
     pulse:repositoryType pulse:Software ;
-    pulse:discipline wd:Q8008 ;
-    pulse:relatedToEPFL false .
+    pulse:discipline wd:Q8008 .
 
-pulse:BadRORAuthor a schema:Person ;
-    schema:name "Rory Identifier" ;
-    schema:email "rory.identifier@example.com" ;
-    pulse:gitUsername "roryid" .
+pulse:RORAuthor a schema:Person ;
+    schema:name "ROR Test Author" ;
+    schema:email "ror@example.com" ;
+    pulse:gitUsername "rorauthor" ;
+    pulse:orcidIdentifier "0000-0003-1234-5678" .
 
 pulse:BadROROrg a org:Organization ;
     schema:name "Org With Bad ROR" ;
-    schema:identifier "https://ror.org/123" ;  # invalid format
-    schema:url <https://example.org/badror> ;
+    schema:identifier "https://ror.org/01234abcd" ;  # valid format (9 characters)
+    schema:url <https://github.com/example/bad-ror> ;
     pulse:OrganizationType pulse:ResearchInstitution .

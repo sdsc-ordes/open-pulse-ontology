@@ -15,11 +15,12 @@ pulse:InvalidLicenseRepoPattern a schema:SoftwareSourceCode ;
     schema:license <https://github.com/example/invalid-license> ;
     schema:codeRepository <https://opensource.org/licenses/MIT> ; 
     schema:citation <https://doi.org/10.1234/example.citation> ;
-    schema:creator pulse:Author2 ;
+    schema:author pulse:Author2 ;
     pulse:repositoryType pulse:Software ;
     pulse:discipline wd:Q413 .  # Physics
 
 pulse:Author2 a schema:Person ;
     schema:name "Alice Johnson" ;
     schema:email "alice@example.com" ;
-    pulse:gitUsername "alicejohnson" .
+    pulse:gitUsername "alicejohnson" ;
+    pulse:orcidIdentifier "0000-0002-1825-0097" .

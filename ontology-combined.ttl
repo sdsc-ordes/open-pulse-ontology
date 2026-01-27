@@ -18,7 +18,7 @@
     dct:abstract "The Open Pulse Ontology to model contributions to open source scientific software and research articles from EPFL." ;
     dct:license <https://spdx.org/licenses/CC-BY-4.0.html> ;
     dct:title "Open Pulse Ontology" ;
-    owl:versionInfo "v.2.0"^^xsd:string ; .
+    owl:versionInfo "v.2.0"^^xsd:string .
 
 # Classes
 schema:Person a rdfs:Class ; skos:prefLabel "Person" ; skos:definition "An individual researcher or contributor." .

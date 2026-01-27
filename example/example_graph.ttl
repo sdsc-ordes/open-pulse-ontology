@@ -20,12 +20,12 @@ pulse:Alice a schema:Person ;
 pulse:EPFL a org:Organization ;
     schema:name "EPFL" ;
     schema:identifier "https://ror.org/02aj6n233" ;
-    schema:url <https://www.epfl.ch> .
+    schema:url <https://github.com/epfl> .
 
 pulse:SDSC a org:Organization ;
     schema:name "Swiss Data Science Center" ;
-    schema:identifier "https://ror.org/02aj6n233" ;
-    schema:url <https://datascience.ch> ;
+    schema:identifier "https://ror.org/03v8tnc06" ;
+    schema:url <https://github.com/swissdatasciencecenter> ;
     pulse:owns pulse:RenkuRepo .
 
 pulse:AliceEPFLMembership a org:Membership ;

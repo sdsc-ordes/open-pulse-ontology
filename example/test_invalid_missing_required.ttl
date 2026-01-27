@@ -4,9 +4,9 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # INVALID REPOSITORY - Should FAIL validation
-# Missing 2 required properties:
-# - missing schema:name (required, minCount 1)
-# - missing schema:creator (required, minCount 1)
+# Missing required properties:
+# - schema:author (required, minCount 1)
+# - schema:name (required, minCount 1)
 
 pulse:InvalidMissingRequired a schema:SoftwareSourceCode ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
@@ -16,4 +16,5 @@ pulse:InvalidMissingRequired a schema:SoftwareSourceCode ;
 pulse:InvalidPerson a schema:Person ;
     schema:email "invalid@example.com" ;
     pulse:gitUsername "invaliduser" ;
+    pulse:orcidIdentifier "0000-0008-9012-3456" ;
     schema:name "Invalid Person" .

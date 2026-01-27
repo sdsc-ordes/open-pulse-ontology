@@ -4,7 +4,6 @@ Validates that 'valid' test files pass (conforms=true) and 'invalid' test files 
 """
 
 import sys
-import os
 from pathlib import Path
 from pyshacl import validate
 import rdflib
