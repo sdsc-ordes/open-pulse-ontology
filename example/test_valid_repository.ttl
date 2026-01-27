@@ -40,4 +40,4 @@ pulse:ValidAuthor a schema:Person ;
 pulse:ValidOrganization a org:Organization ;
     schema:name "Example Research Lab" ;
     schema:identifier "https://ror.org/012345678" ;
-    schema:url <https://example.org> .
+    schema:url <https://github.com/DeepLabCut> .

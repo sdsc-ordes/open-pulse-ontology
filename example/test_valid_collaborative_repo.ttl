@@ -58,7 +58,7 @@ pulse:ContributorMembership a org:Membership ;
 pulse:EPFLCenter a org:Organization ;
     schema:name "EPFL Center for Systems Biology" ;
     schema:identifier "https://ror.org/02s376052" ;
-    schema:url <https://www.epfl.ch/research/domains/systems-biology> ;
+    schema:url <https://github.com/DeepLabCut> ;
     pulse:OrganizationType pulse:ResearchInstitution ;
     pulse:githubOrgFollowers "410"^^xsd:integer ;
     pulse:owns pulse:CollabRepo .
