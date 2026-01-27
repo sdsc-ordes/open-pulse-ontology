@@ -14,20 +14,14 @@ pulse:InvalidMetricsRepo a schema:SoftwareSourceCode ;
     schema:codeRepository <https://github.com/example/bad-metrics> ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.badmetrics> ;
-    schema:creator pulse:MetricsAuthor ;
+    schema:author pulse:MetricsAuthor ;
     pulse:repositoryType pulse:Software ;
     pulse:discipline wd:Q395 ;
-    pulse:relatedToEPFL true ;
     pulse:githubRepoStars "12k" ;      # invalid datatype
-    pulse:githubRepoForks "forty" ;    # invalid datatype
-    pulse:hasCommit pulse:MetricsCommit .
+    pulse:githubRepoForks "forty" .    # invalid datatype
 
 pulse:MetricsAuthor a schema:Person ;
     schema:name "Pat Metrics" ;
     schema:email "pat.metrics@example.com" ;
-    pulse:gitUsername "patmetrics" .
-
-pulse:MetricsCommit a pulse:GitCommit ;
-    schema:identifier "abc1234" ;
-    schema:dateCreated "2024-03-02T12:00:00"^^xsd:dateTime ;
-    schema:author pulse:MetricsAuthor .
+    pulse:gitUsername "patmetrics" ;
+    pulse:orcidIdentifier "0000-0002-3456-7890" .

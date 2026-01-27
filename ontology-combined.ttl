@@ -135,6 +135,7 @@ pulse:owns a rdf:Property ; skos:prefLabel "owns" ; skos:definition "Links a Per
 pulse:ownedBy a rdf:Property ; skos:prefLabel "owned by" ; skos:definition "Links a software repository to its owning Person or Organization." .
 pulse:isForkOf a rdf:Property ; skos:prefLabel "is fork of" ; skos:definition "Links a repository to the repository it was forked from." ; rdfs:domain schema:SoftwareSourceCode ; rdfs:range schema:SoftwareSourceCode .
 pulse:hasContribution a rdf:Property ; skos:prefLabel "has contribution" ; skos:definition "Links a Person to a Contribution they made to a repository." .
+pulse:contributionTo a rdf:Property ; skos:prefLabel "contribution to" ; skos:definition "Links a Contribution to the Repository it belongs to." ; rdfs:domain pulse:Contribution ; rdfs:range schema:SoftwareSourceCode .
 pulse:contributionCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "contribution count" ; skos:definition "The number of contributions (commits) made." .
 pulse:firstContributionDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:prefLabel "first contribution date" ; skos:definition "The date of the first contribution." .
 pulse:lastContributionDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:prefLabel "last contribution date" ; skos:definition "The date of the most recent contribution." .
@@ -362,6 +363,14 @@ pulse:ContributionShape
     sh:targetClass pulse:Contribution ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ 
+        sh:path pulse:contributionTo ; 
+        sh:class schema:SoftwareSourceCode ; 
+        sh:minCount 1 ; 
+        sh:maxCount 1 ; 
+        sh:name "Contribution To" ;
+        sh:description "The repository this contribution belongs to."
+    ] ;
     sh:property [ 
         sh:path pulse:contributionCount ; 
         sh:datatype xsd:integer ; 

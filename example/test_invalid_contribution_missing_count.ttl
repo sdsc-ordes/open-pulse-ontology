@@ -29,5 +29,6 @@ pulse:ContribAuthor a schema:Person ;
 # Invalid: missing contributionCount (required, minCount 1)
 pulse:InvalidContribution a pulse:Contribution ;
     schema:author pulse:ContribAuthor ;
+    pulse:contributionTo pulse:InvalidContributionRepo ;
     pulse:firstContributionDate "2024-01-15T10:30:00"^^xsd:dateTime ;
     pulse:lastContributionDate "2024-12-20T16:45:00"^^xsd:dateTime .

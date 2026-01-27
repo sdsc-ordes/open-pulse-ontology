@@ -12,8 +12,9 @@ wd:Q395 a pulse:DisciplineEnumeration .
 pulse:Alice a schema:Person ;
     schema:name "Alice" ;
     schema:email "alice@epfl.ch" ;
-    schema:gender "Female" ;
     pulse:gitUsername "alice-dev" ;
+    pulse:orcidIdentifier "0000-0001-2345-6789" ;
+    pulse:hasContribution pulse:AliceRenkuContribution ;
     org:hasMembership pulse:AliceEPFLMembership , pulse:AliceSDSCMembership .
 
 pulse:EPFL a org:Organization ;
@@ -25,7 +26,7 @@ pulse:SDSC a org:Organization ;
     schema:name "Swiss Data Science Center" ;
     schema:identifier "https://ror.org/02aj6n233" ;
     schema:url <https://datascience.ch> ;
-    pulse:managedRepository pulse:RenkuRepo .
+    pulse:owns pulse:RenkuRepo .
 
 pulse:AliceEPFLMembership a org:Membership ;
     org:organization pulse:EPFL ;
@@ -42,26 +43,16 @@ pulse:RenkuRepo a schema:SoftwareSourceCode ;
     schema:dateCreated "2024-05-13T10:00:00Z"^^xsd:dateTime ;
     schema:codeRepository <https://github.com/swissdatasciencecenter/renku> ;
     schema:license <https://spdx.org/licenses/Apache-2.0.html> ;
-    schema:creator pulse:Alice ;
-    pulse:managedBy pulse:SDSC ;
+    schema:author pulse:Alice ;
+    pulse:ownedBy pulse:SDSC ;
     pulse:repositoryType pulse:Software ; 
     pulse:discipline wd:Q395 ;
-    schema:programmingLanguage "Python" ;
-    pulse:hasCommit pulse:Commit_001 , pulse:Commit_002 .
+    schema:programmingLanguage "Python" .
 
-pulse:Commit_001 a pulse:GitCommit ;
-    schema:identifier "a1b2c3d" ;
-    schema:dateCreated "2026-01-10T14:30:00Z"^^xsd:dateTime ;
-    schema:author pulse:Alice .
+pulse:AliceRenkuContribution a pulse:Contribution ;
+    schema:author pulse:Alice ;
+    pulse:contributionTo pulse:RenkuRepo ;
+    pulse:contributionCount 2 ;
+    pulse:firstContributionDate "2026-01-10T14:30:00Z"^^xsd:dateTime ;
+    pulse:lastContributionDate "2026-01-12T09:15:00Z"^^xsd:dateTime .
 
-pulse:Commit_002 a pulse:GitCommit ;
-    schema:identifier "f9e8d7c" ;
-    schema:dateCreated "2026-01-12T09:15:00Z"^^xsd:dateTime ;
-    schema:author pulse:Alice .
-
-pulse:ClimateData a schema:Dataset ;
-    schema:name "Alpine Temp Records" ;
-    schema:description "Records used in Renku projects." ;
-    schema:identifier "10.5281/zenodo.12345" ;
-    schema:datePublished "2025-11-01"^^xsd:date ;
-    pulse:relatedSoftware pulse:RenkuRepo .

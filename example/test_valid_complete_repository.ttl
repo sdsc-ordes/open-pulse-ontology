@@ -37,6 +37,7 @@ pulse:LeadResearcher a schema:Person ;
 
 pulse:SarahContribution a pulse:Contribution ;
     schema:author pulse:LeadResearcher ;
+    pulse:contributionTo pulse:CompleteRepo ;
     pulse:contributionCount "256"^^xsd:integer ;
     pulse:firstContributionDate "2024-01-10T09:00:00"^^xsd:dateTime ;
     pulse:lastContributionDate "2024-12-15T17:30:00"^^xsd:dateTime .

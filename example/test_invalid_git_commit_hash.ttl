@@ -11,15 +11,10 @@ pulse:InvalidCommitRepo a schema:SoftwareSourceCode ;
     schema:codeRepository <https://github.com/example/invalid-commit> ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.citation> ;
-    schema:creator pulse:CommitAuthor ;
-    pulse:hasCommit pulse:InvalidCommit .
-
-pulse:InvalidCommit a pulse:GitCommit ;
-    schema:identifier "12345" ;
-    schema:dateCreated "2024-01-10T14:30:00"^^xsd:dateTime ;
     schema:author pulse:CommitAuthor .
 
 pulse:CommitAuthor a schema:Person ;
     schema:name "Dave Developer" ;
     schema:email "dave@example.com" ;
-    pulse:gitUsername "davedeveloper" .
+    pulse:gitUsername "davedeveloper" ;
+    pulse:orcidIdentifier "0000-0003-4567-8901" .
