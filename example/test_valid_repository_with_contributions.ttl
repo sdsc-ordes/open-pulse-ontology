@@ -65,6 +65,6 @@ pulse:AliceMembership a org:Membership ;
 pulse:MathOrg a org:Organization ;
     schema:name "Mathematics Institute" ;
     schema:identifier "https://ror.org/0abcdef12" ;
-    schema:url <https://math.example.org> ;
+    schema:url <https://github.com/DeepLabCut> ;
     pulse:OrganizationType pulse:University ;
     pulse:owns pulse:RepoWithContributions .
