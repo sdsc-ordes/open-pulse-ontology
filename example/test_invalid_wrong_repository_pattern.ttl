@@ -13,7 +13,7 @@ pulse:InvalidLicenseRepoPattern a schema:SoftwareSourceCode ;
     schema:name "Invalid License Test" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
     schema:license <https://github.com/example/invalid-license> ;
-    schema:codeRepository <https://opensource.org/licenses/MIT> ; 
+    pulse:githubRepositoryHandle "<https://opensource.org/licenses/MIT>" ;  # Invalid: should be owner/repo format
     schema:citation <https://doi.org/10.1234/example.citation> ;
     schema:author pulse:Author2 ;
     pulse:repositoryType pulse:Software ;
@@ -22,5 +22,5 @@ pulse:InvalidLicenseRepoPattern a schema:SoftwareSourceCode ;
 pulse:Author2 a schema:Person ;
     schema:name "Alice Johnson" ;
     schema:email "alice@example.com" ;
-    pulse:gitUsername "alicejohnson" ;
+    pulse:githubUsername "alicejohnson" ;
     pulse:orcidIdentifier "0000-0002-1825-0097" .

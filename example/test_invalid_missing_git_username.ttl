@@ -7,12 +7,12 @@ wd:Q395 a pulse:DisciplineEnumeration .
 pulse:Software a pulse:RepositoryTypeEnumeration .
 
 # INVALID PERSON - Should FAIL validation
-# Missing required git username, pulse:GitUsernameShape has sh:minCount 1
+# Missing all required identifiers - must have at least one of: githubUsername, email, or infoscienceUsername (sh:xone constraint)
 
 pulse:InvalidMissingGitUsernameRepo a schema:SoftwareSourceCode ;
     schema:name "Missing Git Username Test" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    schema:codeRepository <https://github.com/example/invalid-git-username> ;
+    pulse:githubRepositoryHandle "example/invalid-git-username" ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.citation> ;
     schema:author pulse:PersonMissingGitUsername ;
@@ -21,5 +21,4 @@ pulse:InvalidMissingGitUsernameRepo a schema:SoftwareSourceCode ;
 
 pulse:PersonMissingGitUsername a schema:Person ;
     schema:name "George NoUsername" ;
-    schema:email "george@example.com" ;
     pulse:orcidIdentifier "0000-0002-1825-0097" .

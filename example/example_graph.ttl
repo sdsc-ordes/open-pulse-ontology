@@ -12,7 +12,7 @@ wd:Q395 a pulse:DisciplineEnumeration .
 pulse:Alice a schema:Person ;
     schema:name "Alice" ;
     schema:email "alice@epfl.ch" ;
-    pulse:gitUsername "alice-dev" ;
+    pulse:githubUsername "alice-dev" ;
     pulse:orcidIdentifier "0000-0001-2345-6789" ;
     pulse:hasContribution pulse:AliceRenkuContribution ;
     org:hasMembership pulse:AliceEPFLMembership , pulse:AliceSDSCMembership .
@@ -20,12 +20,12 @@ pulse:Alice a schema:Person ;
 pulse:EPFL a org:Organization ;
     schema:name "EPFL" ;
     schema:identifier "https://ror.org/02aj6n233" ;
-    schema:url <https://github.com/epfl> .
+    pulse:githubOrganizationHandle "epfl" .
 
 pulse:SDSC a org:Organization ;
     schema:name "Swiss Data Science Center" ;
     schema:identifier "https://ror.org/03v8tnc06" ;
-    schema:url <https://github.com/swissdatasciencecenter> ;
+    pulse:githubOrganizationHandle "swissdatasciencecenter" ;
     pulse:owns pulse:RenkuRepo .
 
 pulse:AliceEPFLMembership a org:Membership ;
@@ -41,7 +41,7 @@ pulse:AliceSDSCMembership a org:Membership ;
 pulse:RenkuRepo a schema:SoftwareSourceCode ;
     schema:name "Renku" ;
     schema:dateCreated "2024-05-13T10:00:00Z"^^xsd:dateTime ;
-    schema:codeRepository <https://github.com/swissdatasciencecenter/renku> ;
+    pulse:githubRepositoryHandle "swissdatasciencecenter/renku" ;
     schema:license <https://spdx.org/licenses/Apache-2.0.html> ;
     schema:author pulse:Alice ;
     pulse:ownedBy pulse:SDSC ;

@@ -21,7 +21,7 @@ pulse:Software a pulse:RepositoryTypeEnumeration .
 pulse:ValidRepo a schema:SoftwareSourceCode ;
     schema:name "Valid Test Repository" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    schema:codeRepository <https://github.com/example/valid-repo> ;
+    pulse:githubRepositoryHandle "example/valid-repo" ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.citation> ;
     schema:programmingLanguage "Python" ;
@@ -34,10 +34,10 @@ pulse:ValidRepo a schema:SoftwareSourceCode ;
 pulse:ValidAuthor a schema:Person ;
     schema:name "Jane Doe" ;
     schema:email "jane.doe@example.com" ;
-    pulse:gitUsername "janedoe" ;
+    pulse:githubUsername "janedoe" ;
     pulse:orcidIdentifier "0000-0002-1825-0097" .
 
 pulse:ValidOrganization a org:Organization ;
     schema:name "Example Research Lab" ;
     schema:identifier "https://ror.org/012345678" ;
-    schema:url <https://github.com/DeepLabCut> .
+    pulse:githubOrganizationHandle "DeepLabCut" .

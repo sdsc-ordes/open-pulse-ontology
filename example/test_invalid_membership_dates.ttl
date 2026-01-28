@@ -10,7 +10,7 @@
 pulse:InvalidMembershipRepo a schema:SoftwareSourceCode ;
     schema:name "Invalid Membership Test" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    schema:codeRepository <https://github.com/example/invalid-membership> ;
+    pulse:githubRepositoryHandle "example/invalid-membership" ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.citation> ;
     schema:author pulse:PersonWithInvalidMembership .
@@ -18,7 +18,7 @@ pulse:InvalidMembershipRepo a schema:SoftwareSourceCode ;
 pulse:PersonWithInvalidMembership a schema:Person ;
     schema:name "Charlie Brown" ;
     schema:email "charlie@example.com" ;
-    pulse:gitUsername "charliebrown" ;
+    pulse:githubUsername "charliebrown" ;
     pulse:orcidIdentifier "0000-0005-6789-0123" ;
     org:hasMembership pulse:InvalidMembership .
 
@@ -31,4 +31,4 @@ pulse:InvalidMembership a org:Membership ;
 pulse:SomeOrg a org:Organization ;
     schema:name "Some Organization" ;
     schema:identifier "https://ror.org/987654321" ;
-    schema:url <https://github.com/someorg> .
+    pulse:githubOrganizationHandle "someorg" .

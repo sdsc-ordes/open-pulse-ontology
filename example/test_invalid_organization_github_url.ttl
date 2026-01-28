@@ -9,7 +9,7 @@
 pulse:InvalidGithubUrlRepo a schema:SoftwareSourceCode ;
     schema:name "Invalid GitHub URL Test" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    schema:codeRepository <https://github.com/example/test-repo> ;
+    pulse:githubRepositoryHandle "example/test-repo" ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.citation> ;
     schema:author pulse:GithubUrlAuthor ;
@@ -18,10 +18,10 @@ pulse:InvalidGithubUrlRepo a schema:SoftwareSourceCode ;
 pulse:GithubUrlAuthor a schema:Person ;
     schema:name "Github URL Test Author" ;
     schema:email "github@example.com" ;
-    pulse:gitUsername "githubauthor" ;
+    pulse:githubUsername "githubauthor" ;
     pulse:orcidIdentifier "0000-0006-7890-1234" .
 
 pulse:InvalidGithubOrg a org:Organization ;
     schema:name "Invalid GitHub Org" ;
     schema:identifier "https://ror.org/012345678" ;
-    schema:url <https://gitlab.com/example-org> .  # Wrong domain, should be github.com
+    pulse:githubOrganizationHandle "<https://gitlab.com/example-org>" .  # Invalid: should be just a handle, not a full URL

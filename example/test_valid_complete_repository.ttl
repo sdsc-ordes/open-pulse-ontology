@@ -14,7 +14,7 @@ pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
 pulse:CompleteRepo a schema:SoftwareSourceCode ;
     schema:name "Complete Research Software" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    schema:codeRepository <https://github.com/epfl/research-software> ;
+    pulse:githubRepositoryHandle "epfl/research-software" ;
     schema:license <https://spdx.org/licenses/BSD-3-Clause.html> ;
     schema:citation <https://doi.org/10.5281/zenodo.1234567> ;
     schema:programmingLanguage "Python" ;
@@ -28,7 +28,7 @@ pulse:CompleteRepo a schema:SoftwareSourceCode ;
 pulse:LeadResearcher a schema:Person ;
     schema:name "Dr. Sarah Smith" ;
     schema:email "sarah.smith@epfl.ch" ;
-    pulse:gitUsername "sarahsmith" ;
+    pulse:githubUsername "sarahsmith" ;
     pulse:infoscienceUsername "sarah.smith" ;
     pulse:orcidIdentifier "0000-0001-5109-3700" ;
     schema:url <https://people.epfl.ch/sarah.smith> ;
@@ -51,7 +51,7 @@ pulse:Membership1 a org:Membership ;
 pulse:EPFLLab a org:Organization ;
     schema:name "EPFL Computational Lab" ;
     schema:identifier "https://ror.org/02s376052" ;
-    schema:url <https://github.com/DeepLabCut> ;
+    pulse:githubOrganizationHandle "DeepLabCut" ;
     pulse:OrganizationType pulse:ResearchInstitution ;
     pulse:githubOrgFollowers "320"^^xsd:integer ;
     pulse:owns pulse:CompleteRepo .

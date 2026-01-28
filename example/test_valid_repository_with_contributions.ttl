@@ -15,7 +15,7 @@ pulse:University a pulse:OrganizationTypeEnumeration .
 pulse:RepoWithContributions a schema:SoftwareSourceCode ;
     schema:name "Math Library with Contributions" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    schema:codeRepository <https://github.com/example/math-lib> ;
+    pulse:githubRepositoryHandle "example/math-lib" ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.mathlib> ;
     schema:programmingLanguage "Python" ;
@@ -30,7 +30,7 @@ pulse:RepoWithContributions a schema:SoftwareSourceCode ;
 pulse:LeadContributor a schema:Person ;
     schema:name "Alice Developer" ;
     schema:email "alice.dev@example.com" ;
-    pulse:gitUsername "alicedev" ;
+    pulse:githubUsername "alicedev" ;
     pulse:orcidIdentifier "0000-0001-2345-6789" ;
     schema:url <https://github.com/alicedev> ;
     pulse:hasContribution pulse:AliceContribution ;
@@ -39,7 +39,7 @@ pulse:LeadContributor a schema:Person ;
 pulse:SecondaryContributor a schema:Person ;
     schema:name "Bob Coder" ;
     schema:email "bob.coder@example.com" ;
-    pulse:gitUsername "bobcoder" ;
+    pulse:githubUsername "bobcoder" ;
     pulse:orcidIdentifier "0000-0002-3456-7890" ;
     pulse:hasContribution pulse:BobContribution .
 
@@ -67,6 +67,6 @@ pulse:AliceMembership a org:Membership ;
 pulse:MathOrg a org:Organization ;
     schema:name "Mathematics Institute" ;
     schema:identifier "https://ror.org/0abcdef12" ;
-    schema:url <https://github.com/DeepLabCut> ;
+    pulse:githubOrganizationHandle "DeepLabCut" ;
     pulse:OrganizationType pulse:University ;
     pulse:owns pulse:RepoWithContributions .

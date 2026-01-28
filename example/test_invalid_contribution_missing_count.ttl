@@ -11,7 +11,7 @@ pulse:Software a pulse:RepositoryTypeEnumeration .
 pulse:InvalidContributionRepo a schema:SoftwareSourceCode ;
     schema:name "Invalid Contribution Test" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    schema:codeRepository <https://github.com/example/invalid-contrib> ;
+    pulse:githubRepositoryHandle "example/invalid-contrib" ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.invalid> ;
     schema:programmingLanguage "JavaScript" ;
@@ -22,7 +22,7 @@ pulse:InvalidContributionRepo a schema:SoftwareSourceCode ;
 pulse:ContribAuthor a schema:Person ;
     schema:name "Charlie Contributor" ;
     schema:email "charlie@example.com" ;
-    pulse:gitUsername "charliec" ;
+    pulse:githubUsername "charliec" ;
     pulse:orcidIdentifier "0000-0003-4567-8901" ;
     pulse:hasContribution pulse:InvalidContribution .
 

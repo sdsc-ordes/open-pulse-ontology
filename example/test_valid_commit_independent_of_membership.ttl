@@ -14,7 +14,7 @@ pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
 pulse:InvalidTemporalRepo a schema:SoftwareSourceCode ;
     schema:name "Temporal Misaligned Repo" ;
     schema:dateCreated "2024-02-01T08:00:00"^^xsd:dateTime ;
-    schema:codeRepository <https://github.com/epfl/temporal-misaligned> ;
+    pulse:githubRepositoryHandle "epfl/temporal-misaligned" ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.temporal> ;
     schema:programmingLanguage "Scala" ;
@@ -28,7 +28,7 @@ pulse:InvalidTemporalRepo a schema:SoftwareSourceCode ;
 pulse:TemporalAuthor a schema:Person ;
     schema:name "Alex Temporal" ;
     schema:email "alex.temporal@epfl.ch" ;
-    pulse:gitUsername "alextemporal" ;
+    pulse:githubUsername "alextemporal" ;
     pulse:orcidIdentifier "0000-0001-8888-9999" ;
     org:hasMembership pulse:BrokenMembership .
 
@@ -41,6 +41,6 @@ pulse:BrokenMembership a org:Membership ;
 pulse:TemporalLab a org:Organization ;
     schema:name "EPFL Temporal Lab" ;
     schema:identifier "https://ror.org/02s376052" ;
-    schema:url <https://github.com/DeepLabCut> ;
+    pulse:githubOrganizationHandle "DeepLabCut" ;
     pulse:OrganizationType pulse:ResearchInstitution ;
     pulse:owns pulse:InvalidTemporalRepo .

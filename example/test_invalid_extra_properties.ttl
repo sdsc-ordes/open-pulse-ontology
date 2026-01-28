@@ -12,7 +12,7 @@ wd:Q420 a pulse:DisciplineEnumeration .
 pulse:InvalidExtraPropsRepo a schema:SoftwareSourceCode ;
     schema:name "Invalid Extra Props Test" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    schema:codeRepository <https://github.com/example/invalid-extra> ;
+    pulse:githubRepositoryHandle "example/invalid-extra" ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.citation> ;
     schema:author pulse:PersonWithExtraProps ;
@@ -22,6 +22,6 @@ pulse:InvalidExtraPropsRepo a schema:SoftwareSourceCode ;
 pulse:PersonWithExtraProps a schema:Person ;
     schema:name "Eve Extra" ;
     schema:email "eve@example.com" ;
-    pulse:gitUsername "eveextra" ;
+    pulse:githubUsername "eveextra" ;
     pulse:orcidIdentifier "0000-0004-5678-9012" ;
     pulse:notAllowedProperty "This property is not defined in the shape" .
