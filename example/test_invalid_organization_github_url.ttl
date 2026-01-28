@@ -4,7 +4,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # INVALID ORGANIZATION - Should FAIL validation
-# Organization URL doesn't match required GitHub pattern
+# Organization githubOrganizationHandle should be a simple string handle, not a URL or IRI
 
 pulse:InvalidGithubUrlRepo a schema:SoftwareSourceCode ;
     schema:name "Invalid GitHub URL Test" ;
@@ -24,4 +24,4 @@ pulse:GithubUrlAuthor a schema:Person ;
 pulse:InvalidGithubOrg a org:Organization ;
     schema:name "Invalid GitHub Org" ;
     schema:identifier "https://ror.org/012345678" ;
-    pulse:githubOrganizationHandle "<https://gitlab.com/example-org>" .  # Invalid: should be just a handle, not a full URL
+    pulse:githubOrganizationHandle <https://github.com/example-org> .  # Invalid: should be a string literal \"example-org\", not an IRI

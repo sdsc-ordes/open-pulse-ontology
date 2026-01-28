@@ -302,7 +302,7 @@ pulse:PersonShape
         sh:class schema:SoftwareSourceCode ;
         sh:name "Owns Repository"
     ] ;
-    sh:xone (
+    sh:or (
         [ sh:property [ sh:path pulse:githubUsername ; sh:minCount 1 ] ]
         [ sh:property [ sh:path schema:email ; sh:minCount 1 ] ]
         [ sh:property [ sh:path pulse:infoscienceUsername ; sh:minCount 1 ] ]
