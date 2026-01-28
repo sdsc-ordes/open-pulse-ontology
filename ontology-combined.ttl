@@ -121,8 +121,11 @@ org:organization a rdf:Property ; skos:prefLabel "organization" ; skos:definitio
 org:role a rdf:Property ; skos:prefLabel "role"; skos:definition "Indicates the Role that the Agent plays in a Membership relationship with an Organization." .
 time:hasBeginning a rdf:Property ; skos:prefLabel "has beginning" ; skos:definition "The beginning of the temporal entity." .
 time:hasEnd a rdf:Property ; skos:prefLabel "has end" ; skos:definition "The end of the temporal entity." .
-pulse:gitUsername a rdf:Property ; skos:prefLabel "git username" ; skos:definition "The GitHub/Git handle of a person." .
+pulse:githubUsername a rdf:Property ; skos:prefLabel "github username" ; skos:definition "The GitHub handle of a person." .
+pulse:githubOrganizationHandle a rdf:Property ; skos:prefLabel "github organization handle" ; skos:definition "The GitHub handle of an organization." .
+pulse:githubRepositoryHandle a rdf:Property ; skos:prefLabel "github repository handle" ; skos:definition "The handle of the GitHub repository in the format 'owner/repository'." .
 pulse:infoscienceUsername a rdf:Property ; skos:prefLabel "infoscience username" ; skos:definition "The Infoscience username of a person." .
+pulse:infoscienceOrganizationIdentifierShape a rdf:Property ; skos:prefLabel "infoscience organization identifier" ; skos:definition "The Infoscience identifier for an organization." .
 pulse:discipline a rdf:Property ; skos:prefLabel "discipline" ; skos:definition "The academic or scientific discipline associated with the resource." .
 pulse:repositoryType a rdf:Property ; skos:prefLabel "repository type" ; skos:definition "The type or category of the repository (e.g., software, data, publication)." .
 pulse:OrganizationType a rdf:Property ; skos:prefLabel "organization type" ; skos:definition "The type or category of the organization (e.g., university, research institute, company)." .
@@ -171,12 +174,25 @@ pulse:OrganizationTypeShape
     sh:name "Organization Type" ;
     sh:description "Must be a valid IRI from the Organization Type enumeration (e.g., pulse:University)." .
 
-pulse:GitUsernameShape
+pulse:GithubUsernameShape
     a sh:PropertyShape ;
-    sh:path pulse:gitUsername ;
+    sh:path pulse:githubUsername ;
     sh:datatype xsd:string ;
+    sh:description "The GitHub handle of a person." .
+
+pulse:GithubOrganizationHandleShape a sh:PropertyShape ;
+    sh:path pulse:githubOrganizationHandle ;
+    sh:datatype xsd:string ;
+    sh:description "The GitHub handle of an organization." .
+
+pulse:GithubRepositoryHandleShape
+    a sh:PropertyShape ;
+    sh:path pulse:githubRepositoryHandle ;
     sh:minCount 1 ;
-    sh:description "The GitHub/Git handle of a person." .
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:pattern "^[a-zA-Z0-9\\-_]+/[a-zA-Z0-9\\-_]+$" ;
+    sh:description "The GitHub repository handle in the format 'owner/repository'." .
 
 pulse:DisciplineShape
     a sh:PropertyShape ;
@@ -205,7 +221,6 @@ pulse:OrcidPropertyShape
     sh:path pulse:orcidIdentifier ;
     sh:datatype xsd:string ;
     sh:pattern "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$" ;
-    sh:minCount 1 ;
     sh:description "ORCID identifier validation." .
 
 pulse:InfoscienceArticleIdentifierShape
@@ -213,6 +228,13 @@ pulse:InfoscienceArticleIdentifierShape
     sh:path pulse:infoscienceArticleIdentifier ;
     sh:datatype xsd:string ;
     sh:description "Infoscience article identifier." .
+
+pulse:InfoscienceOrganizationIdentifierShape 
+    a sh:PropertyShape ;
+    sh:path schema:identifier ;
+    sh:datatype xsd:string ;
+    sh:pattern "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$" ;
+    sh:description "Infoscience Organization ID validation." .
 
 pulse:RorPropertyShape
     a sh:PropertyShape ;
@@ -264,7 +286,7 @@ pulse:PersonShape
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property pulse:NameShape ;
-    sh:property pulse:GitUsernameShape ;
+    sh:property pulse:GithubUsernameShape ;
     sh:property pulse:EmailShape ;
     sh:property pulse:UrlShape ;
     sh:property pulse:OrcidPropertyShape ;
@@ -279,7 +301,12 @@ pulse:PersonShape
         sh:path pulse:owns ; 
         sh:class schema:SoftwareSourceCode ;
         sh:name "Owns Repository"
-    ].
+    ] ;
+    sh:xone (
+        [ sh:property [ sh:path pulse:githubUsername ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path schema:email ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path pulse:infoscienceUsername ; sh:minCount 1 ] ]
+    ) .
 
 pulse:ArticleShape
     a sh:NodeShape ;
@@ -307,12 +334,7 @@ pulse:OrganizationShape
     sh:ignoredProperties ( rdf:type ) ;
     sh:property pulse:NameShape ;
     sh:property pulse:RorPropertyShape ;
-    sh:property [ 
-        sh:path schema:url ; 
-        sh:pattern "^https://github\\.com/[a-zA-Z0-9\\-_]+$" ;
-        sh:name "URL" ;
-        sh:description "Organization URL - can be a GitHub organization URL."
-    ] ;
+    sh:property pulse:GithubOrganizationHandleShape ;
     sh:property pulse:OrganizationTypeShape ;
     sh:property pulse:GithubOrgFollowersShape ;
     sh:property pulse:HasUnitPropertyShape ;
@@ -336,7 +358,7 @@ pulse:RepositoryShape
     sh:property pulse:GithubRepoStarsShape ;
     sh:property pulse:GithubRepoForksShape ;
     sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Creation Date" ] ;
-    sh:property [ sh:path schema:codeRepository ; sh:nodeKind sh:IRI ;sh:pattern "^https?://(github|gitlab|bitbucket)\\.com/" ;  sh:flags "i" ; sh:name "Code Repository URL" ] ; 
+    sh:property pulse:GithubRepositoryHandleShape ;
     sh:property [ sh:path schema:license ; sh:nodeKind sh:IRI ; sh:name "License" ] ;
     sh:property [ sh:path schema:citation ; sh:nodeKind sh:IRI ; sh:name "Citation" ] ;
     sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
