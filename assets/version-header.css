@@ -472,6 +472,20 @@
   font-size: 0.85rem;
 }
 
+.commit-nav-arrow-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.commit-nav-count {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  min-width: 20px;
+  text-align: center;
+}
+
 .commit-nav-btn {
   display: flex;
   align-items: center;
@@ -889,6 +903,10 @@
     font-size: 0.8rem;
   }
 
+  .commit-nav-arrow-group {
+    gap: 4px;
+  }
+
   .commit-message {
     display: none;
   }
@@ -934,6 +952,11 @@
 
   .commit-date {
     display: none;
+  }
+
+  .commit-nav-count {
+    min-width: 16px;
+    font-size: 0.7rem;
   }
 
   .search-input-wrapper.open {

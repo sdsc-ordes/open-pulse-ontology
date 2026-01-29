@@ -327,10 +327,17 @@
     const currentIndex = commits.findIndex(c => c.hash === currentCommitHash);
     const commit = commits[currentIndex] || commits[0];
 
-    const hasPrev = currentIndex > 0;
-    const hasNext = currentIndex < commits.length - 1;
-    const prevCommit = hasPrev ? commits[currentIndex - 1] : null;
-    const nextCommit = hasNext ? commits[currentIndex + 1] : null;
+    // Commits are sorted newest first (index 0 = newest)
+    // "Previous" = older commits = higher index (to the left)
+    // "Next" = newer commits = lower index (to the right)
+    const hasOlder = currentIndex < commits.length - 1;
+    const hasNewer = currentIndex > 0;
+    const olderCommit = hasOlder ? commits[currentIndex + 1] : null;
+    const newerCommit = hasNewer ? commits[currentIndex - 1] : null;
+
+    // Count commits on each side
+    const olderCount = commits.length - 1 - currentIndex;  // commits after current
+    const newerCount = currentIndex;  // commits before current
 
     const icons = {
       left: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>`,
@@ -340,9 +347,12 @@
     return `
       <div class="commit-nav">
         <div class="commit-nav-content">
-          <button class="commit-nav-btn" ${hasPrev ? `data-href="${getBranchCommitPath(branchName, prevCommit.hash)}"` : 'disabled'} title="${hasPrev ? 'Newer commit' : 'No newer commits'}">
-            ${icons.left}
-          </button>
+          <div class="commit-nav-arrow-group">
+            <button class="commit-nav-btn" ${hasOlder ? `data-href="${getBranchCommitPath(branchName, olderCommit.hash)}"` : 'disabled'} title="${hasOlder ? 'Previous (older) commit' : 'No older commits'}">
+              ${icons.left}
+            </button>
+            <span class="commit-nav-count">${olderCount}</span>
+          </div>
           <div class="commit-info">
             <a href="${getGitHubCommitUrl(commit.hash)}" class="commit-hash" target="_blank" rel="noopener" title="View on GitHub">
               ${escapeHtml(commit.hash.substring(0, 7))}
@@ -355,9 +365,12 @@
             <span class="commit-message">"${escapeHtml(commit.message || '')}"</span>
             <span class="commit-position">${currentIndex + 1}/${commits.length}</span>
           </div>
-          <button class="commit-nav-btn" ${hasNext ? `data-href="${getBranchCommitPath(branchName, nextCommit.hash)}"` : 'disabled'} title="${hasNext ? 'Older commit' : 'No older commits'}">
-            ${icons.right}
-          </button>
+          <div class="commit-nav-arrow-group">
+            <span class="commit-nav-count">${newerCount}</span>
+            <button class="commit-nav-btn" ${hasNewer ? `data-href="${getBranchCommitPath(branchName, newerCommit.hash)}"` : 'disabled'} title="${hasNewer ? 'Next (newer) commit' : 'No newer commits'}">
+              ${icons.right}
+            </button>
+          </div>
         </div>
       </div>
     `;
