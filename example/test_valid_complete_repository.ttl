@@ -29,7 +29,7 @@ pulse:LeadResearcher a schema:Person ;
     schema:name "Dr. Sarah Smith" ;
     schema:email "sarah.smith@epfl.ch" ;
     pulse:githubUsername "sarahsmith" ;
-    pulse:infoscienceUsername "sarah.smith" ;
+    pulse:infosciencePersonIdentifier "sarah.smith" ;
     pulse:orcidIdentifier "0000-0001-5109-3700" ;
     schema:url <https://people.epfl.ch/sarah.smith> ;
     pulse:hasContribution pulse:SarahContribution ;

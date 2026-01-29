@@ -7,7 +7,7 @@ wd:Q395 a pulse:DisciplineEnumeration .
 pulse:Software a pulse:RepositoryTypeEnumeration .
 
 # INVALID PERSON - Should FAIL validation
-# Missing all required identifiers - must have at least one of: githubUsername, email, or infoscienceUsername (sh:xone constraint)
+# Missing all required identifiers - must have at least one of: githubUsername, email, or infoscienceIdentifier (sh:xone constraint)
 
 pulse:InvalidMissingGitUsernameRepo a schema:SoftwareSourceCode ;
     schema:name "Missing Git Username Test" ;

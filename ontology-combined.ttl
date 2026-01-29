@@ -124,8 +124,8 @@ time:hasEnd a rdf:Property ; skos:prefLabel "has end" ; skos:definition "The end
 pulse:githubUsername a rdf:Property ; skos:prefLabel "github username" ; skos:definition "The GitHub handle of a person." .
 pulse:githubOrganizationHandle a rdf:Property ; skos:prefLabel "github organization handle" ; skos:definition "The GitHub handle of an organization." .
 pulse:githubRepositoryHandle a rdf:Property ; skos:prefLabel "github repository handle" ; skos:definition "The handle of the GitHub repository in the format 'owner/repository'." .
-pulse:infoscienceUsername a rdf:Property ; skos:prefLabel "infoscience username" ; skos:definition "The Infoscience username of a person." .
-pulse:infoscienceOrganizationIdentifierShape a rdf:Property ; skos:prefLabel "infoscience organization identifier" ; skos:definition "The Infoscience identifier for an organization." .
+pulse:infosciencePersonIdentifier a rdf:Property ; skos:prefLabel "infoscience Identifier" ; skos:definition "The infoscience identifier of a person." .
+pulse:infoscienceOrganizationIdentifier a rdf:Property ; skos:prefLabel "infoscience organization identifier" ; skos:definition "The Infoscience identifier for an organization." .
 pulse:discipline a rdf:Property ; skos:prefLabel "discipline" ; skos:definition "The academic or scientific discipline associated with the resource." .
 pulse:repositoryType a rdf:Property ; skos:prefLabel "repository type" ; skos:definition "The type or category of the repository (e.g., software, data, publication)." .
 pulse:OrganizationType a rdf:Property ; skos:prefLabel "organization type" ; skos:definition "The type or category of the organization (e.g., university, research institute, company)." .
@@ -231,7 +231,7 @@ pulse:InfoscienceArticleIdentifierShape
 
 pulse:InfoscienceOrganizationIdentifierShape 
     a sh:PropertyShape ;
-    sh:path schema:identifier ;
+    sh:path pulse:infoscienceOrganizationIdentifier;
     sh:datatype xsd:string ;
     sh:pattern "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$" ;
     sh:description "Infoscience Organization ID validation." .
@@ -290,7 +290,7 @@ pulse:PersonShape
     sh:property pulse:EmailShape ;
     sh:property pulse:UrlShape ;
     sh:property pulse:OrcidPropertyShape ;
-    sh:property [ sh:path pulse:infoscienceUsername ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Infoscience Username" ] ;
+    sh:property [ sh:path pulse:infosciencePersonIdentifier ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Infoscience Identifier" ] ;
     sh:property [ sh:path pulse:hasContribution ; sh:class pulse:Contribution ; sh:name "Has Contribution" ] ;
     sh:property [ 
         sh:path org:hasMembership ; 
@@ -305,7 +305,7 @@ pulse:PersonShape
     sh:or (
         [ sh:property [ sh:path pulse:githubUsername ; sh:minCount 1 ] ]
         [ sh:property [ sh:path schema:email ; sh:minCount 1 ] ]
-        [ sh:property [ sh:path pulse:infoscienceUsername ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path pulse:infosciencePersonIdentifier ; sh:minCount 1 ] ]
     ) .
 
 pulse:ArticleShape
