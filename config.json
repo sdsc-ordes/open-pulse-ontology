@@ -1,0 +1,9 @@
+{
+  "title": "Open Pulse Ontology",
+  "repository": "https://github.com/open-pulse/open-pulse-ontology",
+  "defaultVersion": "latest-release",
+  "priorityBranches": ["main", "develop"],
+  "maxDropdownReleases": 3,
+  "maxDropdownBranches": 2,
+  "commitHistoryLimit": 50
+}
