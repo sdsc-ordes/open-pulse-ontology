@@ -62,6 +62,8 @@ jobs:
       - name: Fix SVG namespace issue
         run: |
           sed -i 's/ xmlns=""//g' docs/ontology.svg docs/index.html
+          # Remove XML declaration from inline SVG (breaks HTML rendering)
+          sed -i 's/<?xml version="1.0" encoding="us-ascii" standalone="no"?>//g' docs/index.html
 
       - name: Inject Enumerations into HTML
         run: |

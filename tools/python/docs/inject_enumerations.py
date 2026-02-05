@@ -114,6 +114,14 @@ def generate_enumeration_html(enumerations):
     return "\n".join(html_parts)
 
 
+def is_inside_svg(element):
+    """Check if an element is inside an SVG element."""
+    for parent in element.parents:
+        if parent.name == "svg":
+            return True
+    return False
+
+
 def inject_references_to_enum_classes(soup, enumerations):
     """Add references to enumeration value tables in their class sections."""
     for enum_uri, enum_data in enumerations.items():
@@ -137,10 +145,15 @@ def inject_references_to_enum_classes(soup, enumerations):
                 if "contains" in selector:
                     for elem in soup.find_all(["h2", "h3", "h4"]):
                         if elem.get_text() and enum_data["label"] in elem.get_text():
-                            target_element = elem
-                            break
+                            # Skip elements inside SVG
+                            if not is_inside_svg(elem):
+                                target_element = elem
+                                break
                 else:
-                    target_element = soup.select_one(selector)
+                    candidate = soup.select_one(selector)
+                    # Skip elements inside SVG
+                    if candidate and not is_inside_svg(candidate):
+                        target_element = candidate
 
                 if target_element:
                     break
