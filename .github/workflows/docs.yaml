@@ -59,6 +59,10 @@ jobs:
             -i ontology-combined.ttl \
             -o docs/ontology.svg
 
+      - name: Fix SVG namespace issue
+        run: |
+          sed -i 's/ xmlns=""//g' docs/ontology.svg
+
       - name: Inject Enumerations into HTML
         run: |
           python tools/python/docs/inject_enumerations.py ontology-combined.ttl docs/index.html
