@@ -62,7 +62,7 @@ jobs:
         run: |
           java -jar shacl-play-cli.jar \
             draw \
-            -i ${{ env.enriched_file }} \
+            -i ontology-combined.ttl \
             -o docs/ontology.svg
 
       - name: Inject Enumerations into HTML
