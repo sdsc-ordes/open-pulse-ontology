@@ -17,11 +17,6 @@ on:
       - "shapes.ttl"
     tags:
       - "v*"
-  pull_request:
-    paths:
-      - "ontology-combined.ttl"
-      - "ontology.ttl"
-      - "shapes.ttl"
 
 permissions:
   contents: write
@@ -33,7 +28,6 @@ jobs:
   generate-docs:
     runs-on: ubuntu-latest
     outputs:
-      should_deploy: ${{ steps.check-deploy.outputs.should_deploy }}
       version_type: ${{ steps.version-info.outputs.type }}
       version_name: ${{ steps.version-info.outputs.name }}
       commit_hash: ${{ steps.version-info.outputs.commit }}
@@ -47,17 +41,6 @@ jobs:
         with:
           ref: ${{ github.event.inputs.ref || github.ref }}
           fetch-depth: 0
-
-      - name: Check if should deploy
-        id: check-deploy
-        run: |
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            echo "should_deploy=false" >> $GITHUB_OUTPUT
-            echo "Pull request - will build but not deploy"
-          else
-            echo "should_deploy=true" >> $GITHUB_OUTPUT
-            echo "Push event - will build and deploy"
-          fi
 
       - name: Determine version info
         id: version-info
@@ -155,7 +138,6 @@ jobs:
     name: Deploy to Docs Branch
     needs: generate-docs
     runs-on: ubuntu-latest
-    if: needs.generate-docs.outputs.should_deploy == 'true'
 
     steps:
       - name: Checkout docs branch
