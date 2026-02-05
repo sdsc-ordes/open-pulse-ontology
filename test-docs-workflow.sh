@@ -17,7 +17,7 @@ echo ""
 echo "Step 2: Checking if SHACL Play CLI exists..."
 if [ ! -f "shacl-play-cli.jar" ]; then
     echo "  Downloading SHACL Play CLI..."
-    curl -L -o shacl-play-cli.jar https://github.com/sparna-git/shacl-play/releases/download/0.10.2/shacl-play-app-0.10.2-onejar.jar
+    curl -L -o shacl-play-cli.jar https://github.com/sparna-git/shacl-play/releases/download/0.11.4/shacl-play-app-0.11.4-onejar.jar
     echo "  ✓ Downloaded"
 else
     echo "  ✓ Already exists"
