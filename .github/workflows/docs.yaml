@@ -61,7 +61,7 @@ jobs:
 
       - name: Fix SVG namespace issue
         run: |
-          sed -i 's/ xmlns=""//g' docs/ontology.svg
+          sed -i 's/ xmlns=""//g' docs/ontology.svg docs/index.html
 
       - name: Inject Enumerations into HTML
         run: |
