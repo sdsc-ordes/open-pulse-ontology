@@ -1,0 +1,27 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+wd:Q395 a pulse:DisciplineEnumeration .
+
+# INVALID GITHUB METRICS - Should FAIL (Github stats must be xsd:integer)
+
+pulse:InvalidMetricsRepo a schema:SoftwareSourceCode ;
+    schema:name "Bad Metrics Repo" ;
+    schema:dateCreated "2024-03-01T10:00:00"^^xsd:dateTime ;
+    pulse:githubRepositoryHandle "example/bad-metrics" ;
+    schema:license <https://spdx.org/licenses/MIT.html> ;
+    schema:citation <https://doi.org/10.1234/example.badmetrics> ;
+    schema:author pulse:MetricsAuthor ;
+    pulse:repositoryType pulse:Software ;
+    pulse:discipline wd:Q395 ;
+    pulse:githubRepoStars "12k" ;      # invalid datatype
+    pulse:githubRepoForks "forty" .    # invalid datatype
+
+pulse:MetricsAuthor a schema:Person ;
+    schema:name "Pat Metrics" ;
+    schema:email "pat.metrics@example.com" ;
+    pulse:githubUsername "patmetrics" ;
+    pulse:orcidIdentifier "0000-0002-3456-7890" .

@@ -1,0 +1,46 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+wd:Q395 a pulse:DisciplineEnumeration .
+pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
+
+# VALID TEMPORAL ALIGNMENT - Should PASS validation
+# Membership interval is independent of commit timing
+
+pulse:InvalidTemporalRepo a schema:SoftwareSourceCode ;
+    schema:name "Temporal Misaligned Repo" ;
+    schema:dateCreated "2024-02-01T08:00:00"^^xsd:dateTime ;
+    pulse:githubRepositoryHandle "epfl/temporal-misaligned" ;
+    schema:license <https://spdx.org/licenses/MIT.html> ;
+    schema:citation <https://doi.org/10.1234/example.temporal> ;
+    schema:programmingLanguage "Scala" ;
+    schema:programmingLanguage "Python" ;
+    schema:programmingLanguage "C++" ;
+    schema:author pulse:TemporalAuthor ;
+    pulse:ownedBy pulse:TemporalLab ;
+    pulse:repositoryType pulse:Software ;
+    pulse:discipline wd:Q395 .  # Mathematics
+
+pulse:TemporalAuthor a schema:Person ;
+    schema:name "Alex Temporal" ;
+    schema:email "alex.temporal@epfl.ch" ;
+    pulse:githubUsername "alextemporal" ;
+    pulse:orcidIdentifier "0000-0001-8888-9999" ;
+    org:hasMembership pulse:BrokenMembership .
+
+pulse:BrokenMembership a org:Membership ;
+    org:organization pulse:TemporalLab ;
+    org:role "Contributor" ;
+    time:hasBeginning "2024-06-01"^^xsd:date ;
+    time:hasEnd "2024-07-01"^^xsd:date . 
+
+pulse:TemporalLab a org:Organization ;
+    schema:name "EPFL Temporal Lab" ;
+    schema:identifier "https://ror.org/02s376052" ;
+    pulse:githubOrganizationHandle "DeepLabCut" ;
+    pulse:OrganizationType pulse:ResearchInstitution ;
+    pulse:owns pulse:InvalidTemporalRepo .

@@ -1,0 +1,72 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+wd:Q395 a pulse:DisciplineEnumeration .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+pulse:University a pulse:OrganizationTypeEnumeration .
+
+# VALID REPOSITORY WITH CONTRIBUTIONS - Should PASS validation
+# This example demonstrates the Contribution pattern for tracking aggregated
+# contribution statistics for persons
+
+pulse:RepoWithContributions a schema:SoftwareSourceCode ;
+    schema:name "Math Library with Contributions" ;
+    schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
+    pulse:githubRepositoryHandle "example/math-lib" ;
+    schema:license <https://spdx.org/licenses/MIT.html> ;
+    schema:citation <https://doi.org/10.1234/example.mathlib> ;
+    schema:programmingLanguage "Python" ;
+    pulse:githubRepoStars "42"^^xsd:integer ;
+    pulse:githubRepoForks "8"^^xsd:integer ;
+    schema:author pulse:LeadContributor ;
+    schema:author pulse:SecondaryContributor ;
+    pulse:ownedBy pulse:MathOrg ;
+    pulse:repositoryType pulse:Software ;
+    pulse:discipline wd:Q395 .  # Mathematics
+
+pulse:LeadContributor a schema:Person ;
+    schema:name "Alice Developer" ;
+    schema:email "alice.dev@example.com" ;
+    pulse:githubUsername "alicedev" ;
+    pulse:orcidIdentifier "0000-0001-2345-6789" ;
+    schema:url <https://github.com/alicedev> ;
+    pulse:hasContribution pulse:AliceContribution ;
+    org:hasMembership pulse:AliceMembership .
+
+pulse:SecondaryContributor a schema:Person ;
+    schema:name "Bob Coder" ;
+    schema:email "bob.coder@example.com" ;
+    pulse:githubUsername "bobcoder" ;
+    pulse:orcidIdentifier "0000-0002-3456-7890" ;
+    pulse:hasContribution pulse:BobContribution .
+
+# Contribution objects track aggregated statistics
+pulse:AliceContribution a pulse:Contribution ;
+    schema:author pulse:LeadContributor ;
+    pulse:contributionTo pulse:RepoWithContributions ;
+    pulse:contributionCount "127"^^xsd:integer ;
+    pulse:firstContributionDate "2024-01-15T10:30:00"^^xsd:dateTime ;
+    pulse:lastContributionDate "2024-12-20T16:45:00"^^xsd:dateTime .
+
+pulse:BobContribution a pulse:Contribution ;
+    schema:author pulse:SecondaryContributor ;
+    pulse:contributionTo pulse:RepoWithContributions ;
+    pulse:contributionCount "43"^^xsd:integer ;
+    pulse:firstContributionDate "2024-03-10T09:15:00"^^xsd:dateTime ;
+    pulse:lastContributionDate "2024-11-05T14:30:00"^^xsd:dateTime .
+
+pulse:AliceMembership a org:Membership ;
+    org:organization pulse:MathOrg ;
+    org:role "Lead Developer" ;
+    time:hasBeginning "2024-01-01"^^xsd:date ;
+    time:hasEnd "2025-12-31"^^xsd:date .
+
+pulse:MathOrg a org:Organization ;
+    schema:name "Mathematics Institute" ;
+    schema:identifier "https://ror.org/0abcdef12" ;
+    pulse:githubOrganizationHandle "DeepLabCut" ;
+    pulse:OrganizationType pulse:University ;
+    pulse:owns pulse:RepoWithContributions .

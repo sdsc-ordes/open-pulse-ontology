@@ -1,0 +1,27 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# INVALID ORGANIZATION - Should FAIL validation
+# Organization githubOrganizationHandle should be a simple string handle, not a URL or IRI
+
+pulse:InvalidGithubUrlRepo a schema:SoftwareSourceCode ;
+    schema:name "Invalid GitHub URL Test" ;
+    schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
+    pulse:githubRepositoryHandle "example/test-repo" ;
+    schema:license <https://spdx.org/licenses/MIT.html> ;
+    schema:citation <https://doi.org/10.1234/example.citation> ;
+    schema:author pulse:GithubUrlAuthor ;
+    pulse:ownedBy pulse:InvalidGithubOrg .
+
+pulse:GithubUrlAuthor a schema:Person ;
+    schema:name "Github URL Test Author" ;
+    schema:email "github@example.com" ;
+    pulse:githubUsername "githubauthor" ;
+    pulse:orcidIdentifier "0000-0006-7890-1234" .
+
+pulse:InvalidGithubOrg a org:Organization ;
+    schema:name "Invalid GitHub Org" ;
+    schema:identifier "https://ror.org/012345678" ;
+    pulse:githubOrganizationHandle <https://github.com/example-org> .  # Invalid: should be a string literal \"example-org\", not an IRI

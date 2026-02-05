@@ -1,0 +1,34 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# INVALID MEMBERSHIP - Should FAIL validation
+# End date is before start date, time:hasBeginning has sh:lessThan time:hasEnd
+
+pulse:InvalidMembershipRepo a schema:SoftwareSourceCode ;
+    schema:name "Invalid Membership Test" ;
+    schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
+    pulse:githubRepositoryHandle "example/invalid-membership" ;
+    schema:license <https://spdx.org/licenses/MIT.html> ;
+    schema:citation <https://doi.org/10.1234/example.citation> ;
+    schema:author pulse:PersonWithInvalidMembership .
+
+pulse:PersonWithInvalidMembership a schema:Person ;
+    schema:name "Charlie Brown" ;
+    schema:email "charlie@example.com" ;
+    pulse:githubUsername "charliebrown" ;
+    pulse:orcidIdentifier "0000-0005-6789-0123" ;
+    org:hasMembership pulse:InvalidMembership .
+
+pulse:InvalidMembership a org:Membership ;
+    org:organization pulse:SomeOrg ;
+    org:role "Researcher" ;
+    time:hasBeginning "2025-01-01"^^xsd:date ;
+    time:hasEnd "2024-01-01"^^xsd:date .  # End date before start date!
+
+pulse:SomeOrg a org:Organization ;
+    schema:name "Some Organization" ;
+    schema:identifier "https://ror.org/987654321" ;
+    pulse:githubOrganizationHandle "someorg" .

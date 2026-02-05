@@ -1,0 +1,26 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+wd:Q413 a pulse:DisciplineEnumeration .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+
+# INVALID REPOSITORY - Should FAIL validation
+# Here I swapped the licence with codeRepository URL 
+
+pulse:InvalidLicenseRepoPattern a schema:SoftwareSourceCode ;
+    schema:name "Invalid License Test" ;
+    schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
+    schema:license <https://github.com/example/invalid-license> ;
+    pulse:githubRepositoryHandle "<https://opensource.org/licenses/MIT>" ;  # Invalid: should be owner/repo format
+    schema:citation <https://doi.org/10.1234/example.citation> ;
+    schema:author pulse:Author2 ;
+    pulse:repositoryType pulse:Software ;
+    pulse:discipline wd:Q413 .  # Physics
+
+pulse:Author2 a schema:Person ;
+    schema:name "Alice Johnson" ;
+    schema:email "alice@example.com" ;
+    pulse:githubUsername "alicejohnson" ;
+    pulse:orcidIdentifier "0000-0002-1825-0097" .

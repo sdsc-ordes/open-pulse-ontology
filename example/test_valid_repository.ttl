@@ -1,0 +1,43 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+wd:Q395 a pulse:DisciplineEnumeration .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+
+# VALID REPOSITORY - Should PASS validation
+# This repository satisfies all required constraints:
+# - has name (required, max 60 chars)
+# - has dateCreated
+# - has codeRepository (IRI)
+# - has license (IRI)
+# - has citation (IRI)
+# - has creator (Person, minCount 1)
+# - has managedBy (Organization, maxCount 1)
+# - has repositoryType from enumeration
+# - has discipline from enumeration
+
+pulse:ValidRepo a schema:SoftwareSourceCode ;
+    schema:name "Valid Test Repository" ;
+    schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
+    pulse:githubRepositoryHandle "example/valid-repo" ;
+    schema:license <https://spdx.org/licenses/MIT.html> ;
+    schema:citation <https://doi.org/10.1234/example.citation> ;
+    schema:programmingLanguage "Python" ;
+    pulse:githubRepoStars "12"^^xsd:integer ;
+    schema:author pulse:ValidAuthor ;
+    pulse:ownedBy pulse:ValidOrganization ;
+    pulse:repositoryType pulse:Software ;
+    pulse:discipline wd:Q395 .  # Mathematics
+
+pulse:ValidAuthor a schema:Person ;
+    schema:name "Jane Doe" ;
+    schema:email "jane.doe@example.com" ;
+    pulse:githubUsername "janedoe" ;
+    pulse:orcidIdentifier "0000-0002-1825-0097" .
+
+pulse:ValidOrganization a org:Organization ;
+    schema:name "Example Research Lab" ;
+    schema:identifier "https://ror.org/012345678" ;
+    pulse:githubOrganizationHandle "DeepLabCut" .

@@ -1,0 +1,27 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+wd:Q420 a pulse:DisciplineEnumeration .
+
+# INVALID PERSON - Should FAIL validation
+# Contains extra properties not allowed by closed shape, pulse:PersonShape has sh:closed true
+
+pulse:InvalidExtraPropsRepo a schema:SoftwareSourceCode ;
+    schema:name "Invalid Extra Props Test" ;
+    schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
+    pulse:githubRepositoryHandle "example/invalid-extra" ;
+    schema:license <https://spdx.org/licenses/MIT.html> ;
+    schema:citation <https://doi.org/10.1234/example.citation> ;
+    schema:author pulse:PersonWithExtraProps ;
+    pulse:repositoryType pulse:Software ;
+    pulse:discipline wd:Q420 .
+
+pulse:PersonWithExtraProps a schema:Person ;
+    schema:name "Eve Extra" ;
+    schema:email "eve@example.com" ;
+    pulse:githubUsername "eveextra" ;
+    pulse:orcidIdentifier "0000-0004-5678-9012" ;
+    pulse:notAllowedProperty "This property is not defined in the shape" .

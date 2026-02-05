@@ -1,0 +1,58 @@
+@prefix pulse:     <https://open-pulse.epfl.ch/ontology#> .
+@prefix schema: <http://schema.org/> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix pulse:  <https://open-pulse.epfl.ch/ontology#> .
+@prefix time:   <http://www.w3.org/2006/time#> .
+@prefix wd:     <http://www.wikidata.org/entity/> .
+
+pulse:Software a pulse:RepositoryTypeEnumeration .
+wd:Q395 a pulse:DisciplineEnumeration .
+
+pulse:Alice a schema:Person ;
+    schema:name "Alice" ;
+    schema:email "alice@epfl.ch" ;
+    pulse:githubUsername "alice-dev" ;
+    pulse:orcidIdentifier "0000-0001-2345-6789" ;
+    pulse:hasContribution pulse:AliceRenkuContribution ;
+    org:hasMembership pulse:AliceEPFLMembership , pulse:AliceSDSCMembership .
+
+pulse:EPFL a org:Organization ;
+    schema:name "EPFL" ;
+    schema:identifier "https://ror.org/02aj6n233" ;
+    pulse:githubOrganizationHandle "epfl" .
+
+pulse:SDSC a org:Organization ;
+    schema:name "Swiss Data Science Center" ;
+    schema:identifier "https://ror.org/03v8tnc06" ;
+    pulse:githubOrganizationHandle "swissdatasciencecenter" ;
+    pulse:owns pulse:RenkuRepo .
+
+pulse:AliceEPFLMembership a org:Membership ;
+    org:organization pulse:EPFL ;
+    org:role "PhD Student" ;
+    time:hasBeginning "2022-09-01"^^xsd:date .
+
+pulse:AliceSDSCMembership a org:Membership ;
+    org:organization pulse:SDSC ;
+    org:role "Affiliated Researcher" ;
+    time:hasBeginning "2024-01-01"^^xsd:date .
+
+pulse:RenkuRepo a schema:SoftwareSourceCode ;
+    schema:name "Renku" ;
+    schema:dateCreated "2024-05-13T10:00:00Z"^^xsd:dateTime ;
+    pulse:githubRepositoryHandle "swissdatasciencecenter/renku" ;
+    schema:license <https://spdx.org/licenses/Apache-2.0.html> ;
+    schema:author pulse:Alice ;
+    pulse:ownedBy pulse:SDSC ;
+    pulse:repositoryType pulse:Software ; 
+    pulse:discipline wd:Q395 ;
+    schema:programmingLanguage "Python" .
+
+pulse:AliceRenkuContribution a pulse:Contribution ;
+    schema:author pulse:Alice ;
+    pulse:contributionTo pulse:RenkuRepo ;
+    pulse:contributionCount 2 ;
+    pulse:firstContributionDate "2026-01-10T14:30:00Z"^^xsd:dateTime ;
+    pulse:lastContributionDate "2026-01-12T09:15:00Z"^^xsd:dateTime .
+
