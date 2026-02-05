@@ -2,11 +2,15 @@ name: SHACL Documentation Generation
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "ontology-combined.ttl"
       - "ontology.ttl"
       - "shapes.ttl"
   pull_request:
+    branches:
+      - main
     paths:
       - "ontology-combined.ttl"
       - "ontology.ttl"
