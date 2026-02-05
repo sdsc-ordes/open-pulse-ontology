@@ -17,6 +17,11 @@ on:
       - "shapes.ttl"
     tags:
       - "v*"
+  pull_request:
+    paths:
+      - "ontology-combined.ttl"
+      - "ontology.ttl"
+      - "shapes.ttl"
 
 permissions:
   contents: write
@@ -28,6 +33,7 @@ jobs:
   generate-docs:
     runs-on: ubuntu-latest
     outputs:
+      should_deploy: ${{ steps.check-deploy.outputs.should_deploy }}
       version_type: ${{ steps.version-info.outputs.type }}
       version_name: ${{ steps.version-info.outputs.name }}
       commit_hash: ${{ steps.version-info.outputs.commit }}
@@ -41,6 +47,17 @@ jobs:
         with:
           ref: ${{ github.event.inputs.ref || github.ref }}
           fetch-depth: 0
+
+      - name: Check if should deploy
+        id: check-deploy
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "should_deploy=false" >> $GITHUB_OUTPUT
+            echo "Pull request - will build but not deploy"
+          else
+            echo "should_deploy=true" >> $GITHUB_OUTPUT
+            echo "Push event - will build and deploy"
+          fi
 
       - name: Determine version info
         id: version-info
@@ -138,6 +155,7 @@ jobs:
     name: Deploy to Docs Branch
     needs: generate-docs
     runs-on: ubuntu-latest
+    if: needs.generate-docs.outputs.should_deploy == 'true'
 
     steps:
       - name: Checkout docs branch
@@ -169,20 +187,25 @@ jobs:
           if [ "$VERSION_TYPE" == "release" ]; then
             # For releases: versions/{tag}/
             TARGET_PATH="versions/$VERSION_NAME"
+            ASSETS_PATH="../../assets"
           else
             # For branches: branches/{name}/{commit}/
             TARGET_PATH="branches/$VERSION_NAME/$COMMIT_HASH"
+            ASSETS_PATH="../../../assets"
           fi
           
           echo "path=$TARGET_PATH" >> $GITHUB_OUTPUT
+          echo "assets_path=$ASSETS_PATH" >> $GITHUB_OUTPUT
           
           echo "----------------------------------------"
           echo "Target path: $TARGET_PATH"
+          echo "Assets path: $ASSETS_PATH"
           echo "----------------------------------------"
 
       - name: Copy docs to target folder
         run: |
           TARGET_PATH="${{ steps.target.outputs.path }}"
+          ASSETS_PATH="${{ steps.target.outputs.assets_path }}"
           
           # Create target directory
           mkdir -p "$TARGET_PATH"
@@ -190,13 +213,24 @@ jobs:
           # Copy generated docs
           cp -r generated-docs/* "$TARGET_PATH/"
           
-          # Rename generated index.html to doc.html and use the header wrapper as index.html
-          # The wrapper dynamically resolves asset paths at runtime, so it works at any
-          # directory depth (including branch names with slashes like feat/my-feature)
+          # Inject header CSS/JS includes into index.html
           if [ -f "$TARGET_PATH/index.html" ]; then
-            mv "$TARGET_PATH/index.html" "$TARGET_PATH/doc.html"
-            cp assets/index-header.html "$TARGET_PATH/index.html"
-            echo "Wrapper index.html placed, generated docs renamed to doc.html"
+            # Check if already has version-header includes
+            if ! grep -q "version-header.css" "$TARGET_PATH/index.html"; then
+              echo "Injecting version header includes..."
+              
+              # Try to inject after <meta charset> first
+              if grep -q '<meta[^>]*charset' "$TARGET_PATH/index.html"; then
+                sed -i 's|\(<meta[^>]*charset[^>]*>\)|\1\n<link rel="stylesheet" href="'"$ASSETS_PATH"'/version-header.css">\n<script src="'"$ASSETS_PATH"'/version-header.js" defer></script>|I' "$TARGET_PATH/index.html"
+              # Otherwise inject after <head>
+              elif grep -q '<head>' "$TARGET_PATH/index.html"; then
+                sed -i 's|<head>|<head>\n<link rel="stylesheet" href="'"$ASSETS_PATH"'/version-header.css">\n<script src="'"$ASSETS_PATH"'/version-header.js" defer></script>|I' "$TARGET_PATH/index.html"
+              else
+                echo "Warning: Could not find insertion point for header includes"
+              fi
+            else
+              echo "Version header includes already present"
+            fi
           fi
           
           # Cleanup downloaded artifact folder
