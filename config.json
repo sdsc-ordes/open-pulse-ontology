@@ -4,6 +4,6 @@
   "defaultVersion": "latest-release",
   "priorityBranches": ["main", "develop"],
   "maxDropdownReleases": 3,
-  "maxDropdownBranches": 2,
+  "maxDropdownBranches": 5,
   "commitHistoryLimit": 50
 }

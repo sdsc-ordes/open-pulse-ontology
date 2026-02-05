@@ -139,6 +139,17 @@
     });
   }
 
+  function sortBranchesByLatestCommit(branchNames) {
+    // Sort branches by their most recent commit date (newest first)
+    return [...branchNames].sort((a, b) => {
+      const aCommits = versionsData.branches[a]?.commits || [];
+      const bCommits = versionsData.branches[b]?.commits || [];
+      const aDate = aCommits[0]?.date || '1970-01-01';
+      const bDate = bCommits[0]?.date || '1970-01-01';
+      return bDate.localeCompare(aDate); // Descending order (newest first)
+    });
+  }
+
   // ============================================
   // Search Functions
   // ============================================
@@ -271,10 +282,11 @@
 
   function buildDropdownContent(location) {
     const releases = sortReleasesBySemver(versionsData.releases);
-    const branchNames = sortBranchesByPriority(Object.keys(versionsData.branches));
+    // Sort branches by latest commit date (newest first)
+    const branchNames = sortBranchesByLatestCommit(Object.keys(versionsData.branches));
 
     const maxReleases = config.maxDropdownReleases || 3;
-    const maxBranches = config.maxDropdownBranches || 2;
+    const maxBranches = config.maxDropdownBranches || 5;
 
     let html = '';
 
@@ -293,21 +305,20 @@
       html += '</div>';
     }
 
-    // Priority branches section
-    const priorityBranches = branchNames.filter(name => 
-      (config.priorityBranches || []).includes(name)
-    ).slice(0, maxBranches);
+    // Branches section - sorted by latest commit, show up to maxBranches
+    const displayBranches = branchNames.slice(0, maxBranches);
 
-    if (priorityBranches.length > 0) {
-      html += '<div class="version-group"><div class="version-group-label">Active Development</div>';
-      priorityBranches.forEach(branchName => {
+    if (displayBranches.length > 0) {
+      html += '<div class="version-group"><div class="version-group-label">Branches (by recent activity)</div>';
+      displayBranches.forEach(branchName => {
         const branchData = versionsData.branches[branchName];
         const latestCommit = branchData.commits[0];
         const isCurrent = location.type === 'branch' && location.branch === branchName;
+        const isPriority = (config.priorityBranches || []).includes(branchName);
         html += `
           <a href="${getBranchCommitPath(branchName, latestCommit.hash)}" class="version-option ${isCurrent ? 'current' : ''}">
             ${escapeHtml(branchName)}
-            <span class="option-badge dev">dev</span>
+            ${isPriority ? '<span class="option-badge dev">dev</span>' : ''}
           </a>`;
       });
       html += '</div>';
@@ -417,8 +428,8 @@
     });
     releasesHtml += '</tbody></table>';
 
-    // Build branches accordion
-    const branchNames = sortBranchesByPriority(Object.keys(versionsData.branches));
+    // Build branches accordion - sorted by latest commit date
+    const branchNames = sortBranchesByLatestCommit(Object.keys(versionsData.branches));
     let branchesHtml = '';
 
     branchNames.forEach(branchName => {

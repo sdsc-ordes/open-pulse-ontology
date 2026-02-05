@@ -51,21 +51,8 @@
           "message": "Add Dataset and ImagingModality classes"
         }
       ]
-    },
-    "feat/docks-workflow": {
-      "commits": [
-        {
-          "hash": "0130a09",
-          "date": "2026-02-05",
-          "author": "caviri",
-          "message": "test: testing ci"
-        }
-      ]
     }
   },
   "latestRelease": "v0.1.0",
-  "priorityBranches": [
-    "main",
-    "develop"
-  ]
+  "priorityBranches": ["main", "develop"]
 }
