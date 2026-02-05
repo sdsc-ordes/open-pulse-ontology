@@ -1,98 +1,24 @@
-name: SHACL Documentation Generation Versioned
+name: SHACL Documentation Generation
 
 on:
-  workflow_dispatch:
-    inputs:
-      ref:
-        description: "Branch or tag to build docs from (leave empty for current)"
-        required: false
-        default: ""
   push:
-    branches:
-      - "**"
-      - "!docs" # Exclude docs branch to prevent loops
     paths:
       - "ontology-combined.ttl"
       - "ontology.ttl"
       - "shapes.ttl"
-    tags:
-      - "v*"
   pull_request:
     paths:
       - "ontology-combined.ttl"
       - "ontology.ttl"
       - "shapes.ttl"
 
-permissions:
-  contents: write
-
-env:
-  DOCS_BRANCH: docs
-
 jobs:
   generate-docs:
     runs-on: ubuntu-latest
-    outputs:
-      should_deploy: ${{ steps.check-deploy.outputs.should_deploy }}
-      version_type: ${{ steps.version-info.outputs.type }}
-      version_name: ${{ steps.version-info.outputs.name }}
-      commit_hash: ${{ steps.version-info.outputs.commit }}
-      commit_date: ${{ steps.version-info.outputs.date }}
-      commit_author: ${{ steps.version-info.outputs.author }}
-      commit_message: ${{ steps.version-info.outputs.message }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.inputs.ref || github.ref }}
-          fetch-depth: 0
-
-      - name: Check if should deploy
-        id: check-deploy
-        run: |
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            echo "should_deploy=false" >> $GITHUB_OUTPUT
-            echo "Pull request - will build but not deploy"
-          else
-            echo "should_deploy=true" >> $GITHUB_OUTPUT
-            echo "Push event - will build and deploy"
-          fi
-
-      - name: Determine version info
-        id: version-info
-        run: |
-          # Get commit info
-          COMMIT_HASH=$(git rev-parse --short=7 HEAD)
-          COMMIT_DATE=$(git log -1 --format=%cs)
-          COMMIT_AUTHOR=$(git log -1 --format=%an)
-          # Escape quotes and limit message length
-          COMMIT_MESSAGE=$(git log -1 --format=%s | head -c 100 | sed 's/"/\\"/g')
-          
-          # Determine if this is a tag or branch
-          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            VERSION_TYPE="release"
-            VERSION_NAME="${{ github.ref_name }}"
-          else
-            VERSION_TYPE="branch"
-            VERSION_NAME="${{ github.ref_name }}"
-          fi
-          
-          echo "type=$VERSION_TYPE" >> $GITHUB_OUTPUT
-          echo "name=$VERSION_NAME" >> $GITHUB_OUTPUT
-          echo "commit=$COMMIT_HASH" >> $GITHUB_OUTPUT
-          echo "date=$COMMIT_DATE" >> $GITHUB_OUTPUT
-          echo "author=$COMMIT_AUTHOR" >> $GITHUB_OUTPUT
-          echo "message=$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
-          
-          echo "----------------------------------------"
-          echo "Version type: $VERSION_TYPE"
-          echo "Version name: $VERSION_NAME"
-          echo "Commit hash: $COMMIT_HASH"
-          echo "Commit date: $COMMIT_DATE"
-          echo "Commit author: $COMMIT_AUTHOR"
-          echo "Commit message: $COMMIT_MESSAGE"
-          echo "----------------------------------------"
 
       - name: Set up Python and install dependencies
         run: |
@@ -119,274 +45,42 @@ jobs:
 
       - name: Generate Documentation
         run: |
-          mkdir -p generated-docs
           java -jar shacl-play-cli.jar \
             doc \
             -d \
             -i ontology-combined.ttl \
             -l en \
-            -o generated-docs/index.html
+            -o docs/index.html
 
       - name: Generate Ontology Diagram
         run: |
           java -jar shacl-play-cli.jar \
             draw \
             -i ontology-combined.ttl \
-            -o generated-docs/ontology.svg
+            -o docs/ontology.svg
 
       - name: Fix SVG namespace issue
         run: |
-          sed -i 's/ xmlns=""//g' generated-docs/ontology.svg generated-docs/index.html
+          sed -i 's/ xmlns=""//g' docs/ontology.svg docs/index.html
           # Remove XML declaration from inline SVG (breaks HTML rendering)
-          sed -i 's/<?xml version="1.0" encoding="us-ascii" standalone="no"?>//g' generated-docs/index.html
+          sed -i 's/<?xml version="1.0" encoding="us-ascii" standalone="no"?>//g' docs/index.html
 
       - name: Inject Enumerations into HTML
         run: |
-          python tools/python/docs/inject_enumerations.py ontology-combined.ttl generated-docs/index.html
+          python tools/python/docs/inject_enumerations.py ontology-combined.ttl docs/index.html
 
-      - name: Upload generated documentation as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: shacl-documentation
-          path: generated-docs/
-          retention-days: 7
-
-  deploy-docs:
-    name: Deploy to Docs Branch
-    needs: generate-docs
-    runs-on: ubuntu-latest
-    if: needs.generate-docs.outputs.should_deploy == 'true'
-
-    steps:
-      - name: Checkout docs branch
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ env.DOCS_BRANCH }}
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Ensure on docs branch
-        run: |
-          git checkout ${{ env.DOCS_BRANCH }} || git checkout -b ${{ env.DOCS_BRANCH }}
-          git pull origin ${{ env.DOCS_BRANCH }} --rebase || true
-          echo "Current branch: $(git branch --show-current)"
-
-      - name: Download generated docs
-        uses: actions/download-artifact@v4
-        with:
-          name: shacl-documentation
-          path: generated-docs
-
-      - name: Determine target folder
-        id: target
-        run: |
-          VERSION_TYPE="${{ needs.generate-docs.outputs.version_type }}"
-          VERSION_NAME="${{ needs.generate-docs.outputs.version_name }}"
-          COMMIT_HASH="${{ needs.generate-docs.outputs.commit_hash }}"
-          
-          if [ "$VERSION_TYPE" == "release" ]; then
-            # For releases: versions/{tag}/
-            TARGET_PATH="versions/$VERSION_NAME"
-            ASSETS_PATH="../../assets"
-          else
-            # For branches: branches/{name}/{commit}/
-            TARGET_PATH="branches/$VERSION_NAME/$COMMIT_HASH"
-            ASSETS_PATH="../../../assets"
-          fi
-          
-          echo "path=$TARGET_PATH" >> $GITHUB_OUTPUT
-          echo "assets_path=$ASSETS_PATH" >> $GITHUB_OUTPUT
-          
-          echo "----------------------------------------"
-          echo "Target path: $TARGET_PATH"
-          echo "Assets path: $ASSETS_PATH"
-          echo "----------------------------------------"
-
-      - name: Copy docs to target folder
-        run: |
-          TARGET_PATH="${{ steps.target.outputs.path }}"
-          ASSETS_PATH="${{ steps.target.outputs.assets_path }}"
-          
-          # Create target directory
-          mkdir -p "$TARGET_PATH"
-          
-          # Copy generated docs
-          cp -r generated-docs/* "$TARGET_PATH/"
-          
-          # Inject header CSS/JS includes into index.html
-          if [ -f "$TARGET_PATH/index.html" ]; then
-            # Check if already has version-header includes
-            if ! grep -q "version-header.css" "$TARGET_PATH/index.html"; then
-              echo "Injecting version header includes..."
-              
-              # Try to inject after <meta charset> first
-              if grep -q '<meta[^>]*charset' "$TARGET_PATH/index.html"; then
-                sed -i 's|\(<meta[^>]*charset[^>]*>\)|\1\n<link rel="stylesheet" href="'"$ASSETS_PATH"'/version-header.css">\n<script src="'"$ASSETS_PATH"'/version-header.js" defer></script>|I' "$TARGET_PATH/index.html"
-              # Otherwise inject after <head>
-              elif grep -q '<head>' "$TARGET_PATH/index.html"; then
-                sed -i 's|<head>|<head>\n<link rel="stylesheet" href="'"$ASSETS_PATH"'/version-header.css">\n<script src="'"$ASSETS_PATH"'/version-header.js" defer></script>|I' "$TARGET_PATH/index.html"
-              else
-                echo "Warning: Could not find insertion point for header includes"
-              fi
-            else
-              echo "Version header includes already present"
-            fi
-          fi
-          
-          # Cleanup downloaded artifact folder
-          rm -rf generated-docs
-          
-          echo "Files deployed to $TARGET_PATH:"
-          ls -la "$TARGET_PATH/"
-
-      - name: Update versions.json
-        run: |
-          VERSION_TYPE="${{ needs.generate-docs.outputs.version_type }}"
-          VERSION_NAME="${{ needs.generate-docs.outputs.version_name }}"
-          COMMIT_HASH="${{ needs.generate-docs.outputs.commit_hash }}"
-          COMMIT_DATE="${{ needs.generate-docs.outputs.commit_date }}"
-          COMMIT_AUTHOR="${{ needs.generate-docs.outputs.commit_author }}"
-          COMMIT_MESSAGE="${{ needs.generate-docs.outputs.commit_message }}"
-          
-          # Create versions.json if it doesn't exist
-          if [ ! -f "versions.json" ]; then
-            echo "Creating new versions.json"
-            echo '{"releases":[],"branches":{},"latestRelease":null,"priorityBranches":["main","develop"]}' > versions.json
-          fi
-          
-          # Export variables for Python script
-          export VERSION_TYPE VERSION_NAME COMMIT_HASH COMMIT_DATE COMMIT_AUTHOR COMMIT_MESSAGE
-          
-          # Use Python to update versions.json
-          python3 << 'PYTHON_SCRIPT'
-          import json
-          import os
-          
-          # Read environment variables
-          version_type = os.environ.get('VERSION_TYPE', '')
-          version_name = os.environ.get('VERSION_NAME', '')
-          commit_hash = os.environ.get('COMMIT_HASH', '')
-          commit_date = os.environ.get('COMMIT_DATE', '')
-          commit_author = os.environ.get('COMMIT_AUTHOR', '')
-          commit_message = os.environ.get('COMMIT_MESSAGE', '')[:100]
-          
-          print(f"Updating versions.json for {version_type}: {version_name} @ {commit_hash}")
-          
-          with open('versions.json', 'r') as f:
-              data = json.load(f)
-          
-          if version_type == "release":
-              # Add or update release
-              releases = data.get('releases', [])
-              
-              release_entry = {
-                  'tag': version_name,
-                  'path': f'/versions/{version_name}/',
-                  'date': commit_date,
-                  'commit': commit_hash,
-                  'author': commit_author,
-                  'message': commit_message
-              }
-              
-              # Check if release already exists
-              existing_idx = next((i for i, r in enumerate(releases) if r['tag'] == version_name), None)
-              
-              if existing_idx is not None:
-                  releases[existing_idx] = release_entry
-                  print(f"Updated existing release: {version_name}")
-              else:
-                  releases.append(release_entry)
-                  print(f"Added new release: {version_name}")
-              
-              data['releases'] = releases
-              
-              # Update latestRelease (compare semver)
-              def parse_version(v):
-                  parts = v.lstrip('v').split('.')
-                  return [int(x) for x in parts if x.isdigit()]
-              
-              try:
-                  current_latest = data.get('latestRelease')
-                  if not current_latest:
-                      data['latestRelease'] = version_name
-                      print(f"Set latestRelease to: {version_name}")
-                  else:
-                      if parse_version(version_name) >= parse_version(current_latest):
-                          data['latestRelease'] = version_name
-                          print(f"Updated latestRelease to: {version_name}")
-              except Exception as e:
-                  print(f"Warning: Could not compare versions: {e}")
-                  if not data.get('latestRelease'):
-                      data['latestRelease'] = version_name
-          
-          else:
-              # Add commit to branch
-              branches = data.get('branches', {})
-              
-              if version_name not in branches:
-                  branches[version_name] = {'commits': []}
-                  print(f"Created new branch entry: {version_name}")
-              
-              commit_entry = {
-                  'hash': commit_hash,
-                  'date': commit_date,
-                  'author': commit_author,
-                  'message': commit_message
-              }
-              
-              commits = branches[version_name]['commits']
-              
-              # Check if commit already exists
-              existing_idx = next((i for i, c in enumerate(commits) if c['hash'] == commit_hash), None)
-              
-              if existing_idx is not None:
-                  commits[existing_idx] = commit_entry
-                  print(f"Updated existing commit: {commit_hash}")
-              else:
-                  # Add to beginning (newest first)
-                  commits.insert(0, commit_entry)
-                  print(f"Added new commit: {commit_hash}")
-              
-              # Limit to 50 commits per branch
-              max_commits = 50
-              if len(commits) > max_commits:
-                  commits = commits[:max_commits]
-                  print(f"Trimmed commits to {max_commits}")
-              
-              branches[version_name]['commits'] = commits
-              data['branches'] = branches
-          
-          with open('versions.json', 'w') as f:
-              json.dump(data, f, indent=2)
-          
-          print("versions.json updated successfully")
-          PYTHON_SCRIPT
-
-      - name: Commit and push to docs branch
+      - name: Commit generated docs (for push events only)
+        if: github.event_name == 'push'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          VERSION_TYPE="${{ needs.generate-docs.outputs.version_type }}"
-          VERSION_NAME="${{ needs.generate-docs.outputs.version_name }}"
-          COMMIT_HASH="${{ needs.generate-docs.outputs.commit_hash }}"
-          
-          git add .
-          
-          if [ "$VERSION_TYPE" == "release" ]; then
-            COMMIT_MSG="docs: deploy release $VERSION_NAME"
-          else
-            COMMIT_MSG="docs: deploy $VERSION_NAME @ $COMMIT_HASH"
-          fi
-          
-          # Check if there are changes to commit
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "$COMMIT_MSG"
-            # Push explicitly to docs branch, handling detached HEAD
-            git push origin HEAD:${{ env.DOCS_BRANCH }}
-            echo "----------------------------------------"
-            echo "Deployed: $COMMIT_MSG"
-            echo "----------------------------------------"
-          fi
+          git add docs/index.html
+          git add docs/ontology.svg
+          git commit -m "Update generated docs" || echo "Nothing to commit"
+          git push
+
+      - name: Upload generated documentation as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: shacl-documentation
+          path: docs/index.html
