@@ -144,6 +144,7 @@ pulse:firstContributionDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:pref
 pulse:lastContributionDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:prefLabel "last contribution date" ; skos:definition "The date of the most recent contribution." .
 pulse:infoscienceArticleIdentifier a rdf:Property ; skos:prefLabel "infoscience article identifier" ; skos:definition "The Infoscience identifier for an article." .
 pulse:orcidIdentifier a rdf:Property ; skos:prefLabel "ORCID identifier" ; skos:definition "The ORCID identifier for a person." .
+
 # ---------------------------------------------------------
 # 2. REUSABLE PROPERTY SHAPES
 # ---------------------------------------------------------
