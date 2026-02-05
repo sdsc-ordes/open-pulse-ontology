@@ -15,7 +15,6 @@
 # ---------------------------------------------------------
 # 1. CLASS & PROPERTY SECTION
 # ---------------------------------------------------------
-# Testing action
 
 <https://open-pulse.epfl.ch/ontology#> a owl:Ontology ;
     dct:abstract "The Open Pulse Ontology to model contributions to open source scientific software and research articles from EPFL." ;
