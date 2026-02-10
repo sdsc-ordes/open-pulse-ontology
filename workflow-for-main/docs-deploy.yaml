@@ -198,17 +198,10 @@ jobs:
           # Copy generated docs
           cp -r generated-docs/* "$TARGET_PATH/"
           
-          # Inject header includes into index.html
+          # Rename generated index.html to doc.html and use the header wrapper as index.html
           if [ -f "$TARGET_PATH/index.html" ]; then
-            # Determine relative path to assets
-            if [[ "$TARGET_PATH" == versions/* ]]; then
-              ASSETS_PATH="../../assets"
-            else
-              ASSETS_PATH="../../../assets"
-            fi
-            
-            # Inject CSS and JS includes after <meta charset>
-            sed -i 's|<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>|<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>\n<link rel="stylesheet" href="'"$ASSETS_PATH"'/version-header.css">\n<script src="'"$ASSETS_PATH"'/version-header.js" defer></script>|' "$TARGET_PATH/index.html"
+            mv "$TARGET_PATH/index.html" "$TARGET_PATH/doc.html"
+            cp assets/index-header.html "$TARGET_PATH/index.html"
           fi
 
       - name: Update versions.json

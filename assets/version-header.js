@@ -11,6 +11,9 @@
 (function() {
   'use strict';
 
+  // Don't run inside an iframe (the wrapper page handles the header)
+  if (window.self !== window.top) return;
+
   // Configuration paths
   const CONFIG_PATH = '/config.json';
   const VERSIONS_PATH = '/versions.json';
@@ -45,7 +48,8 @@
     const relativePath = basePath ? path.replace(basePath, '') : path;
 
     // Check if viewing a branch: /branches/{name}/{commit}/
-    const branchMatch = relativePath.match(/^\/branches\/([^/]+)\/([^/]+)\//);
+    // Use greedy match for branch name to handle slashes (e.g. feat/docks-workflow)
+    const branchMatch = relativePath.match(/^\/branches\/(.+)\/([^/]+)\//);
     if (branchMatch) {
       return { type: 'branch', branch: branchMatch[1], commit: branchMatch[2] };
     }
