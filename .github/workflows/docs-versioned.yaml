@@ -169,25 +169,20 @@ jobs:
           if [ "$VERSION_TYPE" == "release" ]; then
             # For releases: versions/{tag}/
             TARGET_PATH="versions/$VERSION_NAME"
-            ASSETS_PATH="../../assets"
           else
             # For branches: branches/{name}/{commit}/
             TARGET_PATH="branches/$VERSION_NAME/$COMMIT_HASH"
-            ASSETS_PATH="../../../assets"
           fi
           
           echo "path=$TARGET_PATH" >> $GITHUB_OUTPUT
-          echo "assets_path=$ASSETS_PATH" >> $GITHUB_OUTPUT
           
           echo "----------------------------------------"
           echo "Target path: $TARGET_PATH"
-          echo "Assets path: $ASSETS_PATH"
           echo "----------------------------------------"
 
       - name: Copy docs to target folder
         run: |
           TARGET_PATH="${{ steps.target.outputs.path }}"
-          ASSETS_PATH="${{ steps.target.outputs.assets_path }}"
           
           # Create target directory
           mkdir -p "$TARGET_PATH"
@@ -195,24 +190,13 @@ jobs:
           # Copy generated docs
           cp -r generated-docs/* "$TARGET_PATH/"
           
-          # Inject header CSS/JS includes into index.html
+          # Rename generated index.html to doc.html and use the header wrapper as index.html
+          # The wrapper dynamically resolves asset paths at runtime, so it works at any
+          # directory depth (including branch names with slashes like feat/my-feature)
           if [ -f "$TARGET_PATH/index.html" ]; then
-            # Check if already has version-header includes
-            if ! grep -q "version-header.css" "$TARGET_PATH/index.html"; then
-              echo "Injecting version header includes..."
-              
-              # Try to inject after <meta charset> first
-              if grep -q '<meta[^>]*charset' "$TARGET_PATH/index.html"; then
-                sed -i 's|\(<meta[^>]*charset[^>]*>\)|\1\n<link rel="stylesheet" href="'"$ASSETS_PATH"'/version-header.css">\n<script src="'"$ASSETS_PATH"'/version-header.js" defer></script>|I' "$TARGET_PATH/index.html"
-              # Otherwise inject after <head>
-              elif grep -q '<head>' "$TARGET_PATH/index.html"; then
-                sed -i 's|<head>|<head>\n<link rel="stylesheet" href="'"$ASSETS_PATH"'/version-header.css">\n<script src="'"$ASSETS_PATH"'/version-header.js" defer></script>|I' "$TARGET_PATH/index.html"
-              else
-                echo "Warning: Could not find insertion point for header includes"
-              fi
-            else
-              echo "Version header includes already present"
-            fi
+            mv "$TARGET_PATH/index.html" "$TARGET_PATH/doc.html"
+            cp assets/index-header.html "$TARGET_PATH/index.html"
+            echo "Wrapper index.html placed, generated docs renamed to doc.html"
           fi
           
           # Cleanup downloaded artifact folder
