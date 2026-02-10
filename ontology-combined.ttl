@@ -218,6 +218,7 @@ pulse:DoiPropertyShape
     a sh:PropertyShape ;
     sh:path schema:identifier ;
     sh:datatype xsd:string ;
+    sh:minCount 1 ;
     sh:pattern "^10\\.\\d{4,9}/[-._;()/:a-zA-Z0-9]+$" ;
     sh:description "Standard DOI validation." .
 
