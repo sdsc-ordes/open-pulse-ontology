@@ -5,50 +5,36 @@
       "path": "/versions/v0.1.0/",
       "date": "2026-01-15",
       "commit": "a1b2c3d",
-      "author": "cvivarr",
-      "message": "Initial release of Open Pulse Ontology"
+      "author": "rmfranken",
+      "message": "v0.1.0 release"
+    },
+    {
+      "tag": "v2.0.0",
+      "path": "/versions/v2.0.0/",
+      "date": "2026-02-08",
+      "commit": "a1b2c3d",
+      "author": "rmfranken",
+      "message": "v0.2.0 release"
     }
   ],
   "branches": {
     "main": {
       "commits": [
         {
-          "hash": "def5678",
-          "date": "2026-01-29",
-          "author": "cvivarr",
-          "message": "Update ontology with new imaging properties"
-        },
-        {
-          "hash": "abc1234",
-          "date": "2026-01-27",
-          "author": "jsmith",
-          "message": "Add software source code class definitions"
+          "hash": "91f44d4",
+          "date": "2026-02-05",
+          "author": "rmfranken",
+          "message": "trigger ci"
         }
       ]
     },
     "develop": {
       "commits": [
         {
-          "hash": "ghi9012",
-          "date": "2026-01-28",
-          "author": "cvivarr",
-          "message": "WIP: Add compute requirements specification"
-        },
-        {
-          "hash": "xyz7890",
-          "date": "2026-01-25",
-          "author": "mjones",
-          "message": "Experimental PROV namespace integration"
-        }
-      ]
-    },
-    "feature-new-classes": {
-      "commits": [
-        {
-          "hash": "jkl3456",
-          "date": "2026-01-27",
-          "author": "alee",
-          "message": "Add Dataset and ImagingModality classes"
+          "hash": "4fc7673",
+          "date": "2026-02-05",
+          "author": "rmfranken",
+          "message": "make docs gen only on main to prevent red crosses on ci"
         }
       ]
     },
