@@ -21,6 +21,12 @@
     "main": {
       "commits": [
         {
+          "hash": "d5acf84",
+          "date": "2026-02-10",
+          "author": "Carlos Vivar Rios",
+          "message": "Merge pull request #5 from sdsc-ordes/feat/docks-workflow"
+        },
+        {
           "hash": "91f44d4",
           "date": "2026-02-05",
           "author": "rmfranken",

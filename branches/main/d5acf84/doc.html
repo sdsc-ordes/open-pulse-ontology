@@ -1,0 +1,1647 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<style>
+		
+			body {
+						margin: 0;
+						font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+							"Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+							"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+							"Noto Color Emoji";
+						background-color: #fff;
+					}
+		
+		/* Pour la colonne Description */
+		td,
+		th {
+		white-space: normal;
+		word-break: break-word;
+		}
+		/* Limite la largeur de la colonne Description */
+		td.description,
+		th.description {
+		max-width: 300px;
+		}
+		/* Pour éviter le scroll horizontal du tableau */
+		table {
+		/*width: 100%;*/
+		max-width: 1100px;
+		table-layout: fixed;
+		}
+			  
+					
+					.anchor {
+						float: left;
+						padding-right: 4px;
+						margin-left: -20px;
+						line-height: 1;
+						padding-top: 12px;
+					}
+							
+					a {
+						color: #007bff;
+						text-decoration: none;
+						background-color: transparent;
+					}
+					
+					a:-webkit-any-link {
+						cursor: pointer;
+					}
+					
+					.p {
+						font-size: 0.875em;
+					}
+					
+					h2 {
+						margin: 25px 0px 10px 0px;
+					}
+					
+					h3 {
+						font-size: 1.4em;
+					}
+
+					h4 {
+						font-size: 1.1em;
+						font-weight: bold;
+					}
+
+					.constraint_list li {
+						list-style:"> ";
+						font-style: italic;
+					}
+					
+					@media only print {
+					}
+					
+					@page {
+						size: A4 portrait;
+						margin-top: 1.2cm;
+						margin-bottom: 1.2cm;
+						margin-left: 1.2cm;
+						margin-right: 1.2cm;
+						background-repeat: no-repeat;
+						background-position: 40px 10px;
+						
+						@bottom-center
+						{
+						content
+						:
+						counter(
+						page
+						);
+					}
+					
+					}
+							
+					/* This section draw the format web */
+					.ul_type_none {
+						list-style-type: none;
+					}
+					
+					.sp_list_description_properties {
+						/* don't set it lower otherwise it gets hidden in PDF */
+						padding-left: 20px;
+					}
+					
+					dl, ol, ul {
+						margin-top: 0;
+						margin-bottom: 1rem;
+					}
+					
+					li {
+						display: list-item;
+						text-align: -webkit-match-parent;
+					}
+					
+					.sp_section_title_header {
+						font-family: Georgia, Garamond, serif;	
+						margin-top: 25px;
+						margin-bottom: 2.5rem;
+					    font-size: 1.5625rem;
+						display: block;
+						font-weight: 500;
+						color: #1e1e1f;
+						line-height: 1.2em;   
+					}
+					
+					.sp_section_subtitle {
+						font-family: Georgia, Garamond, serif;	
+						margin-top: 0;
+						margin-bottom: 0.5rem;
+						display: block;
+						font-weight: 500;
+						color: #1e1e1f;
+						line-height: 1.2em;  
+					}
+					
+					.sp_section_title_table {
+						font-family: Georgia, Garamond, serif;	
+						/* 0 because URI is right under */
+						margin-bottom: 0rem;
+						display: block;
+						font-weight: 500;
+						color: #1e1e1f;
+						line-height: 1.2em; 
+					}
+							
+
+					.sp_section_title_toc {
+						font-family: Georgia, Garamond, serif;	
+					}
+
+					/* URI below the title of the section */
+					.sp_section_uri	 {
+						margin-top: 0px;
+					}
+
+					/* div wrapping section title and URI below - same as a paragraph margin */
+					.sp_section_title_table_wrapper {
+						margin-bottom: 16px;
+						border-bottom: 1px solid;	
+					}
+					
+					.sp_section_nodeshape_diagram {
+						padding-bottom: 16px;
+					}
+					
+					.sp_section_nodeshape_center {
+						display: flex;
+						justify-content: center;
+					}
+					
+					table {
+						display: table;
+						border-spacing: 0px;
+						margin-bottom: 1rem;
+					}
+					
+					.table-striped tr:nth-child(even) {
+						background-color: #eee;
+					}
+							
+					.sp_table_prefixes table {
+						border-collapse: collapse;
+						margin-bottom: 1rem;
+						color: #212529;
+					}
+											
+					.sp_table_prefixes td {
+						padding: 0.25rem;
+						vertical-align: top;
+						border-top: 1px solid #dee2e6;
+					}
+					
+					.sp_table_propertyshapes {
+						border-collapse: collapse;
+						width: 100%;
+					}
+										
+					.sp_table_propertyshapes thead {
+						display: table-header-group;
+						vertical-align: middle;
+						border-color: inherit;
+					}
+													
+					.sp_table_propertyshapes tr {
+					    display: table-row;
+					    vertical-align: inherit;
+					    border-color: inherit;					    
+					}
+													
+					.sp_table_propertyshapes th:nth-child(4) {
+						width: 6%;
+					}
+													
+					.sp_table_propertyshapes td {
+						padding: 0.75rem;
+						border-top: 1px solid #dee2e6;
+					}
+													
+					.sp_table_propertyshapes tbody {
+						display: table-row-group;
+						vertical-align: middle;
+						border-color: inherit;
+					}
+										
+					.sp_table_propertyshapes_col_description {
+						word-break: break-word;
+					}
+					
+					tr.sp_propertyGroup {
+						font-style: italic;
+						background-color: #def0f7;
+					}
+					
+					tr.sp_propertyGroup td {
+						border-bottom: 1px solid black;
+						padding-bottom: 0.25 rem;
+					}
+					
+					.sp_serialization_badge {
+						margin-right: 0.5em;
+					}
+
+					.sp_nodeshape_description {
+						background: #efefef;
+						padding-top:1px;
+						padding-bottom:1px;
+						padding-left:10px;
+						padding-right:10px;
+						border-radius: 5px;
+						margin-bottom:10px;
+					}
+					
+					
+							/*
+							.container {
+							    width: calc(100% - 40px);
+							    max-width: 1100px;
+							    margin-left: 300px;
+							    margin-right: auto;
+							}
+							.container {width: calc(100% - 500px);}
+							*/
+							.container {
+								width: auto;
+								max-width: 1100px;
+								margin-left: 300px;
+								margin-right: 120px;
+							}
+							.toc {
+								position: fixed;
+								top: 0;
+								left: 0;
+								font-size: small;
+								padding: 10px 10px;
+								width: auto;
+								border-right: solid 2px #eeeeee;
+								bottom: 0;
+								overflow-y: scroll;
+								background-color:white;
+								max-width:255px;
+							}
+							.sp_list_toc {padding-left: 0px;}
+							.sp_list_toc_l2 {padding-left: 10px;}	
+							.sp_list_toc_l3 {padding-left: 8px;}					
+						</style>
+<!--EXTRA CSS-->
+<meta charset="utf-8"/>
+<meta content="en" name="lang"/>
+<meta content="en" property="og:locale"/>
+<title>Open Pulse Ontology</title>
+<meta content="Open Pulse Ontology" name="apple-mobile-web-app-title"/>
+<meta content="Open Pulse Ontology" name="twitter:title"/>
+<meta content="Open Pulse Ontology" property="og:title"/><script type="application/ld+json">{
+    "license": ["https://spdx.org/licenses/CC-BY-4.0.html"],
+    "@type": "TechArticle",
+    "name": "Open Pulse Ontology",
+    "@context": "https://schema.org",
+    "version": "v.2.0",
+    "url": "https://open-pulse.epfl.ch/ontology#"
+}</script><style>
+        #enumerations {
+            margin-top: 2rem;
+            border-top: 2px solid #ccc;
+            padding-top: 2rem;
+        }
+        .enumeration {
+            margin-bottom: 2rem;
+        }
+        .enum-values {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .enum-values th,
+        .enum-values td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .enum-values th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .enum-values tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .enum-values code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.85em;
+        }
+        .enum-values code a {
+            color: #0066cc;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .enum-values code a:hover {
+            text-decoration: underline;
+        }
+        .comment {
+            font-style: italic;
+            color: #666;
+        }
+        .enum-reference {
+            margin: 0.5rem 0 1rem 0;
+            padding: 0.5rem;
+            background-color: #e8f4f8;
+            border-left: 4px solid #0066cc;
+            font-size: 0.95em;
+        }
+        .enum-reference a {
+            color: #0066cc;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .enum-reference a:hover {
+            text-decoration: underline;
+        }
+        </style></head>
+<body>
+<div class="sp_container_principal container pt-4">
+<h1 class="mb-4 sp_section_title_header">Open Pulse Ontology</h1>
+<div><b>Version: </b>v.2.0<br/><b>License: </b><a href="https://spdx.org/licenses/CC-BY-4.0.html" target="_blank">https://spdx.org/licenses/CC-BY-4.0.html</a><br/><br/></div>
+<div class="row mt-3">
+<div class="col">
+<h2 class="sp_section_subtitle" id="abstract">Abstract</h2><p>The Open Pulse Ontology to model contributions to open source scientific software and research articles from EPFL.</p>
+</div>
+</div>
+<div class="sp_section_title_toc toc">
+<h2 id="index">Table of Contents</h2>
+<ul class="sp_list_toc ul_type_none t-x-mode" role="list">
+<li><a href="#prefixes">Namespaces</a></li>
+<li><a href="#diagrams">Diagrams</a></li>
+<li><a href="#documentation">Model documentation</a><ul class="ul_type_none sp_list_toc_l2" role="list">
+<li><a href="#pulse:ArticleShape">pulse:ArticleShape</a></li>
+<li><a href="#pulse:ContributionShape">pulse:ContributionShape</a></li>
+<li><a href="#pulse:MembershipShape">pulse:MembershipShape</a></li>
+<li><a href="#pulse:OrganizationShape">pulse:OrganizationShape</a></li>
+<li><a href="#pulse:PersonShape">pulse:PersonShape</a></li>
+<li><a href="#pulse:RepositoryShape">pulse:RepositoryShape</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="row mt-3">
+<div class="col">
+<section>
+<h2 class="sp_section_subtitle" id="prefixes">Namespaces</h2>
+<table class="sp_table_prefixes table table-striped table-responsive">
+<thead>
+<tr>
+<th>Prefix</th>
+<th>Namespace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>org</td>
+<td><a href="http://www.w3.org/ns/org#" target="_blank">http://www.w3.org/ns/org#</a></td>
+</tr>
+<tr>
+<td>pulse</td>
+<td><a href="https://open-pulse.epfl.ch/ontology#" target="_blank">https://open-pulse.epfl.ch/ontology#</a></td>
+</tr>
+<tr>
+<td>schema</td>
+<td><a href="http://schema.org/" target="_blank">http://schema.org/</a></td>
+</tr>
+<tr>
+<td>time</td>
+<td><a href="http://www.w3.org/2006/time#" target="_blank">http://www.w3.org/2006/time#</a></td>
+</tr>
+<tr>
+<td>xsd</td>
+<td><a href="http://www.w3.org/2001/XMLSchema#" target="_blank">http://www.w3.org/2001/XMLSchema#</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+</div><br/><div class="sp_section_row mt-3">
+<div class="sp_section_col">
+<section>
+<h2 class="sp_section_subtitle" id="diagrams">Diagrams</h2>
+<div><svg contentstyletype="text/css" height="1035px" preserveaspectratio="none" style="width:1483px;height:1035px;background:#FFFFFF;" version="1.1" viewbox="0 0 1483 1035" width="1483px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" zoomandpan="magnify"><defs></defs><g><!--class pulse:OrganizationShape (org:Organization)--><a href="#pulse:OrganizationShape" target="_top" title="#pulse:OrganizationShape" xlink:actuate="onRequest" xlink:href="#pulse:OrganizationShape" xlink:show="new" xlink:title="#pulse:OrganizationShape" xlink:type="simple"><g id="elem_pulse:OrganizationShape (org:Organization)"><rect codeline="8" fill="#F1F1F1" height="115.7813" id="pulse:OrganizationShape (org:Organization)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="365" x="138" y="183"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="303" x="169" y="200.9951">pulse:OrganizationShape (org:Organization)</text><line style="stroke:#181818;stroke-width:0.5;" x1="139" x2="502" y1="209.2969" y2="209.2969"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="316" x="144" y="226.292">pulse:githubOrgFollowers  : xsd:integer  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="307" x="144" y="242.5889">pulse:githubOrganizationHandle  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="353" x="144" y="258.8857">pulse:infoscienceOrganizationIdentifier  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="204" x="144" y="275.1826">schema:identifier  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="226" x="144" y="291.4795">schema:name  : xsd:string  [1..*]</text></g></a><!--class pulse:OrganizationTypeEnumeration--><g id="elem_pulse:OrganizationTypeEnumeration"><rect fill="#F1F1F1" height="26.2969" id="uml_pulse:OrganizationTypeEnumeration" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="258" x="191.5" y="445.5"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="252" x="194.5" y="463.4951">pulse:OrganizationTypeEnumeration</text></g><!--class pulse:RepositoryShape (schema:SoftwareSourceCode)--><a href="#pulse:RepositoryShape" target="_top" title="#pulse:RepositoryShape" xlink:actuate="onRequest" xlink:href="#pulse:RepositoryShape" xlink:show="new" xlink:title="#pulse:RepositoryShape" xlink:type="simple"><g id="elem_pulse:RepositoryShape (schema:SoftwareSourceCode)"><rect codeline="24" fill="#F1F1F1" height="164.6719" id="pulse:RepositoryShape (schema:SoftwareSourceCode)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="387" x="485" y="376"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="381" x="488" y="393.9951">pulse:RepositoryShape (schema:SoftwareSourceCode)</text><line style="stroke:#181818;stroke-width:0.5;" x1="486" x2="871" y1="402.2969" y2="402.2969"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="301" x="491" y="419.292">pulse:githubRepoForks  : xsd:integer  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="298" x="491" y="435.5889">pulse:githubRepoStars  : xsd:integer  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="338" x="491" y="451.8857">pulse:githubRepositoryHandle  : xsd:string  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="147" x="491" y="468.1826">schema:citation  :  IRI</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="257" x="491" y="484.4795">schema:dateCreated  : xsd:dateTime</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="146" x="491" y="500.7764">schema:license  :  IRI</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="226" x="491" y="517.0732">schema:name  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="305" x="491" y="533.3701">schema:programmingLanguage  : xsd:string</text></g></a><!--class pulse:ArticleShape (schema:ScholarlyArticle)--><a href="#pulse:ArticleShape" target="_top" title="#pulse:ArticleShape" xlink:actuate="onRequest" xlink:href="#pulse:ArticleShape" xlink:show="new" xlink:title="#pulse:ArticleShape" xlink:type="simple"><g id="elem_pulse:ArticleShape (schema:ScholarlyArticle)"><rect codeline="17" fill="#F1F1F1" height="99.4844" id="pulse:ArticleShape (schema:ScholarlyArticle)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="320" x="670.5" y="7"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="306" x="677.5" y="24.9951">pulse:ArticleShape (schema:ScholarlyArticle)</text><line style="stroke:#181818;stroke-width:0.5;" x1="671.5" x2="989.5" y1="33.2969" y2="33.2969"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="308" x="676.5" y="50.292">pulse:infoscienceArticleIdentifier  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="278" x="676.5" y="66.5889">schema:datePublished  : xsd:date  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="204" x="676.5" y="82.8857">schema:identifier  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="226" x="676.5" y="99.1826">schema:name  : xsd:string  [1..*]</text></g></a><!--class pulse:PersonShape (schema:Person)--><a href="#pulse:PersonShape" target="_top" title="#pulse:PersonShape" xlink:actuate="onRequest" xlink:href="#pulse:PersonShape" xlink:show="new" xlink:title="#pulse:PersonShape" xlink:type="simple"><g id="elem_pulse:PersonShape (schema:Person)"><rect codeline="41" fill="#F1F1F1" height="132.0781" id="pulse:PersonShape (schema:Person)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="371" x="422" y="736"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="259" x="478" y="753.9951">pulse:PersonShape (schema:Person)</text><line style="stroke:#181818;stroke-width:0.5;" x1="423" x2="792" y1="762.2969" y2="762.2969"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="243" x="428" y="779.292">pulse:githubUsername  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="359" x="428" y="795.5889">pulse:infosciencePersonIdentifier  : xsd:string  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="221" x="428" y="811.8857">pulse:orcidIdentifier  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="157" x="428" y="828.1826">schema:email  :  Literal</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="226" x="428" y="844.4795">schema:name  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="114" x="428" y="860.7764">schema:url  :  IRI</text></g></a><polygon fill="#F1F1F1" points="215.5,634,227.5,646,215.5,658,203.5,646,215.5,634" style="stroke:#181818;stroke-width:0.5;"></polygon><!--class pulse:DisciplineEnumeration--><g id="elem_pulse:DisciplineEnumeration"><rect fill="#F1F1F1" height="26.2969" id="uml_pulse:DisciplineEnumeration" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="203" x="263" y="633"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="197" x="266" y="650.9951">pulse:DisciplineEnumeration</text></g><!--class pulse:RepositoryTypeEnumeration--><g id="elem_pulse:RepositoryTypeEnumeration"><rect fill="#F1F1F1" height="26.2969" id="uml_pulse:RepositoryTypeEnumeration" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="245" x="850" y="633"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="239" x="853" y="650.9951">pulse:RepositoryTypeEnumeration</text></g><!--class pulse:ContributionShape (pulse:Contribution)--><a href="#pulse:ContributionShape" target="_top" title="#pulse:ContributionShape" xlink:actuate="onRequest" xlink:href="#pulse:ContributionShape" xlink:show="new" xlink:title="#pulse:ContributionShape" xlink:type="simple"><g id="elem_pulse:ContributionShape (pulse:Contribution)"><rect codeline="51" fill="#F1F1F1" height="83.1875" id="pulse:ContributionShape (pulse:Contribution)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="320" x="628.5" y="945"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="314" x="631.5" y="962.9951">pulse:ContributionShape (pulse:Contribution)</text><line style="stroke:#181818;stroke-width:0.5;" x1="629.5" x2="947.5" y1="971.2969" y2="971.2969"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="305" x="634.5" y="988.292">pulse:contributionCount  : xsd:integer  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="297" x="634.5" y="1004.5889">pulse:firstContributionDate  : xsd:dateTime</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="296" x="634.5" y="1020.8857">pulse:lastContributionDate  : xsd:dateTime</text></g></a><!--class pulse:MembershipShape (org:Membership)--><a href="#pulse:MembershipShape" target="_top" title="#pulse:MembershipShape" xlink:actuate="onRequest" xlink:href="#pulse:MembershipShape" xlink:show="new" xlink:title="#pulse:MembershipShape" xlink:type="simple"><g id="elem_pulse:MembershipShape (org:Membership)"><rect codeline="57" fill="#F1F1F1" height="83.1875" id="pulse:MembershipShape (org:Membership)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="307" x="7" y="945"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="301" x="10" y="962.9951">pulse:MembershipShape (org:Membership)</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="313" y1="971.2969" y2="971.2969"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="183" x="13" y="988.292">org:role  : xsd:string  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="207" x="13" y="1004.5889">time:hasBeginning  : xsd:date</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="208" x="13" y="1020.8857">time:hasEnd  : xsd:date  [0..1]</text></g></a><!--link pulse:OrganizationShape (org:Organization) to pulse:OrganizationTypeEnumeration--><g id="link_pulse:OrganizationShape (org:Organization)_pulse:OrganizationTypeEnumeration"><path codeline="14" d="M320.5,299.18 C320.5,349.06 320.5,411.63 320.5,439.25 " fill="none" id="pulse:OrganizationShape (org:Organization)-to-pulse:OrganizationTypeEnumeration" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="320.5,445.25,324.5,436.25,320.5,440.25,316.5,436.25,320.5,445.25" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="149" x="321.5" y="342.0669">pulse:OrganizationType</text></g><!--link pulse:OrganizationShape (org:Organization) to pulse:RepositoryShape (schema:SoftwareSourceCode)--><g id="link_pulse:OrganizationShape (org:Organization)_pulse:RepositoryShape (schema:SoftwareSourceCode)"><path codeline="15" d="M427.59,299.21 C445.06,308.94 462.87,319.1 479.5,329 C504.24,343.73 525.2642,356.7791 550.1142,372.6591 " fill="none" id="pulse:OrganizationShape (org:Organization)-to-pulse:RepositoryShape (schema:SoftwareSourceCode)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="555.17,375.89,549.7401,367.6732,550.9568,373.1976,545.4323,374.4143,555.17,375.89" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="70" x="508.5" y="342.0669">pulse:owns</text></g><!--link pulse:OrganizationShape (org:Organization) to pulse:OrganizationShape (org:Organization)--><g id="link_pulse:OrganizationShape (org:Organization)_pulse:OrganizationShape (org:Organization)"><path codeline="16" d="M503.37,225.69 C524.37,228.54 538,233.64 538,241 C538,248.36 530.3155,252.6531 509.3155,255.5031 " fill="none" id="pulse:OrganizationShape (org:Organization)-to-pulse:OrganizationShape (org:Organization)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="503.37,256.31,512.8262,259.0633,508.3246,255.6376,511.7503,251.136,503.37,256.31" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="74" x="544" y="238.0669">org:hasUnit</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="63" x="544" y="253.1997">org:unitOf</text></g><!--link pulse:ArticleShape (schema:ScholarlyArticle) to pulse:OrganizationShape (org:Organization)--><g id="link_pulse:ArticleShape (schema:ScholarlyArticle)_pulse:OrganizationShape (org:Organization)"><path codeline="22" d="M694.83,106.05 C628.73,129.7 554.4694,156.279 485.4794,180.959 " fill="none" id="pulse:ArticleShape (schema:ScholarlyArticle)-to-pulse:OrganizationShape (org:Organization)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="479.83,182.98,489.6514,183.7148,484.5378,181.2959,486.9568,176.1823,479.83,182.98" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="179" x="607.5" y="149.0669">schema:sourceOrganization</text></g><!--link pulse:ArticleShape (schema:ScholarlyArticle) to pulse:PersonShape (schema:Person)--><g id="link_pulse:ArticleShape (schema:ScholarlyArticle)_pulse:PersonShape (schema:Person)"><path codeline="23" d="M990.82,83.3 C1140.35,112.04 1340.5,164.59 1340.5,240 C1340.5,240 1340.5,240 1340.5,647 C1340.5,758.67 1016.5655,789.5881 799.4055,797.9881 " fill="none" id="pulse:ArticleShape (schema:ScholarlyArticle)-to-pulse:PersonShape (schema:Person)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="793.41,798.22,802.5579,801.8691,798.4063,798.0267,802.2487,793.8751,793.41,798.22" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="134" x="1341.5" y="463.0669">schema:author [1..*]</text></g><!--link pulse:RepositoryShape (schema:SoftwareSourceCode) to diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63--><g id="link_pulse:RepositoryShape (schema:SoftwareSourceCode)_diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63"><path codeline="29" d="M484.94,535.75 C478.75,537.6 472.59,539.35 466.5,541 C386.09,562.73 354.53,530.95 281.5,571 C251.61,587.39 231.5303,617.5232 222.5803,632.6832 " fill="none" id="pulse:RepositoryShape (schema:SoftwareSourceCode)-to-diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="219.53,637.85,227.55,632.1334,222.0719,633.5443,220.6609,628.0663,219.53,637.85" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="95" x="282.5" y="584.0669">pulse:ownedBy</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="34" x="313" y="599.1997">[0..1]</text></g><!--link diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63 to pulse:PersonShape (schema:Person)--><g id="link_diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63_pulse:PersonShape (schema:Person)"><path codeline="30" d="M223.39,650.17 C229.44,652.6 237.99,656.03 245.5,659 C309.21,684.24 379.3,711.78 440.71,735.84 " fill="none" id="diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63-pulse:PersonShape (schema:Person)" style="stroke:#800000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"></path></g><!--link diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63 to pulse:OrganizationShape (org:Organization)--><g id="link_diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63_pulse:OrganizationShape (org:Organization)"><path codeline="31" d="M211.46,637.55 C194.39,604.98 130.92,472.42 173.5,376 C186.68,346.15 210.16,320.07 234.54,299.06 " fill="none" id="diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63-pulse:OrganizationShape (org:Organization)" style="stroke:#800000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"></path></g><!--link pulse:RepositoryShape (schema:SoftwareSourceCode) to pulse:DisciplineEnumeration--><g id="link_pulse:RepositoryShape (schema:SoftwareSourceCode)_pulse:DisciplineEnumeration"><path codeline="37" d="M484.75,536.18 C448.86,551.36 420.16,564.6 412.5,571 C391.82,588.28 379.3708,611.3169 372.0508,627.4369 " fill="none" id="pulse:RepositoryShape (schema:SoftwareSourceCode)-to-pulse:DisciplineEnumeration" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="369.57,632.9,376.9332,626.3592,371.6373,628.3474,369.6491,623.0515,369.57,632.9" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="96" x="413.5" y="591.5669">pulse:discipline</text></g><!--link pulse:RepositoryShape (schema:SoftwareSourceCode) to pulse:RepositoryShape (schema:SoftwareSourceCode)--><g id="link_pulse:RepositoryShape (schema:SoftwareSourceCode)_pulse:RepositoryShape (schema:SoftwareSourceCode)"><path codeline="38" d="M872.29,439.64 C893.4,443.25 907,449.54 907,458.5 C907,467.46 899.3141,472.7386 878.2041,476.3486 " fill="none" id="pulse:RepositoryShape (schema:SoftwareSourceCode)-to-pulse:RepositoryShape (schema:SoftwareSourceCode)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="872.29,477.36,881.8355,479.7857,877.2185,476.5172,880.487,471.9002,872.29,477.36" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="127" x="913" y="463.0669">pulse:isForkOf [0..1]</text></g><!--link pulse:RepositoryShape (schema:SoftwareSourceCode) to pulse:PersonShape (schema:Person)--><g id="link_pulse:RepositoryShape (schema:SoftwareSourceCode)_pulse:PersonShape (schema:Person)"><path codeline="39" d="M661.49,541.3 C649.1,600.89 633.7714,674.6656 622.2714,729.9756 " fill="none" id="pulse:RepositoryShape (schema:SoftwareSourceCode)-to-pulse:PersonShape (schema:Person)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="621.05,735.85,626.7983,727.8527,622.0678,730.9547,618.9658,726.2242,621.05,735.85" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="134" x="643.5" y="650.5669">schema:author [1..*]</text></g><!--link pulse:PersonShape (schema:Person) to pulse:RepositoryShape (schema:SoftwareSourceCode)--><g id="link_pulse:PersonShape (schema:Person)_pulse:RepositoryShape (schema:SoftwareSourceCode)"><path codeline="50" d="M569.67,735.84 C556.27,704.65 546.87,666.82 557.5,633 C567.74,600.42 582.9923,573.4706 602.7423,546.1806 " fill="none" id="pulse:PersonShape (schema:Person)-to-pulse:RepositoryShape (schema:SoftwareSourceCode)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="606.26,541.32,597.743,546.2658,603.3286,545.3705,604.2239,550.9561,606.26,541.32" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="70" x="558.5" y="650.5669">pulse:owns</text></g><!--link pulse:RepositoryShape (schema:SoftwareSourceCode) to pulse:RepositoryTypeEnumeration--><g id="link_pulse:RepositoryShape (schema:SoftwareSourceCode)_pulse:RepositoryTypeEnumeration"><path codeline="40" d="M807.88,541.13 C863.96,576.51 918.4253,610.8889 948.1653,629.6489 " fill="none" id="pulse:RepositoryShape (schema:SoftwareSourceCode)-to-pulse:RepositoryTypeEnumeration" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="953.24,632.85,947.762,624.6652,949.0111,630.1824,943.4938,631.4314,953.24,632.85" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="132" x="901.5" y="591.5669">pulse:repositoryType</text></g><!--link pulse:PersonShape (schema:Person) to pulse:ContributionShape (pulse:Contribution)--><g id="link_pulse:PersonShape (schema:Person)_pulse:ContributionShape (pulse:Contribution)"><path codeline="48" d="M592.72,868.21 C592.35,884.65 595.19,901.46 604.5,915 C612.64,926.84 618.1411,933.2543 629.8811,941.4543 " fill="none" id="pulse:PersonShape (schema:Person)-to-pulse:ContributionShape (pulse:Contribution)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="634.8,944.89,629.7121,936.4571,630.7009,942.0269,625.1311,943.0157,634.8,944.89" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="139" x="605.5" y="911.0669">pulse:hasContribution</text></g><!--link pulse:ContributionShape (pulse:Contribution) to pulse:PersonShape (schema:Person)--><g id="link_pulse:ContributionShape (pulse:Contribution)_pulse:PersonShape (schema:Person)"><path codeline="55" d="M775.9,944.91 C769.66,929.13 760.97,911.61 749.5,898 C740.52,887.34 734.6835,881.2019 723.5735,872.0619 " fill="none" id="pulse:ContributionShape (pulse:Contribution)-to-pulse:PersonShape (schema:Person)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="718.94,868.25,723.349,877.0569,722.8013,871.4266,728.4315,870.8789,718.94,868.25" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="135" x="760.5" y="911.0669">schema:author [1..1]</text></g><!--link pulse:PersonShape (schema:Person) to pulse:MembershipShape (org:Membership)--><g id="link_pulse:PersonShape (schema:Person)_pulse:MembershipShape (org:Membership)"><path codeline="49" d="M448.02,868.11 C385.21,893.76 320.5951,920.1427 265.2951,942.7127 " fill="none" id="pulse:PersonShape (schema:Person)-to-pulse:MembershipShape (org:Membership)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="259.74,944.98,269.5842,945.2825,264.3693,943.0906,266.5612,937.8757,259.74,944.98" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="127" x="372.5" y="911.0669">org:hasMembership</text></g><!--link pulse:ContributionShape (pulse:Contribution) to pulse:RepositoryShape (schema:SoftwareSourceCode)--><g id="link_pulse:ContributionShape (pulse:Contribution)_pulse:RepositoryShape (schema:SoftwareSourceCode)"><path codeline="56" d="M877.32,944.84 C992.87,885.64 1173.23,767.92 1112.5,633 C1071.12,541.06 973.5365,498.7584 878.0165,478.2684 " fill="none" id="pulse:ContributionShape (pulse:Contribution)-to-pulse:RepositoryShape (schema:SoftwareSourceCode)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="872.15,477.01,880.1109,482.8087,877.0388,478.0587,881.7888,474.9866,872.15,477.01" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="167" x="1125.5" y="702.0669">pulse:contributionTo [1..1]</text></g><!--link pulse:MembershipShape (org:Membership) to pulse:OrganizationShape (org:Organization)--><g id="link_pulse:MembershipShape (org:Membership)_pulse:OrganizationShape (org:Organization)"><path codeline="61" d="M106.36,944.98 C68.43,911.59 24.5,860.49 24.5,803 C24.5,457.5 24.5,457.5 24.5,457.5 C24.5,384.08 79.4108,335.7874 145.5508,301.8774 " fill="none" id="pulse:MembershipShape (org:Membership)-to-pulse:OrganizationShape (org:Organization)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="150.89,299.14,141.0563,299.6866,146.4407,301.4212,144.7062,306.8055,150.89,299.14" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="142" x="25.5" y="650.5669">org:organization [1..1]</text></g><!--SRC=[jLXjJzim4FxUN-5jN_QYLIsZ25KJ6kk08S505BGFh9hS-9ASSEp8TjQLNp-d2S5DMvgNxaEhvkxytCNttFbS3OO86e6EgGTZYAcYHYeYf82EVa2H2YBYSQhrgHHcZ8z0-lkTLmny540kpi- -trxT7FyuEt7DPHHR06jkvXn84l4zHpjJDBu4hMa0Fv6PaFHxFKTzh9ISZIItKRovf4fAqT6RWoITKHeRUHqdNCFmIWLKu2CrACKuf36Gjr85I-9thydz_PiDvfC9wTI26fBCEa0J9bEhF9MSonaeJQpkhsP350O2K8JSzxhT_eIqTL0elrF1xExcRhHHA8Acw2XygJq4uO5hSSvi4j77DFnsRhGNGaI7k6l0b1PbgFj-j_k-zaP__7YqZaMtynXEH1A1MZm-RrdPgBcx6uYbHileUMwUlzjO-cP65OnbeZmOIGPEnkHCwDsyuKkxd0f3gky46lABfq-9_NdbbyhkM1dqE9J2zqB9gUBpNEiMdhl0gRcgE6jecoktCxQwZrp7g87hPCfHXy2UK5FXAjDgO-FkmwrI4LL16p0c1zCBphhQDiwlRJyjtEOhCfdhaoOcbEhptOTUxxXtLBpp4bDhrLf1rz8gXx6DQZVhvUdIKwaUjfyKBPsC3LN_tKcsTFsPbAPYuUhp4M588odOxvAxttHwq3yOx0_y_G7hmu0Tmhu_zVg3wTxKF_GFFZKASq6XfXwNUYsmh_EdBUiqHIJTBgb2wPqug5Im3PEVQpqqMMbR4Jc_EIVjuDAUEb9WlvVQx2sc3QqTD4SFX8OT1LgbnJP3ZfKCx10SMSWBAeB4piYR3eRwXP2j-uRsn8ovdTxNZZMiKBVsrAYZe4vxufLVjF4sRMfNHyZEDcBZDAcMJ4g7rekn5uUKO-KSK5lUsstZTnhKEchNWd96iaotUI8hfxOIlbGUikrJNhLqsm_oHLEuG6Dpmckkhz88gY4bYgyqfnTNElGQsOkvmcdYTFfLXRE5Tg1tDRNzNK8qjU8GO-TSUHQw5uTdQMqlBMv5IyLJTNUAEbfPu5HJtQts7F589iAiZc4bkjJruAFInjLzMznCDXsVTU7jJlu7z1tqvVwabTj6x7ApUIjNebcYtVOYAGXNCdNeLhNIb5mpT9UwQnKiOxEPbkrN25281OnxtMq2TIBAT-RQSJNytq8wmfLSXVRcJJnKzggP_Ox0Cepfx06YsCojQ154Hq4a_m3vaWWx5Zq0-mS0]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/jLXjJzim4FxUN-5jN_QYLIsZ25KJ6kk08S505BGFh9hS-9ASSEp8TjQLNp-d2S5DMvgNxaEhvkxytCNttFbS3OO86e6EgGTZYAcYHYeYf82EVa2H2YBYSQhrgHHcZ8z0-lkTLmny540kpi--trxT7FyuEt7DPHHR06jkvXn84l4zHpjJDBu4hMa0Fv6PaFHxFKTzh9ISZIItKRovf4fAqT6RWoITKHeRUHqdNCFmIWLKu2CrACKuf36Gjr85I-9thydz_PiDvfC9wTI26fBCEa0J9bEhF9MSonaeJQpkhsP350O2K8JSzxhT_eIqTL0elrF1xExcRhHHA8Acw2XygJq4uO5hSSvi4j77DFnsRhGNGaI7k6l0b1PbgFj-j_k-zaP__7YqZaMtynXEH1A1MZm-RrdPgBcx6uYbHileUMwUlzjO-cP65OnbeZmOIGPEnkHCwDsyuKkxd0f3gky46lABfq-9_NdbbyhkM1dqE9J2zqB9gUBpNEiMdhl0gRcgE6jecoktCxQwZrp7g87hPCfHXy2UK5FXAjDgO-FkmwrI4LL16p0c1zCBphhQDiwlRJyjtEOhCfdhaoOcbEhptOTUxxXtLBpp4bDhrLf1rz8gXx6DQZVhvUdIKwaUjfyKBPsC3LN_tKcsTFsPbAPYuUhp4M588odOxvAxttHwq3yOx0_y_G7hmu0Tmhu_zVg3wTxKF_GFFZKASq6XfXwNUYsmh_EdBUiqHIJTBgb2wPqug5Im3PEVQpqqMMbR4Jc_EIVjuDAUEb9WlvVQx2sc3QqTD4SFX8OT1LgbnJP3ZfKCx10SMSWBAeB4piYR3eRwXP2j-uRsn8ovdTxNZZMiKBVsrAYZe4vxufLVjF4sRMfNHyZEDcBZDAcMJ4g7rekn5uUKO-KSK5lUsstZTnhKEchNWd96iaotUI8hfxOIlbGUikrJNhLqsm_oHLEuG6Dpmckkhz88gY4bYgyqfnTNElGQsOkvmcdYTFfLXRE5Tg1tDRNzNK8qjU8GO-TSUHQw5uTdQMqlBMv5IyLJTNUAEbfPu5HJtQts7F589iAiZc4bkjJruAFInjLzMznCDXsVTU7jJlu7z1tqvVwabTj6x7ApUIjNebcYtVOYAGXNCdNeLhNIb5mpT9UwQnKiOxEPbkrN25281OnxtMq2TIBAT-RQSJNytq8wmfLSXVRcJJnKzggP_Ox0Cepfx06YsCojQ154Hq4a_m3vaWWx5Zq0-mS0" target="_blank">View as PNG</a></small>
+<!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "pulse:OrganizationShape (org:Organization)" [[#pulse:OrganizationShape]] 
+"pulse:OrganizationShape (org:Organization)" : pulse:githubOrgFollowers  : xsd:integer  [0..1]  
+"pulse:OrganizationShape (org:Organization)" : pulse:githubOrganizationHandle  : xsd:string  
+"pulse:OrganizationShape (org:Organization)" : pulse:infoscienceOrganizationIdentifier  : xsd:string  
+"pulse:OrganizationShape (org:Organization)" : schema:identifier  : xsd:string  
+"pulse:OrganizationShape (org:Organization)" : schema:name  : xsd:string  [1..*]  
+"pulse:OrganizationShape (org:Organization)" - -> "pulse:OrganizationTypeEnumeration" : pulse:OrganizationType 
+"pulse:OrganizationShape (org:Organization)" - -> "pulse:RepositoryShape (schema:SoftwareSourceCode)" : pulse:owns 
+"pulse:OrganizationShape (org:Organization)" - -> "pulse:OrganizationShape (org:Organization)" : org:hasUnit \lorg:unitOf 
+Class "pulse:ArticleShape (schema:ScholarlyArticle)" [[#pulse:ArticleShape]] 
+"pulse:ArticleShape (schema:ScholarlyArticle)" : pulse:infoscienceArticleIdentifier  : xsd:string  
+"pulse:ArticleShape (schema:ScholarlyArticle)" : schema:datePublished  : xsd:date  [1..*]  
+"pulse:ArticleShape (schema:ScholarlyArticle)" : schema:identifier  : xsd:string  
+"pulse:ArticleShape (schema:ScholarlyArticle)" : schema:name  : xsd:string  [1..*]  
+"pulse:ArticleShape (schema:ScholarlyArticle)" - -> "pulse:OrganizationShape (org:Organization)" : schema:sourceOrganization 
+"pulse:ArticleShape (schema:ScholarlyArticle)" - -> "pulse:PersonShape (schema:Person)" : schema:author<U+00A0>[1..*]  
+Class "pulse:RepositoryShape (schema:SoftwareSourceCode)" [[#pulse:RepositoryShape]] 
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : pulse:githubRepoForks  : xsd:integer  [0..1]  
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : pulse:githubRepoStars  : xsd:integer  [0..1]  
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : pulse:githubRepositoryHandle  : xsd:string  [1..1]  
+<> diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" - -> "diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63" : pulse:ownedBy [0..1] 
+diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63 ..  "pulse:PersonShape (schema:Person)"
+diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63 ..  "pulse:OrganizationShape (org:Organization)"
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : schema:citation  :  IRI 
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : schema:dateCreated  : xsd:dateTime  
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : schema:license  :  IRI 
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : schema:name  : xsd:string  [1..*]  
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : schema:programmingLanguage  : xsd:string  
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" - -> "pulse:DisciplineEnumeration" : pulse:discipline 
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" - -> "pulse:RepositoryShape (schema:SoftwareSourceCode)" : pulse:isForkOf<U+00A0>[0..1]  
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" - -> "pulse:PersonShape (schema:Person)" : schema:author<U+00A0>[1..*]  
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" - -> "pulse:RepositoryTypeEnumeration" : pulse:repositoryType 
+Class "pulse:PersonShape (schema:Person)" [[#pulse:PersonShape]] 
+"pulse:PersonShape (schema:Person)" : pulse:githubUsername  : xsd:string  
+"pulse:PersonShape (schema:Person)" : pulse:infosciencePersonIdentifier  : xsd:string  [0..1]  
+"pulse:PersonShape (schema:Person)" : pulse:orcidIdentifier  : xsd:string  
+"pulse:PersonShape (schema:Person)" : schema:email  :  Literal 
+"pulse:PersonShape (schema:Person)" : schema:name  : xsd:string  [1..*]  
+"pulse:PersonShape (schema:Person)" : schema:url  :  IRI 
+"pulse:PersonShape (schema:Person)" - -> "pulse:ContributionShape (pulse:Contribution)" : pulse:hasContribution 
+"pulse:PersonShape (schema:Person)" - -> "pulse:MembershipShape (org:Membership)" : org:hasMembership 
+"pulse:PersonShape (schema:Person)" - -> "pulse:RepositoryShape (schema:SoftwareSourceCode)" : pulse:owns 
+Class "pulse:ContributionShape (pulse:Contribution)" [[#pulse:ContributionShape]] 
+"pulse:ContributionShape (pulse:Contribution)" : pulse:contributionCount  : xsd:integer  [1..*]  
+"pulse:ContributionShape (pulse:Contribution)" : pulse:firstContributionDate  : xsd:dateTime  
+"pulse:ContributionShape (pulse:Contribution)" : pulse:lastContributionDate  : xsd:dateTime  
+"pulse:ContributionShape (pulse:Contribution)" - -> "pulse:PersonShape (schema:Person)" : schema:author<U+00A0>[1..1]  
+"pulse:ContributionShape (pulse:Contribution)" - -> "pulse:RepositoryShape (schema:SoftwareSourceCode)" : pulse:contributionTo<U+00A0>[1..1]  
+Class "pulse:MembershipShape (org:Membership)" [[#pulse:MembershipShape]] 
+"pulse:MembershipShape (org:Membership)" : org:role  : xsd:string  [0..1]  
+"pulse:MembershipShape (org:Membership)" : time:hasBeginning  : xsd:date  
+"pulse:MembershipShape (org:Membership)" : time:hasEnd  : xsd:date  [0..1]  
+"pulse:MembershipShape (org:Membership)" - -> "pulse:OrganizationShape (org:Organization)" : org:organization<U+00A0>[1..1]  
+hide circle
+hide methods
+hide empty members
+remove @unlinked
+@enduml
+--></section>
+</div>
+</div>
+<h2 class="sp_section_subtitle" id="documentation">Model documentation</h2>
+<div class="row mt-3">
+<div class="col">
+<section>
+<div class="sp_section_title_table_wrapper">
+<h3 class="sp_section_title_table" id="pulse:ArticleShape">pulse:ArticleShape</h3><code class="sp_section_uri">https://open-pulse.epfl.ch/ontology#ArticleShape</code></div>
+<ul class="sp_list_description_properties">
+<li>Applies to: <a href="http://schema.org/ScholarlyArticle">schema:ScholarlyArticle</a></li>
+<li>Closed shape</li>
+</ul>
+<div class="sp_section_nodeshape_diagram">
+<div class="sp_section_nodeshape_center"><svg contentstyletype="text/css" height="318px" preserveaspectratio="none" style="width:355px;height:318px;background:#FFFFFF;" version="1.1" viewbox="0 0 355 318" width="355px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" zoomandpan="magnify"><defs></defs><g><!--class pulse:ArticleShape (schema:ScholarlyArticle)--><a href="#pulse:ArticleShape" target="_top" title="#pulse:ArticleShape" xlink:actuate="onRequest" xlink:href="#pulse:ArticleShape" xlink:show="new" xlink:title="#pulse:ArticleShape" xlink:type="simple"><g id="elem_pulse:ArticleShape (schema:ScholarlyArticle)"><rect codeline="8" fill="#F1F1F1" height="99.4844" id="pulse:ArticleShape (schema:ScholarlyArticle)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="320" x="7" y="110"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="306" x="14" y="127.9951">pulse:ArticleShape (schema:ScholarlyArticle)</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="326" y1="136.2969" y2="136.2969"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="308" x="13" y="153.292">pulse:infoscienceArticleIdentifier  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="278" x="13" y="169.5889">schema:datePublished  : xsd:date  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="204" x="13" y="185.8857">schema:identifier  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="226" x="13" y="202.1826">schema:name  : xsd:string  [1..*]</text></g></a><!--class pulse:OrganizationShape (org:Organization)--><a href="#pulse:OrganizationShape" target="_top" title="#pulse:OrganizationShape" xlink:actuate="onRequest" xlink:href="#pulse:OrganizationShape" xlink:show="new" xlink:title="#pulse:OrganizationShape" xlink:type="simple"><g id="elem_pulse:OrganizationShape (org:Organization)"><rect codeline="16" fill="#F1F1F1" height="26.2969" id="pulse:OrganizationShape (org:Organization)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="309" x="12.5" y="7"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="303" x="15.5" y="24.9951">pulse:OrganizationShape (org:Organization)</text></g></a><!--class pulse:PersonShape (schema:Person)--><a href="#pulse:PersonShape" target="_top" title="#pulse:PersonShape" xlink:actuate="onRequest" xlink:href="#pulse:PersonShape" xlink:show="new" xlink:title="#pulse:PersonShape" xlink:type="simple"><g id="elem_pulse:PersonShape (schema:Person)"><rect codeline="15" fill="#F1F1F1" height="26.2969" id="pulse:PersonShape (schema:Person)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="265" x="34.5" y="286"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="259" x="37.5" y="303.9951">pulse:PersonShape (schema:Person)</text></g></a><!--reverse link pulse:OrganizationShape (org:Organization) to pulse:ArticleShape (schema:ScholarlyArticle)--><g id="link_pulse:OrganizationShape (org:Organization)_pulse:ArticleShape (schema:ScholarlyArticle)"><path codeline="13" d="M167,39.2 C167,56.29 167,82.33 167,109.74 " fill="none" id="pulse:OrganizationShape (org:Organization)-backto-pulse:ArticleShape (schema:ScholarlyArticle)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="167,33.2,163,42.2,167,38.2,171,42.2,167,33.2" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="179" x="168" y="76.0669">schema:sourceOrganization</text></g><!--link pulse:ArticleShape (schema:ScholarlyArticle) to pulse:PersonShape (schema:Person)--><g id="link_pulse:ArticleShape (schema:ScholarlyArticle)_pulse:PersonShape (schema:Person)"><path codeline="14" d="M167,209.36 C167,236.84 167,262.96 167,279.98 " fill="none" id="pulse:ArticleShape (schema:ScholarlyArticle)-to-pulse:PersonShape (schema:Person)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="167,285.98,171,276.98,167,280.98,163,276.98,167,285.98" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="134" x="168" y="252.0669">schema:author [1..*]</text></g><!--SRC=[hLBBJiD03BpdAmnSU0YK8auLGbI8HoKU5GLng7fOTjranJuYUmEqNyz6IKiA0b7WbdZ6C-Er6GCuOP4B8N68XI0HF87p3XD-qgugM916C9zv5uPwXj0vIDOKJhH3kEoVNzpTtFQkpq_RT6-BA13fOMeGIclsM-WBYU8AcKM63rg573ffse9xHFxbn9kOOkDAaFSkuQz3Gd9IPOFreZICtHu5BGqESr4WRBBCqOhkKERU23BJ1jrQXz5eutF3U0p9YZfTgFdQJJnBZKvY0_PLd5zFD194rYkhBWVIBeDVU3IO4W47vQFHdAEQgrP5W55dRszx_0Tj_Vzngurz5FjjpjrozsY-unlAXDCp4RHtJQEdRAdSZi6-98bjT7LtzUu-GEA5RzDIrzgceWovfyFxdJJjfKUBgPTkzLkbnO6sMDLzBYdyx2KMKf_ebM0UDmzIKvoq_hOOeokkVz0MOHfBzZ76I0YjVqOuBftHxWdL6m00]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/hLBBJiD03BpdAmnSU0YK8auLGbI8HoKU5GLng7fOTjranJuYUmEqNyz6IKiA0b7WbdZ6C-Er6GCuOP4B8N68XI0HF87p3XD-qgugM916C9zv5uPwXj0vIDOKJhH3kEoVNzpTtFQkpq_RT6-BA13fOMeGIclsM-WBYU8AcKM63rg573ffse9xHFxbn9kOOkDAaFSkuQz3Gd9IPOFreZICtHu5BGqESr4WRBBCqOhkKERU23BJ1jrQXz5eutF3U0p9YZfTgFdQJJnBZKvY0_PLd5zFD194rYkhBWVIBeDVU3IO4W47vQFHdAEQgrP5W55dRszx_0Tj_Vzngurz5FjjpjrozsY-unlAXDCp4RHtJQEdRAdSZi6-98bjT7LtzUu-GEA5RzDIrzgceWovfyFxdJJjfKUBgPTkzLkbnO6sMDLzBYdyx2KMKf_ebM0UDmzIKvoq_hOOeokkVz0MOHfBzZ76I0YjVqOuBftHxWdL6m00" target="_blank">View as PNG</a></small>
+<!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "pulse:ArticleShape (schema:ScholarlyArticle)" [[#pulse:ArticleShape]] 
+"pulse:ArticleShape (schema:ScholarlyArticle)" : pulse:infoscienceArticleIdentifier  : xsd:string  
+"pulse:ArticleShape (schema:ScholarlyArticle)" : schema:datePublished  : xsd:date  [1..*]  
+"pulse:ArticleShape (schema:ScholarlyArticle)" : schema:identifier  : xsd:string  
+"pulse:ArticleShape (schema:ScholarlyArticle)" : schema:name  : xsd:string  [1..*]  
+"pulse:ArticleShape (schema:ScholarlyArticle)" -u-> "pulse:OrganizationShape (org:Organization)" : schema:sourceOrganization 
+"pulse:ArticleShape (schema:ScholarlyArticle)" -d-> "pulse:PersonShape (schema:Person)" : schema:author<U+00A0>[1..*]  
+Class "pulse:PersonShape (schema:Person)" [[#pulse:PersonShape]] 
+Class "pulse:OrganizationShape (org:Organization)" [[#pulse:OrganizationShape]] 
+hide circle
+hide methods
+hide empty members
+remove @unlinked
+@enduml
+--></div>
+<table class="sp_table_propertyshapes table-striped table-responsive">
+<thead>
+<tr>
+<th>Property name</th>
+<th>URI</th>
+<th>Expected value</th>
+<th>Card.</th>
+<th class="sp_description_column">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr style="
+					''
+				">
+<td>Author</td>
+<td id="pulse:ArticleShape_schema:author"><code><a href="http://schema.org/author">schema:author</a></code></td>
+<td><code><a href="#pulse:PersonShape">pulse:PersonShape</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">1..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The author of this article</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Publication Date</td>
+<td id="pulse:ArticleShape_schema:datePublished"><code><a href="http://schema.org/datePublished">schema:datePublished</a></code></td>
+<td><code>xsd:date</code><br/><small></small></td>
+<td>
+<div style="width:30px">1..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Date of first publication or broadcast</td>
+</tr>
+<tr style="
+					''
+				">
+<td>infoscience article identifier</td>
+<td id="pulse:ArticleShape_pulse:infoscienceArticleIdentifier"><code><a href="https://open-pulse.epfl.ch/ontology#infoscienceArticleIdentifier">pulse:infoscienceArticleIdentifier</a></code></td>
+<td><code>xsd:string</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Infoscience article identifier.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>identifier</td>
+<td id="pulse:ArticleShape_schema:identifier"><code><a href="http://schema.org/identifier">schema:identifier</a></code></td>
+<td><code>xsd:string</code><br/><small>^10\.\d{4,9}/[-._;()/:a-zA-Z0-9]+$</small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Standard DOI validation.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>name</td>
+<td id="pulse:ArticleShape_schema:name"><code><a href="http://schema.org/name">schema:name</a></code></td>
+<td><code>xsd:string</code><br/><small></small></td>
+<td>
+<div style="width:30px">1..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The name of the item.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Source Organization</td>
+<td id="pulse:ArticleShape_schema:sourceOrganization"><code><a href="http://schema.org/sourceOrganization">schema:sourceOrganization</a></code></td>
+<td><code><a href="#pulse:OrganizationShape">pulse:OrganizationShape</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The organization where the work was created or published.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+</div><br/><div class="row mt-3">
+<div class="col">
+<section>
+<div class="sp_section_title_table_wrapper">
+<h3 class="sp_section_title_table" id="pulse:ContributionShape">pulse:ContributionShape</h3><code class="sp_section_uri">https://open-pulse.epfl.ch/ontology#ContributionShape</code></div>
+<ul class="sp_list_description_properties">
+<li>Applies to: <a href="https://open-pulse.epfl.ch/ontology#Contribution">pulse:Contribution</a></li>
+<li>Closed shape</li>
+</ul>
+<div class="sp_section_nodeshape_diagram">
+<div class="sp_section_nodeshape_center"><svg contentstyletype="text/css" height="302px" preserveaspectratio="none" style="width:401px;height:302px;background:#FFFFFF;" version="1.1" viewbox="0 0 401 302" width="401px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" zoomandpan="magnify"><defs></defs><g><!--class pulse:ContributionShape (pulse:Contribution)--><a href="#pulse:ContributionShape" target="_top" title="#pulse:ContributionShape" xlink:actuate="onRequest" xlink:href="#pulse:ContributionShape" xlink:show="new" xlink:title="#pulse:ContributionShape" xlink:type="simple"><g id="elem_pulse:ContributionShape (pulse:Contribution)"><rect codeline="8" fill="#F1F1F1" height="83.1875" id="pulse:ContributionShape (pulse:Contribution)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="320" x="40.5" y="110"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="314" x="43.5" y="127.9951">pulse:ContributionShape (pulse:Contribution)</text><line style="stroke:#181818;stroke-width:0.5;" x1="41.5" x2="359.5" y1="136.2969" y2="136.2969"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="305" x="46.5" y="153.292">pulse:contributionCount  : xsd:integer  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="297" x="46.5" y="169.5889">pulse:firstContributionDate  : xsd:dateTime</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="296" x="46.5" y="185.8857">pulse:lastContributionDate  : xsd:dateTime</text></g></a><!--class pulse:PersonShape (schema:Person)--><a href="#pulse:PersonShape" target="_top" title="#pulse:PersonShape" xlink:actuate="onRequest" xlink:href="#pulse:PersonShape" xlink:show="new" xlink:title="#pulse:PersonShape" xlink:type="simple"><g id="elem_pulse:PersonShape (schema:Person)"><rect codeline="15" fill="#F1F1F1" height="26.2969" id="pulse:PersonShape (schema:Person)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="265" x="68" y="7"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="259" x="71" y="24.9951">pulse:PersonShape (schema:Person)</text></g></a><!--class pulse:RepositoryShape (schema:SoftwareSourceCode)--><a href="#pulse:RepositoryShape" target="_top" title="#pulse:RepositoryShape" xlink:actuate="onRequest" xlink:href="#pulse:RepositoryShape" xlink:show="new" xlink:title="#pulse:RepositoryShape" xlink:type="simple"><g id="elem_pulse:RepositoryShape (schema:SoftwareSourceCode)"><rect codeline="14" fill="#F1F1F1" height="26.2969" id="pulse:RepositoryShape (schema:SoftwareSourceCode)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="387" x="7" y="270"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="381" x="10" y="287.9951">pulse:RepositoryShape (schema:SoftwareSourceCode)</text></g></a><!--reverse link pulse:PersonShape (schema:Person) to pulse:ContributionShape (pulse:Contribution)--><g id="link_pulse:PersonShape (schema:Person)_pulse:ContributionShape (pulse:Contribution)"><path codeline="12" d="M200.5,39.42 C200.5,56.89 200.5,83.55 200.5,109.94 " fill="none" id="pulse:PersonShape (schema:Person)-backto-pulse:ContributionShape (pulse:Contribution)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="200.5,33.42,196.5,42.42,200.5,38.42,204.5,42.42,200.5,33.42" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="135" x="201.5" y="76.0669">schema:author [1..1]</text></g><!--link pulse:ContributionShape (pulse:Contribution) to pulse:RepositoryShape (schema:SoftwareSourceCode)--><g id="link_pulse:ContributionShape (pulse:Contribution)_pulse:RepositoryShape (schema:SoftwareSourceCode)"><path codeline="13" d="M200.5,193.12 C200.5,219.67 200.5,246.55 200.5,263.92 " fill="none" id="pulse:ContributionShape (pulse:Contribution)-to-pulse:RepositoryShape (schema:SoftwareSourceCode)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="200.5,269.92,204.5,260.92,200.5,264.92,196.5,260.92,200.5,269.92" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="167" x="201.5" y="236.0669">pulse:contributionTo [1..1]</text></g><!--SRC=[jL9DJm8n4BtlhnZXuaSWkyOJCKQoAfg86XRZWN0esu5js7QQjYlYhxSh7ouIJ23nrhutyzxBp5Xqe9X4grcA2Mfcc2C3YXG6TYfK2KX8SsRj7IcNY4-4w28uuZWM2k7neNFVV-wrdpgtrNAIsWluSZVF4GgPdrVOcM6wYzQo2Ru9xZA8mh12jusXMKovJr7lCaEa0hix90HncGrgkiWjjcAVqOXHuGIf96CQuNYREAd1O53VqJ0SGh2dM0iMS5g1OogK0qzzMDuIok443S0WQZPFXt2mmrWOwwhS3NEuSk7-tHSI3vVta_m7zKRHk5hjvmMDNLVRD4F9bjXtZ2N22fUHkNmz2yDsU5KEBJfWQ0t-uzj3JLRuevblUYSqTZDcCA72f1WJnntxxDDMd8t3syjWVNs_kihRsr3zSrnhbKfLgP09Zf0Aa-QuU4lqu-HsyK6ftTn3SkIx0eEItX6k2vKBDKN-1G00]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/jL9DJm8n4BtlhnZXuaSWkyOJCKQoAfg86XRZWN0esu5js7QQjYlYhxSh7ouIJ23nrhutyzxBp5Xqe9X4grcA2Mfcc2C3YXG6TYfK2KX8SsRj7IcNY4-4w28uuZWM2k7neNFVV-wrdpgtrNAIsWluSZVF4GgPdrVOcM6wYzQo2Ru9xZA8mh12jusXMKovJr7lCaEa0hix90HncGrgkiWjjcAVqOXHuGIf96CQuNYREAd1O53VqJ0SGh2dM0iMS5g1OogK0qzzMDuIok443S0WQZPFXt2mmrWOwwhS3NEuSk7-tHSI3vVta_m7zKRHk5hjvmMDNLVRD4F9bjXtZ2N22fUHkNmz2yDsU5KEBJfWQ0t-uzj3JLRuevblUYSqTZDcCA72f1WJnntxxDDMd8t3syjWVNs_kihRsr3zSrnhbKfLgP09Zf0Aa-QuU4lqu-HsyK6ftTn3SkIx0eEItX6k2vKBDKN-1G00" target="_blank">View as PNG</a></small>
+<!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "pulse:ContributionShape (pulse:Contribution)" [[#pulse:ContributionShape]] 
+"pulse:ContributionShape (pulse:Contribution)" : pulse:contributionCount  : xsd:integer  [1..*]  
+"pulse:ContributionShape (pulse:Contribution)" : pulse:firstContributionDate  : xsd:dateTime  
+"pulse:ContributionShape (pulse:Contribution)" : pulse:lastContributionDate  : xsd:dateTime  
+"pulse:ContributionShape (pulse:Contribution)" -u-> "pulse:PersonShape (schema:Person)" : schema:author<U+00A0>[1..1]  
+"pulse:ContributionShape (pulse:Contribution)" -d-> "pulse:RepositoryShape (schema:SoftwareSourceCode)" : pulse:contributionTo<U+00A0>[1..1]  
+Class "pulse:RepositoryShape (schema:SoftwareSourceCode)" [[#pulse:RepositoryShape]] 
+Class "pulse:PersonShape (schema:Person)" [[#pulse:PersonShape]] 
+hide circle
+hide methods
+hide empty members
+remove @unlinked
+@enduml
+--></div>
+<table class="sp_table_propertyshapes table-striped table-responsive">
+<thead>
+<tr>
+<th>Property name</th>
+<th>URI</th>
+<th>Expected value</th>
+<th>Card.</th>
+<th class="sp_description_column">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr style="
+					''
+				">
+<td>Contribution Count</td>
+<td id="pulse:ContributionShape_pulse:contributionCount"><code><a href="https://open-pulse.epfl.ch/ontology#contributionCount">pulse:contributionCount</a></code></td>
+<td><code>xsd:integer</code><br/><small></small></td>
+<td>
+<div style="width:30px">1..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Number of commits made.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Contribution To</td>
+<td id="pulse:ContributionShape_pulse:contributionTo"><code><a href="https://open-pulse.epfl.ch/ontology#contributionTo">pulse:contributionTo</a></code></td>
+<td><code><a href="#pulse:RepositoryShape">pulse:RepositoryShape</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">1..1</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The repository this contribution belongs to.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>First Contribution Date</td>
+<td id="pulse:ContributionShape_pulse:firstContributionDate"><code><a href="https://open-pulse.epfl.ch/ontology#firstContributionDate">pulse:firstContributionDate</a></code></td>
+<td><code>xsd:dateTime</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The date of the first contribution.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Git Author</td>
+<td id="pulse:ContributionShape_schema:author"><code><a href="http://schema.org/author">schema:author</a></code></td>
+<td><code><a href="#pulse:PersonShape">pulse:PersonShape</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">1..1</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The person who made these contributions.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Last Contribution Date</td>
+<td id="pulse:ContributionShape_pulse:lastContributionDate"><code><a href="https://open-pulse.epfl.ch/ontology#lastContributionDate">pulse:lastContributionDate</a></code></td>
+<td><code>xsd:dateTime</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The date of the most recent contribution.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+</div><br/><div class="row mt-3">
+<div class="col">
+<section>
+<div class="sp_section_title_table_wrapper">
+<h3 class="sp_section_title_table" id="pulse:MembershipShape">pulse:MembershipShape</h3><code class="sp_section_uri">https://open-pulse.epfl.ch/ontology#MembershipShape</code></div>
+<ul class="sp_list_description_properties">
+<li>Applies to: <a href="http://www.w3.org/ns/org#Membership">org:Membership</a></li>
+<li>Closed shape</li>
+</ul>
+<div class="sp_section_nodeshape_diagram">
+<div class="sp_section_nodeshape_center"><svg contentstyletype="text/css" height="200px" preserveaspectratio="none" style="width:323px;height:200px;background:#FFFFFF;" version="1.1" viewbox="0 0 323 200" width="323px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" zoomandpan="magnify"><defs></defs><g><!--class pulse:MembershipShape (org:Membership)--><a href="#pulse:MembershipShape" target="_top" title="#pulse:MembershipShape" xlink:actuate="onRequest" xlink:href="#pulse:MembershipShape" xlink:show="new" xlink:title="#pulse:MembershipShape" xlink:type="simple"><g id="elem_pulse:MembershipShape (org:Membership)"><rect codeline="8" fill="#F1F1F1" height="83.1875" id="pulse:MembershipShape (org:Membership)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="307" x="8" y="110"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="301" x="11" y="127.9951">pulse:MembershipShape (org:Membership)</text><line style="stroke:#181818;stroke-width:0.5;" x1="9" x2="314" y1="136.2969" y2="136.2969"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="183" x="14" y="153.292">org:role  : xsd:string  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="207" x="14" y="169.5889">time:hasBeginning  : xsd:date</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="208" x="14" y="185.8857">time:hasEnd  : xsd:date  [0..1]</text></g></a><!--class pulse:OrganizationShape (org:Organization)--><a href="#pulse:OrganizationShape" target="_top" title="#pulse:OrganizationShape" xlink:actuate="onRequest" xlink:href="#pulse:OrganizationShape" xlink:show="new" xlink:title="#pulse:OrganizationShape" xlink:type="simple"><g id="elem_pulse:OrganizationShape (org:Organization)"><rect codeline="13" fill="#F1F1F1" height="26.2969" id="pulse:OrganizationShape (org:Organization)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="309" x="7" y="7"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="303" x="10" y="24.9951">pulse:OrganizationShape (org:Organization)</text></g></a><!--reverse link pulse:OrganizationShape (org:Organization) to pulse:MembershipShape (org:Membership)--><g id="link_pulse:OrganizationShape (org:Organization)_pulse:MembershipShape (org:Membership)"><path codeline="12" d="M161.5,39.42 C161.5,56.89 161.5,83.55 161.5,109.94 " fill="none" id="pulse:OrganizationShape (org:Organization)-backto-pulse:MembershipShape (org:Membership)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="161.5,33.42,157.5,42.42,161.5,38.42,165.5,42.42,161.5,33.42" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="142" x="162.5" y="76.0669">org:organization [1..1]</text></g><!--SRC=[dP51Jm8n48Nl-oj6k6WCPDTusXWY4aGJaKGm7ZOSwdRSRMYdJTiLuTUx2qfAr0IyJT-yV7qpuz03CONEi1odQ9XbNbiWJHYvXQ16K91Bvjoj9ZyLQuJaCZhX-2O8uU5-T3URFFKVHyFGhfMf0RNThoH2fUH5q5rQPiRe72lmHN1VGXB7GRjlhLuEjAnJjCVCQasH-piaH8Cc6xHC9HscOrIlQ5qfpBHa1k5Kso8GprgGPUrVhVCvH0T3KcWag-lXwlh3yTHvAwW0oE9kDvd3KIml5AObSpTO2A8DPWlbpEF_K4FY-v3ZStMgJkzxhHDRC19hveMcm1_AkwteGBnwFe_ZVjpBag_Vzuvr67Lti1_svcIbu0YviBd4RQtGbvgxxGELyQjQsemLMLJw7U6w8YbeWVmJ]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/dP51Jm8n48Nl-oj6k6WCPDTusXWY4aGJaKGm7ZOSwdRSRMYdJTiLuTUx2qfAr0IyJT-yV7qpuz03CONEi1odQ9XbNbiWJHYvXQ16K91Bvjoj9ZyLQuJaCZhX-2O8uU5-T3URFFKVHyFGhfMf0RNThoH2fUH5q5rQPiRe72lmHN1VGXB7GRjlhLuEjAnJjCVCQasH-piaH8Cc6xHC9HscOrIlQ5qfpBHa1k5Kso8GprgGPUrVhVCvH0T3KcWag-lXwlh3yTHvAwW0oE9kDvd3KIml5AObSpTO2A8DPWlbpEF_K4FY-v3ZStMgJkzxhHDRC19hveMcm1_AkwteGBnwFe_ZVjpBag_Vzuvr67Lti1_svcIbu0YviBd4RQtGbvgxxGELyQjQsemLMLJw7U6w8YbeWVmJ" target="_blank">View as PNG</a></small>
+<!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "pulse:MembershipShape (org:Membership)" [[#pulse:MembershipShape]] 
+"pulse:MembershipShape (org:Membership)" : org:role  : xsd:string  [0..1]  
+"pulse:MembershipShape (org:Membership)" : time:hasBeginning  : xsd:date  
+"pulse:MembershipShape (org:Membership)" : time:hasEnd  : xsd:date  [0..1]  
+"pulse:MembershipShape (org:Membership)" -u-> "pulse:OrganizationShape (org:Organization)" : org:organization<U+00A0>[1..1]  
+Class "pulse:OrganizationShape (org:Organization)" [[#pulse:OrganizationShape]] 
+hide circle
+hide methods
+hide empty members
+remove @unlinked
+@enduml
+--></div>
+<table class="sp_table_propertyshapes table-striped table-responsive">
+<thead>
+<tr>
+<th>Property name</th>
+<th>URI</th>
+<th>Expected value</th>
+<th>Card.</th>
+<th class="sp_description_column">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr style="
+					''
+				">
+<td>End Date</td>
+<td id="pulse:MembershipShape_time:hasEnd"><code><a href="http://www.w3.org/2006/time#hasEnd">time:hasEnd</a></code></td>
+<td><code>xsd:date</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..1</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The end of the temporal entity.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Organization</td>
+<td id="pulse:MembershipShape_org:organization"><code><a href="http://www.w3.org/ns/org#organization">org:organization</a></code></td>
+<td><code><a href="#pulse:OrganizationShape">pulse:OrganizationShape</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">1..1</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Indicates the organization in which the agent is a member.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Role</td>
+<td id="pulse:MembershipShape_org:role"><code><a href="http://www.w3.org/ns/org#role">org:role</a></code></td>
+<td><code>xsd:string</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..1</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Indicates the Role that the Agent plays in a Membership relationship with an Organization.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Start Date</td>
+<td id="pulse:MembershipShape_time:hasBeginning"><code><a href="http://www.w3.org/2006/time#hasBeginning">time:hasBeginning</a></code></td>
+<td><code>xsd:date</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The beginning of the temporal entity.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+</div><br/><div class="row mt-3">
+<div class="col">
+<section>
+<div class="sp_section_title_table_wrapper">
+<h3 class="sp_section_title_table" id="pulse:OrganizationShape">pulse:OrganizationShape</h3><code class="sp_section_uri">https://open-pulse.epfl.ch/ontology#OrganizationShape</code></div>
+<ul class="sp_list_description_properties">
+<li>Applies to: <a href="http://www.w3.org/ns/org#Organization">org:Organization</a></li>
+<li>Closed shape</li>
+</ul>
+<div class="sp_section_nodeshape_diagram">
+<div class="sp_section_nodeshape_center"><svg contentstyletype="text/css" height="335px" preserveaspectratio="none" style="width:511px;height:335px;background:#FFFFFF;" version="1.1" viewbox="0 0 511 335" width="511px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" zoomandpan="magnify"><defs></defs><g><!--class pulse:OrganizationShape (org:Organization)--><a href="#pulse:OrganizationShape" target="_top" title="#pulse:OrganizationShape" xlink:actuate="onRequest" xlink:href="#pulse:OrganizationShape" xlink:show="new" xlink:title="#pulse:OrganizationShape" xlink:type="simple"><g id="elem_pulse:OrganizationShape (org:Organization)"><rect codeline="17" fill="#F1F1F1" height="115.7813" id="pulse:OrganizationShape (org:Organization)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="365" x="18" y="110"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="303" x="49" y="127.9951">pulse:OrganizationShape (org:Organization)</text><line style="stroke:#181818;stroke-width:0.5;" x1="19" x2="382" y1="136.2969" y2="136.2969"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="316" x="24" y="153.292">pulse:githubOrgFollowers  : xsd:integer  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="307" x="24" y="169.5889">pulse:githubOrganizationHandle  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="353" x="24" y="185.8857">pulse:infoscienceOrganizationIdentifier  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="204" x="24" y="202.1826">schema:identifier  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="226" x="24" y="218.4795">schema:name  : xsd:string  [1..*]</text></g></a><!--class pulse:OrganizationTypeEnumeration--><g id="elem_pulse:OrganizationTypeEnumeration"><rect fill="#F1F1F1" height="26.2969" id="uml_pulse:OrganizationTypeEnumeration" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="258" x="71.5" y="7"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="252" x="74.5" y="24.9951">pulse:OrganizationTypeEnumeration</text></g><!--class pulse:RepositoryShape (schema:SoftwareSourceCode)--><a href="#pulse:RepositoryShape" target="_top" title="#pulse:RepositoryShape" xlink:actuate="onRequest" xlink:href="#pulse:RepositoryShape" xlink:show="new" xlink:title="#pulse:RepositoryShape" xlink:type="simple"><g id="elem_pulse:RepositoryShape (schema:SoftwareSourceCode)"><rect codeline="18" fill="#F1F1F1" height="26.2969" id="pulse:RepositoryShape (schema:SoftwareSourceCode)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="387" x="7" y="303"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="381" x="10" y="320.9951">pulse:RepositoryShape (schema:SoftwareSourceCode)</text></g></a><!--reverse link pulse:OrganizationTypeEnumeration to pulse:OrganizationShape (org:Organization)--><g id="link_pulse:OrganizationTypeEnumeration_pulse:OrganizationShape (org:Organization)"><path codeline="14" d="M200.5,39.2 C200.5,56.06 200.5,81.6 200.5,109.83 " fill="none" id="pulse:OrganizationTypeEnumeration-backto-pulse:OrganizationShape (org:Organization)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="200.5,33.2,196.5,42.2,200.5,38.2,204.5,42.2,200.5,33.2" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="149" x="201.5" y="76.0669">pulse:OrganizationType</text></g><!--link pulse:OrganizationShape (org:Organization) to pulse:RepositoryShape (schema:SoftwareSourceCode)--><g id="link_pulse:OrganizationShape (org:Organization)_pulse:RepositoryShape (schema:SoftwareSourceCode)"><path codeline="15" d="M200.5,226.28 C200.5,254.56 200.5,280.15 200.5,296.95 " fill="none" id="pulse:OrganizationShape (org:Organization)-to-pulse:RepositoryShape (schema:SoftwareSourceCode)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="200.5,302.95,204.5,293.95,200.5,297.95,196.5,293.95,200.5,302.95" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="70" x="201.5" y="269.0669">pulse:owns</text></g><!--link pulse:OrganizationShape (org:Organization) to pulse:OrganizationShape (org:Organization)--><g id="link_pulse:OrganizationShape (org:Organization)_pulse:OrganizationShape (org:Organization)"><path codeline="16" d="M383.37,152.69 C404.37,155.54 418,160.64 418,168 C418,175.36 410.3155,179.6531 389.3155,182.5031 " fill="none" id="pulse:OrganizationShape (org:Organization)-to-pulse:OrganizationShape (org:Organization)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="383.37,183.31,392.8262,186.0633,388.3246,182.6376,391.7503,178.136,383.37,183.31" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="74" x="424" y="165.0669">org:hasUnit</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="63" x="424" y="180.1997">org:unitOf</text></g><!--SRC=[jLDDRzim3BtxLt3jPHlG81bsoc5O4VGBM1UWxh13beDgqpPHYHH4ULxwwoStGUi6xG2lsqtaUtgFf2Z526mSgZS5vkXDC542i31cUalS9nmKrgYU2iUSxX1c7xCt9LR425ykpiwlbrV7NyzEXdHnFWaaUjnOXDRP3mEq2yPVeggfyJkLiO7PT3g0ZqEGRY4sLN5uQO88P_foaP0j-jhWmBTMSRuCjM6wCv64yyPuXBSIwYVfTmUmMXs-G5-l8HibDOSjkwROj3S9F1LhfSEWaB1VMiw98zOO05RJoMIsXjSQF83dXiiqtPsDna1S_wqwSILQ47A1GyP5cHwHAkhBVvsD5WqwCwT_BTYlnRxKQZQPl1yzwAFswDDpQtIzyNZ2hSDm7pxER9yqrgzyzBj2BqfffpSx_gwxNAhOcO2vjA70XPGuU3FfMCTwXkTx_DEW-sHZz1jJX1-sZzfqN5R_uUSz4HmramVTlLkzQfEM3WeAXSNjsM5ifDHjWCx7JKgvc_Hdiu1EVY9yRjaItsBv6m00]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/jLDDRzim3BtxLt3jPHlG81bsoc5O4VGBM1UWxh13beDgqpPHYHH4ULxwwoStGUi6xG2lsqtaUtgFf2Z526mSgZS5vkXDC542i31cUalS9nmKrgYU2iUSxX1c7xCt9LR425ykpiwlbrV7NyzEXdHnFWaaUjnOXDRP3mEq2yPVeggfyJkLiO7PT3g0ZqEGRY4sLN5uQO88P_foaP0j-jhWmBTMSRuCjM6wCv64yyPuXBSIwYVfTmUmMXs-G5-l8HibDOSjkwROj3S9F1LhfSEWaB1VMiw98zOO05RJoMIsXjSQF83dXiiqtPsDna1S_wqwSILQ47A1GyP5cHwHAkhBVvsD5WqwCwT_BTYlnRxKQZQPl1yzwAFswDDpQtIzyNZ2hSDm7pxER9yqrgzyzBj2BqfffpSx_gwxNAhOcO2vjA70XPGuU3FfMCTwXkTx_DEW-sHZz1jJX1-sZzfqN5R_uUSz4HmramVTlLkzQfEM3WeAXSNjsM5ifDHjWCx7JKgvc_Hdiu1EVY9yRjaItsBv6m00" target="_blank">View as PNG</a></small>
+<!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "pulse:OrganizationShape (org:Organization)" [[#pulse:OrganizationShape]] 
+"pulse:OrganizationShape (org:Organization)" : pulse:githubOrgFollowers  : xsd:integer  [0..1]  
+"pulse:OrganizationShape (org:Organization)" : pulse:githubOrganizationHandle  : xsd:string  
+"pulse:OrganizationShape (org:Organization)" : pulse:infoscienceOrganizationIdentifier  : xsd:string  
+"pulse:OrganizationShape (org:Organization)" : schema:identifier  : xsd:string  
+"pulse:OrganizationShape (org:Organization)" : schema:name  : xsd:string  [1..*]  
+"pulse:OrganizationShape (org:Organization)" -u-> "pulse:OrganizationTypeEnumeration" : pulse:OrganizationType 
+"pulse:OrganizationShape (org:Organization)" -d-> "pulse:RepositoryShape (schema:SoftwareSourceCode)" : pulse:owns 
+"pulse:OrganizationShape (org:Organization)" -r-> "pulse:OrganizationShape (org:Organization)" : org:hasUnit \lorg:unitOf 
+Class "pulse:OrganizationShape (org:Organization)" [[#pulse:OrganizationShape]] 
+Class "pulse:RepositoryShape (schema:SoftwareSourceCode)" [[#pulse:RepositoryShape]] 
+hide circle
+hide methods
+hide empty members
+remove @unlinked
+@enduml
+--></div>
+<table class="sp_table_propertyshapes table-striped table-responsive">
+<thead>
+<tr>
+<th>Property name</th>
+<th>URI</th>
+<th>Expected value</th>
+<th>Card.</th>
+<th class="sp_description_column">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr style="
+					''
+				">
+<td>has unit</td>
+<td id="pulse:OrganizationShape_org:hasUnit"><code><a href="http://www.w3.org/ns/org#hasUnit">org:hasUnit</a></code></td>
+<td><code><a href="#pulse:OrganizationShape">pulse:OrganizationShape</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Link to a subunit, project, or department.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>unit of</td>
+<td id="pulse:OrganizationShape_org:unitOf"><code><a href="http://www.w3.org/ns/org#unitOf">org:unitOf</a></code></td>
+<td><code><a href="#pulse:OrganizationShape">pulse:OrganizationShape</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Link back to the managing/parent organization.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Organization Type</td>
+<td id="pulse:OrganizationShape_pulse:OrganizationType"><code><a href="https://open-pulse.epfl.ch/ontology#OrganizationType">pulse:OrganizationType</a></code></td>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#OrganizationTypeEnumeration">pulse:OrganizationTypeEnumeration</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Must be a valid IRI from the Organization Type enumeration (e.g., pulse:University).</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Owns Repositories</td>
+<td id="pulse:OrganizationShape_pulse:owns"><code><a href="https://open-pulse.epfl.ch/ontology#owns">pulse:owns</a></code></td>
+<td><code><a href="#pulse:RepositoryShape">pulse:RepositoryShape</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Repositories owned by this organization.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>github organization handle</td>
+<td id="pulse:OrganizationShape_pulse:githubOrganizationHandle"><code><a href="https://open-pulse.epfl.ch/ontology#githubOrganizationHandle">pulse:githubOrganizationHandle</a></code></td>
+<td><code>xsd:string</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The GitHub handle of an organization.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>github organization followers</td>
+<td id="pulse:OrganizationShape_pulse:githubOrgFollowers"><code><a href="https://open-pulse.epfl.ch/ontology#githubOrgFollowers">pulse:githubOrgFollowers</a></code></td>
+<td><code>xsd:integer</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..1</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Number of followers for the GitHub organization.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>infoscience organization identifier</td>
+<td id="pulse:OrganizationShape_pulse:infoscienceOrganizationIdentifier"><code><a href="https://open-pulse.epfl.ch/ontology#infoscienceOrganizationIdentifier">pulse:infoscienceOrganizationIdentifier</a></code></td>
+<td><code>xsd:string</code><br/><small>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$</small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Infoscience Organization ID validation.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>identifier</td>
+<td id="pulse:OrganizationShape_schema:identifier"><code><a href="http://schema.org/identifier">schema:identifier</a></code></td>
+<td><code>xsd:string</code><br/><small>^https://ror\.org/[0-9a-z]{9}$</small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Standard ROR ID validation.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>name</td>
+<td id="pulse:OrganizationShape_schema:name"><code><a href="http://schema.org/name">schema:name</a></code></td>
+<td><code>xsd:string</code><br/><small></small></td>
+<td>
+<div style="width:30px">1..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The name of the item.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+</div><br/><div class="row mt-3">
+<div class="col">
+<section>
+<div class="sp_section_title_table_wrapper">
+<h3 class="sp_section_title_table" id="pulse:PersonShape">pulse:PersonShape</h3><code class="sp_section_uri">https://open-pulse.epfl.ch/ontology#PersonShape</code></div>
+<ul class="sp_list_description_properties">
+<li>Applies to: <a href="http://schema.org/Person">schema:Person</a></li>
+<li>Closed shape</li>
+</ul>
+<div class="sp_section_nodeshape_diagram">
+<div class="sp_section_nodeshape_center"><svg contentstyletype="text/css" height="351px" preserveaspectratio="none" style="width:879px;height:351px;background:#FFFFFF;" version="1.1" viewbox="0 0 879 351" width="879px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" zoomandpan="magnify"><defs></defs><g><!--class pulse:PersonShape (schema:Person)--><a href="#pulse:PersonShape" target="_top" title="#pulse:PersonShape" xlink:actuate="onRequest" xlink:href="#pulse:PersonShape" xlink:show="new" xlink:title="#pulse:PersonShape" xlink:type="simple"><g id="elem_pulse:PersonShape (schema:Person)"><rect codeline="8" fill="#F1F1F1" height="132.0781" id="pulse:PersonShape (schema:Person)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="371" x="7" y="110"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="259" x="63" y="127.9951">pulse:PersonShape (schema:Person)</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="377" y1="136.2969" y2="136.2969"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="243" x="13" y="153.292">pulse:githubUsername  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="359" x="13" y="169.5889">pulse:infosciencePersonIdentifier  : xsd:string  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="221" x="13" y="185.8857">pulse:orcidIdentifier  : xsd:string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="157" x="13" y="202.1826">schema:email  :  Literal</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="226" x="13" y="218.4795">schema:name  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="114" x="13" y="234.7764">schema:url  :  IRI</text></g></a><!--class pulse:ContributionShape (pulse:Contribution)--><a href="#pulse:ContributionShape" target="_top" title="#pulse:ContributionShape" xlink:actuate="onRequest" xlink:href="#pulse:ContributionShape" xlink:show="new" xlink:title="#pulse:ContributionShape" xlink:type="simple"><g id="elem_pulse:ContributionShape (pulse:Contribution)"><rect codeline="19" fill="#F1F1F1" height="26.2969" id="pulse:ContributionShape (pulse:Contribution)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="320" x="32.5" y="7"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="314" x="35.5" y="24.9951">pulse:ContributionShape (pulse:Contribution)</text></g></a><!--class pulse:MembershipShape (org:Membership)--><a href="#pulse:MembershipShape" target="_top" title="#pulse:MembershipShape" xlink:actuate="onRequest" xlink:href="#pulse:MembershipShape" xlink:show="new" xlink:title="#pulse:MembershipShape" xlink:type="simple"><g id="elem_pulse:MembershipShape (org:Membership)"><rect codeline="18" fill="#F1F1F1" height="26.2969" id="pulse:MembershipShape (org:Membership)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="307" x="39" y="319"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="301" x="42" y="336.9951">pulse:MembershipShape (org:Membership)</text></g></a><!--class pulse:RepositoryShape (schema:SoftwareSourceCode)--><a href="#pulse:RepositoryShape" target="_top" title="#pulse:RepositoryShape" xlink:actuate="onRequest" xlink:href="#pulse:RepositoryShape" xlink:show="new" xlink:title="#pulse:RepositoryShape" xlink:type="simple"><g id="elem_pulse:RepositoryShape (schema:SoftwareSourceCode)"><rect codeline="20" fill="#F1F1F1" height="26.2969" id="pulse:RepositoryShape (schema:SoftwareSourceCode)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="387" x="485" y="163"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="381" x="488" y="180.9951">pulse:RepositoryShape (schema:SoftwareSourceCode)</text></g></a><!--reverse link pulse:ContributionShape (pulse:Contribution) to pulse:PersonShape (schema:Person)--><g id="link_pulse:ContributionShape (pulse:Contribution)_pulse:PersonShape (schema:Person)"><path codeline="15" d="M192.5,39.08 C192.5,55.75 192.5,81.01 192.5,109.96 " fill="none" id="pulse:ContributionShape (pulse:Contribution)-backto-pulse:PersonShape (schema:Person)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="192.5,33.08,188.5,42.08,192.5,38.08,196.5,42.08,192.5,33.08" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="139" x="193.5" y="76.0669">pulse:hasContribution</text></g><!--link pulse:PersonShape (schema:Person) to pulse:MembershipShape (org:Membership)--><g id="link_pulse:PersonShape (schema:Person)_pulse:MembershipShape (org:Membership)"><path codeline="16" d="M192.5,242.31 C192.5,271.17 192.5,296.26 192.5,312.88 " fill="none" id="pulse:PersonShape (schema:Person)-to-pulse:MembershipShape (org:Membership)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="192.5,318.88,196.5,309.88,192.5,313.88,188.5,309.88,192.5,318.88" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="127" x="193.5" y="285.0669">org:hasMembership</text></g><!--link pulse:PersonShape (schema:Person) to pulse:RepositoryShape (schema:SoftwareSourceCode)--><g id="link_pulse:PersonShape (schema:Person)_pulse:RepositoryShape (schema:SoftwareSourceCode)"><path codeline="17" d="M378.32,176 C413.15,176 443.65,176 478.72,176 " fill="none" id="pulse:PersonShape (schema:Person)-to-pulse:RepositoryShape (schema:SoftwareSourceCode)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="484.72,176,475.72,172,479.72,176,475.72,180,484.72,176" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="70" x="396.5" y="169.0669">pulse:owns</text></g><!--SRC=[bLF1Rjim3BtxAxJsiWrea1GxvJ2i2DOsGDCDyOOTWXmKYOc9Ig91oikohvzSPucRh9XzC20_FhxtH8W2KGNjGKfj88TIiux4Ab20J9umr81NnccHMmennz-WHX-oDnRM640zJE_kltsPtppUVMxJoPT98D7Zpe6glBjkLRUionc8w0tyG1iBDHeEM-KRPjfEoAKKbpFDH26JrqEgR59dKnTbvGJ6Nu65Gbxe4jHRCGLulSVUNQZ5ulACjLogh4llM3Ma3SQYMdqNu3gGIlWliME9Z66Z-abXM9COX62WgKrj6Xck4VXKTp4S34RBdlh41kthcXsrzaZwqDKIwW4Zi7Oz-_yrhSLeC7Y_x9kauYR7T3xjrdbLNNty-pucwGqphgg81_fveJN3Gakxqj7G7Wrdu5S9Bx3SauatBV3PgeQIqH7jQCD7cpcK99YMOlUIdDCwRZL3JXKRc925zWFP1ZdPd__7FIpH2RLUf1TINKTz43nhE9FiTSk3xabNhLgW1MMGZOFcx24MPANv0L_6NOAUxvSnUFe9wbCL78Odi7y0]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/bLF1Rjim3BtxAxJsiWrea1GxvJ2i2DOsGDCDyOOTWXmKYOc9Ig91oikohvzSPucRh9XzC20_FhxtH8W2KGNjGKfj88TIiux4Ab20J9umr81NnccHMmennz-WHX-oDnRM640zJE_kltsPtppUVMxJoPT98D7Zpe6glBjkLRUionc8w0tyG1iBDHeEM-KRPjfEoAKKbpFDH26JrqEgR59dKnTbvGJ6Nu65Gbxe4jHRCGLulSVUNQZ5ulACjLogh4llM3Ma3SQYMdqNu3gGIlWliME9Z66Z-abXM9COX62WgKrj6Xck4VXKTp4S34RBdlh41kthcXsrzaZwqDKIwW4Zi7Oz-_yrhSLeC7Y_x9kauYR7T3xjrdbLNNty-pucwGqphgg81_fveJN3Gakxqj7G7Wrdu5S9Bx3SauatBV3PgeQIqH7jQCD7cpcK99YMOlUIdDCwRZL3JXKRc925zWFP1ZdPd__7FIpH2RLUf1TINKTz43nhE9FiTSk3xabNhLgW1MMGZOFcx24MPANv0L_6NOAUxvSnUFe9wbCL78Odi7y0" target="_blank">View as PNG</a></small>
+<!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "pulse:PersonShape (schema:Person)" [[#pulse:PersonShape]] 
+"pulse:PersonShape (schema:Person)" : pulse:githubUsername  : xsd:string  
+"pulse:PersonShape (schema:Person)" : pulse:infosciencePersonIdentifier  : xsd:string  [0..1]  
+"pulse:PersonShape (schema:Person)" : pulse:orcidIdentifier  : xsd:string  
+"pulse:PersonShape (schema:Person)" : schema:email  :  Literal 
+"pulse:PersonShape (schema:Person)" : schema:name  : xsd:string  [1..*]  
+"pulse:PersonShape (schema:Person)" : schema:url  :  IRI 
+"pulse:PersonShape (schema:Person)" -u-> "pulse:ContributionShape (pulse:Contribution)" : pulse:hasContribution 
+"pulse:PersonShape (schema:Person)" -d-> "pulse:MembershipShape (org:Membership)" : org:hasMembership 
+"pulse:PersonShape (schema:Person)" -r-> "pulse:RepositoryShape (schema:SoftwareSourceCode)" : pulse:owns 
+Class "pulse:MembershipShape (org:Membership)" [[#pulse:MembershipShape]] 
+Class "pulse:ContributionShape (pulse:Contribution)" [[#pulse:ContributionShape]] 
+Class "pulse:RepositoryShape (schema:SoftwareSourceCode)" [[#pulse:RepositoryShape]] 
+hide circle
+hide methods
+hide empty members
+remove @unlinked
+@enduml
+--></div>
+<table class="sp_table_propertyshapes table-striped table-responsive">
+<thead>
+<tr>
+<th>Property name</th>
+<th>URI</th>
+<th>Expected value</th>
+<th>Card.</th>
+<th class="sp_description_column">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr style="
+					''
+				">
+<td>Has Contribution</td>
+<td id="pulse:PersonShape_pulse:hasContribution"><code><a href="https://open-pulse.epfl.ch/ontology#hasContribution">pulse:hasContribution</a></code></td>
+<td><code><a href="#pulse:ContributionShape">pulse:ContributionShape</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Links a Person to a Contribution they made to a repository.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>hasMembership</td>
+<td id="pulse:PersonShape_org:hasMembership"><code><a href="http://www.w3.org/ns/org#hasMembership">org:hasMembership</a></code></td>
+<td><code><a href="#pulse:MembershipShape">pulse:MembershipShape</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Indicates a membership relationship that the Agent plays.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Infoscience Identifier</td>
+<td id="pulse:PersonShape_pulse:infosciencePersonIdentifier"><code><a href="https://open-pulse.epfl.ch/ontology#infosciencePersonIdentifier">pulse:infosciencePersonIdentifier</a></code></td>
+<td><code>xsd:string</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..1</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The infoscience identifier of a person.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Owns Repository</td>
+<td id="pulse:PersonShape_pulse:owns"><code><a href="https://open-pulse.epfl.ch/ontology#owns">pulse:owns</a></code></td>
+<td><code><a href="#pulse:RepositoryShape">pulse:RepositoryShape</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Links a Person or Organization to a software repository they own.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>github username</td>
+<td id="pulse:PersonShape_pulse:githubUsername"><code><a href="https://open-pulse.epfl.ch/ontology#githubUsername">pulse:githubUsername</a></code></td>
+<td><code>xsd:string</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The GitHub handle of a person.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>ORCID identifier</td>
+<td id="pulse:PersonShape_pulse:orcidIdentifier"><code><a href="https://open-pulse.epfl.ch/ontology#orcidIdentifier">pulse:orcidIdentifier</a></code></td>
+<td><code>xsd:string</code><br/><small>^\d{4}-\d{4}-\d{4}-\d{3}[0-9X]$</small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">ORCID identifier validation.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>email</td>
+<td id="pulse:PersonShape_schema:email"><code><a href="http://schema.org/email">schema:email</a></code></td>
+<td><code>Literal</code><br/><small>^[\w\-\.]+@([\w-]+\.)+[\w-]{2,4}$</small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Reusable validation for institutional and personal email addresses.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>name</td>
+<td id="pulse:PersonShape_schema:name"><code><a href="http://schema.org/name">schema:name</a></code></td>
+<td><code>xsd:string</code><br/><small></small></td>
+<td>
+<div style="width:30px">1..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The name of the item.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>url</td>
+<td id="pulse:PersonShape_schema:url"><code><a href="http://schema.org/url">schema:url</a></code></td>
+<td><code>IRI</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Standard validation for any web URL.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+</div><br/><div class="row mt-3">
+<div class="col">
+<section>
+<div class="sp_section_title_table_wrapper">
+<h3 class="sp_section_title_table" id="pulse:RepositoryShape">pulse:RepositoryShape</h3><code class="sp_section_uri">https://open-pulse.epfl.ch/ontology#RepositoryShape</code></div>
+<ul class="sp_list_description_properties">
+<li>Applies to: <a href="http://schema.org/SoftwareSourceCode">schema:SoftwareSourceCode</a></li>
+<li>Closed shape</li>
+</ul>
+<div class="sp_section_nodeshape_diagram">
+<div class="sp_section_nodeshape_center"><svg contentstyletype="text/css" height="484px" preserveaspectratio="none" style="width:713px;height:484px;background:#FFFFFF;" version="1.1" viewbox="0 0 713 484" width="713px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" zoomandpan="magnify"><defs></defs><g><!--class pulse:RepositoryShape (schema:SoftwareSourceCode)--><a href="#pulse:RepositoryShape" target="_top" title="#pulse:RepositoryShape" xlink:actuate="onRequest" xlink:href="#pulse:RepositoryShape" xlink:show="new" xlink:title="#pulse:RepositoryShape" xlink:type="simple"><g id="elem_pulse:RepositoryShape (schema:SoftwareSourceCode)"><rect codeline="25" fill="#F1F1F1" height="164.6719" id="pulse:RepositoryShape (schema:SoftwareSourceCode)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="387" x="65" y="110"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="381" x="68" y="127.9951">pulse:RepositoryShape (schema:SoftwareSourceCode)</text><line style="stroke:#181818;stroke-width:0.5;" x1="66" x2="451" y1="136.2969" y2="136.2969"></line><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="301" x="71" y="153.292">pulse:githubRepoForks  : xsd:integer  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="298" x="71" y="169.5889">pulse:githubRepoStars  : xsd:integer  [0..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="338" x="71" y="185.8857">pulse:githubRepositoryHandle  : xsd:string  [1..1]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="147" x="71" y="202.1826">schema:citation  :  IRI</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="257" x="71" y="218.4795">schema:dateCreated  : xsd:dateTime</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="146" x="71" y="234.7764">schema:license  :  IRI</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="226" x="71" y="251.0732">schema:name  : xsd:string  [1..*]</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="305" x="71" y="267.3701">schema:programmingLanguage  : xsd:string</text></g></a><polygon fill="#F1F1F1" points="412.5,367,424.5,379,412.5,391,400.5,379,412.5,367" style="stroke:#181818;stroke-width:0.5;"></polygon><!--class pulse:PersonShape (schema:Person)--><a href="#pulse:PersonShape" target="_top" title="#pulse:PersonShape" xlink:actuate="onRequest" xlink:href="#pulse:PersonShape" xlink:show="new" xlink:title="#pulse:PersonShape" xlink:type="simple"><g id="elem_pulse:PersonShape (schema:Person)"><rect codeline="26" fill="#F1F1F1" height="26.2969" id="pulse:PersonShape (schema:Person)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="265" x="97" y="452"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="259" x="100" y="469.9951">pulse:PersonShape (schema:Person)</text></g></a><!--class pulse:OrganizationShape (org:Organization)--><a href="#pulse:OrganizationShape" target="_top" title="#pulse:OrganizationShape" xlink:actuate="onRequest" xlink:href="#pulse:OrganizationShape" xlink:show="new" xlink:title="#pulse:OrganizationShape" xlink:type="simple"><g id="elem_pulse:OrganizationShape (org:Organization)"><rect codeline="27" fill="#F1F1F1" height="26.2969" id="pulse:OrganizationShape (org:Organization)" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="309" x="397" y="452"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="303" x="400" y="469.9951">pulse:OrganizationShape (org:Organization)</text></g></a><!--class pulse:DisciplineEnumeration--><g id="elem_pulse:DisciplineEnumeration"><rect fill="#F1F1F1" height="26.2969" id="uml_pulse:DisciplineEnumeration" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="203" x="287" y="7"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="197" x="290" y="24.9951">pulse:DisciplineEnumeration</text></g><!--class pulse:RepositoryTypeEnumeration--><g id="elem_pulse:RepositoryTypeEnumeration"><rect fill="#F1F1F1" height="26.2969" id="uml_pulse:RepositoryTypeEnumeration" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="245" x="7" y="7"></rect><text fill="#000000" font-family="sans-serif" font-size="14" lengthadjust="spacing" textlength="239" x="10" y="24.9951">pulse:RepositoryTypeEnumeration</text></g><!--link pulse:RepositoryShape (schema:SoftwareSourceCode) to diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63--><g id="link_pulse:RepositoryShape (schema:SoftwareSourceCode)_diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63"><path codeline="13" d="M326.72,275.23 C359.54,314.56 390.686,351.8631 403.536,367.2631 " fill="none" id="pulse:RepositoryShape (schema:SoftwareSourceCode)-to-diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="407.38,371.87,404.6852,362.397,404.1766,368.0309,398.5427,367.5224,407.38,371.87" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="95" x="375.5" y="318.0669">pulse:ownedBy</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="34" x="406" y="333.1997">[0..1]</text></g><!--link diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63 to pulse:PersonShape (schema:Person)--><g id="link_diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63_pulse:PersonShape (schema:Person)"><path codeline="14" d="M404.64,383.61 C379.19,395.29 298.27,432.44 255.91,451.88 " fill="none" id="diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63-pulse:PersonShape (schema:Person)" style="stroke:#800000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"></path></g><!--link diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63 to pulse:OrganizationShape (org:Organization)--><g id="link_diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63_pulse:OrganizationShape (org:Organization)"><path codeline="15" d="M419.58,384.28 C440.05,396.65 499.83,432.77 531.41,451.86 " fill="none" id="diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63-pulse:OrganizationShape (org:Organization)" style="stroke:#800000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"></path></g><!--reverse link pulse:DisciplineEnumeration to pulse:RepositoryShape (schema:SoftwareSourceCode)--><g id="link_pulse:DisciplineEnumeration_pulse:RepositoryShape (schema:SoftwareSourceCode)"><path codeline="21" d="M375.5118,38.0311 C363.0518,54.3711 343.57,79.93 320.88,109.69 " fill="none" id="pulse:DisciplineEnumeration-backto-pulse:RepositoryShape (schema:SoftwareSourceCode)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="379.15,33.26,370.512,37.9912,376.1182,37.2359,376.8735,42.8421,379.15,33.26" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="96" x="354.5" y="76.0669">pulse:discipline</text></g><!--link pulse:RepositoryShape (schema:SoftwareSourceCode) to pulse:RepositoryShape (schema:SoftwareSourceCode)--><g id="link_pulse:RepositoryShape (schema:SoftwareSourceCode)_pulse:RepositoryShape (schema:SoftwareSourceCode)"><path codeline="22" d="M452.29,173.64 C473.4,177.25 487,183.54 487,192.5 C487,201.46 479.3141,206.7386 458.2041,210.3486 " fill="none" id="pulse:RepositoryShape (schema:SoftwareSourceCode)-to-pulse:RepositoryShape (schema:SoftwareSourceCode)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="452.29,211.36,461.8355,213.7857,457.2185,210.5172,460.487,205.9002,452.29,211.36" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="127" x="493" y="197.0669">pulse:isForkOf [0..1]</text></g><!--link pulse:RepositoryShape (schema:SoftwareSourceCode) to pulse:PersonShape (schema:Person)--><g id="link_pulse:RepositoryShape (schema:SoftwareSourceCode)_pulse:PersonShape (schema:Person)"><path codeline="23" d="M249.76,275.03 C242.96,338.49 234.7688,414.8441 231.4688,445.6641 " fill="none" id="pulse:RepositoryShape (schema:SoftwareSourceCode)-to-pulse:PersonShape (schema:Person)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="230.83,451.63,235.7654,443.107,231.3623,446.6584,227.8109,442.2553,230.83,451.63" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="134" x="240.5" y="383.5669">schema:author [1..*]</text></g><!--reverse link pulse:RepositoryTypeEnumeration to pulse:RepositoryShape (schema:SoftwareSourceCode)--><g id="link_pulse:RepositoryTypeEnumeration_pulse:RepositoryShape (schema:SoftwareSourceCode)"><path codeline="24" d="M142.3996,38.0452 C154.7596,54.3852 174.08,79.93 196.6,109.69 " fill="none" id="pulse:RepositoryTypeEnumeration-backto-pulse:RepositoryShape (schema:SoftwareSourceCode)" style="stroke:#800000;stroke-width:1.0;"></path><polygon fill="#800000" points="138.78,33.26,141.0193,42.8509,141.7964,37.2477,147.3996,38.0247,138.78,33.26" style="stroke:#800000;stroke-width:1.0;"></polygon><text fill="#000000" font-family="sans-serif" font-size="13" lengthadjust="spacing" textlength="132" x="172.5" y="76.0669">pulse:repositoryType</text></g><!--SRC=[jLLTRzem57tFhxYZB-icKD81gb25nbW_aDenaKvxGAXoufl48hOZsocZltvE0mHQLas1laJ9_JZd-Dxh6uq61E6eCnAYZnbHn4W5GWfqz9o9mi0XJ8dMLr8OdpqXU6td0yM82OJRqVND_NWo-75zkHqkUMO1RBXPfWWvJy-sl0j5iZlKciJucr6JWEUwM-w1Kd8nbAbLSN97b9J2qVyM2Swmq0QDB4yrzYQOISsiS-ad94FugCC4EUdvCZ8Bej2NkGfnA2cUDc0wFTcRDPk1KmUl1sLIp4oI1qNgbLHp3TRnHzCU4mPZL01JjzNoPd0i4jyGzUuaPUeD4TGsTCMbZM8YjbJUYkgY3vGHBWLzU47tG8Akr-sqEr6xGptiq7DiHq7eTOAp83gFkbzgoMms-z2eorYTKYu4qc_BTScSkeZGQi5w47-YqbBidg6qdJQEGZ1MCH7iYHYseP4gtZ5RfdhDNtb3PfvnYdx3Q3A2m-0eCJXKQ9zqFK65wPvnX0EXKnQYq7WaeSMgsJVZdsQ7wioKZEsEunRobeWujolm9L6zYv0NDw5C_CvqoBBKRkTBaNDKposiXfrkt3MfQ4LLQwSmNMp5SNJnwxFh3jp-GOkggIerRrsvgWKaDubK6_93shfTzIhnVfdjhxpQ2Ncl7zSEwfibsQ1iHRr2-AyrKq6z2Yy04qOHGgR25CjtZhO7L9SVo3Epj2OUM1cEGYuV4Rxcmexe7EbV]--></g></svg></div><small class="form-text text-muted">Click diagram to navigate to corresponding section | <a href="http://www.plantuml.com/plantuml/png/jLLTRzem57tFhxYZB-icKD81gb25nbW_aDenaKvxGAXoufl48hOZsocZltvE0mHQLas1laJ9_JZd-Dxh6uq61E6eCnAYZnbHn4W5GWfqz9o9mi0XJ8dMLr8OdpqXU6td0yM82OJRqVND_NWo-75zkHqkUMO1RBXPfWWvJy-sl0j5iZlKciJucr6JWEUwM-w1Kd8nbAbLSN97b9J2qVyM2Swmq0QDB4yrzYQOISsiS-ad94FugCC4EUdvCZ8Bej2NkGfnA2cUDc0wFTcRDPk1KmUl1sLIp4oI1qNgbLHp3TRnHzCU4mPZL01JjzNoPd0i4jyGzUuaPUeD4TGsTCMbZM8YjbJUYkgY3vGHBWLzU47tG8Akr-sqEr6xGptiq7DiHq7eTOAp83gFkbzgoMms-z2eorYTKYu4qc_BTScSkeZGQi5w47-YqbBidg6qdJQEGZ1MCH7iYHYseP4gtZ5RfdhDNtb3PfvnYdx3Q3A2m-0eCJXKQ9zqFK65wPvnX0EXKnQYq7WaeSMgsJVZdsQ7wioKZEsEunRobeWujolm9L6zYv0NDw5C_CvqoBBKRkTBaNDKposiXfrkt3MfQ4LLQwSmNMp5SNJnwxFh3jp-GOkggIerRrsvgWKaDubK6_93shfTzIhnVfdjhxpQ2Ncl7zSEwfibsQ1iHRr2-AyrKq6z2Yy04qOHGgR25CjtZhO7L9SVo3Epj2OUM1cEGYuV4Rxcmexe7EbV" target="_blank">View as PNG</a></small>
+<!--@startuml
+set namespaceSeparator none
+skinparam classFontSize 14
+!define LIGHTORANGE
+skinparam componentStyle uml2
+skinparam wrapMessageWidth 100
+skinparam ArrowColor #Maroon
+set namespaceSeparator none 
+Class "pulse:RepositoryShape (schema:SoftwareSourceCode)" [[#pulse:RepositoryShape]] 
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : pulse:githubRepoForks  : xsd:integer  [0..1]  
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : pulse:githubRepoStars  : xsd:integer  [0..1]  
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : pulse:githubRepositoryHandle  : xsd:string  [1..1]  
+<> diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" - -> "diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63" : pulse:ownedBy [0..1] 
+diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63 ..  "pulse:PersonShape (schema:Person)"
+diamond_RepositoryShape_ab616545f45d1e5d8e4fbc15b2bf8f63 ..  "pulse:OrganizationShape (org:Organization)"
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : schema:citation  :  IRI 
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : schema:dateCreated  : xsd:dateTime  
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : schema:license  :  IRI 
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : schema:name  : xsd:string  [1..*]  
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" : schema:programmingLanguage  : xsd:string  
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" -u-> "pulse:DisciplineEnumeration" : pulse:discipline 
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" -d-> "pulse:RepositoryShape (schema:SoftwareSourceCode)" : pulse:isForkOf<U+00A0>[0..1]  
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" -r-> "pulse:PersonShape (schema:Person)" : schema:author<U+00A0>[1..*]  
+"pulse:RepositoryShape (schema:SoftwareSourceCode)" -u-> "pulse:RepositoryTypeEnumeration" : pulse:repositoryType 
+Class "pulse:RepositoryShape (schema:SoftwareSourceCode)" [[#pulse:RepositoryShape]] 
+Class "pulse:PersonShape (schema:Person)" [[#pulse:PersonShape]] 
+Class "pulse:OrganizationShape (org:Organization)" [[#pulse:OrganizationShape]] 
+hide circle
+hide methods
+hide empty members
+remove @unlinked
+@enduml
+--></div>
+<table class="sp_table_propertyshapes table-striped table-responsive">
+<thead>
+<tr>
+<th>Property name</th>
+<th>URI</th>
+<th>Expected value</th>
+<th>Card.</th>
+<th class="sp_description_column">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr style="
+					''
+				">
+<td>Author</td>
+<td id="pulse:RepositoryShape_schema:author"><code><a href="http://schema.org/author">schema:author</a></code></td>
+<td><code><a href="#pulse:PersonShape">pulse:PersonShape</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">1..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The author of this repository.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Citation</td>
+<td id="pulse:RepositoryShape_schema:citation"><code><a href="http://schema.org/citation">schema:citation</a></code></td>
+<td><code>IRI</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">A citation or reference to a creative work such as a publication or dataset.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Creation Date</td>
+<td id="pulse:RepositoryShape_schema:dateCreated"><code><a href="http://schema.org/dateCreated">schema:dateCreated</a></code></td>
+<td><code>xsd:dateTime</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The date on which the CreativeWork was created or the item was added to a DataFeed.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Discipline</td>
+<td id="pulse:RepositoryShape_pulse:discipline"><code><a href="https://open-pulse.epfl.ch/ontology#discipline">pulse:discipline</a></code></td>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#DisciplineEnumeration">pulse:DisciplineEnumeration</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Must be a valid IRI from the Wikidata-based Discipline enumeration.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Is Fork Of</td>
+<td id="pulse:RepositoryShape_pulse:isForkOf"><code><a href="https://open-pulse.epfl.ch/ontology#isForkOf">pulse:isForkOf</a></code></td>
+<td><code><a href="#pulse:RepositoryShape">pulse:RepositoryShape</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">0..1</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The repository this was forked from.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>License</td>
+<td id="pulse:RepositoryShape_schema:license"><code><a href="http://schema.org/license">schema:license</a></code></td>
+<td><code>IRI</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">A license document that applies to this content, typically indicated by URL.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Owned By</td>
+<td id="pulse:RepositoryShape_pulse:ownedBy"><code><a href="https://open-pulse.epfl.ch/ontology#ownedBy">pulse:ownedBy</a></code></td>
+<td><code><a href="#pulse:PersonShape">pulse:PersonShape</a></code><code> or </code><code><a href="#pulse:OrganizationShape">pulse:OrganizationShape</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">0..1</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The Person or Organization that owns this repository.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>github repository forks</td>
+<td id="pulse:RepositoryShape_pulse:githubRepoForks"><code><a href="https://open-pulse.epfl.ch/ontology#githubRepoForks">pulse:githubRepoForks</a></code></td>
+<td><code>xsd:integer</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..1</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Number of forks for the Software GitHub repository.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>github repository handle</td>
+<td id="pulse:RepositoryShape_pulse:githubRepositoryHandle"><code><a href="https://open-pulse.epfl.ch/ontology#githubRepositoryHandle">pulse:githubRepositoryHandle</a></code></td>
+<td><code>xsd:string</code><br/><small>^[a-zA-Z0-9\-_]+/[a-zA-Z0-9\-_]+$</small></td>
+<td>
+<div style="width:30px">1..1</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The GitHub repository handle in the format 'owner/repository'.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>github repository stars</td>
+<td id="pulse:RepositoryShape_pulse:githubRepoStars"><code><a href="https://open-pulse.epfl.ch/ontology#githubRepoStars">pulse:githubRepoStars</a></code></td>
+<td><code>xsd:integer</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..1</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Number of stars for the Software GitHub repository.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>Repository Type</td>
+<td id="pulse:RepositoryShape_pulse:repositoryType"><code><a href="https://open-pulse.epfl.ch/ontology#repositoryType">pulse:repositoryType</a></code></td>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#RepositoryTypeEnumeration">pulse:RepositoryTypeEnumeration</a></code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">Must be a valid IRI from the Repository Type enumeration (e.g., pulse:Software).</td>
+</tr>
+<tr style="
+					''
+				">
+<td>name</td>
+<td id="pulse:RepositoryShape_schema:name"><code><a href="http://schema.org/name">schema:name</a></code></td>
+<td><code>xsd:string</code><br/><small></small></td>
+<td>
+<div style="width:30px">1..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The name of the item.</td>
+</tr>
+<tr style="
+					''
+				">
+<td>programming language</td>
+<td id="pulse:RepositoryShape_schema:programmingLanguage"><code><a href="http://schema.org/programmingLanguage">schema:programmingLanguage</a></code></td>
+<td><code>xsd:string</code><br/><small></small></td>
+<td>
+<div style="width:30px">0..*</div>
+</td>
+<td class="sp_table_propertyshapes_col_description">The computer programming language.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+</div><br/>
+<section id="enumerations">
+<h2>Enumerations</h2>
+<p>The following enumerations define controlled vocabularies used in the ontology.</p>
+<section class="enumeration" id="enum-values-DisciplineEnumeration">
+<h3>Discipline Enumeration</h3><div class="enum-reference">See enumeration values in the <a href="#enum-values-DisciplineEnumeration">Enumerations section</a></div>
+<p class="comment">Enumeration of academic and scientific disciplines.</p>
+<table class="enum-values">
+<thead><tr><th>Value</th><th>Label</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q3606845" target="_blank">http://www.wikidata.org/entity/Q3606845</a></code></td>
+<td>Agricultural and food sciences</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q23404" target="_blank">http://www.wikidata.org/entity/Q23404</a></code></td>
+<td>Anthropology</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q7112556" target="_blank">http://www.wikidata.org/entity/Q7112556</a></code></td>
+<td>Applied sciences</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q12271" target="_blank">http://www.wikidata.org/entity/Q12271</a></code></td>
+<td>Architecture</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q735" target="_blank">http://www.wikidata.org/entity/Q735</a></code></td>
+<td>Art</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q333" target="_blank">http://www.wikidata.org/entity/Q333</a></code></td>
+<td>Astronomy</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q580689" target="_blank">http://www.wikidata.org/entity/Q580689</a></code></td>
+<td>Biological engineering</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q420" target="_blank">http://www.wikidata.org/entity/Q420</a></code></td>
+<td>Biology</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q4830453" target="_blank">http://www.wikidata.org/entity/Q4830453</a></code></td>
+<td>Business</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q83588" target="_blank">http://www.wikidata.org/entity/Q83588</a></code></td>
+<td>Chemical engineering</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q2329" target="_blank">http://www.wikidata.org/entity/Q2329</a></code></td>
+<td>Chemistry</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q77590" target="_blank">http://www.wikidata.org/entity/Q77590</a></code></td>
+<td>Civil engineering</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q11680831" target="_blank">http://www.wikidata.org/entity/Q11680831</a></code></td>
+<td>Communication studies</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q428691" target="_blank">http://www.wikidata.org/entity/Q428691</a></code></td>
+<td>Computer engineering</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q8008" target="_blank">http://www.wikidata.org/entity/Q8008</a></code></td>
+<td>Earth science</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q8134" target="_blank">http://www.wikidata.org/entity/Q8134</a></code></td>
+<td>Economics</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q8434" target="_blank">http://www.wikidata.org/entity/Q8434</a></code></td>
+<td>Education</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q43035" target="_blank">http://www.wikidata.org/entity/Q43035</a></code></td>
+<td>Electrical engineering</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q3353193" target="_blank">http://www.wikidata.org/entity/Q3353193</a></code></td>
+<td>Energy engineering</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q188847" target="_blank">http://www.wikidata.org/entity/Q188847</a></code></td>
+<td>Environmental science</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q816264" target="_blank">http://www.wikidata.org/entity/Q816264</a></code></td>
+<td>Formal sciences</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q1071" target="_blank">http://www.wikidata.org/entity/Q1071</a></code></td>
+<td>Geography</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q843601" target="_blank">http://www.wikidata.org/entity/Q843601</a></code></td>
+<td>Health sciences</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q309" target="_blank">http://www.wikidata.org/entity/Q309</a></code></td>
+<td>History</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q80083" target="_blank">http://www.wikidata.org/entity/Q80083</a></code></td>
+<td>Humanities</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q18351432" target="_blank">http://www.wikidata.org/entity/Q18351432</a></code></td>
+<td>Industrial and production engineering</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikipedia.org/wiki/Information_engineering" target="_blank">http://www.wikipedia.org/wiki/Information_engineering</a></code></td>
+<td>Information engineering</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q7748" target="_blank">http://www.wikidata.org/entity/Q7748</a></code></td>
+<td>Law</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q8162" target="_blank">http://www.wikidata.org/entity/Q8162</a></code></td>
+<td>Linguistics</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q8242" target="_blank">http://www.wikidata.org/entity/Q8242</a></code></td>
+<td>Literature</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q8078" target="_blank">http://www.wikidata.org/entity/Q8078</a></code></td>
+<td>Logic</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q395" target="_blank">http://www.wikidata.org/entity/Q395</a></code></td>
+<td>Mathematics</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q101333" target="_blank">http://www.wikidata.org/entity/Q101333</a></code></td>
+<td>Mechanical engineering</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q192386" target="_blank">http://www.wikidata.org/entity/Q192386</a></code></td>
+<td>Military science</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q7991" target="_blank">http://www.wikidata.org/entity/Q7991</a></code></td>
+<td>Natural sciences</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q5891" target="_blank">http://www.wikidata.org/entity/Q5891</a></code></td>
+<td>Philosophy</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q413" target="_blank">http://www.wikidata.org/entity/Q413</a></code></td>
+<td>Physics</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q7163" target="_blank">http://www.wikidata.org/entity/Q7163</a></code></td>
+<td>Politics</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q9418" target="_blank">http://www.wikidata.org/entity/Q9418</a></code></td>
+<td>Psychology</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q9174" target="_blank">http://www.wikidata.org/entity/Q9174</a></code></td>
+<td>Religion</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q42240" target="_blank">http://www.wikidata.org/entity/Q42240</a></code></td>
+<td>Research</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q34749" target="_blank">http://www.wikidata.org/entity/Q34749</a></code></td>
+<td>Social sciences</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q21201" target="_blank">http://www.wikidata.org/entity/Q21201</a></code></td>
+<td>Sociology</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q12483" target="_blank">http://www.wikidata.org/entity/Q12483</a></code></td>
+<td>Statistics</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q2167061" target="_blank">http://www.wikidata.org/entity/Q2167061</a></code></td>
+<td>Systems science and engineering</td>
+<td></td>
+</tr>
+<tr>
+<td><code><a href="http://www.wikidata.org/entity/Q2878974" target="_blank">http://www.wikidata.org/entity/Q2878974</a></code></td>
+<td>Theoretical computer science</td>
+<td></td>
+</tr>
+</tbody></table>
+</section>
+<section class="enumeration" id="enum-values-RepositoryTypeEnumeration">
+<h3>Repository Type Enumeration</h3><div class="enum-reference">See enumeration values in the <a href="#enum-values-RepositoryTypeEnumeration">Enumerations section</a></div>
+<p class="comment">Enumeration of repository types used within the ontology.</p>
+<table class="enum-values">
+<thead><tr><th>Value</th><th>Label</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#Data" target="_blank">https://open-pulse.epfl.ch/ontology#Data</a></code></td>
+<td>Data</td>
+<td>A repository that contains datasets.</td>
+</tr>
+<tr>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#Documentation" target="_blank">https://open-pulse.epfl.ch/ontology#Documentation</a></code></td>
+<td>Documentation</td>
+<td>A repository that contains documentation.</td>
+</tr>
+<tr>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#EducationalResource" target="_blank">https://open-pulse.epfl.ch/ontology#EducationalResource</a></code></td>
+<td>Educational Resource</td>
+<td>A repository that contains educational materials.</td>
+</tr>
+<tr>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#Other" target="_blank">https://open-pulse.epfl.ch/ontology#Other</a></code></td>
+<td>Other</td>
+<td>A repository that does not fit into the other categories.</td>
+</tr>
+<tr>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#Software" target="_blank">https://open-pulse.epfl.ch/ontology#Software</a></code></td>
+<td>Software</td>
+<td>A repository that contains software source code.</td>
+</tr>
+</tbody></table>
+</section>
+<section class="enumeration" id="enum-values-OrganizationTypeEnumeration">
+<h3>Organization Type Enumeration</h3><div class="enum-reference">See enumeration values in the <a href="#enum-values-OrganizationTypeEnumeration">Enumerations section</a></div>
+<p class="comment">Enumeration of organization types used within the ontology.</p>
+<table class="enum-values">
+<thead><tr><th>Value</th><th>Label</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#CommunitySpace" target="_blank">https://open-pulse.epfl.ch/ontology#CommunitySpace</a></code></td>
+<td>Community Space</td>
+<td>A community-driven organization or space.</td>
+</tr>
+<tr>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#GovernmentAgency" target="_blank">https://open-pulse.epfl.ch/ontology#GovernmentAgency</a></code></td>
+<td>Government Agency</td>
+<td>A government organization.</td>
+</tr>
+<tr>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#NonProfitOrganization" target="_blank">https://open-pulse.epfl.ch/ontology#NonProfitOrganization</a></code></td>
+<td>Non-Profit Organization</td>
+<td>An organization that operates for a charitable or social purpose rather than for profit.</td>
+</tr>
+<tr>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#OtherOrganizationType" target="_blank">https://open-pulse.epfl.ch/ontology#OtherOrganizationType</a></code></td>
+<td>Other</td>
+<td>An organization type that does not fit into the other categories.</td>
+</tr>
+<tr>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#PrivateCompany" target="_blank">https://open-pulse.epfl.ch/ontology#PrivateCompany</a></code></td>
+<td>Private Company</td>
+<td>A privately owned business organization.</td>
+</tr>
+<tr>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#ResearchInstitution" target="_blank">https://open-pulse.epfl.ch/ontology#ResearchInstitution</a></code></td>
+<td>Research Institution</td>
+<td>a research institution is one that has made conducting research a vital part of its mission and goals.</td>
+</tr>
+<tr>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#SoftwareProject" target="_blank">https://open-pulse.epfl.ch/ontology#SoftwareProject</a></code></td>
+<td>Software Project</td>
+<td>An organization focused on development of specific software.</td>
+</tr>
+<tr>
+<td><code><a href="https://open-pulse.epfl.ch/ontology#University" target="_blank">https://open-pulse.epfl.ch/ontology#University</a></code></td>
+<td>University</td>
+<td>An educational institution.</td>
+</tr>
+</tbody></table>
+</section>
+</section></div><script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js">//</script><script>				
+					anchors.options = {
+	                    icon: '#'
+	                  };
+               		anchors.options.placement = 'left';
+					anchors.add('h2,h3');
+					// for links inside tables		
+					anchors.add('td[id]');
+				</script></body>
+</html>
