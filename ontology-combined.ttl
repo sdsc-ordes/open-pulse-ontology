@@ -196,7 +196,7 @@ pulse:GithubRepositoryHandleShape
     sh:minCount 1 ;
     sh:maxCount 1 ;
     sh:datatype xsd:string ;
-    sh:pattern "^[a-zA-Z0-9\\-_]+/[a-zA-Z0-9\\-_]+$" ;
+    sh:pattern "^[a-zA-Z0-9\\-_]+/[a-zA-Z0-9\\-_\\.]+$" ;
     sh:description "The GitHub repository handle in the format 'owner/repository'." .
 
 pulse:DisciplineShape
