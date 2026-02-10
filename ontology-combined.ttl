@@ -20,7 +20,7 @@
     dct:abstract "The Open Pulse Ontology to model contributions to open source scientific software and research articles from EPFL." ;
     dct:license <https://spdx.org/licenses/CC-BY-4.0.html> ;
     dct:title "Open Pulse Ontology" ;
-    owl:versionInfo "v.2.0"^^xsd:string .
+    owl:versionInfo "v.2.0.1"^^xsd:string .
 
 # Classes
 schema:Person a rdfs:Class ; skos:prefLabel "Person" ; skos:definition "An individual researcher or contributor." .
@@ -79,7 +79,7 @@ wd:Q101333 a pulse:DisciplineEnumeration; skos:prefLabel "Mechanical engineering
 wd:Q580689 a pulse:DisciplineEnumeration; skos:prefLabel "Biological engineering"@en; rdfs:subClassOf wd:Q7112556 .
 wd:Q188847 a pulse:DisciplineEnumeration; skos:prefLabel "Environmental science"@en; rdfs:subClassOf wd:Q7112556 .
 wd:Q2167061 a pulse:DisciplineEnumeration; skos:prefLabel "Systems science and engineering"@en; rdfs:subClassOf wd:Q7112556 .
-<http://www.wikipedia.org/wiki/Information_engineering> a pulse:DisciplineEnumeration; skos:prefLabel "Information engineering"@en;rdfs:subClassOf wd:Q7112556 .
+wd:Q1254373 a pulse:DisciplineEnumeration; skos:prefLabel "Information engineering"@en;rdfs:subClassOf wd:Q7112556 .
 wd:Q3606845 a pulse:DisciplineEnumeration; skos:prefLabel "Agricultural and food sciences"@en;rdfs:subClassOf wd:Q7112556 .
 wd:Q4830453 a pulse:DisciplineEnumeration; skos:prefLabel "Business"@en; rdfs:subClassOf wd:Q7112556 .
 wd:Q80083 a pulse:DisciplineEnumeration; skos:prefLabel "Humanities"@en; rdfs:subClassOf wd:Q11862829 .
@@ -194,7 +194,7 @@ pulse:GithubRepositoryHandleShape
     sh:minCount 1 ;
     sh:maxCount 1 ;
     sh:datatype xsd:string ;
-    sh:pattern "^[a-zA-Z0-9\\-_]+/[a-zA-Z0-9\\-_]+$" ;
+    sh:pattern "^[a-zA-Z0-9\\-_]+/[a-zA-Z0-9\\-_\\.]+$" ;
     sh:description "The GitHub repository handle in the format 'owner/repository'." .
 
 pulse:DisciplineShape
@@ -216,6 +216,7 @@ pulse:DoiPropertyShape
     a sh:PropertyShape ;
     sh:path schema:identifier ;
     sh:datatype xsd:string ;
+    sh:minCount 1 ;
     sh:pattern "^10\\.\\d{4,9}/[-._;()/:a-zA-Z0-9]+$" ;
     sh:description "Standard DOI validation." .
 
