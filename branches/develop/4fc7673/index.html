@@ -27,19 +27,33 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { height: 100%; overflow: hidden; }
-    body {
-      display: flex;
-      flex-direction: column;
-      padding-top: 0 !important; /* Override version-header.js inline padding */
-    }
     #doc-frame {
-      flex: 1;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
       width: 100%;
       border: none;
+      /* Default: full viewport, adjusted by script once header loads */
+      top: 0;
     }
   </style>
 </head>
 <body>
   <iframe id="doc-frame" src="doc.html" title="Documentation"></iframe>
+  <script>
+    // Once the header is injected, push the iframe below it
+    var observer = new MutationObserver(function() {
+      var header = document.querySelector('.version-header');
+      if (header) {
+        var headerHeight = header.offsetHeight;
+        var commitNav = document.querySelector('.commit-nav');
+        if (commitNav) headerHeight += commitNav.offsetHeight;
+        document.getElementById('doc-frame').style.top = headerHeight + 'px';
+        observer.disconnect();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  </script>
 </body>
 </html>
