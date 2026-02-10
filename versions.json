@@ -59,6 +59,16 @@
           "message": "test: testing ci"
         }
       ]
+    },
+    "fix/infoscience-uuid": {
+      "commits": [
+        {
+          "hash": "d2a4a45",
+          "date": "2026-02-10",
+          "author": "Carlos Vivar Rios",
+          "message": "fix: updated regex pattern"
+        }
+      ]
     }
   },
   "latestRelease": "v2.0.0",
