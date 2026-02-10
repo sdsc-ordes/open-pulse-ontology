@@ -55,6 +55,12 @@
     "feat/docks-workflow": {
       "commits": [
         {
+          "hash": "d303a01",
+          "date": "2026-02-10",
+          "author": "caviri",
+          "message": "ci: testing docs site"
+        },
+        {
           "hash": "778c371",
           "date": "2026-02-05",
           "author": "caviri",
