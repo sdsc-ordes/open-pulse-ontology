@@ -7,6 +7,7 @@ This branch (`docs`) contains the static documentation site for the Open Pulse O
 This is a **deployment-only branch**. It contains:
 - Generated HTML documentation for all versions
 - The version header component (CSS/JS)
+- The wrapper template for embedding documentation
 - Site configuration files
 
 **Do not commit ontology source files here.** Source files (`ontology.ttl`, `shapes.ttl`, etc.) live in the source branches (`main`, `develop`, feature branches).
@@ -18,16 +19,18 @@ docs/
 ├── index.html                          # Root redirect (to latest release)
 ├── config.json                         # Site configuration
 ├── versions.json                       # Version manifest (auto-updated by CI)
-├── DOCS-README.md                      # This file
+├── .nojekyll                           # Prevents Jekyll processing on GitHub Pages
+├── README.md                           # This file
 ├── assets/
+│   ├── index-header.html               # Wrapper template (copied into each version folder)
 │   ├── version-header.css              # Header styles
 │   └── version-header.js               # Header component logic
 ├── branches/
 │   ├── main/
-│   │   ├── {commit-hash}/              # One folder per commit
-│   │   │   ├── index.html
-│   │   │   └── ontology.svg
-│   │   └── ...
+│   │   └── {commit-hash}/
+│   │       ├── index.html              # Wrapper (loads header + embeds doc.html)
+│   │       ├── doc.html                # Generated documentation
+│   │       └── ontology.svg
 │   ├── develop/
 │   │   └── {commit-hash}/
 │   │       └── ...
@@ -36,13 +39,14 @@ docs/
 │           └── ...
 ├── versions/
 │   ├── v0.1.0/
-│   │   ├── index.html
+│   │   ├── index.html                  # Wrapper
+│   │   ├── doc.html                    # Generated documentation
 │   │   └── ontology.svg
-│   └── v0.2.0/
-│       └── ...
-└── workflow-for-main/
-    ├── docs-deploy.yaml                # GitHub Action (copy to main branch)
-    └── README.md
+│   └── ...
+└── .github/
+    └── workflow-for-main/
+        ├── docs-deploy.yaml            # Reference copy of the GitHub Action
+        └── README.md                   # Workflow documentation
 ```
 
 ### Path Structure
@@ -52,7 +56,35 @@ docs/
   
 - **Branch Commits**: `/branches/{branch-name}/{commit-hash}/index.html`
   - Example: `/branches/main/abc1234/index.html`
-  - Example: `/branches/feature-auth/def5678/index.html`
+  - Example: `/branches/feat/docks-workflow/def5678/index.html`
+
+## How Documentation Pages Work
+
+Each documentation page uses a **wrapper pattern** with two files:
+
+| File | Role |
+|------|------|
+| `index.html` | Lightweight wrapper that loads the version header and embeds `doc.html` |
+| `doc.html` | The actual generated documentation (from SHACL Play) |
+
+### Wrapper (`index.html`)
+
+The wrapper is a copy of `assets/index-header.html`. It does three things:
+
+1. **Resolves the base path** from `window.location.pathname` using a regex (e.g. extracts `/open-pulse-ontology` from the full URL)
+2. **Dynamically loads** `version-header.css` and `version-header.js` using that base path — no hardcoded relative paths
+3. **Embeds** the generated documentation via `<iframe src="doc.html">`
+
+```html
+<!-- Simplified view of the wrapper -->
+<script>
+  var path = window.location.pathname;
+  var match = path.match(/^(.*?)\/(branches|versions)\//);
+  var basePath = match ? match[1] : '';
+  // Creates <link> and <script> elements pointing to {basePath}/assets/...
+</script>
+<iframe id="doc-frame" src="doc.html"></iframe>
+```
 
 ## Configuration Files
 
@@ -67,7 +99,7 @@ Site-wide settings:
   "defaultVersion": "latest-release",
   "priorityBranches": ["main", "develop"],
   "maxDropdownReleases": 3,
-  "maxDropdownBranches": 2,
+  "maxDropdownBranches": 5,
   "commitHistoryLimit": 50
 }
 ```
@@ -84,7 +116,7 @@ Site-wide settings:
 
 ### versions.json
 
-Auto-maintained version manifest:
+Auto-maintained version manifest (updated by CI on every deploy):
 
 ```json
 {
@@ -139,40 +171,38 @@ The version header provides:
 - Filter/search functionality
 - Expandable branch sections showing all commits
 
-## Files Removed from This Branch
-
-These files exist in source branches but were intentionally excluded from the docs branch:
-
-| Removed | Reason |
-|---------|--------|
-| `ontology.ttl`, `shapes.ttl`, `ontology-combined.ttl` | Source files live in source branches |
-| `openpulse_subset.ttl` | Source file |
-| `main.py`, `gen.sh` | Development utilities |
-| `src/`, `tools/`, `test/` | Source code and tooling |
-| `.github/workflows/` | CI workflows live in main branch |
-| `test-docs-workflow.sh` | Development script |
-| `LICENSE`, `README.md` | Kept in source branches |
-
 ## GitHub Action Workflow
 
-The `docs-deploy.yaml` workflow (located in `workflow-for-main/`) should be copied to the main branch at `.github/workflows/docs-deploy.yaml`.
+The documentation is deployed automatically by the `docs-versioned.yaml` workflow on source branches. A reference copy is kept at `.github/workflow-for-main/docs-deploy.yaml`.
 
 ### Triggers
-- Push to any branch (except `docs`)
+- Push to any branch (except `docs`) when ontology files change
 - Tag creation (`v*`)
 - Manual dispatch
 
 ### What It Does
-1. Generates HTML documentation from ontology files
+1. Generates HTML documentation from ontology files using SHACL Play CLI
 2. Creates target folder based on trigger:
    - Tags → `versions/{tag}/`
    - Branches → `branches/{name}/{commit}/`
-3. Injects header CSS/JS into generated HTML
+3. Renames generated `index.html` to `doc.html` and places the wrapper `index.html` (from `assets/index-header.html`)
 4. Updates `versions.json` with new entry
 5. Commits and pushes to `docs` branch
 
 ### Cleanup Job
 Optionally removes documentation for deleted branches while preserving all tagged releases.
+
+## Key Files on This Branch
+
+| File | Purpose | Modified by |
+|------|---------|-------------|
+| `assets/index-header.html` | Wrapper template copied into each version/branch folder | Manual edits only |
+| `assets/version-header.css` | Header styles | Manual edits only |
+| `assets/version-header.js` | Header component (dropdown, search, commit nav, modal) | Manual edits only |
+| `config.json` | Site configuration | Manual edits only |
+| `versions.json` | Version manifest | CI (auto-updated on every deploy) |
+| `index.html` | Root redirect page | Manual edits only |
+| `.nojekyll` | Prevents GitHub Pages Jekyll processing | Should not be removed |
 
 ## Local Development
 

@@ -1,26 +1,35 @@
 # GitHub Actions Workflow for Multi-Version Documentation Deployment
-# 
-# This workflow should be placed in the main branch at:
-# .github/workflows/docs-deploy.yaml
+#
+# This is a REFERENCE COPY of the workflow. The actual workflow lives at:
+# .github/workflows/docs-versioned.yaml (on source branches like main, feat/*)
 #
 # It triggers on pushes to any branch (except docs) and on tag creation,
 # generates documentation, and deploys to the docs branch.
+#
+# IMPORTANT: This workflow uses the "wrapper pattern" — it renames the generated
+# index.html to doc.html and copies assets/index-header.html as the new index.html.
+# This avoids hardcoded relative paths that break with branch names containing
+# slashes (e.g. feat/docks-workflow).
 
-name: Deploy Documentation
+name: SHACL Documentation Generation Versioned
 
 on:
-  push:
-    branches:
-      - '**'
-      - '!docs'  # Exclude docs branch to prevent loops
-    tags:
-      - 'v*'
   workflow_dispatch:
     inputs:
       ref:
-        description: 'Branch or tag to build docs from'
-        required: true
-        default: 'main'
+        description: "Branch or tag to build docs from (leave empty for current)"
+        required: false
+        default: ""
+  push:
+    branches:
+      - "**"
+      - "!docs" # Exclude docs branch to prevent loops
+    paths:
+      - "ontology-combined.ttl"
+      - "ontology.ttl"
+      - "shapes.ttl"
+    tags:
+      - "v*"
 
 permissions:
   contents: write
@@ -30,7 +39,6 @@ env:
 
 jobs:
   generate-docs:
-    name: Generate Documentation
     runs-on: ubuntu-latest
     outputs:
       version_type: ${{ steps.version-info.outputs.type }}
@@ -41,7 +49,7 @@ jobs:
       commit_message: ${{ steps.version-info.outputs.message }}
 
     steps:
-      - name: Checkout source
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.ref || github.ref }}
@@ -51,10 +59,11 @@ jobs:
         id: version-info
         run: |
           # Get commit info
-          COMMIT_HASH=$(git rev-parse --short HEAD)
+          COMMIT_HASH=$(git rev-parse --short=7 HEAD)
           COMMIT_DATE=$(git log -1 --format=%cs)
           COMMIT_AUTHOR=$(git log -1 --format=%an)
-          COMMIT_MESSAGE=$(git log -1 --format=%s | head -c 100)
+          # Escape quotes and limit message length
+          COMMIT_MESSAGE=$(git log -1 --format=%s | head -c 100 | sed 's/"/\\"/g')
           
           # Determine if this is a tag or branch
           if [[ "${{ github.ref }}" == refs/tags/* ]]; then
@@ -72,85 +81,71 @@ jobs:
           echo "author=$COMMIT_AUTHOR" >> $GITHUB_OUTPUT
           echo "message=$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
           
+          echo "----------------------------------------"
           echo "Version type: $VERSION_TYPE"
           echo "Version name: $VERSION_NAME"
-          echo "Commit: $COMMIT_HASH"
+          echo "Commit hash: $COMMIT_HASH"
+          echo "Commit date: $COMMIT_DATE"
+          echo "Commit author: $COMMIT_AUTHOR"
+          echo "Commit message: $COMMIT_MESSAGE"
+          echo "----------------------------------------"
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: 'pip'
+      - name: Set up Python and install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r tools/python/requirements.txt
 
-      - name: Setup Java
+      - name: Set up Java 11
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: "temurin"
+          java-version: "11"
 
       - name: Install Graphviz
-        run: sudo apt-get update && sudo apt-get install -y graphviz
-
-      - name: Install Python dependencies
         run: |
-          pip install --upgrade pip
-          pip install rdflib
+          sudo apt-get update
+          sudo apt-get install -y graphviz
 
-      - name: Run SPARQL enrichment
-        run: |
-          if [ -f "src/sparql.py" ]; then
-            python src/sparql.py
-          fi
-        continue-on-error: true
+      - name: Set DOT_PATH environment variable
+        run: echo "GRAPHVIZ_DOT=/usr/bin/dot" >> $GITHUB_ENV
 
       - name: Download SHACL Play CLI
         run: |
-          mkdir -p tools
-          if [ ! -f "tools/shacl-play-app.jar" ]; then
-            curl -L -o tools/shacl-play-app.jar \
-              "https://github.com/sparna-git/shacl-play/releases/download/0.8.1/shacl-play-app-0.8.1-onejar.jar"
-          fi
+          wget https://github.com/sparna-git/shacl-play/releases/download/0.11.4/shacl-play-app-0.11.4-onejar.jar -O shacl-play-cli.jar
 
-      - name: Generate HTML documentation
+      - name: Generate Documentation
         run: |
-          mkdir -p docs
-          java -jar tools/shacl-play-app.jar doc \
+          mkdir -p generated-docs
+          java -jar shacl-play-cli.jar \
+            doc \
+            -d \
             -i ontology-combined.ttl \
-            -o docs/index.html \
-            --language en \
-            --title "Open Pulse Ontology"
-        continue-on-error: true
+            -l en \
+            -o generated-docs/index.html
 
-      - name: Generate SVG diagram
+      - name: Generate Ontology Diagram
         run: |
-          if [ -f "ontology-combined.ttl" ]; then
-            java -jar tools/shacl-play-app.jar draw \
-              -i ontology-combined.ttl \
-              -o docs/ontology.svg \
-              --language en
-          fi
-        continue-on-error: true
+          java -jar shacl-play-cli.jar \
+            draw \
+            -i ontology-combined.ttl \
+            -o generated-docs/ontology.svg
 
-      - name: Inject enumeration values
+      - name: Fix SVG namespace issue
         run: |
-          if [ -f "src/inject_enumerations.py" ]; then
-            python src/inject_enumerations.py docs/index.html
-          fi
-        continue-on-error: true
+          sed -i 's/ xmlns=""//g' generated-docs/ontology.svg generated-docs/index.html
+          # Remove XML declaration from inline SVG (breaks HTML rendering)
+          sed -i 's/<?xml version="1.0" encoding="us-ascii" standalone="no"?>//g' generated-docs/index.html
 
-      # If docs generation failed, create a placeholder
-      - name: Create placeholder if needed
+      - name: Inject Enumerations into HTML
         run: |
-          if [ ! -f "docs/index.html" ]; then
-            echo "<html><body><h1>Documentation coming soon</h1><p>Commit: ${{ steps.version-info.outputs.commit }}</p></body></html>" > docs/index.html
-          fi
+          python tools/python/docs/inject_enumerations.py ontology-combined.ttl generated-docs/index.html
 
-      - name: Upload docs artifact
+      - name: Upload generated documentation as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: generated-docs
-          path: docs/
-          retention-days: 1
+          name: shacl-documentation
+          path: generated-docs/
+          retention-days: 7
 
   deploy-docs:
     name: Deploy to Docs Branch
@@ -163,11 +158,18 @@ jobs:
         with:
           ref: ${{ env.DOCS_BRANCH }}
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Ensure on docs branch
+        run: |
+          git checkout ${{ env.DOCS_BRANCH }} || git checkout -b ${{ env.DOCS_BRANCH }}
+          git pull origin ${{ env.DOCS_BRANCH }} --rebase || true
+          echo "Current branch: $(git branch --show-current)"
 
       - name: Download generated docs
         uses: actions/download-artifact@v4
         with:
-          name: generated-docs
+          name: shacl-documentation
           path: generated-docs
 
       - name: Determine target folder
@@ -186,7 +188,10 @@ jobs:
           fi
           
           echo "path=$TARGET_PATH" >> $GITHUB_OUTPUT
+          
+          echo "----------------------------------------"
           echo "Target path: $TARGET_PATH"
+          echo "----------------------------------------"
 
       - name: Copy docs to target folder
         run: |
@@ -199,10 +204,19 @@ jobs:
           cp -r generated-docs/* "$TARGET_PATH/"
           
           # Rename generated index.html to doc.html and use the header wrapper as index.html
+          # The wrapper dynamically resolves asset paths at runtime, so it works at any
+          # directory depth (including branch names with slashes like feat/my-feature)
           if [ -f "$TARGET_PATH/index.html" ]; then
             mv "$TARGET_PATH/index.html" "$TARGET_PATH/doc.html"
             cp assets/index-header.html "$TARGET_PATH/index.html"
+            echo "Wrapper index.html placed, generated docs renamed to doc.html"
           fi
+          
+          # Cleanup downloaded artifact folder
+          rm -rf generated-docs
+          
+          echo "Files deployed to $TARGET_PATH:"
+          ls -la "$TARGET_PATH/"
 
       - name: Update versions.json
         run: |
@@ -215,28 +229,34 @@ jobs:
           
           # Create versions.json if it doesn't exist
           if [ ! -f "versions.json" ]; then
+            echo "Creating new versions.json"
             echo '{"releases":[],"branches":{},"latestRelease":null,"priorityBranches":["main","develop"]}' > versions.json
           fi
           
+          # Export variables for Python script
+          export VERSION_TYPE VERSION_NAME COMMIT_HASH COMMIT_DATE COMMIT_AUTHOR COMMIT_MESSAGE
+          
           # Use Python to update versions.json
-          python3 << EOF
+          python3 << 'PYTHON_SCRIPT'
           import json
-          import sys
+          import os
+          
+          # Read environment variables
+          version_type = os.environ.get('VERSION_TYPE', '')
+          version_name = os.environ.get('VERSION_NAME', '')
+          commit_hash = os.environ.get('COMMIT_HASH', '')
+          commit_date = os.environ.get('COMMIT_DATE', '')
+          commit_author = os.environ.get('COMMIT_AUTHOR', '')
+          commit_message = os.environ.get('COMMIT_MESSAGE', '')[:100]
+          
+          print(f"Updating versions.json for {version_type}: {version_name} @ {commit_hash}")
           
           with open('versions.json', 'r') as f:
               data = json.load(f)
           
-          version_type = "$VERSION_TYPE"
-          version_name = "$VERSION_NAME"
-          commit_hash = "$COMMIT_HASH"
-          commit_date = "$COMMIT_DATE"
-          commit_author = "$COMMIT_AUTHOR"
-          commit_message = """$COMMIT_MESSAGE"""
-          
           if version_type == "release":
               # Add or update release
               releases = data.get('releases', [])
-              existing = next((r for r in releases if r['tag'] == version_name), None)
               
               release_entry = {
                   'tag': version_name,
@@ -244,62 +264,84 @@ jobs:
                   'date': commit_date,
                   'commit': commit_hash,
                   'author': commit_author,
-                  'message': commit_message[:100]
+                  'message': commit_message
               }
               
-              if existing:
-                  releases = [r if r['tag'] != version_name else release_entry for r in releases]
+              # Check if release already exists
+              existing_idx = next((i for i, r in enumerate(releases) if r['tag'] == version_name), None)
+              
+              if existing_idx is not None:
+                  releases[existing_idx] = release_entry
+                  print(f"Updated existing release: {version_name}")
               else:
                   releases.append(release_entry)
+                  print(f"Added new release: {version_name}")
               
               data['releases'] = releases
               
               # Update latestRelease (compare semver)
               def parse_version(v):
-                  return [int(x) for x in v.lstrip('v').split('.')]
+                  parts = v.lstrip('v').split('.')
+                  return [int(x) for x in parts if x.isdigit()]
               
               try:
                   current_latest = data.get('latestRelease')
-                  if not current_latest or parse_version(version_name) > parse_version(current_latest):
+                  if not current_latest:
                       data['latestRelease'] = version_name
-              except:
+                      print(f"Set latestRelease to: {version_name}")
+                  else:
+                      if parse_version(version_name) >= parse_version(current_latest):
+                          data['latestRelease'] = version_name
+                          print(f"Updated latestRelease to: {version_name}")
+              except Exception as e:
+                  print(f"Warning: Could not compare versions: {e}")
                   if not data.get('latestRelease'):
                       data['latestRelease'] = version_name
           
           else:
               # Add commit to branch
               branches = data.get('branches', {})
+              
               if version_name not in branches:
                   branches[version_name] = {'commits': []}
+                  print(f"Created new branch entry: {version_name}")
               
               commit_entry = {
                   'hash': commit_hash,
                   'date': commit_date,
                   'author': commit_author,
-                  'message': commit_message[:100]
+                  'message': commit_message
               }
               
-              # Check if commit already exists
               commits = branches[version_name]['commits']
+              
+              # Check if commit already exists
               existing_idx = next((i for i, c in enumerate(commits) if c['hash'] == commit_hash), None)
               
               if existing_idx is not None:
                   commits[existing_idx] = commit_entry
+                  print(f"Updated existing commit: {commit_hash}")
               else:
                   # Add to beginning (newest first)
                   commits.insert(0, commit_entry)
+                  print(f"Added new commit: {commit_hash}")
               
               # Limit to 50 commits per branch
-              branches[version_name]['commits'] = commits[:50]
+              max_commits = 50
+              if len(commits) > max_commits:
+                  commits = commits[:max_commits]
+                  print(f"Trimmed commits to {max_commits}")
+              
+              branches[version_name]['commits'] = commits
               data['branches'] = branches
           
           with open('versions.json', 'w') as f:
               json.dump(data, f, indent=2)
           
-          print(f"Updated versions.json for {version_type}: {version_name}")
-          EOF
+          print("versions.json updated successfully")
+          PYTHON_SCRIPT
 
-      - name: Commit and push
+      - name: Commit and push to docs branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -311,82 +353,19 @@ jobs:
           git add .
           
           if [ "$VERSION_TYPE" == "release" ]; then
-            git commit -m "docs: deploy release $VERSION_NAME" || echo "No changes to commit"
+            COMMIT_MSG="docs: deploy release $VERSION_NAME"
           else
-            git commit -m "docs: deploy $VERSION_NAME@$COMMIT_HASH" || echo "No changes to commit"
+            COMMIT_MSG="docs: deploy $VERSION_NAME @ $COMMIT_HASH"
           fi
           
-          git push origin ${{ env.DOCS_BRANCH }}
-
-  cleanup-stale:
-    name: Cleanup Stale Branches
-    runs-on: ubuntu-latest
-    if: github.event_name == 'delete' || github.event_name == 'schedule'
-    
-    steps:
-      - name: Checkout docs branch
-        uses: actions/checkout@v4
-        with:
-          ref: docs
-          fetch-depth: 0
-
-      - name: Get active branches
-        id: active-branches
-        run: |
-          # Get list of all remote branches
-          git fetch origin
-          ACTIVE_BRANCHES=$(git branch -r | grep -v HEAD | sed 's|origin/||' | tr '\n' ',' | sed 's/,$//')
-          echo "branches=$ACTIVE_BRANCHES" >> $GITHUB_OUTPUT
-
-      - name: Remove stale branch docs
-        run: |
-          python3 << EOF
-          import json
-          import os
-          import shutil
-          
-          active_branches = "${{ steps.active-branches.outputs.branches }}".split(',')
-          active_branches = [b.strip() for b in active_branches if b.strip()]
-          
-          # Never remove these
-          active_branches.append('docs')
-          
-          with open('versions.json', 'r') as f:
-              data = json.load(f)
-          
-          branches = data.get('branches', {})
-          branches_to_remove = []
-          
-          for branch_name in list(branches.keys()):
-              if branch_name not in active_branches:
-                  branches_to_remove.append(branch_name)
-          
-          for branch_name in branches_to_remove:
-              # Remove from versions.json
-              del branches[branch_name]
-              
-              # Remove folder
-              branch_path = f'branches/{branch_name}'
-              if os.path.exists(branch_path):
-                  shutil.rmtree(branch_path)
-                  print(f"Removed stale branch: {branch_name}")
-          
-          data['branches'] = branches
-          
-          with open('versions.json', 'w') as f:
-              json.dump(data, f, indent=2)
-          
-          if branches_to_remove:
-              print(f"Cleaned up {len(branches_to_remove)} stale branches")
-          else:
-              print("No stale branches to clean up")
-          EOF
-
-      - name: Commit cleanup
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          git add .
-          git commit -m "docs: cleanup stale branch documentation" || echo "No changes to commit"
-          git push origin docs
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "$COMMIT_MSG"
+            # Push explicitly to docs branch, handling detached HEAD
+            git push origin HEAD:${{ env.DOCS_BRANCH }}
+            echo "----------------------------------------"
+            echo "Deployed: $COMMIT_MSG"
+            echo "----------------------------------------"
+          fi
