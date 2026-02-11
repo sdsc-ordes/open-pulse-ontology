@@ -37,6 +37,12 @@
     "develop": {
       "commits": [
         {
+          "hash": "5d8b548",
+          "date": "2026-02-11",
+          "author": "Robin Franken",
+          "message": "Merge pull request #9 from sdsc-ordes/fix/infoscience-uuid"
+        },
+        {
           "hash": "4fc7673",
           "date": "2026-02-05",
           "author": "rmfranken",
