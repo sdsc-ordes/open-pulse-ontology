@@ -1,0 +1,185 @@
+name: Generate Changelog on Version Change
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'ontology-combined.ttl'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force changelog generation even if version unchanged'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  detect-version-change:
+    name: Detect Version Change
+    runs-on: ubuntu-latest
+    outputs:
+      version_changed: ${{ steps.check.outputs.version_changed }}
+      new_version: ${{ steps.check.outputs.new_version }}
+      normalized_version: ${{ steps.check.outputs.normalized_version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for git-cliff
+
+      - name: Extract current version
+        id: current_version
+        run: |
+          # Extract version from owl:versionInfo in ontology-combined.ttl
+          # More specific regex to match: owl:versionInfo "version"^^xsd:string
+          VERSION=$(grep -oP '^\s*owl:versionInfo\s+"v\K[^"]+(?="(\^\^xsd:string)?[\s;\.])' ontology-combined.ttl || echo "")
+          echo "Current version in ontology: v$VERSION"
+          echo "version=v$VERSION" >> $GITHUB_OUTPUT
+          
+          # Normalize version (remove period after 'v' if present: v.X.Y.Z -> vX.Y.Z)
+          NORMALIZED=$(echo "v$VERSION" | sed 's/^v\./v/')
+          echo "Normalized version: $NORMALIZED"
+          echo "normalized=$NORMALIZED" >> $GITHUB_OUTPUT
+
+      - name: Get previous version from last commit
+        id: previous_version
+        run: |
+          # Try to get version from previous commit
+          git fetch origin ${{ github.ref_name }}
+          PREV_VERSION=$(git show HEAD~1:ontology-combined.ttl 2>/dev/null | grep -oP '^\s*owl:versionInfo\s+"v\K[^"]+(?="(\^\^xsd:string)?[\s;\.])' || echo "")
+          echo "Previous version: v$PREV_VERSION"
+          echo "version=v$PREV_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Check if version changed
+        id: check
+        run: |
+          CURRENT="${{ steps.current_version.outputs.version }}"
+          PREVIOUS="${{ steps.previous_version.outputs.version }}"
+          FORCE="${{ github.event.inputs.force }}"
+          
+          echo "Comparing versions:"
+          echo "  Current:  $CURRENT"
+          echo "  Previous: $PREVIOUS"
+          echo "  Force:    $FORCE"
+          
+          if [ "$FORCE" = "true" ] || [ "$CURRENT" != "$PREVIOUS" ]; then
+            echo "version_changed=true" >> $GITHUB_OUTPUT
+            echo "Version changed or forced - proceeding with changelog generation"
+          else
+            echo "version_changed=false" >> $GITHUB_OUTPUT
+            echo "Version unchanged - skipping changelog generation"
+          fi
+          
+          echo "new_version=$CURRENT" >> $GITHUB_OUTPUT
+          echo "normalized_version=${{ steps.current_version.outputs.normalized }}" >> $GITHUB_OUTPUT
+
+  generate-changelog:
+    name: Generate Changelog and Create Release
+    runs-on: ubuntu-latest
+    needs: detect-version-change
+    if: needs.detect-version-change.outputs.version_changed == 'true'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for git-cliff
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Install git-cliff
+        run: |
+          # Install git-cliff from crates.io with GitHub integration
+          cargo install git-cliff --features github
+
+      - name: Generate Changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ needs.detect-version-change.outputs.normalized_version }}"
+          echo "Generating changelog for version: $VERSION"
+          
+          # Generate full changelog
+          git-cliff --tag "$VERSION" --output CHANGELOG.md
+          
+          echo "Changelog generated successfully"
+
+      - name: Extract latest release notes
+        id: release_notes
+        run: |
+          VERSION="${{ needs.detect-version-change.outputs.normalized_version }}"
+          
+          # Extract just the latest version's changelog for the GitHub release
+          # This gets content between the latest version header and the next version header
+          RELEASE_NOTES=$(git-cliff --tag "$VERSION" --unreleased --strip all)
+          
+          # Save to file for GitHub release
+          echo "$RELEASE_NOTES" > release-notes.md
+          
+          echo "Release notes extracted"
+
+      - name: Commit Changelog
+        id: commit
+        run: |
+          # Check if CHANGELOG.md has changes
+          if git diff --quiet CHANGELOG.md; then
+            echo "No changes to CHANGELOG.md"
+            echo "committed=false" >> $GITHUB_OUTPUT
+          else
+            git add CHANGELOG.md
+            git commit -m "chore(release): update changelog for ${{ needs.detect-version-change.outputs.new_version }}"
+            git push origin ${{ github.ref_name }}
+            echo "committed=true" >> $GITHUB_OUTPUT
+            echo "CHANGELOG.md committed and pushed"
+          fi
+
+      - name: Create Git Tag
+        run: |
+          VERSION="${{ needs.detect-version-change.outputs.normalized_version }}"
+          
+          # Check if tag already exists
+          if git rev-parse "$VERSION" >/dev/null 2>&1; then
+            echo "Tag $VERSION already exists, skipping tag creation"
+          else
+            # Create annotated tag
+            git tag -a "$VERSION" -m "Release $VERSION"
+            git push origin "$VERSION"
+            echo "Created and pushed tag: $VERSION"
+          fi
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ needs.detect-version-change.outputs.normalized_version }}"
+          
+          # Check if release already exists
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo "Release $VERSION already exists, updating it"
+            gh release edit "$VERSION" --notes-file release-notes.md
+          else
+            echo "Creating new release: $VERSION"
+            gh release create "$VERSION" \
+              --title "Release $VERSION" \
+              --notes-file release-notes.md \
+              --verify-tag
+          fi
+
+      - name: Summary
+        run: |
+          echo "## Changelog Generation Complete! 🎉" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Version**: ${{ needs.detect-version-change.outputs.new_version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Normalized Tag**: ${{ needs.detect-version-change.outputs.normalized_version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Changelog**: Updated CHANGELOG.md" >> $GITHUB_STEP_SUMMARY
+          echo "- **Release**: Created GitHub release" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "The [convert-ontology-on-release](.github/workflows/convert-ontology-on-release.yml) workflow will now be triggered automatically." >> $GITHUB_STEP_SUMMARY
