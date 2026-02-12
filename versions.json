@@ -85,6 +85,12 @@
     "feat/auto-changelog": {
       "commits": [
         {
+          "hash": "c81e1f3",
+          "date": "2026-02-12",
+          "author": "github-actions[bot]",
+          "message": "Update generated docs"
+        },
+        {
           "hash": "799c766",
           "date": "2026-02-12",
           "author": "github-actions[bot]",
