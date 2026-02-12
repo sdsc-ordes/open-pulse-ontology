@@ -79,6 +79,12 @@
     "feat/auto-changelog": {
       "commits": [
         {
+          "hash": "799c766",
+          "date": "2026-02-12",
+          "author": "github-actions[bot]",
+          "message": "Update generated docs"
+        },
+        {
           "hash": "6df3c6d",
           "date": "2026-02-12",
           "author": "rmfranken",
