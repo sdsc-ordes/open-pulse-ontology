@@ -146,7 +146,7 @@ jobs:
           VERSION="${{ needs.detect-version-change.outputs.normalized_version }}"
           
           # Check if tag already exists
-          if git rev-parse "$VERSION" >/dev/null 2>&1; then
+          if git rev-parse -q --verify "refs/tags/$VERSION" >/dev/null 2>&1; then
             echo "Tag $VERSION already exists, skipping tag creation"
           else
             # Create annotated tag
