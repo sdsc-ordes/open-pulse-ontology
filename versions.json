@@ -75,6 +75,16 @@
           "message": "fix: updated regex pattern"
         }
       ]
+    },
+    "feat/auto-changelog": {
+      "commits": [
+        {
+          "hash": "6df3c6d",
+          "date": "2026-02-12",
+          "author": "rmfranken",
+          "message": "chore(release): update changelog for v2.1.0"
+        }
+      ]
     }
   },
   "latestRelease": "v2.0.0",
