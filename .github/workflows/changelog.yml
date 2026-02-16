@@ -38,6 +38,13 @@ jobs:
           # Extract version from owl:versionInfo in ontology-combined.ttl
           # More specific regex to match: owl:versionInfo "version"^^xsd:string
           VERSION=$(grep -oP '^\s*owl:versionInfo\s+"v\K[^"]+(?="(\^\^xsd:string)?[\s;\.])' ontology-combined.ttl || echo "")
+          
+          # Check if VERSION is non-empty and matches a SemVer pattern
+          if [[ -z "$VERSION" || ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Error: Failed to extract a valid version from ontology-combined.ttl" >&2
+            exit 1
+          fi
+
           echo "Current version in ontology: v$VERSION"
           echo "version=v$VERSION" >> $GITHUB_OUTPUT
           
