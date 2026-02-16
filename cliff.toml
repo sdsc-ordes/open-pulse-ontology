@@ -68,9 +68,9 @@ commit_preprocessors = [
 # regex for parsing and grouping commits
 commit_parsers = [
   # --- ADD THIS BLOCK AT THE TOP ---
-  # Skip commits containing specific noisy keywords (case-insensitive)
-  # Matches: "Trigger ci", "chore: reformat code", "re-generate docs", "Regenerate"
-  { message = "(?i).*(trigger|format|re-?generate).*", skip = true },
+  # Skip noisy CI/chore commits that just trigger or regenerate artifacts (case-insensitive)
+  # Examples: "ci: trigger workflow", "chore: re-generate docs"
+  { message = "(?i)^(chore|ci)(\\([^)]*\\))?: .*(trigger|re-?generate).*", skip = true },
   # ---------------------------------
 
   { message = "^feat", group = "Features" },
