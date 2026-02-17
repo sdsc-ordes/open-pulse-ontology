@@ -5,7 +5,7 @@ taxonomy/qid_cache.json
 taxonomy/taxonomy.txt
 .venv/*
 software_instances.ttl
-
+.env
 # Ignore downloaded/third-party jars
 shacl-play-cli.jar
 
