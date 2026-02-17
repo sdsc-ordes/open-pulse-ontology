@@ -25,7 +25,6 @@ jobs:
 
       - name: Run SHACL validation test suite
         run: |
-          uv sync --frozen --extra dev
           uv run python tools/python/checks/test_validation.py
 
       - name: Upload test results on failure
