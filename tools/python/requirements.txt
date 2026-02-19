@@ -1,5 +1,0 @@
-rdflib
-pyshacl
-beautifulsoup4
-lxml
-
