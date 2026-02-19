@@ -1,0 +1,141 @@
+name: Generate Changelog on Version Change
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'ontology-combined.ttl'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force changelog generation even if version unchanged'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  detect-version-change:
+    name: Detect Version Change
+    runs-on: ubuntu-latest
+    outputs:
+      version_changed: ${{ steps.check.outputs.version_changed }}
+      new_version: ${{ steps.check.outputs.new_version }}
+      is_prerelease: ${{ steps.check.outputs.is_prerelease }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract Current Version from File
+        id: current
+        run: |
+          # Robust regex for owl:versionInfo, ignoring trailing ^^xsd:string
+          RAW=$(grep -oP 'owl:versionInfo\s+"v?\K[^"]+' ontology-combined.ttl | head -1)
+          if [[ -z "$RAW" ]]; then
+            echo "Error: Could not extract version!" && exit 1
+          fi
+          if [[ ! "$RAW" =~ ^v ]]; then RAW="v$RAW"; fi
+          
+          echo "val=$RAW" >> $GITHUB_OUTPUT
+          echo "Found current version: $RAW"
+
+      - name: Get Latest Git Tag
+        id: last_tag
+        run: |
+          LATEST=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "val=$LATEST" >> $GITHUB_OUTPUT
+          echo "Latest tag: $LATEST"
+
+      - name: Compare and Determine Release Type
+        id: check
+        run: |
+          CURRENT="${{ steps.current.outputs.val }}"
+          LAST="${{ steps.last_tag.outputs.val }}"
+          FORCE="${{ github.event.inputs.force }}"
+          
+          if [ "$FORCE" = "true" ] || [ "$CURRENT" != "$LAST" ]; then
+            echo "version_changed=true" >> $GITHUB_OUTPUT
+            echo "new_version=$CURRENT" >> $GITHUB_OUTPUT
+            if [[ "$CURRENT" == *"-"* ]]; then
+              echo "is_prerelease=true" >> $GITHUB_OUTPUT
+            else
+              echo "is_prerelease=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "version_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+  generate-changelog:
+    name: Generate Changelog and Create Release
+    runs-on: ubuntu-latest
+    needs: detect-version-change
+    if: needs.detect-version-change.outputs.version_changed == 'true'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Install git-cliff
+        run: cargo install git-cliff --features github
+
+      - name: Generate Changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ needs.detect-version-change.outputs.new_version }}"
+          git-cliff --tag "$VERSION" --output CHANGELOG.md
+
+      - name: Extract latest release notes
+        id: release_notes
+        run: |
+          VERSION="${{ needs.detect-version-change.outputs.new_version }}"
+          git-cliff --tag "$VERSION" --unreleased --strip all > release-notes.md
+
+      - name: Commit Changelog
+        id: commit
+        run: |
+          if git diff --quiet CHANGELOG.md; then
+            echo "committed=false" >> $GITHUB_OUTPUT
+          else
+            git add CHANGELOG.md
+            git commit -m "chore(release): update changelog for ${{ needs.detect-version-change.outputs.new_version }}"
+            git push origin ${{ github.ref_name }}
+            echo "committed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Git Tag
+        run: |
+          VERSION="${{ needs.detect-version-change.outputs.new_version }}"
+          if ! git rev-parse -q --verify "refs/tags/$VERSION" >/dev/null 2>&1; then
+            git tag -a "$VERSION" -m "Release $VERSION"
+            git push origin "$VERSION"
+          fi
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ needs.detect-version-change.outputs.new_version }}"
+          IS_PRE="${{ needs.detect-version-change.outputs.is_prerelease }}"
+          
+          ARGS="--title \"Release $VERSION\" --notes-file release-notes.md"
+          if [ "$IS_PRE" = "true" ]; then ARGS="$ARGS --prerelease"; fi
+
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            eval "gh release edit $VERSION $ARGS"
+          else
+            eval "gh release create $VERSION $ARGS --verify-tag"
+          fi
