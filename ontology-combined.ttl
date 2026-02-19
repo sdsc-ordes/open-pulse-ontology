@@ -352,8 +352,6 @@ pulse:OrganizationShape
         [ sh:property [ sh:path pulse:infoscienceOrganizationIdentifier ; sh:minCount 1 ] ]
     ) . 
 
-
-
 pulse:RepositoryShape
     a sh:NodeShape ;
     sh:targetClass schema:SoftwareSourceCode ;
