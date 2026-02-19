@@ -57,6 +57,7 @@ pulse:DepartmentPhysics a org:Organization ;
 
 # Organization 4: Physics Simulation Unit (subunit)
 pulse:PhysicsSimulationUnit a org:Organization ;
+    pulse:githubOrganizationHandle "physics-sim" ;
     schema:name "Physics Simulation Unit" ;
     org:unitOf pulse:DepartmentPhysics ;
     pulse:owns pulse:SimulationFramework .
