@@ -13,33 +13,17 @@ The Open Pulse Ontology provides a structured vocabulary and validation rules (S
 - **Contributions**: Individual commit-level contributions linking people to repositories
 - **Memberships**: Affiliations between people and organizations with time periods and roles
 
-## Setup
-
-### Prerequisites
-
-- Python 3.9 or higher
-- [uv](https://docs.astral.sh/uv/) (fast Python package manager)
-
-### Installation
-
-```bash
-# Install dependencies
-uv sync
-
-# Or for development (includes testing tools)
-uv sync --extra dev
-```
-
 ## Validation
+
 
 ### Running Validation
 
-```bash
-# Validate test data
-uv run python tools/python/checks/shacl.py example/test_dataset_large_example.ttl ontology-combined.ttl
+Using Python tools:
 
-# Run full test suite
-uv run python tools/python/checks/test_validation.py
+```bash
+cd tools/python
+pip install -r requirements.txt
+python checks/shacl.py
 ```
 
 ### Example Test Cases

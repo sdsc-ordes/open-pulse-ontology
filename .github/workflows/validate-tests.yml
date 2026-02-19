@@ -15,18 +15,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v2
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r tools/python/requirements.txt
+
       - name: Run SHACL validation test suite
         run: |
-          uv sync --frozen --extra dev
-          uv run python tools/python/checks/test_validation.py
+          python tools/python/checks/test_validation.py
 
       - name: Upload test results on failure
         if: failure()
