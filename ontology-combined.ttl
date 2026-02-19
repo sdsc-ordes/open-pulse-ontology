@@ -444,7 +444,7 @@ pulse:MembershipShape
     sh:property [ 
         sh:path time:hasBeginning ; 
         sh:datatype xsd:date ; 
-        sh:lessThan time:hasEnd ;
+        sh:lessThanOrEquals time:hasEnd ;
         sh:name "Start Date"
     ] ;
     sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ; sh:name "End Date" ] .
