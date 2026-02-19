@@ -350,7 +350,7 @@ pulse:OrganizationShape
         [ sh:property [ sh:path schema:identifier ; sh:minCount 1 ] ]
         [ sh:property [ sh:path pulse:githubOrganizationHandle ; sh:minCount 1 ] ]
         [ sh:property [ sh:path pulse:infoscienceOrganizationIdentifier ; sh:minCount 1 ] ]
-    ) . 
+    ) .
 
 pulse:RepositoryShape
     a sh:NodeShape ;
