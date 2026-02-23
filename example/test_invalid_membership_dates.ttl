@@ -5,7 +5,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # INVALID MEMBERSHIP - Should FAIL validation
-# End date is before start date, time:hasBeginning has sh:lessThan time:hasEnd
+# End date is before start date, time:hasBeginning has sh:lessThanOrEqual time:hasEnd
 
 pulse:InvalidMembershipRepo a schema:SoftwareSourceCode ;
     schema:name "Invalid Membership Test" ;

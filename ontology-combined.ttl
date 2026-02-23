@@ -290,13 +290,13 @@ pulse:PersonShape
     a sh:NodeShape ;
     sh:targetClass schema:Person ;
     sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property pulse:NameShape ;
     sh:property pulse:GithubUsernameShape ;
     sh:property pulse:EmailShape ;
     sh:property pulse:UrlShape ;
     sh:property pulse:OrcidPropertyShape ;
-    sh:property [ sh:path pulse:infosciencePersonIdentifier ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Infoscience Identifier" ] ;
+    sh:property [ sh:path pulse:infosciencePersonIdentifier ; sh:datatype xsd:string ; sh:name "Infoscience Identifier" ] ;
     sh:property [ sh:path pulse:hasContribution ; sh:class pulse:Contribution ; sh:name "Has Contribution" ] ;
     sh:property [ 
         sh:path org:hasMembership ; 
@@ -312,13 +312,14 @@ pulse:PersonShape
         [ sh:property [ sh:path pulse:githubUsername ; sh:minCount 1 ] ]
         [ sh:property [ sh:path schema:email ; sh:minCount 1 ] ]
         [ sh:property [ sh:path pulse:infosciencePersonIdentifier ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path pulse:orcidIdentifier ; sh:minCount 1 ] ]
     ) .
 
 pulse:ArticleShape
     a sh:NodeShape ;
     sh:targetClass schema:ScholarlyArticle ;
     sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property pulse:NameShape ;
     sh:property pulse:DoiPropertyShape ;
     sh:property pulse:InfoscienceArticleIdentifierShape ;
@@ -330,7 +331,7 @@ pulse:OrganizationShape
     a sh:NodeShape ;
     sh:targetClass org:Organization ;
     sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property pulse:NameShape ;
     sh:property pulse:RorPropertyShape ;
     sh:property pulse:GithubOrganizationHandleShape ;
@@ -344,13 +345,18 @@ pulse:OrganizationShape
         sh:class schema:SoftwareSourceCode ; 
         sh:name "Owns Repositories" ;
         sh:description "Repositories owned by this organization."
-    ] .
+    ] ;
+    sh:or (
+        [ sh:property [ sh:path schema:identifier ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path pulse:githubOrganizationHandle ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path pulse:infoscienceOrganizationIdentifier ; sh:minCount 1 ] ]
+    ) .
 
 pulse:RepositoryShape
     a sh:NodeShape ;
     sh:targetClass schema:SoftwareSourceCode ;
     sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property pulse:NameShape ;
     sh:property pulse:RepositoryTypeShape ;
     sh:property pulse:DisciplineShape ;
@@ -384,7 +390,7 @@ pulse:ContributionShape
     a sh:NodeShape ;
     sh:targetClass pulse:Contribution ;
     sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property [ 
         sh:path pulse:contributionTo ; 
         sh:class schema:SoftwareSourceCode ; 
@@ -423,7 +429,7 @@ pulse:MembershipShape
     a sh:NodeShape ;
     sh:targetClass org:Membership ;
     sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property [ 
         sh:path org:organization ; 
         sh:class org:Organization ;
@@ -436,7 +442,7 @@ pulse:MembershipShape
     sh:property [ 
         sh:path time:hasBeginning ; 
         sh:datatype xsd:date ; 
-        sh:lessThan time:hasEnd ;
+        sh:lessThanOrEquals time:hasEnd ;
         sh:name "Start Date"
     ] ;
     sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ; sh:name "End Date" ] .
