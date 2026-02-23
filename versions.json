@@ -37,6 +37,12 @@
     "develop": {
       "commits": [
         {
+          "hash": "3f54390",
+          "date": "2026-02-23",
+          "author": "rmfranken",
+          "message": "chore: bump main to v2.1.0"
+        },
+        {
           "hash": "0eb9c5d",
           "date": "2026-02-23",
           "author": "rmfranken",
