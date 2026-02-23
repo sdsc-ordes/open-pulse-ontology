@@ -37,6 +37,12 @@
     "develop": {
       "commits": [
         {
+          "hash": "0eb9c5d",
+          "date": "2026-02-23",
+          "author": "rmfranken",
+          "message": "ci: run ci and create pre-release"
+        },
+        {
           "hash": "87241ac",
           "date": "2026-02-23",
           "author": "rmfranken",
