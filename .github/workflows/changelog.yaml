@@ -15,7 +15,7 @@ on:
         default: 'false'
 
 permissions:
-  contents: write
+  contents: write 
   pull-requests: write
 
 jobs:
@@ -89,7 +89,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Install git-cliff
-        run: cargo install git-cliff --features github
+        uses: taiki-e/install-action@git-cliff
 
       - name: Generate Changelog
         env:
@@ -100,6 +100,8 @@ jobs:
 
       - name: Extract latest release notes
         id: release_notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
         run: |
           VERSION="${{ needs.detect-version-change.outputs.new_version }}"
           git-cliff --tag "$VERSION" --unreleased --strip all > release-notes.md
