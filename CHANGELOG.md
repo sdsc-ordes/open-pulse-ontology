@@ -5,35 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.1.0] - 2026-02-12
+## [2.1.0-develop] - 2026-02-23
 
 ### Bug Fixes
 
-- Pulse:GithubRepositoryHandleShape fix. GH handle contains .
-- DoiPropertyShape mandatory
-- Remove old shapes file
-- Updated regex pattern
-- Remove useless commit messages from auto-changelog
-
-### Features
-
-- Add Readme
-- Adding gh actions for docs
-- Gh action for auto-changelog
-
-### Miscellaneous Tasks
-
-- **(ontology)** Increment version number
-- Make docs gen only on main to prevent red crosses on ci
-- Increment version
-- Cleanup
-- Add .env
-- Increment version to 2.1.0
-
-## [2.0] - 2026-02-05
-
-### Bug Fixes
-
+- **(tests)** Orcid is an identifier so test shouldn't have it
+- **(tests)** Allign comment to reality
+- **(tests)** Github sub org without identifier
 - Update ontology
 - RepositoryType enum
 - Add reference to memberOf for schema:person
@@ -90,6 +68,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Docs svg empty namespace fix
 - Also do it for the html docs
 - Don't put enum elements inside svg - it doesn't like that
+- Renaming yaml to avoid conflict
+- Avoid triggering action on PRs
+- Pulse:GithubRepositoryHandleShape fix. GH handle contains .
+- DoiPropertyShape mandatory
+- Information engineering wd identifier
+- Remove old shapes file
+- Updated regex pattern
+- Remove useless commit messages from auto-changelog
+- Renaming yaml to avoid conflict
+- Improve tag existence check in changelog workflow
+- Better parsing regex
+- Show breaking changes in changelog
+- Upload everything that is generated in docs
+- Check for semver in version
+- Remove old duplicate docs workflow
+- Make all actions use uv, add explicit validation step in validate-test action
+- Make all actions use uv, add explicit validation step in validate-test action
+- Make all actions use uv, add explicit validation step in validate-test action
+- Make all actions use uv, add explicit validation step in validate-test action
+- Good lord let the merge conflict end
+- Account for similar logic in organizational identifiers as persons, add owl:sameAs exception to ignoredProperties for future mapping purposes
+- LessThanOrEquals for date omparisons (same day usecase)
+- Remove useless commit messages from auto-changelog
+- Renaming yaml to avoid conflict
+- Improve tag existence check in changelog workflow
+- Better parsing regex
+- Show breaking changes in changelog
+- Upload everything that is generated in docs
+- Check for semver in version
+- Remove old duplicate docs workflow
+- Make all actions use uv, add explicit validation step in validate-test action
+- Make all actions use uv, add explicit validation step in validate-test action
+- Make all actions use uv, add explicit validation step in validate-test action
+- Good lord let the merge conflict end
+
+### Documentation
+
+- Add contribution guidelines
+- Add contribution guidelines
 
 ### Features
 
@@ -118,17 +135,79 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update test data
 - Add link from contribution back to repository. Update tests accordingly
 - Specify and constrain identifiers for people, org and repos, relax cardinalities for personal identifiers
+- Manual dispatch
+- Renaming index.html to docs.html for wrapper compatibility
+- Add Readme
+- Adding gh actions for docs
+- Gh action for auto-changelog
+- Manual dispatch
+- Add larger test dataset
+- Add larger test dataset
+- Gh action for auto-changelog
+- Manual dispatch
 
 ### Miscellaneous Tasks
 
+- **(docs)** Use uv for python
+- **(ontology)** Increment version number
+- **(ontology)** Increment version number
 - Update gitignore
 - Align ontology with data
+- Reformat python files with black
 - Clean up, rename infoscienceUsername + tests
+- Trigger ci
 - Update documentation tool version
 - Attempt docs ci fix
+- Testing /docs branch ci
+- Testing docs site
+- Make docs gen only on main to prevent red crosses on ci
+- Increment version
+- Cleanup
+- Add .env
+- Increment version to 2.1.0
+- Testing /docs branch ci
+- Rename yml->yaml
+- Rename yamls
+- Rename changelog yaml->yml for consistency
+- Rename yml->yaml
+- Cleanup
+- Increment version to 2.1.0
+- Testing /docs branch ci
+- Rename yml->yaml
+- Rename yamls
+- Rename changelog yaml->yml for consistency
+- Rename yml->yaml
+- Fix uv step in docs-versioned
+- Formatting
+- Formatting
+- Fix uv python -> uv run
+- Cleanup test comment
+- Fix git cliff permissions
+- Run ci and create pre-release
+
+### Refactoring
+
+- Re-work the -develop workflow with pre-releases
+- Use uv, update docs
+- Make sure gh actions also uses uv
+- Make sure gh actions also uses uv
+- Make sure gh actions also uses uv
+- Make sure gh actions also uses uv
+- Use uv, update docs
+- Make sure gh actions also uses uv
+- Re-work the -develop workflow with pre-releases
+- Make sure gh actions also uses uv
+- Make sure gh actions also uses uv
+- Make sure gh actions also uses uv
+- Make sure gh actions also uses uv
+
+### Testing
+
+- Testing ci
+- Testing ci
 
 ### Update
 
 - Add description of class properties except org:role
 
-<!-- generated by git-cliff -->
+
