@@ -49,6 +49,12 @@
     "develop": {
       "commits": [
         {
+          "hash": "bb2ce48",
+          "date": "2026-02-24",
+          "author": "rmfranken",
+          "message": "ci: fix git cliff permissions here too"
+        },
+        {
           "hash": "af788f9",
           "date": "2026-02-24",
           "author": "rmfranken",
