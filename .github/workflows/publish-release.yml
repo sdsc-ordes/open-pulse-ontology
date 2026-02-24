@@ -30,6 +30,8 @@ jobs:
         uses: taiki-e/install-action@git-cliff
 
       - name: Extract latest release notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Strips out old versions, leaving only the notes for THIS release
           git-cliff --tag "${{ steps.extract.outputs.version }}" --unreleased --strip all > release-notes.md
