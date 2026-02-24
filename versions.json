@@ -61,6 +61,12 @@
     "develop": {
       "commits": [
         {
+          "hash": "d09ff24",
+          "date": "2026-02-24",
+          "author": "Robin Franken",
+          "message": "Merge pull request #17 from sdsc-ordes/release/v2.1.2"
+        },
+        {
           "hash": "b763896",
           "date": "2026-02-24",
           "author": "rmfranken",
