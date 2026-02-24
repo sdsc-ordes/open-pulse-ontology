@@ -21,6 +21,12 @@
     "main": {
       "commits": [
         {
+          "hash": "b7a2514",
+          "date": "2026-02-24",
+          "author": "Robin Franken",
+          "message": "Merge pull request #14 from sdsc-ordes/develop"
+        },
+        {
           "hash": "d5acf84",
           "date": "2026-02-10",
           "author": "Carlos Vivar Rios",
