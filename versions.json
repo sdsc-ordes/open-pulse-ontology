@@ -55,6 +55,12 @@
     "develop": {
       "commits": [
         {
+          "hash": "b763896",
+          "date": "2026-02-24",
+          "author": "rmfranken",
+          "message": "ci: prepare a release"
+        },
+        {
           "hash": "d7538c6",
           "date": "2026-02-24",
           "author": "rmfranken",
