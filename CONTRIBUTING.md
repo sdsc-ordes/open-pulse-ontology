@@ -14,7 +14,7 @@ We use a two-branch model to protect production data:
 
 ## 2. Commit Message Conventions
 
-We use **Conventional Commits**. Our CI/CD pipeline reads your commit messages to automatically generate `CHANGELOG.md`.
+We use **Conventional Commits**. Our CI/CD pipeline reads your commit messages to automatically generate `CHANGELOG.md` and GitHub Release notes.
 
 **Format:** `<type>(<optional scope>): <description>`
 
@@ -25,9 +25,7 @@ We use **Conventional Commits**. Our CI/CD pipeline reads your commit messages t
 
 **Example:**
 
-```
-feat(sensor): add temperature sensor class
-```
+`feat(scope): add feature XYZ`
 
 ## 3. Everyday Development (How to Contribute)
 
@@ -37,33 +35,29 @@ During normal development, you are just adding work to the `develop` bucket.
 2. Make your changes (edit the ontology, add scripts, update `README`).
 3. Open a Pull Request into `develop` and merge it.
 
-🛑 **CRITICAL:** Do **NOT** change the `owl:versionInfo` in `ontology-combined.ttl` during this phase. Just merge your code. The release bot will collect your commits later.
+🛑 **CRITICAL:** Do **NOT** remove the `-develop` suffix from `owl:versionInfo` in `ontology-combined.ttl` during this phase. Just merge your code. The release bot will handle versions and collect your commits later.
 
-## 4. Creating a Pre-Release (Cutting a Snapshot)
+## 4. Preparing the Next Version (In Develop)
 
-When enough features have accumulated in `develop` and you want to generate a testable snapshot:
+After a production release is finished, or when starting a new milestone, ensure the `develop` branch reflects the *upcoming* version with a pre-release suffix.
 
-1. Pull the latest `develop` branch to your local machine.
-2. Open `ontology-combined.ttl` and update the `owl:versionInfo` triple with a development suffix (e.g., bump `v2.2.0` to `v2.3.0-develop`).
-3. Commit this single change and push to `develop`:
-
-```bash
-git commit -am "chore: bump version to v2.3.0-develop"
-git push origin develop
-```
-
-> **Note:** This automatically triggers a GitHub Action that groups all recent commits, updates the changelog, and creates a hidden Pre-release on GitHub.
+1. Open `ontology-combined.ttl` on the `develop` branch.
+2. Update the `owl:versionInfo` triple to the next anticipated version with a development suffix (e.g., bump `v2.2.0` to `v2.3.0-develop`).
+3. Commit this change directly or via a quick PR to `develop`.
 
 ## 5. Promoting to Production (Stable Release)
 
-Once a `develop` pre-release has been validated, we promote it to `main`. You do not need to touch any code locally to do this.
+When enough features have accumulated in `develop` and you are ready to cut an official production release, we use GitHub Actions to automate the process.
 
+**Step A: Generate the Release PR**
 1. Go to the **Actions** tab in GitHub.
 2. Select the **Prepare Production Release** workflow.
-3. Click **Run workflow** (leave the branch as `develop`).
+3. Click **Run workflow** (ensure the branch is set to `develop`).
 
-The bot will automatically strip the `-develop` suffix, create a release branch, and open a Pull Request into `main`.
+*The bot will automatically strip the `-develop` suffix, generate the `CHANGELOG.md` using your commit history, and open a Pull Request into `main`.*
 
-4. Review the automated PR and click **Merge**.
+**Step B: Merge and Publish**
+4. Review the automated PR to ensure the changelog and version look correct.
+5. Click **Merge**.
 
-> **Note:** Merging this PR triggers the final pipeline, creating the official production release and updating the live documentation.
+*Merging this PR automatically triggers the **Publish Stable Release** workflow in the background. It will read the merged files, create the official Git Tag, and publish the "Latest Release" badge and notes to the GitHub repository.*

@@ -1,31 +1,39 @@
 name: Prepare Production Release
 
 on:
-  workflow_dispatch: # Removed the unused major/minor/patch inputs for clarity
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   create-release-pr:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           ref: develop
+          fetch-depth: 0 
 
       - name: Bump Version
         id: bump
         run: |
-          # Get current: e.g. v2.2.0-develop
           CURRENT=$(grep -oP 'owl:versionInfo\s+"v?\K[^"]+' ontology-combined.ttl | head -1)
-          
-          # Strip any suffix to get the "Clean" version: v2.2.0
           CLEAN=$(echo "$CURRENT" | sed 's/-.*//')
           if [[ ! "$CLEAN" =~ ^v ]]; then CLEAN="v$CLEAN"; fi
           
-          # Safely update the file
           sed -i "s|owl:versionInfo \"v\?$CURRENT\"|owl:versionInfo \"$CLEAN\"|" ontology-combined.ttl
-          
-          # Strip the 'v' for the output if needed, but keep it consistent for the branch
           echo "clean_version=$CLEAN" >> $GITHUB_OUTPUT
+
+      - name: Install git-cliff
+        uses: taiki-e/install-action@git-cliff
+
+      - name: Generate Changelog
+        run: |
+          # Generates the changelog for the new version based on git history
+          git-cliff --tag "${{ steps.bump.outputs.clean_version }}" --output CHANGELOG.md
 
       - name: Create PR to Main
         uses: peter-evans/create-pull-request@v6
@@ -33,8 +41,12 @@ jobs:
           branch: release/${{ steps.bump.outputs.clean_version }}
           base: main
           title: "Release ${{ steps.bump.outputs.clean_version }}"
-          commit-message: "chore: promote to production ${{ steps.bump.outputs.clean_version }}"
+          commit-message: "chore(release): bump version and update changelog to ${{ steps.bump.outputs.clean_version }}"
           body: |
             This PR was automatically generated to promote the ontology from **develop** to **main**.
-            - New Version: `${{ steps.bump.outputs.clean_version }}`
-            - Merging this will trigger a **Stable Release** and update documentation.
+            
+            ### 📦 Release Details
+            - **New Version:** `${{ steps.bump.outputs.clean_version }}`
+            - The `CHANGELOG.md` has been automatically generated using `git-cliff`.
+            
+            Merging this will trigger a **Stable Release** via the publish workflow.
