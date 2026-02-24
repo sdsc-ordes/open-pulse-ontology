@@ -43,6 +43,12 @@
     "develop": {
       "commits": [
         {
+          "hash": "af788f9",
+          "date": "2026-02-24",
+          "author": "rmfranken",
+          "message": "chore: increment version"
+        },
+        {
           "hash": "740a59b",
           "date": "2026-02-24",
           "author": "Robin Franken",
