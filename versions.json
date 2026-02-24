@@ -21,6 +21,12 @@
     "main": {
       "commits": [
         {
+          "hash": "bb2cfd9",
+          "date": "2026-02-24",
+          "author": "rmfranken",
+          "message": "ci: trigger ci"
+        },
+        {
           "hash": "96c1886",
           "date": "2026-02-24",
           "author": "Robin Franken",
