@@ -148,7 +148,7 @@ pulse:infoscienceArticleIdentifier a rdf:Property ; skos:prefLabel "infoscience 
 pulse:orcidIdentifier a rdf:Property ; skos:prefLabel "ORCID identifier" ; skos:definition "The ORCID identifier for a person." .
 
 # ---------------------------------------------------------
-# 2. REUSABLE PROPERTY SHAPES
+# 2. PROPERTY SHAPES
 # ---------------------------------------------------------
 
 pulse:NameShape
@@ -162,13 +162,12 @@ pulse:EmailShape
     sh:path schema:email ;
     sh:nodeKind sh:Literal ;
     sh:pattern "^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" ;
-    sh:description "Reusable validation for institutional and personal email addresses." .
+    sh:description "Validation for institutional or personal email addresses." .
 
 pulse:UrlShape
     a sh:PropertyShape ;
     sh:path schema:url ;
-    sh:nodeKind sh:IRI ;
-    sh:description "Standard validation for any web URL." .
+    sh:nodeKind sh:IRI .
 
 pulse:OrganizationTypeShape
     a sh:PropertyShape ;
@@ -180,13 +179,11 @@ pulse:OrganizationTypeShape
 pulse:GithubUsernameShape
     a sh:PropertyShape ;
     sh:path pulse:githubUsername ;
-    sh:datatype xsd:string ;
-    sh:description "The GitHub handle of a person." .
+    sh:datatype xsd:string .
 
 pulse:GithubOrganizationHandleShape a sh:PropertyShape ;
     sh:path pulse:githubOrganizationHandle ;
-    sh:datatype xsd:string ;
-    sh:description "The GitHub handle of an organization." .
+    sh:datatype xsd:string .
 
 pulse:GithubRepositoryHandleShape
     a sh:PropertyShape ;
@@ -195,14 +192,14 @@ pulse:GithubRepositoryHandleShape
     sh:maxCount 1 ;
     sh:datatype xsd:string ;
     sh:pattern "^[a-zA-Z0-9\\-_]+/[a-zA-Z0-9\\-_\\.]+$" ;
-    sh:description "The GitHub repository handle in the format 'owner/repository'." .
+    sh:description "Format: 'owner/repository'." .
 
 pulse:DisciplineShape
     a sh:PropertyShape ;
     sh:path pulse:discipline ;
     sh:class pulse:DisciplineEnumeration ;
     sh:name "Discipline" ;
-    sh:description "Must be a valid IRI from the Wikidata-based Discipline enumeration." .
+    sh:description "Must be a valid IRI from the Discipline enumeration (e.g., pulse:ComputerScience)." .
 
 pulse:RepositoryTypeShape
     a sh:PropertyShape ;
@@ -218,67 +215,33 @@ pulse:DoiPropertyShape
     sh:datatype xsd:string ;
     sh:minCount 1 ;
     sh:pattern "^10\\.\\d{4,9}/[-._;()/:a-zA-Z0-9]+$" ;
-    sh:description "Standard DOI validation." .
+    sh:name "DOI" .
 
 pulse:OrcidPropertyShape
     a sh:PropertyShape ;
     sh:path pulse:orcidIdentifier ;
     sh:datatype xsd:string ;
     sh:pattern "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$" ;
-    sh:description "ORCID identifier validation." .
+    sh:description "Format: 0000-0000-0000-0000." .
 
 pulse:InfoscienceArticleIdentifierShape
     a sh:PropertyShape ;
     sh:path pulse:infoscienceArticleIdentifier ;
-    sh:datatype xsd:string ;
-    sh:description "Infoscience article identifier." .
+    sh:datatype xsd:string .
 
 pulse:InfoscienceOrganizationIdentifierShape 
     a sh:PropertyShape ;
     sh:path pulse:infoscienceOrganizationIdentifier;
     sh:datatype xsd:string ;
     sh:pattern "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" ;
-    sh:description "Infoscience Organization UUID4 validation." .
+    sh:description "Must be a valid UUID4." .
 
 pulse:RorPropertyShape
     a sh:PropertyShape ;
     sh:path schema:identifier ;
     sh:datatype xsd:string ;
     sh:pattern "^https://ror\\.org/[0-9a-z]{9}$" ;
-    sh:description "Standard ROR ID validation." .
-
-pulse:HasUnitPropertyShape
-    a sh:PropertyShape ;
-    sh:path org:hasUnit ;
-    sh:class org:Organization ; 
-    sh:description "Link to a subunit, project, or department." .
-
-pulse:UnitOfPropertyShape
-    a sh:PropertyShape ;
-    sh:path org:unitOf ;
-    sh:class org:Organization ; 
-    sh:description "Link back to the managing/parent organization." .
-
-pulse:GithubOrgFollowersShape
-    a sh:PropertyShape ;
-    sh:path pulse:githubOrgFollowers ;
-    sh:datatype xsd:integer ;
-    sh:maxCount 1 ;
-    sh:description "Number of followers for the GitHub organization." .
-
-pulse:GithubRepoStarsShape
-    a sh:PropertyShape ;
-    sh:path pulse:githubRepoStars ;
-    sh:datatype xsd:integer ;
-    sh:maxCount 1 ;
-    sh:description "Number of stars for the Software GitHub repository." .
-
-pulse:GithubRepoForksShape
-    a sh:PropertyShape ;
-    sh:path pulse:githubRepoForks ;  
-    sh:datatype xsd:integer ;
-    sh:maxCount 1 ;
-    sh:description "Number of forks for the Software GitHub repository." .
+    sh:name "ROR ID" .
 
 # ---------------------------------------------------------
 # 3. NODE SHAPES
@@ -294,18 +257,10 @@ pulse:PersonShape
     sh:property pulse:EmailShape ;
     sh:property pulse:UrlShape ;
     sh:property pulse:OrcidPropertyShape ;
-    sh:property [ sh:path pulse:infosciencePersonIdentifier ; sh:datatype xsd:string ; sh:name "Infoscience Identifier" ] ;
-    sh:property [ sh:path pulse:hasContribution ; sh:class pulse:Contribution ; sh:name "Has Contribution" ] ;
-    sh:property [ 
-        sh:path org:hasMembership ; 
-        sh:class org:Membership ;
-        sh:name "hasMembership"
-    ] ;
-    sh:property [ 
-        sh:path pulse:owns ; 
-        sh:class schema:SoftwareSourceCode ;
-        sh:name "Owns Repository"
-    ] ;
+    sh:property [ sh:path pulse:infosciencePersonIdentifier ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path pulse:hasContribution ; sh:class pulse:Contribution ] ;
+    sh:property [ sh:path org:hasMembership ; sh:class org:Membership ] ;
+    sh:property [ sh:path pulse:owns ; sh:class schema:SoftwareSourceCode ] ;
     sh:or (
         [ sh:property [ sh:path pulse:githubUsername ; sh:minCount 1 ] ]
         [ sh:property [ sh:path schema:email ; sh:minCount 1 ] ]
@@ -321,9 +276,9 @@ pulse:ArticleShape
     sh:property pulse:NameShape ;
     sh:property pulse:DoiPropertyShape ;
     sh:property pulse:InfoscienceArticleIdentifierShape ;
-    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Publication Date" ] ;
-    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this article"   ] ;
-    sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] .
+    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ] ;
+    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ] ;
+    sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ] .
 
 pulse:OrganizationShape
     a sh:NodeShape ;
@@ -335,15 +290,10 @@ pulse:OrganizationShape
     sh:property pulse:GithubOrganizationHandleShape ;
     sh:property pulse:InfoscienceOrganizationIdentifierShape ;
     sh:property pulse:OrganizationTypeShape ;
-    sh:property pulse:GithubOrgFollowersShape ;
-    sh:property pulse:HasUnitPropertyShape ;
-    sh:property pulse:UnitOfPropertyShape ;
-    sh:property [ 
-        sh:path pulse:owns ; 
-        sh:class schema:SoftwareSourceCode ; 
-        sh:name "Owns Repositories" ;
-        sh:description "Repositories owned by this organization."
-    ] ;
+    sh:property [ sh:path pulse:githubOrgFollowers ; sh:datatype xsd:integer ; sh:maxCount 1 ] ;
+    sh:property [ sh:path org:hasUnit ; sh:class org:Organization ] ;
+    sh:property [ sh:path org:unitOf ; sh:class org:Organization ] ;
+    sh:property [ sh:path pulse:owns ; sh:class schema:SoftwareSourceCode ] ;
     sh:or (
         [ sh:property [ sh:path schema:identifier ; sh:minCount 1 ] ]
         [ sh:property [ sh:path pulse:githubOrganizationHandle ; sh:minCount 1 ] ]
@@ -358,31 +308,20 @@ pulse:RepositoryShape
     sh:property pulse:NameShape ;
     sh:property pulse:RepositoryTypeShape ;
     sh:property pulse:DisciplineShape ;
-    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this repository."   ] ;
-    sh:property pulse:GithubRepoStarsShape ;
-    sh:property pulse:GithubRepoForksShape ;
-    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Creation Date" ] ;
+    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ] ;
+    sh:property [ sh:path pulse:githubRepoStars ; sh:datatype xsd:integer ; sh:maxCount 1 ] ;
+    sh:property [ sh:path pulse:githubRepoForks ; sh:datatype xsd:integer ; sh:maxCount 1 ] ;
+    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ] ;
     sh:property pulse:GithubRepositoryHandleShape ;
-    sh:property [ sh:path schema:license ; sh:nodeKind sh:IRI ; sh:name "License" ] ;
-    sh:property [ sh:path schema:citation ; sh:nodeKind sh:IRI ; sh:name "Citation" ] ;
+    sh:property [ sh:path schema:license ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path schema:citation ; sh:nodeKind sh:IRI ] ;
     sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
     sh:property [ 
         sh:path pulse:ownedBy ; 
-        sh:or ( 
-            [ sh:class schema:Person ] 
-            [ sh:class org:Organization ] 
-        ) ; 
-        sh:maxCount 1 ; 
-        sh:name "Owned By" ; 
-        sh:description "The Person or Organization that owns this repository."
+        sh:or ( [ sh:class schema:Person ] [ sh:class org:Organization ] ) ; 
+        sh:maxCount 1 
     ] ;
-    sh:property [ 
-        sh:path pulse:isForkOf ; 
-        sh:class schema:SoftwareSourceCode ; 
-        sh:maxCount 1 ; 
-        sh:name "Is Fork Of" ; 
-        sh:description "The repository this was forked from."
-    ] .
+    sh:property [ sh:path pulse:isForkOf ; sh:class schema:SoftwareSourceCode ; sh:maxCount 1 ] .
 
 pulse:ContributionShape
     a sh:NodeShape ;
@@ -393,34 +332,21 @@ pulse:ContributionShape
         sh:path pulse:contributionTo ; 
         sh:class schema:SoftwareSourceCode ; 
         sh:minCount 1 ; 
-        sh:maxCount 1 ; 
-        sh:name "Contribution To" ;
-        sh:description "The repository this contribution belongs to."
+        sh:maxCount 1 
     ] ;
     sh:property [ 
         sh:path pulse:contributionCount ; 
         sh:datatype xsd:integer ; 
-        sh:minCount 1 ; 
-        sh:name "Contribution Count" ;
-        sh:description "Number of commits made."
+        sh:minCount 1 
     ] ;
-    sh:property [ 
-        sh:path pulse:firstContributionDate ; 
-        sh:datatype xsd:dateTime ; 
-        sh:name "First Contribution Date"
-    ] ;
-    sh:property [ 
-        sh:path pulse:lastContributionDate ; 
-        sh:datatype xsd:dateTime ; 
-        sh:name "Last Contribution Date"
-    ] ;
+    sh:property [ sh:path pulse:firstContributionDate ; sh:datatype xsd:dateTime ] ;
+    sh:property [ sh:path pulse:lastContributionDate ; sh:datatype xsd:dateTime ] ;
     sh:property [ 
         sh:path schema:author ; 
         sh:class schema:Person ; 
         sh:minCount 1 ; 
         sh:maxCount 1 ; 
-        sh:name "Git Author" ;
-        sh:description "The person who made these contributions."
+        sh:name "Git Contributor" 
     ] .
 
 pulse:MembershipShape
@@ -433,14 +359,12 @@ pulse:MembershipShape
         sh:class org:Organization ;
         sh:minCount 1 ;                
         sh:maxCount 1 ;                
-        sh:nodeKind sh:IRI ;
-        sh:name "Organization"
+        sh:nodeKind sh:IRI 
     ] ;
-    sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Role" ] ;
+    sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
     sh:property [ 
         sh:path time:hasBeginning ; 
         sh:datatype xsd:date ; 
-        sh:lessThanOrEquals time:hasEnd ;
-        sh:name "Start Date"
+        sh:lessThanOrEquals time:hasEnd 
     ] ;
-    sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ; sh:name "End Date" ] .
+    sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ] .
