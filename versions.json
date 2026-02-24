@@ -55,6 +55,12 @@
     "develop": {
       "commits": [
         {
+          "hash": "d7538c6",
+          "date": "2026-02-24",
+          "author": "rmfranken",
+          "message": "ci: fix read permission for PR's"
+        },
+        {
           "hash": "bb2ce48",
           "date": "2026-02-24",
           "author": "rmfranken",
