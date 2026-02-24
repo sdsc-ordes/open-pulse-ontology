@@ -127,6 +127,16 @@
           "message": "chore(release): update changelog for v2.1.0"
         }
       ]
+    },
+    "chore/ontology-formatting": {
+      "commits": [
+        {
+          "hash": "ddf0156",
+          "date": "2026-02-24",
+          "author": "rmfranken",
+          "message": "chore: small formatting/description edits"
+        }
+      ]
     }
   },
   "latestRelease": "v2.0.0",
