@@ -1,0 +1,40 @@
+name: Prepare Production Release
+
+on:
+  workflow_dispatch: # Removed the unused major/minor/patch inputs for clarity
+
+jobs:
+  create-release-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+
+      - name: Bump Version
+        id: bump
+        run: |
+          # Get current: e.g. v2.2.0-develop
+          CURRENT=$(grep -oP 'owl:versionInfo\s+"v?\K[^"]+' ontology-combined.ttl | head -1)
+          
+          # Strip any suffix to get the "Clean" version: v2.2.0
+          CLEAN=$(echo "$CURRENT" | sed 's/-.*//')
+          if [[ ! "$CLEAN" =~ ^v ]]; then CLEAN="v$CLEAN"; fi
+          
+          # Safely update the file
+          sed -i "s|owl:versionInfo \"v\?$CURRENT\"|owl:versionInfo \"$CLEAN\"|" ontology-combined.ttl
+          
+          # Strip the 'v' for the output if needed, but keep it consistent for the branch
+          echo "clean_version=$CLEAN" >> $GITHUB_OUTPUT
+
+      - name: Create PR to Main
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: release/${{ steps.bump.outputs.clean_version }}
+          base: main
+          title: "Release ${{ steps.bump.outputs.clean_version }}"
+          commit-message: "chore: promote to production ${{ steps.bump.outputs.clean_version }}"
+          body: |
+            This PR was automatically generated to promote the ontology from **develop** to **main**.
+            - New Version: `${{ steps.bump.outputs.clean_version }}`
+            - Merging this will trigger a **Stable Release** and update documentation.

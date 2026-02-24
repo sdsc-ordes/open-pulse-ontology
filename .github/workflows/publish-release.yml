@@ -1,0 +1,54 @@
+name: Publish Stable Release
+
+on:
+  push:
+    branches:
+      - main
+    # This ensures the action only runs if the ontology file was actually updated
+    paths:
+      - 'ontology-combined.ttl'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    # CRITICAL: This permission allows the default GitHub token to create tags and releases
+    permissions:
+      contents: write 
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetches full history so GitHub can generate accurate release notes
+
+      - name: Extract Clean Version
+        id: extract
+        run: |
+          # Read the version that was just merged into main
+          VERSION=$(grep -oP 'owl:versionInfo\s+"v?\K[^"]+' ontology-combined.ttl | head -1)
+          if [[ ! "$VERSION" =~ ^v ]]; then VERSION="v$VERSION"; fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Check if Release Already Exists
+        id: check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Prevent failing if a release for this version was already created
+          if gh release view "${{ steps.extract.outputs.version }}" > /dev/null 2>&1; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "Release ${{ steps.extract.outputs.version }} already exists. Skipping."
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Publish GitHub Release
+        if: steps.check.outputs.exists == 'false'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Uses the official GitHub CLI to publish the release and tag
+          gh release create "${{ steps.extract.outputs.version }}" \
+            --title "Release ${{ steps.extract.outputs.version }}" \
+            --generate-notes \
+            --latest
