@@ -5,16 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.1.1] - 2026-02-24
+## [2.1.2] - 2026-02-24
 
 ### Miscellaneous Tasks
 
+- **(release)** Bump version and update changelog to v2.1.1
 - Bump main to v2.1.0
 - Add publish release action for post merge release promotion
 - Hotfix the release/changelog workflow
-- Small formatting/description edits
-- Increment version
-- Token permission for changelog step
+- Fix git cliff permissions here too
+- Fix read permission for PR's
+- Prepare a release
+- Fix git cliff deprecated keywords
+- One more ci fix
 
 ## [2.1.0-develop] - 2026-02-23
 
