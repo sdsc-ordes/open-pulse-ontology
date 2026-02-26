@@ -13,3 +13,5 @@ shacl-play-app.log
 
 *.bak
 *.log
+__pycache__/
+*.py[cod]
