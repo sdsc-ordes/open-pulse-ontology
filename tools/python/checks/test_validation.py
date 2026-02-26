@@ -5,23 +5,13 @@ Validates that 'valid' test files pass (conforms=true) and 'invalid' test files 
 
 import sys
 from pathlib import Path
-from pyshacl import validate
-import rdflib
+
+from shacl import run_shacl_validation
 
 
 def validate_test_file(test_file, shapes_file):
     """Run SHACL validation and return (conforms, results_text)"""
-    data_graph = rdflib.Graph()
-    data_graph.parse(test_file, format="turtle")
-
-    shapes_graph = rdflib.Graph()
-    shapes_graph.parse(shapes_file, format="turtle")
-
-    conforms, results_graph, results_text = validate(
-        data_graph=data_graph, shacl_graph=shapes_graph, debug=False
-    )
-
-    return conforms, results_text
+    return run_shacl_validation(test_file, shapes_file)
 
 
 def main():
@@ -44,9 +34,7 @@ def main():
     valid_tests = sorted(example_dir.glob("test_valid_*.ttl"))
     invalid_tests = sorted(example_dir.glob("test_invalid_*.ttl"))
 
-    print(
-        f"🔍 Found {len(valid_tests)} valid tests and {len(invalid_tests)} invalid tests\n"
-    )
+    print(f"🔍 Found {len(valid_tests)} valid tests and {len(invalid_tests)} invalid tests\n")
 
     passed = 0
     failed = 0
@@ -63,9 +51,7 @@ def main():
                 print(f"✅ {test_name}: PASSED (conforms=true)")
                 passed += 1
             else:
-                print(
-                    f"❌ {test_name}: FAILED (expected conforms=true, got conforms=false)"
-                )
+                print(f"❌ {test_name}: FAILED (expected conforms=true, got conforms=false)")
                 print(f"   Validation errors:\n{results_text}")
                 failed += 1
                 errors.append(f"{test_name}: Expected to pass but failed validation")
@@ -87,9 +73,7 @@ def main():
                 print(f"✅ {test_name}: PASSED (conforms=false as expected)")
                 passed += 1
             else:
-                print(
-                    f"❌ {test_name}: FAILED (expected conforms=false, got conforms=true)"
-                )
+                print(f"❌ {test_name}: FAILED (expected conforms=false, got conforms=true)")
                 failed += 1
                 errors.append(f"{test_name}: Expected to fail but passed validation")
         except Exception as e:
