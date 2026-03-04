@@ -8,23 +8,26 @@ on:
 jobs:
   conversion-nt:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps: 
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name : Install dependencies
+      - name: Install dependencies
         run: |
           git clone https://github.com/pchampin/sophia-cli
           cd sophia-cli
           cargo install --path .
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
       - name: Convert ontology to N-Triples
         run: |
           sop parse ontology-combined.ttl ! serialize -o ontology-combined.nt
 
       - name: Upload Release Assets
-        run: |
-          gh release upload ${{ github.event.release.tag_name }} ontology-combined.ttl ontology-combined.nt --clobber
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload "${{ github.event.release.tag_name }}" ontology-combined.ttl ontology-combined.nt --clobber
