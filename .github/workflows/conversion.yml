@@ -8,37 +8,26 @@ on:
 jobs:
   conversion-nt:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps: 
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name : Install dependencies
+      - name: Install dependencies
         run: |
           git clone https://github.com/pchampin/sophia-cli
           cd sophia-cli
           cargo install --path .
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
       - name: Convert ontology to N-Triples
         run: |
           sop parse ontology-combined.ttl ! serialize -o ontology-combined.nt
 
-      - name: Upload Release Asset (TTL)
-        uses: actions/upload-release-asset@v1
+      - name: Upload Release Assets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ontology-combined.ttl
-          asset_name: ontology-combined.ttl
-          asset_content_type: text/turtle
-
-      - name: Upload Release Asset (NT)
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ontology-combined.nt
-          asset_name: ontology-combined.nt
-          asset_content_type: application/n-triples
+        run: |
+          gh release upload "${{ github.event.release.tag_name }}" ontology-combined.ttl ontology-combined.nt --clobber

@@ -5,13 +5,9 @@ on:
   push:
     paths:
       - 'ontology-combined.ttl'
-      - 'ontology.ttl'
-      - 'shapes.ttl'
   pull_request:
     paths:
       - 'ontology-combined.ttl'
-      - 'ontology.ttl'
-      - 'shapes.ttl'
 jobs:
   validate:
     runs-on: ubuntu-latest

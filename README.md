@@ -49,20 +49,7 @@ The `example/` directory contains test files demonstrating both valid and invali
 - `test_valid_*.ttl` - Valid data conforming to the ontology
 - `test_invalid_*.ttl` - Invalid data triggering specific validation errors
 
-## SPARQL Endpoint
-
-Start the Flask application to query data via SPARQL:
-
-```bash
-python main.py
-```
-
-The endpoint accepts SPARQL queries at `/sparql`.
-
 ## License
 
 CC-BY-4.0
 
-## Version
-
-Current version: v2.0.1
