@@ -1,22 +1,5 @@
 {
-  "releases": [
-    {
-      "tag": "v0.1.0",
-      "path": "/versions/v0.1.0/",
-      "date": "2026-01-15",
-      "commit": "a1b2c3d",
-      "author": "rmfranken",
-      "message": "v0.1.0 release"
-    },
-    {
-      "tag": "v2.0.0",
-      "path": "/versions/v2.0.0/",
-      "date": "2026-02-08",
-      "commit": "a1b2c3d",
-      "author": "rmfranken",
-      "message": "v0.2.0 release"
-    }
-  ],
+  "releases": [],
   "branches": {
     "main": {
       "commits": [
@@ -193,7 +176,7 @@
       ]
     }
   },
-  "latestRelease": "v2.0.0",
+  "latestRelease": null,
   "priorityBranches": [
     "main",
     "develop"
