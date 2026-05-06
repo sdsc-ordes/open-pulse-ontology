@@ -15,8 +15,13 @@ on:
       - "ontology-combined.ttl"
       - "ontology.ttl"
       - "shapes.ttl"
-    tags:
-      - "v*"
+  # Tag pushes can't share this trigger: GitHub's `paths:` filter applies to
+  # both branches and tags, and for merge-commit tags it silently drops
+  # everything — that's why v2.1.0/v2.1.2 never reached versions.json.
+  # Hook into the release event instead, which `publish-release.yml` fires
+  # via `gh release create --latest`. No paths filter applies here.
+  release:
+    types: [published]
 
 permissions:
   contents: write
@@ -51,15 +56,32 @@ jobs:
           COMMIT_AUTHOR=$(git log -1 --format=%an)
           # Escape quotes and limit message length
           COMMIT_MESSAGE=$(git log -1 --format=%s | head -c 100 | sed 's/"/\\"/g')
-          
-          # Determine if this is a tag or branch
-          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+
+          # Source of truth for the ref we're documenting:
+          # - workflow_dispatch with `ref` input → use that input
+          # - release event → use the release tag
+          # - push event → use github.ref_name
+          # Without this, dispatching with `ref: v2.1.2` was being recorded
+          # as a branch deploy of `develop` because `github.ref` is the
+          # workflow's *launching* ref, not the checked-out ref.
+          INPUT_REF="${{ github.event.inputs.ref }}"
+          RELEASE_TAG="${{ github.event.release.tag_name }}"
+          if [ -n "$INPUT_REF" ]; then
+            REF_NAME="$INPUT_REF"
+          elif [ -n "$RELEASE_TAG" ]; then
+            REF_NAME="$RELEASE_TAG"
+          else
+            REF_NAME="${{ github.ref_name }}"
+          fi
+
+          # A name resolves to a release iff git has a tag with that name.
+          # Branches that happen to share a tag name (rare) lose to the tag.
+          if git show-ref --tags --quiet --verify -- "refs/tags/$REF_NAME"; then
             VERSION_TYPE="release"
-            VERSION_NAME="${{ github.ref_name }}"
           else
             VERSION_TYPE="branch"
-            VERSION_NAME="${{ github.ref_name }}"
           fi
+          VERSION_NAME="$REF_NAME"
           
           echo "type=$VERSION_TYPE" >> $GITHUB_OUTPUT
           echo "name=$VERSION_NAME" >> $GITHUB_OUTPUT
@@ -270,23 +292,33 @@ jobs:
               
               data['releases'] = releases
               
-              # Update latestRelease (compare semver)
+              # Update latestRelease (compare semver). Pre-release tags
+              # (anything with `-` after the version, e.g. v2.1.0-develop or
+              # v2.1.0-rc1) never become "latest" — they only ever sit in
+              # the releases list. Without this gate v2.1.0-develop would
+              # parse as [2,1,0] and promote past v2.1.0 stable.
               def parse_version(v):
-                  parts = v.lstrip('v').split('.')
+                  core = v.lstrip('v').split('-', 1)[0]
+                  parts = core.split('.')
                   return [int(x) for x in parts if x.isdigit()]
-              
+
+              def is_prerelease(v):
+                  return '-' in v.lstrip('v')
+
               try:
-                  current_latest = data.get('latestRelease')
-                  if not current_latest:
-                      data['latestRelease'] = version_name
-                      print(f"Set latestRelease to: {version_name}")
+                  if is_prerelease(version_name):
+                      print(f"Skipping latestRelease update — {version_name} is a pre-release")
                   else:
-                      if parse_version(version_name) >= parse_version(current_latest):
+                      current_latest = data.get('latestRelease')
+                      if not current_latest:
+                          data['latestRelease'] = version_name
+                          print(f"Set latestRelease to: {version_name}")
+                      elif parse_version(version_name) >= parse_version(current_latest):
                           data['latestRelease'] = version_name
                           print(f"Updated latestRelease to: {version_name}")
               except Exception as e:
                   print(f"Warning: Could not compare versions: {e}")
-                  if not data.get('latestRelease'):
+                  if not data.get('latestRelease') and not is_prerelease(version_name):
                       data['latestRelease'] = version_name
           
           else:

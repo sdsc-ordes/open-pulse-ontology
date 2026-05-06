@@ -35,7 +35,7 @@ def run_shacl_validation(data_file, shapes_file):
         logging.error("Results graph:")
         logging.error(results_graph.serialize(format="turtle"))
 
-    return conforms
+    return conforms, results_text
 
 
 if __name__ == "__main__":
@@ -46,8 +46,6 @@ if __name__ == "__main__":
     data_file = sys.argv[1]
     shapes_file = sys.argv[2]
 
-    logging.info(
-        f"Running SHACL validation on {data_file} with shapes {shapes_file}..."
-    )
-    conforms = run_shacl_validation(data_file, shapes_file)
+    logging.info(f"Running SHACL validation on {data_file} with shapes {shapes_file}...")
+    conforms, _ = run_shacl_validation(data_file, shapes_file)
     sys.exit(0 if conforms else 1)

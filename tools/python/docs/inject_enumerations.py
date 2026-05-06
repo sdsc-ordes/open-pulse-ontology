@@ -5,7 +5,7 @@ This script parses the ontology to extract enumeration values and injects them
 into the generated HTML documentation.
 """
 
-from rdflib import Graph, Namespace, RDF, RDFS
+from rdflib import Graph, Namespace, RDF
 from bs4 import BeautifulSoup
 import sys
 
@@ -78,9 +78,7 @@ def generate_enumeration_html(enumerations):
     """)
 
     for enum_uri, enum_data in enumerations.items():
-        enum_id = (
-            enum_uri.split("#")[-1] if "#" in enum_uri else enum_uri.split("/")[-1]
-        )
+        enum_id = enum_uri.split("#")[-1] if "#" in enum_uri else enum_uri.split("/")[-1]
 
         html_parts.append(f"""
         <section id="enum-values-{enum_id}" class="enumeration">
@@ -125,9 +123,7 @@ def is_inside_svg(element):
 def inject_references_to_enum_classes(soup, enumerations):
     """Add references to enumeration value tables in their class sections."""
     for enum_uri, enum_data in enumerations.items():
-        enum_id = (
-            enum_uri.split("#")[-1] if "#" in enum_uri else enum_uri.split("/")[-1]
-        )
+        enum_id = enum_uri.split("#")[-1] if "#" in enum_uri else enum_uri.split("/")[-1]
 
         # Try to find the section for this enumeration class
         # Look for headings or sections that contain the class name
@@ -164,7 +160,7 @@ def inject_references_to_enum_classes(soup, enumerations):
         if target_element:
             # Create a reference note
             reference = soup.new_tag("div", **{"class": "enum-reference"})
-            reference.string = f"See enumeration values in the "
+            reference.string = "See enumeration values in the "
             link = soup.new_tag("a", href=f"#enum-values-{enum_id}")
             link.string = "Enumerations section"
             reference.append(link)
@@ -185,9 +181,7 @@ def inject_into_html(html_file, enumeration_html, enumerations):
 
     # Find the main content area (adjust selector based on SHACL Play's structure)
     # Try to find the container after the main content sections
-    main_content = (
-        soup.find("div", class_="container") or soup.find("main") or soup.find("body")
-    )
+    main_content = soup.find("div", class_="container") or soup.find("main") or soup.find("body")
 
     if main_content:
         # Create a new div for enumerations
@@ -294,7 +288,7 @@ def main():
     for enum_uri, enum_data in enumerations.items():
         print(f"  - {enum_data['label']}: {len(enum_data['values'])} values")
 
-    print(f"\nGenerating HTML for enumerations...")
+    print("\nGenerating HTML for enumerations...")
     enumeration_html = generate_enumeration_html(enumerations)
 
     print(f"Injecting into {html_file}...")

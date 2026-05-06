@@ -2,9 +2,9 @@ name: SHACL Validation Tests
 
 on:
   push:
-    branches: [main, master, develop, ontology-revision]
+    branches: [main]
   pull_request:
-    branches: [main, master, develop, ontology-revision]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
       - name: Run SHACL validation test suite
         run: |
