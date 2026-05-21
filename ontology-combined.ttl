@@ -104,7 +104,7 @@ wd:Q8008 a pulse:DisciplineEnumeration; skos:prefLabel "Earth science"@en; rdfs:
 schema:license a rdf:Property ; skos:prefLabel "license" ; skos:definition "A license document that applies to this content, typically indicated by URL." .
 schema:name a rdf:Property ; skos:prefLabel "name"; skos:definition "The name of the item." .
 schema:email a rdf:Property ; skos:prefLabel "email" ; skos:definition "Email address." .
-schema:url a rdf:Property ; skos:prefLabel "url" ; skos:definition "	URL of the item." .
+schema:url a rdf:Property ; skos:prefLabel "url" ; skos:definition "URL of the item." .
 schema:identifier a rdf:Property ; skos:prefLabel "identifier" ; skos:definition "The identifier (URL/Text) property represents any kind of identifier for any kind of Thing" .
 schema:headline a rdf:Property ; skos:prefLabel "headline" ; skos:definition "The headline of the article." .
 schema:programmingLanguage a rdf:Property ; skos:prefLabel "programming language" ; skos:definition "The computer programming language." .
@@ -129,7 +129,7 @@ pulse:infosciencePersonIdentifier a rdf:Property ; skos:prefLabel "infoscience I
 pulse:infoscienceOrganizationIdentifier a rdf:Property ; skos:prefLabel "infoscience organization identifier" ; skos:definition "The Infoscience identifier for an organization." .
 pulse:discipline a rdf:Property ; skos:prefLabel "discipline" ; skos:definition "The academic or scientific discipline associated with the resource." .
 pulse:repositoryType a rdf:Property ; skos:prefLabel "repository type" ; skos:definition "The type or category of the repository (e.g., software, data, publication)." .
-pulse:OrganizationType a rdf:Property ; skos:prefLabel "organization type" ; skos:definition "The type or category of the organization (e.g., university, research institute, company)." .
+pulse:organizationType a rdf:Property ; skos:prefLabel "organization type" ; skos:definition "The type or category of the organization (e.g., university, research institute, company)." .
 pulse:githubOrgFollowers a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github organization followers" ; skos:definition "The number of followers of a GitHub organization." .
 pulse:githubRepoStars a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github repository stars" ; skos:definition "The number of stars (likes) a GitHub repository has received." .
 pulse:githubRepoForks a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github repository forks" ; skos:definition "The number of forks (copies) of a GitHub repository." .
@@ -171,7 +171,7 @@ pulse:UrlShape
 
 pulse:OrganizationTypeShape
     a sh:PropertyShape ;
-    sh:path pulse:OrganizationType ;
+    sh:path pulse:organizationType ;
     sh:class pulse:OrganizationTypeEnumeration ;
     sh:name "Organization Type" ;
     sh:description "Must be a valid IRI from the Organization Type enumeration (e.g., pulse:University)." .
