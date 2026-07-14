@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "5a3a1a0",
+          "date": "2026-07-14",
+          "author": "rmfranken",
+          "message": "feat(ontology): update schema identifiers to use ROR and DOI properties"
+        },
+        {
           "hash": "d421078",
           "date": "2026-07-14",
           "author": "rmfranken",
