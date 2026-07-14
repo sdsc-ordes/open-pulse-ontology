@@ -6,6 +6,7 @@
 @prefix wd: <http://www.wikidata.org/entity/> .
 pulse:Software a pulse:RepositoryTypeEnumeration .
 wd:Q2329 a pulse:DisciplineEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # INVALID MEMBERSHIP - Missing org:organization (minCount 1)
 
@@ -21,10 +22,14 @@ pulse:MissingOrgRepo a schema:SoftwareSourceCode ;
 
 pulse:MemberlessPerson a schema:Person ;
     schema:name "Morgan Missing" ;
-    schema:email "morgan.missing@example.com" ;
-    pulse:githubUsername "memmissing" ;
     pulse:orcidIdentifier "0000-0007-8901-2345" ;
+    pulse:hasProfile pulse:MemberlessPersonGitHubProfile ;
     org:hasMembership pulse:MembershipWithoutOrg .
+
+pulse:MemberlessPersonGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:githubUsername "memmissing" ;
+    schema:email "morgan.missing@example.com" .
 
 pulse:MembershipWithoutOrg a org:Membership ; # Missing org:organization
     org:role "Researcher" ;

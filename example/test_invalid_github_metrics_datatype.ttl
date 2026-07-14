@@ -5,6 +5,7 @@
 @prefix wd: <http://www.wikidata.org/entity/> .
 pulse:Software a pulse:RepositoryTypeEnumeration .
 wd:Q395 a pulse:DisciplineEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # INVALID GITHUB METRICS - Should FAIL (Github stats must be xsd:integer)
 
@@ -22,6 +23,10 @@ pulse:InvalidMetricsRepo a schema:SoftwareSourceCode ;
 
 pulse:MetricsAuthor a schema:Person ;
     schema:name "Pat Metrics" ;
-    schema:email "pat.metrics@example.com" ;
+    pulse:orcidIdentifier "0000-0002-3456-7890" ;
+    pulse:hasProfile pulse:MetricsAuthorGitHubProfile .
+
+pulse:MetricsAuthorGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
     pulse:githubUsername "patmetrics" ;
-    pulse:orcidIdentifier "0000-0002-3456-7890" .
+    schema:email "pat.metrics@example.com" .

@@ -2,9 +2,10 @@
 @prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+pulse:GitHub a pulse:PlatformEnumeration .
 
-# INVALID PERSON - Should FAIL validation
-# Email doesn't match the required pattern, pulse:EmailShape has pattern "^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+# INVALID PLATFORM PROFILE - Should FAIL validation
+# Email doesn't match the required pattern, pulse:ProfileEmailShape has pattern "^[\\w\\-\\.\\+]+@([\\w-]+\\.)+[\\w-]{2,}$"
 
 pulse:InvalidEmailRepo a schema:SoftwareSourceCode ;
     schema:name "Invalid Email Test" ;
@@ -16,7 +17,10 @@ pulse:InvalidEmailRepo a schema:SoftwareSourceCode ;
 
 pulse:InvalidEmailPerson a schema:Person ;
     schema:name "Bob Invalid" ;
-    schema:email "not-a-valid-email" ;
     pulse:orcidIdentifier "0000-0002-1825-0097" ;
-    pulse:githubUsername "bobinvalid" .
+    pulse:hasProfile pulse:InvalidEmailProfile .
 
+pulse:InvalidEmailProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:githubUsername "bobinvalid" ;
+    schema:email "not-a-valid-email" .

@@ -19,7 +19,7 @@
     dct:abstract "The Open Pulse Ontology to model contributions to open source scientific software and research articles from EPFL." ;
     dct:license <https://spdx.org/licenses/CC-BY-4.0.html> ;
     dct:title "Open Pulse Ontology" ;
-    owl:versionInfo "v2.1.2"^^xsd:string .
+    owl:versionInfo "v3.0.0-develop"^^xsd:string .
 
 # Classes
 schema:Person a rdfs:Class ; skos:prefLabel "Person" ; skos:definition "An individual researcher or contributor." .
@@ -28,12 +28,14 @@ schema:SoftwareSourceCode a rdfs:Class ; skos:prefLabel "Software Repository" ; 
 org:Membership a rdfs:Class ; skos:prefLabel "Membership" ; skos:definition "An affiliation between a Person and an Organization." .
 org:Organization a rdfs:Class ; skos:prefLabel "Organization" ; skos:definition "Represents a collection of people organized together into a community or other social, commercial or political structure. The group has some common purpose or reason for existence which goes beyond the set of people belonging to it and can act as an Agent. Organizations are often decomposable into hierarchical structures." .
 pulse:Contribution a rdfs:Class ; skos:prefLabel "Contribution" ; skos:definition "Represents a person's aggregated contributions to a repository." .
+pulse:PlatformProfile a rdfs:Class ; skos:prefLabel "Platform Profile" ; skos:definition "An identity that a Person holds on a specific external platform (e.g. a GitHub account or an Infoscience author record), grouping the platform-scoped handle, display name and email that belong together." .
 
 # Enumeration Classes
 schema:Enumeration a rdfs:Class ; skos:prefLabel "Enumeration" ; skos:definition "A type that defines a set of discrete values." .
 pulse:DisciplineEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Discipline Enumeration" ; skos:definition "Enumeration of academic and scientific disciplines." ; rdfs:comment "Discipline enumeration values are derived from EPFL Graph disciplines structure. (https://graphsearch.epfl.ch/en/category/academic-disciplines)".
 pulse:RepositoryTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Repository Type Enumeration" ; skos:definition "Enumeration of repository types used within the ontology." .
 pulse:OrganizationTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Organization Type Enumeration" ; skos:definition "Enumeration of organization types used within the ontology." .
+pulse:PlatformEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Platform Enumeration" ; skos:definition "Enumeration of external platforms on which a person can hold a profile." .
 
 # Enumeration Instances - Repository Types
 pulse:Software a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Software"@en ; skos:definition "A repository that contains software source code."@en .
@@ -51,6 +53,11 @@ pulse:PrivateCompany a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Priva
 pulse:NonProfitOrganization a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Non-Profit Organization"@en ; skos:definition "An organization that operates for a charitable or social purpose rather than for profit."@en .
 pulse:CommunitySpace a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Community Space"@en ; skos:definition "A community-driven organization or space."@en .
 pulse:OtherOrganizationType a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Other"@en ; skos:definition "An organization type that does not fit into the other categories."@en .
+
+# Enumeration Instances - Platforms
+pulse:GitHub a pulse:PlatformEnumeration ; skos:prefLabel "GitHub"@en ; skos:definition "The GitHub code-hosting platform."@en .
+pulse:Infoscience a pulse:PlatformEnumeration ; skos:prefLabel "Infoscience"@en ; skos:definition "EPFL's Infoscience institutional publication repository."@en .
+pulse:ORCID a pulse:PlatformEnumeration ; skos:prefLabel "ORCID"@en ; skos:definition "The ORCID researcher-identifier registry."@en .
 
 # Enumeration Instances - Disciplines
 wd:Q34749 a pulse:DisciplineEnumeration; skos:prefLabel "Social sciences"@en; rdfs:subClassOf wd:Q11862829 .
@@ -146,6 +153,11 @@ pulse:lastContributionDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:prefL
 pulse:infoscienceArticleIdentifier a rdf:Property ; skos:prefLabel "infoscience article identifier" ; skos:definition "The Infoscience identifier for an article." .
 pulse:orcidIdentifier a rdf:Property ; skos:prefLabel "ORCID identifier" ; skos:definition "The ORCID identifier for a person." .
 
+# Platform profile properties
+pulse:hasProfile a rdf:Property ; skos:prefLabel "has profile" ; skos:definition "Links a Person to a platform profile (external account/identity) they hold." .
+pulse:profileOf a rdf:Property ; skos:prefLabel "profile of" ; skos:definition "Links a platform profile back to the Person it belongs to." .
+pulse:platform a rdf:Property ; rdfs:range pulse:PlatformEnumeration ; skos:prefLabel "platform" ; skos:definition "The external platform on which a profile exists." .
+
 # ---------------------------------------------------------
 # 2. REUSABLE PROPERTY SHAPES
 # ---------------------------------------------------------
@@ -168,6 +180,13 @@ pulse:UrlShape
     sh:path schema:url ;
     sh:nodeKind sh:IRI ;
     sh:description "Standard validation for any web URL." .
+
+pulse:ProfileEmailShape
+    a sh:PropertyShape ;
+    sh:path schema:email ;
+    sh:nodeKind sh:Literal ;
+    sh:pattern "^[\\w\\-\\.\\+]+@([\\w-]+\\.)+[\\w-]{2,}$" ;
+    sh:description "Platform email. Unlike pulse:EmailShape this allows '+' sub-addressing so provider noreply forms validate (e.g. GitHub '1024+user@users.noreply.github.com')." .
 
 pulse:OrganizationTypeShape
     a sh:PropertyShape ;
@@ -288,28 +307,68 @@ pulse:PersonShape
     sh:targetClass schema:Person ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
-    sh:property pulse:NameShape ;
-    sh:property pulse:GithubUsernameShape ;
-    sh:property pulse:EmailShape ;
-    sh:property pulse:UrlShape ;
-    sh:property pulse:OrcidPropertyShape ;
-    sh:property [ sh:path pulse:infosciencePersonIdentifier ; sh:datatype xsd:string ; sh:name "Infoscience Identifier" ] ;
+    sh:property pulse:NameShape ;                       # canonical / preferred name of the human
+    sh:property pulse:OrcidPropertyShape ;              # cross-platform anchor identifier
+    sh:property [
+        sh:path pulse:hasProfile ;
+        sh:class pulse:PlatformProfile ;
+        sh:name "Has Profile" ;
+        sh:description "Platform-scoped identities (GitHub, Infoscience, ...) held by this person. Each carries the name/email/handle used on that platform."
+    ] ;
     sh:property [ sh:path pulse:hasContribution ; sh:class pulse:Contribution ; sh:name "Has Contribution" ] ;
-    sh:property [ 
-        sh:path org:hasMembership ; 
+    sh:property [
+        sh:path org:hasMembership ;
         sh:class org:Membership ;
         sh:name "hasMembership"
     ] ;
-    sh:property [ 
-        sh:path pulse:owns ; 
+    sh:property [
+        sh:path pulse:owns ;
         sh:class schema:SoftwareSourceCode ;
         sh:name "Owns Repository"
     ] ;
+    # A person is identifiable either by a cross-platform ORCID anchor
+    # or by at least one platform profile.
+    sh:or (
+        [ sh:property [ sh:path pulse:orcidIdentifier ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path pulse:hasProfile ; sh:minCount 1 ] ]
+    ) .
+
+pulse:PlatformProfileShape
+    a sh:NodeShape ;
+    sh:targetClass pulse:PlatformProfile ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property [
+        sh:path pulse:platform ;
+        sh:class pulse:PlatformEnumeration ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Platform" ;
+        sh:description "Which platform this profile lives on (from the Platform enumeration)."
+    ] ;
+    sh:property [
+        sh:path pulse:profileOf ;
+        sh:class schema:Person ;
+        sh:maxCount 1 ;
+        sh:name "Profile Of" ;
+        sh:description "Optional back-link to the person this profile belongs to."
+    ] ;
+    sh:property [
+        sh:path schema:name ;
+        sh:datatype xsd:string ;
+        sh:name "Display Name" ;
+        sh:description "The name as it appears on this platform (may differ per platform)."
+    ] ;
+    sh:property pulse:ProfileEmailShape ;
+    sh:property pulse:UrlShape ;
+    sh:property pulse:GithubUsernameShape ;
+    sh:property [ sh:path pulse:infosciencePersonIdentifier ; sh:datatype xsd:string ; sh:name "Infoscience Identifier" ] ;
+    # Every profile must carry at least one platform-scoped identifier.
     sh:or (
         [ sh:property [ sh:path pulse:githubUsername ; sh:minCount 1 ] ]
-        [ sh:property [ sh:path schema:email ; sh:minCount 1 ] ]
         [ sh:property [ sh:path pulse:infosciencePersonIdentifier ; sh:minCount 1 ] ]
-        [ sh:property [ sh:path pulse:orcidIdentifier ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path schema:email ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path schema:url ; sh:minCount 1 ] ]
     ) .
 
 pulse:ArticleShape

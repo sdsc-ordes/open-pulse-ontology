@@ -7,6 +7,7 @@
 pulse:Software a pulse:RepositoryTypeEnumeration .
 wd:Q420 a pulse:DisciplineEnumeration .
 pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # VALID COLLABORATIVE REPOSITORY - Should PASS validation
 # Two contributors with memberships
@@ -30,18 +31,26 @@ pulse:CollabRepo a schema:SoftwareSourceCode ;
 
 pulse:LeadDev a schema:Person ;
     schema:name "Dr. Lina Morel" ;
-    schema:email "lina.morel@epfl.ch" ;
-    pulse:githubUsername "linam" ;
     pulse:orcidIdentifier "0000-0003-1234-5678" ;
-    schema:url <https://people.epfl.ch/lina.morel> ;
+    pulse:hasProfile pulse:LeadDevGitHubProfile ;
     org:hasMembership pulse:LeadMembership .
+
+pulse:LeadDevGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:githubUsername "linam" ;
+    schema:email "lina.morel@epfl.ch" ;
+    schema:url <https://people.epfl.ch/lina.morel> .
 
 pulse:Contributor a schema:Person ;
     schema:name "Marco Ruiz" ;
-    schema:email "marco.ruiz@epfl.ch" ;
-    pulse:githubUsername "marcor" ;
     pulse:orcidIdentifier "0000-0002-9876-5432" ;
+    pulse:hasProfile pulse:ContributorGitHubProfile ;
     org:hasMembership pulse:ContributorMembership .
+
+pulse:ContributorGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:githubUsername "marcor" ;
+    schema:email "marco.ruiz@epfl.ch" .
 
 pulse:LeadMembership a org:Membership ;
     org:organization pulse:EPFLCenter ;

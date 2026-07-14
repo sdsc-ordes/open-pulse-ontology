@@ -5,6 +5,7 @@
 @prefix wd: <http://www.wikidata.org/entity/> .
 pulse:Software a pulse:RepositoryTypeEnumeration .
 wd:Q420 a pulse:DisciplineEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # INVALID PERSON - Should FAIL validation
 # Contains extra properties not allowed by closed shape, pulse:PersonShape has sh:closed true
@@ -21,7 +22,11 @@ pulse:InvalidExtraPropsRepo a schema:SoftwareSourceCode ;
 
 pulse:PersonWithExtraProps a schema:Person ;
     schema:name "Eve Extra" ;
-    schema:email "eve@example.com" ;
-    pulse:githubUsername "eveextra" ;
     pulse:orcidIdentifier "0000-0004-5678-9012" ;
+    pulse:hasProfile pulse:EveGitHubProfile ;
     pulse:notAllowedProperty "This property is not defined in the shape" .
+
+pulse:EveGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:githubUsername "eveextra" ;
+    schema:email "eve@example.com" .

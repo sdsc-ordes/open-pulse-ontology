@@ -1,21 +1,41 @@
-@prefix pulse:     <https://open-pulse.epfl.ch/ontology#> .
+@prefix pulse:  <https://open-pulse.epfl.ch/ontology#> .
 @prefix schema: <http://schema.org/> .
 @prefix org:    <http://www.w3.org/ns/org#> .
 @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
-@prefix pulse:  <https://open-pulse.epfl.ch/ontology#> .
 @prefix time:   <http://www.w3.org/2006/time#> .
 @prefix wd:     <http://www.wikidata.org/entity/> .
 
 pulse:Software a pulse:RepositoryTypeEnumeration .
 wd:Q395 a pulse:DisciplineEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
+pulse:Infoscience a pulse:PlatformEnumeration .
 
+# The Person is a thin "real-world individual" anchor:
+# preferred name + cross-platform ORCID + links to platform profiles.
 pulse:Alice a schema:Person ;
-    schema:name "Alice" ;
-    schema:email "alice@epfl.ch" ;
-    pulse:githubUsername "alice-dev" ;
+    schema:name "Alice Müller" ;
     pulse:orcidIdentifier "0000-0001-2345-6789" ;
+    pulse:hasProfile pulse:AliceGitHubProfile , pulse:AliceInfoscienceProfile ;
     pulse:hasContribution pulse:AliceRenkuContribution ;
     org:hasMembership pulse:AliceEPFLMembership , pulse:AliceSDSCMembership .
+
+# GitHub identity: display handle + noreply email (note the '+' — allowed by
+# pulse:ProfileEmailShape).
+pulse:AliceGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:profileOf pulse:Alice ;
+    schema:name "alice-dev" ;
+    pulse:githubUsername "alice-dev" ;
+    schema:email "1024+alice-dev@users.noreply.github.com" ;
+    schema:url <https://github.com/alice-dev> .
+
+# Infoscience identity: a different display name form and the institutional email.
+pulse:AliceInfoscienceProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:Infoscience ;
+    pulse:profileOf pulse:Alice ;
+    schema:name "Müller, Alice" ;
+    schema:email "alice@epfl.ch" ;
+    pulse:infosciencePersonIdentifier "550e8400-e29b-41d4-a716-446655440000" .
 
 pulse:EPFL a org:Organization ;
     schema:name "EPFL" ;
@@ -45,7 +65,7 @@ pulse:RenkuRepo a schema:SoftwareSourceCode ;
     schema:license <https://spdx.org/licenses/Apache-2.0.html> ;
     schema:author pulse:Alice ;
     pulse:ownedBy pulse:SDSC ;
-    pulse:repositoryType pulse:Software ; 
+    pulse:repositoryType pulse:Software ;
     pulse:discipline wd:Q395 ;
     schema:programmingLanguage "Python" .
 
@@ -55,4 +75,3 @@ pulse:AliceRenkuContribution a pulse:Contribution ;
     pulse:contributionCount 2 ;
     pulse:firstContributionDate "2026-01-10T14:30:00Z"^^xsd:dateTime ;
     pulse:lastContributionDate "2026-01-12T09:15:00Z"^^xsd:dateTime .
-

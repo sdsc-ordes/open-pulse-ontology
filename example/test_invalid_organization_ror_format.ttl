@@ -6,6 +6,7 @@
 pulse:Software a pulse:RepositoryTypeEnumeration .
 pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
 wd:Q8008 a pulse:DisciplineEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # INVALID ROR IDENTIFIER - Should FAIL (does not match https://ror.org/[0-9a-z]{9})
 
@@ -22,9 +23,13 @@ pulse:BadRORRepo a schema:SoftwareSourceCode ;
 
 pulse:RORAuthor a schema:Person ;
     schema:name "ROR Test Author" ;
-    schema:email "ror@example.com" ;
+    pulse:orcidIdentifier "0000-0003-1234-5678" ;
+    pulse:hasProfile pulse:RORAuthorGitHubProfile .
+
+pulse:RORAuthorGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
     pulse:githubUsername "rorauthor" ;
-    pulse:orcidIdentifier "0000-0003-1234-5678" .
+    schema:email "ror@example.com" .
 
 pulse:BadROROrg a org:Organization ;
     schema:name "Org With Bad ROR" ;

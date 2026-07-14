@@ -22,6 +22,9 @@ pulse:University a pulse:OrganizationTypeEnumeration .
 pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
 pulse:SoftwareProject a pulse:OrganizationTypeEnumeration .
 
+pulse:GitHub a pulse:PlatformEnumeration .
+pulse:Infoscience a pulse:PlatformEnumeration .
+
 # ============================================================
 # ORGANIZATIONS
 # ============================================================
@@ -69,16 +72,28 @@ pulse:PhysicsSimulationUnit a org:Organization ;
 # Contributor 1: Alice Chen (appears in all 3 repos)
 pulse:AliceChen a schema:Person ;
     schema:name "Dr. Alice Chen" ;
-    schema:email "alice.chen@epfl.ch" ;
-    pulse:githubUsername "alicechen" ;
-    pulse:infosciencePersonIdentifier "alice.chen" ;
     pulse:orcidIdentifier "0000-0001-9234-5678" ;
-    schema:url <https://people.epfl.ch/alice.chen> ;
+    pulse:hasProfile pulse:AliceChenGitHubProfile ;
+    pulse:hasProfile pulse:AliceChenInfoscienceProfile ;
     pulse:hasContribution pulse:AliceContribSimulation ;
     pulse:hasContribution pulse:AliceContribNetwork ;
     pulse:hasContribution pulse:AliceContribData ;
     org:hasMembership pulse:AliceMembershipEPFL ;
     org:hasMembership pulse:AliceMembershipSwiss .
+
+pulse:AliceChenGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:profileOf pulse:AliceChen ;
+    schema:name "alicechen" ;
+    pulse:githubUsername "alicechen" .
+
+pulse:AliceChenInfoscienceProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:Infoscience ;
+    pulse:profileOf pulse:AliceChen ;
+    schema:name "Chen, Alice" ;
+    pulse:infosciencePersonIdentifier "alice.chen" ;
+    schema:email "alice.chen@epfl.ch" ;
+    schema:url <https://people.epfl.ch/alice.chen> .
 
 pulse:AliceMembershipEPFL a org:Membership ;
     org:organization pulse:EPFLComputationalLab ;
@@ -94,16 +109,28 @@ pulse:AliceMembershipSwiss a org:Membership ;
 # Contributor 2: Bob Kumar (appears in repos 1 and 2)
 pulse:BobKumar a schema:Person ;
     schema:name "Prof. Bob Kumar" ;
-    schema:email "b.kumar@eth.ch" ;
-    pulse:githubUsername "bobkumar42" ;
-    pulse:infosciencePersonIdentifier "b.kumar" ;
     pulse:orcidIdentifier "0000-0002-8765-4321" ;
-    schema:url <https://people.eth.ch/bob.kumar> ;
+    pulse:hasProfile pulse:BobKumarGitHubProfile ;
+    pulse:hasProfile pulse:BobKumarInfoscienceProfile ;
     pulse:hasContribution pulse:BobContribSimulation ;
     pulse:hasContribution pulse:BobContribNetwork ;
     org:hasMembership pulse:BobMembershipETH ;
     org:hasMembership pulse:BobMembershipSwiss ;
     pulse:owns pulse:NetworkAnalysis .
+
+pulse:BobKumarGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:profileOf pulse:BobKumar ;
+    schema:name "bobkumar42" ;
+    pulse:githubUsername "bobkumar42" .
+
+pulse:BobKumarInfoscienceProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:Infoscience ;
+    pulse:profileOf pulse:BobKumar ;
+    schema:name "Kumar, Bob" ;
+    pulse:infosciencePersonIdentifier "b.kumar" ;
+    schema:email "b.kumar@eth.ch" ;
+    schema:url <https://people.eth.ch/bob.kumar> .
 
 pulse:BobMembershipETH a org:Membership ;
     org:organization pulse:DepartmentPhysics ;
@@ -119,14 +146,26 @@ pulse:BobMembershipSwiss a org:Membership ;
 # Contributor 3: Carol Martinez (appears in repos 1 and 3)
 pulse:CarolMartinez a schema:Person ;
     schema:name "Carol Martinez" ;
-    schema:email "carol.martinez@epfl.ch" ;
-    pulse:githubUsername "cmartinez" ;
-    pulse:infosciencePersonIdentifier "carol.martinez" ;
     pulse:orcidIdentifier "0000-0003-5432-1098" ;
-    schema:url <https://people.epfl.ch/carol.martinez> ;
+    pulse:hasProfile pulse:CarolMartinezGitHubProfile ;
+    pulse:hasProfile pulse:CarolMartinezInfoscienceProfile ;
     pulse:hasContribution pulse:CarolContribSimulation ;
     pulse:hasContribution pulse:CarolContribData ;
     org:hasMembership pulse:CarolMembershipEPFL .
+
+pulse:CarolMartinezGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:profileOf pulse:CarolMartinez ;
+    schema:name "cmartinez" ;
+    pulse:githubUsername "cmartinez" .
+
+pulse:CarolMartinezInfoscienceProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:Infoscience ;
+    pulse:profileOf pulse:CarolMartinez ;
+    schema:name "Martinez, Carol" ;
+    pulse:infosciencePersonIdentifier "carol.martinez" ;
+    schema:email "carol.martinez@epfl.ch" ;
+    schema:url <https://people.epfl.ch/carol.martinez> .
 
 pulse:CarolMembershipEPFL a org:Membership ;
     org:organization pulse:EPFLComputationalLab ;
@@ -136,14 +175,26 @@ pulse:CarolMembershipEPFL a org:Membership ;
 # Contributor 4: David Lee (appears in repos 2 and 3)
 pulse:DavidLee a schema:Person ;
     schema:name "David Lee, PhD" ;
-    schema:email "d.lee@eth.ch" ;
-    pulse:githubUsername "davidlee88" ;
-    pulse:infosciencePersonIdentifier "d.lee" ;
     pulse:orcidIdentifier "0000-0001-2345-6789" ;
-    schema:url <https://people.eth.ch/david.lee> ;
+    pulse:hasProfile pulse:DavidLeeGitHubProfile ;
+    pulse:hasProfile pulse:DavidLeeInfoscienceProfile ;
     pulse:hasContribution pulse:DavidContribNetwork ;
     pulse:hasContribution pulse:DavidContribData ;
     org:hasMembership pulse:DavidMembershipPhysics .
+
+pulse:DavidLeeGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:profileOf pulse:DavidLee ;
+    schema:name "davidlee88" ;
+    pulse:githubUsername "davidlee88" .
+
+pulse:DavidLeeInfoscienceProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:Infoscience ;
+    pulse:profileOf pulse:DavidLee ;
+    schema:name "Lee, David" ;
+    pulse:infosciencePersonIdentifier "d.lee" ;
+    schema:email "d.lee@eth.ch" ;
+    schema:url <https://people.eth.ch/david.lee> .
 
 pulse:DavidMembershipPhysics a org:Membership ;
     org:organization pulse:PhysicsSimulationUnit ;
@@ -154,14 +205,26 @@ pulse:DavidMembershipPhysics a org:Membership ;
 # Contributor 5: Emma Wilson (appears only in repo 3)
 pulse:EmmaWilson a schema:Person ;
     schema:name "Dr. Emma Wilson" ;
-    schema:email "emma.wilson@epfl.ch" ;
-    pulse:githubUsername "ewilson" ;
-    pulse:infosciencePersonIdentifier "emma.wilson" ;
     pulse:orcidIdentifier "0000-0002-7654-3210" ;
-    schema:url <https://people.epfl.ch/emma.wilson> ;
+    pulse:hasProfile pulse:EmmaWilsonGitHubProfile ;
+    pulse:hasProfile pulse:EmmaWilsonInfoscienceProfile ;
     pulse:hasContribution pulse:EmmaContribData ;
     org:hasMembership pulse:EmmaMembershipEPFL ;
     org:hasMembership pulse:EmmaMembershipPhysics .
+
+pulse:EmmaWilsonGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:profileOf pulse:EmmaWilson ;
+    schema:name "ewilson" ;
+    pulse:githubUsername "ewilson" .
+
+pulse:EmmaWilsonInfoscienceProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:Infoscience ;
+    pulse:profileOf pulse:EmmaWilson ;
+    schema:name "Wilson, Emma" ;
+    pulse:infosciencePersonIdentifier "emma.wilson" ;
+    schema:email "emma.wilson@epfl.ch" ;
+    schema:url <https://people.epfl.ch/emma.wilson> .
 
 pulse:EmmaMembershipEPFL a org:Membership ;
     org:organization pulse:EPFLComputationalLab ;
@@ -418,7 +481,8 @@ pulse:Article6 a schema:ScholarlyArticle ;
 # SUMMARY STATISTICS
 # ============================================================
 # Total entities:
-#   - 5 people
+#   - 5 people (each with a GitHub and an Infoscience platform profile)
+#   - 10 platform profiles
 #   - 4 organizations
 #   - 3 repositories
 #   - 6 articles

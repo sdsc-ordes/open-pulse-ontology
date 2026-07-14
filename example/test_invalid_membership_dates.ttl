@@ -3,6 +3,7 @@
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # INVALID MEMBERSHIP - Should FAIL validation
 # End date is before start date, time:hasBeginning has sh:lessThanOrEqual time:hasEnd
@@ -17,10 +18,14 @@ pulse:InvalidMembershipRepo a schema:SoftwareSourceCode ;
 
 pulse:PersonWithInvalidMembership a schema:Person ;
     schema:name "Charlie Brown" ;
-    schema:email "charlie@example.com" ;
-    pulse:githubUsername "charliebrown" ;
     pulse:orcidIdentifier "0000-0005-6789-0123" ;
+    pulse:hasProfile pulse:CharlieBrownGitHubProfile ;
     org:hasMembership pulse:InvalidMembership .
+
+pulse:CharlieBrownGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:githubUsername "charliebrown" ;
+    schema:email "charlie@example.com" .
 
 pulse:InvalidMembership a org:Membership ;
     org:organization pulse:SomeOrg ;

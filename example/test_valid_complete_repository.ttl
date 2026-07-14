@@ -7,6 +7,8 @@
 wd:Q2329 a pulse:DisciplineEnumeration .
 pulse:Software a pulse:RepositoryTypeEnumeration .
 pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
+pulse:Infoscience a pulse:PlatformEnumeration .
 
 # VALID COMPLETE REPOSITORY - Should PASS validation
 # This is a comprehensive example with all optional properties correctly set
@@ -27,13 +29,24 @@ pulse:CompleteRepo a schema:SoftwareSourceCode ;
 
 pulse:LeadResearcher a schema:Person ;
     schema:name "Dr. Sarah Smith" ;
-    schema:email "sarah.smith@epfl.ch" ;
-    pulse:githubUsername "sarahsmith" ;
-    pulse:infosciencePersonIdentifier "sarah.smith" ;
     pulse:orcidIdentifier "0000-0001-5109-3700" ;
-    schema:url <https://people.epfl.ch/sarah.smith> ;
+    pulse:hasProfile pulse:SarahGitHubProfile , pulse:SarahInfoscienceProfile ;
     pulse:hasContribution pulse:SarahContribution ;
     org:hasMembership pulse:Membership1 .
+
+pulse:SarahGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:profileOf pulse:LeadResearcher ;
+    schema:name "sarahsmith" ;
+    pulse:githubUsername "sarahsmith" .
+
+pulse:SarahInfoscienceProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:Infoscience ;
+    pulse:profileOf pulse:LeadResearcher ;
+    schema:name "Smith, Sarah" ;
+    pulse:infosciencePersonIdentifier "sarah.smith" ;
+    schema:email "sarah.smith@epfl.ch" ;
+    schema:url <https://people.epfl.ch/sarah.smith> .
 
 pulse:SarahContribution a pulse:Contribution ;
     schema:author pulse:LeadResearcher ;

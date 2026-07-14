@@ -2,6 +2,7 @@
 @prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # INVALID ORGANIZATION - Should FAIL validation
 # Organization githubOrganizationHandle should be a simple string handle, not a URL or IRI
@@ -17,9 +18,13 @@ pulse:InvalidGithubUrlRepo a schema:SoftwareSourceCode ;
 
 pulse:GithubUrlAuthor a schema:Person ;
     schema:name "Github URL Test Author" ;
-    schema:email "github@example.com" ;
+    pulse:orcidIdentifier "0000-0006-7890-1234" ;
+    pulse:hasProfile pulse:GithubUrlAuthorGitHubProfile .
+
+pulse:GithubUrlAuthorGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
     pulse:githubUsername "githubauthor" ;
-    pulse:orcidIdentifier "0000-0006-7890-1234" .
+    schema:email "github@example.com" .
 
 pulse:InvalidGithubOrg a org:Organization ;
     schema:name "Invalid GitHub Org" ;

@@ -4,6 +4,7 @@
 @prefix wd: <http://www.wikidata.org/entity/> .
 wd:Q413 a pulse:DisciplineEnumeration .
 pulse:Software a pulse:RepositoryTypeEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # INVALID CONTRIBUTION - Should FAIL validation
 # Missing required contributionCount field (minCount 1)
@@ -21,10 +22,14 @@ pulse:InvalidContributionRepo a schema:SoftwareSourceCode ;
 
 pulse:ContribAuthor a schema:Person ;
     schema:name "Charlie Contributor" ;
-    schema:email "charlie@example.com" ;
-    pulse:githubUsername "charliec" ;
     pulse:orcidIdentifier "0000-0003-4567-8901" ;
+    pulse:hasProfile pulse:ContribAuthorGitHubProfile ;
     pulse:hasContribution pulse:InvalidContribution .
+
+pulse:ContribAuthorGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:githubUsername "charliec" ;
+    schema:email "charlie@example.com" .
 
 # Invalid: missing contributionCount (required, minCount 1)
 pulse:InvalidContribution a pulse:Contribution ;

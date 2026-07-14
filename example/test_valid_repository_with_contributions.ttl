@@ -7,6 +7,7 @@
 wd:Q395 a pulse:DisciplineEnumeration .
 pulse:Software a pulse:RepositoryTypeEnumeration .
 pulse:University a pulse:OrganizationTypeEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # VALID REPOSITORY WITH CONTRIBUTIONS - Should PASS validation
 # This example demonstrates the Contribution pattern for tracking aggregated
@@ -29,19 +30,27 @@ pulse:RepoWithContributions a schema:SoftwareSourceCode ;
 
 pulse:LeadContributor a schema:Person ;
     schema:name "Alice Developer" ;
-    schema:email "alice.dev@example.com" ;
-    pulse:githubUsername "alicedev" ;
     pulse:orcidIdentifier "0000-0001-2345-6789" ;
-    schema:url <https://github.com/alicedev> ;
+    pulse:hasProfile pulse:LeadContributorGitHubProfile ;
     pulse:hasContribution pulse:AliceContribution ;
     org:hasMembership pulse:AliceMembership .
 
+pulse:LeadContributorGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:githubUsername "alicedev" ;
+    schema:email "alice.dev@example.com" ;
+    schema:url <https://github.com/alicedev> .
+
 pulse:SecondaryContributor a schema:Person ;
     schema:name "Bob Coder" ;
-    schema:email "bob.coder@example.com" ;
-    pulse:githubUsername "bobcoder" ;
     pulse:orcidIdentifier "0000-0002-3456-7890" ;
+    pulse:hasProfile pulse:SecondaryContributorGitHubProfile ;
     pulse:hasContribution pulse:BobContribution .
+
+pulse:SecondaryContributorGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:githubUsername "bobcoder" ;
+    schema:email "bob.coder@example.com" .
 
 # Contribution objects track aggregated statistics
 pulse:AliceContribution a pulse:Contribution ;

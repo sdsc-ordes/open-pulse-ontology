@@ -5,6 +5,7 @@
 @prefix wd: <http://www.wikidata.org/entity/> .
 wd:Q413 a pulse:DisciplineEnumeration .
 pulse:Software a pulse:RepositoryTypeEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # INVALID REPOSITORY - Should FAIL validation
 # Here I swapped the licence with codeRepository URL 
@@ -21,6 +22,10 @@ pulse:InvalidLicenseRepoPattern a schema:SoftwareSourceCode ;
 
 pulse:Author2 a schema:Person ;
     schema:name "Alice Johnson" ;
-    schema:email "alice@example.com" ;
+    pulse:orcidIdentifier "0000-0002-1825-0097" ;
+    pulse:hasProfile pulse:Author2GitHubProfile .
+
+pulse:Author2GitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
     pulse:githubUsername "alicejohnson" ;
-    pulse:orcidIdentifier "0000-0002-1825-0097" .
+    schema:email "alice@example.com" .

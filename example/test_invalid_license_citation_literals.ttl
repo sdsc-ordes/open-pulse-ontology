@@ -5,6 +5,7 @@
 @prefix wd: <http://www.wikidata.org/entity/> .
 pulse:Software a pulse:RepositoryTypeEnumeration .
 wd:Q413 a pulse:DisciplineEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # INVALID LICENSE/CITATION NODEKIND - Should FAIL (must be IRIs, not literals)
 
@@ -20,6 +21,10 @@ pulse:InvalidLicenseCitationRepo a schema:SoftwareSourceCode ;
 
 pulse:LiteralAuthor a schema:Person ;
     schema:name "Casey Literal" ;
-    schema:email "casey.literal@example.com" ;
     pulse:orcidIdentifier "0000-0001-2345-6789" ;
-    pulse:githubUsername "cliteral" .
+    pulse:hasProfile pulse:LiteralAuthorGitHubProfile .
+
+pulse:LiteralAuthorGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:githubUsername "cliteral" ;
+    schema:email "casey.literal@example.com" .
