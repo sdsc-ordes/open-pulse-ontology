@@ -75,3 +75,15 @@ pulse:AliceRenkuContribution a pulse:Contribution ;
     pulse:contributionCount 2 ;
     pulse:firstContributionDate "2026-01-10T14:30:00Z"^^xsd:dateTime ;
     pulse:lastContributionDate "2026-01-12T09:15:00Z"^^xsd:dateTime .
+
+# A research project ties people, outputs, host org and funding period together.
+pulse:RenkuProject a schema:Project ;
+    schema:name "Renku: Reproducible Data Science" ;
+    schema:description "Research project building a platform for reproducible and collaborative data science." ;
+    schema:url <https://renkulab.io> ;
+    schema:member pulse:Alice ;
+    schema:sourceOrganization pulse:SDSC ;
+    schema:funder pulse:EPFL ;
+    pulse:projectOutput pulse:RenkuRepo ;
+    time:hasBeginning "2023-01-01"^^xsd:date ;
+    time:hasEnd "2026-12-31"^^xsd:date .

@@ -1,0 +1,61 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+wd:Q395 a pulse:DisciplineEnumeration .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
+pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
+
+# VALID PROJECT - Should PASS validation
+# A research project linking members, outputs (repository + article),
+# a host organization, a funder, and a time span.
+
+pulse:ValidProject a schema:Project ;
+    schema:name "Open Science Toolkit Project" ;
+    schema:description "A funded research project producing open source scientific tools." ;
+    schema:url <https://example.org/ost-project> ;
+    schema:member pulse:ProjectLead ;
+    schema:sourceOrganization pulse:HostLab ;
+    schema:funder pulse:FundingOrg ;
+    pulse:projectOutput pulse:ProjectRepo , pulse:ProjectArticle ;
+    time:hasBeginning "2024-01-01"^^xsd:date ;
+    time:hasEnd "2027-12-31"^^xsd:date .
+
+pulse:ProjectLead a schema:Person ;
+    schema:name "Nora Lead" ;
+    pulse:orcidIdentifier "0000-0002-1111-2222" ;
+    pulse:hasProfile pulse:ProjectLeadGitHubProfile .
+
+pulse:ProjectLeadGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:githubUsername "noralead" ;
+    schema:email "nora.lead@example.org" .
+
+pulse:HostLab a org:Organization ;
+    schema:name "Host Lab" ;
+    schema:identifier "https://ror.org/02s376052" ;
+    pulse:githubOrganizationHandle "host-lab" ;
+    pulse:OrganizationType pulse:ResearchInstitution .
+
+pulse:FundingOrg a org:Organization ;
+    schema:name "National Science Fund" ;
+    schema:identifier "https://ror.org/00yjd3n13" .
+
+pulse:ProjectRepo a schema:SoftwareSourceCode ;
+    schema:name "Open Science Toolkit" ;
+    schema:dateCreated "2024-02-01T09:00:00"^^xsd:dateTime ;
+    pulse:githubRepositoryHandle "host-lab/os-toolkit" ;
+    schema:license <https://spdx.org/licenses/MIT.html> ;
+    schema:author pulse:ProjectLead ;
+    pulse:repositoryType pulse:Software ;
+    pulse:discipline wd:Q395 .
+
+pulse:ProjectArticle a schema:ScholarlyArticle ;
+    schema:name "The Open Science Toolkit" ;
+    schema:identifier "10.1234/ost.2025" ;
+    schema:datePublished "2025-06-01"^^xsd:date ;
+    schema:author pulse:ProjectLead ;
+    schema:sourceOrganization pulse:HostLab .

@@ -1,0 +1,15 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+
+# INVALID PROJECT - Should FAIL validation
+# pulse:projectOutput must point to a SoftwareSourceCode or ScholarlyArticle,
+# not an Organization (sh:or constraint on ProjectShape)
+
+pulse:BadOutputProject a schema:Project ;
+    schema:name "Bad Output Project" ;
+    pulse:projectOutput pulse:NotAnOutput .
+
+pulse:NotAnOutput a org:Organization ;
+    schema:name "Not An Output" ;
+    schema:identifier "https://ror.org/02s376052" .

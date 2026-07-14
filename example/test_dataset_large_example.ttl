@@ -419,6 +419,25 @@ pulse:ContribData5 a pulse:Contribution ;
     pulse:lastContributionDate "2024-11-20T16:20:00"^^xsd:dateTime .
 
 # ============================================================
+# RESEARCH PROJECT (ties people, repos, articles and orgs together)
+# ============================================================
+
+pulse:SimulationProject a schema:Project ;
+    schema:name "Next-Generation Physics Simulation Project" ;
+    schema:description "Joint EPFL-ETH research project developing simulation and analysis software." ;
+    schema:member pulse:AliceChen ;
+    schema:member pulse:BobKumar ;
+    schema:member pulse:CarolMartinez ;
+    schema:sourceOrganization pulse:EPFLComputationalLab ;
+    schema:funder pulse:SwissResearchAlliance ;
+    pulse:projectOutput pulse:SimulationFramework ;
+    pulse:projectOutput pulse:NetworkAnalysis ;
+    pulse:projectOutput pulse:Article1 ;
+    pulse:projectOutput pulse:Article2 ;
+    time:hasBeginning "2019-01-01"^^xsd:date ;
+    time:hasEnd "2025-12-31"^^xsd:date .
+
+# ============================================================
 # SCHOLARLY ARTICLES (connected to organizations and people)
 # ============================================================
 
@@ -483,6 +502,7 @@ pulse:Article6 a schema:ScholarlyArticle ;
 # Total entities:
 #   - 5 people (each with a GitHub and an Infoscience platform profile)
 #   - 10 platform profiles
+#   - 1 research project (3 members, 4 outputs, host org + funder)
 #   - 4 organizations
 #   - 3 repositories
 #   - 6 articles

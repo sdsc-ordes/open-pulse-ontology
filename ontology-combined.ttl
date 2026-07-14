@@ -25,6 +25,7 @@
 schema:Person a rdfs:Class ; skos:prefLabel "Person" ; skos:definition "An individual researcher or contributor." .
 schema:ScholarlyArticle a rdfs:Class ; skos:prefLabel "Scholarly Article" ; skos:definition "A research paper or publication." .
 schema:SoftwareSourceCode a rdfs:Class ; skos:prefLabel "Software Repository" ; skos:definition "A software project or source code." .
+schema:Project a rdfs:Class ; skos:prefLabel "Project" ; skos:definition "A collaborative research endeavor with a particular aim, typically time-bounded and funded, that produces research outputs such as software repositories and scholarly articles." .
 org:Membership a rdfs:Class ; skos:prefLabel "Membership" ; skos:definition "An affiliation between a Person and an Organization." .
 org:Organization a rdfs:Class ; skos:prefLabel "Organization" ; skos:definition "Represents a collection of people organized together into a community or other social, commercial or political structure. The group has some common purpose or reason for existence which goes beyond the set of people belonging to it and can act as an Agent. Organizations are often decomposable into hierarchical structures." .
 pulse:Contribution a rdfs:Class ; skos:prefLabel "Contribution" ; skos:definition "Represents a person's aggregated contributions to a repository." .
@@ -122,6 +123,8 @@ schema:author a rdf:Property ; skos:prefLabel "author" ; skos:definition "The au
 schema:sourceOrganization a rdf:Property ; skos:prefLabel "source organization" ; skos:definition "The organization where the work was created or published." .
 schema:description a rdf:Property ; skos:prefLabel "description" ; skos:definition "A description of the item." .
 schema:citation a rdf:Property ; skos:prefLabel "citation" ; skos:definition "A citation or reference to a creative work such as a publication or dataset." .
+schema:member a rdf:Property ; skos:prefLabel "member" ; skos:definition "A member of an Organization or a Project." .
+schema:funder a rdf:Property ; skos:prefLabel "funder" ; skos:definition "An organization that supports (sponsors) something through some kind of financial contribution." .
 org:hasUnit a rdf:Property ; skos:prefLabel "has unit"; skos:definition "Indicates a unit which is part of this Organization, e.g. a Department within a larger Organization.".
 org:unitOf a rdf:Property ; skos:prefLabel "unit of"; skos:definition "Indicates an Organization of which this Unit is a part, e.g. a Department within a larger Organization.".
 org:hasMembership a rdf:Property ; skos:prefLabel "has membership"; skos:definition "Indicates a membership relationship that the Agent plays." .
@@ -157,6 +160,9 @@ pulse:orcidIdentifier a rdf:Property ; skos:prefLabel "ORCID identifier" ; skos:
 pulse:hasProfile a rdf:Property ; skos:prefLabel "has profile" ; skos:definition "Links a Person to a platform profile (external account/identity) they hold." .
 pulse:profileOf a rdf:Property ; skos:prefLabel "profile of" ; skos:definition "Links a platform profile back to the Person it belongs to." .
 pulse:platform a rdf:Property ; rdfs:range pulse:PlatformEnumeration ; skos:prefLabel "platform" ; skos:definition "The external platform on which a profile exists." .
+
+# Project properties
+pulse:projectOutput a rdf:Property ; skos:prefLabel "project output" ; skos:definition "Links a Project to a research output (software repository or scholarly article) produced by the project." .
 
 # ---------------------------------------------------------
 # 2. REUSABLE PROPERTY SHAPES
@@ -495,9 +501,58 @@ pulse:MembershipShape
         sh:name "Organization"
     ] ;
     sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Role" ] ;
-    sh:property [ 
-        sh:path time:hasBeginning ; 
-        sh:datatype xsd:date ; 
+    sh:property [
+        sh:path time:hasBeginning ;
+        sh:datatype xsd:date ;
+        sh:lessThanOrEquals time:hasEnd ;
+        sh:name "Start Date"
+    ] ;
+    sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ; sh:name "End Date" ] .
+
+pulse:ProjectShape
+    a sh:NodeShape ;
+    sh:targetClass schema:Project ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property pulse:NameShape ;
+    sh:property [
+        sh:path schema:description ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Description" ;
+        sh:description "A short description of the project's aim."
+    ] ;
+    sh:property pulse:UrlShape ;
+    sh:property [
+        sh:path pulse:projectOutput ;
+        sh:or (
+            [ sh:class schema:SoftwareSourceCode ]
+            [ sh:class schema:ScholarlyArticle ]
+        ) ;
+        sh:name "Project Output" ;
+        sh:description "A repository or scholarly article produced by this project."
+    ] ;
+    sh:property [
+        sh:path schema:member ;
+        sh:class schema:Person ;
+        sh:name "Member" ;
+        sh:description "A person participating in this project."
+    ] ;
+    sh:property [
+        sh:path schema:sourceOrganization ;
+        sh:class org:Organization ;
+        sh:name "Host Organization" ;
+        sh:description "The organization(s) hosting or running this project."
+    ] ;
+    sh:property [
+        sh:path schema:funder ;
+        sh:class org:Organization ;
+        sh:name "Funder" ;
+        sh:description "The organization(s) funding this project."
+    ] ;
+    sh:property [
+        sh:path time:hasBeginning ;
+        sh:datatype xsd:date ;
         sh:lessThanOrEquals time:hasEnd ;
         sh:name "Start Date"
     ] ;
