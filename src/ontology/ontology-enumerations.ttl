@@ -1,0 +1,93 @@
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix time:   <http://www.w3.org/2006/time#> .
+@prefix pulse:     <https://open-pulse.epfl.ch/ontology#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# ---------------------------------------------------------
+# ENUMERATIONS SECTION
+# ---------------------------------------------------------
+
+# Enumeration Classes
+schema:Enumeration a rdfs:Class ; skos:prefLabel "Enumeration" ; skos:definition "A type that defines a set of discrete values." .
+pulse:DisciplineEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Discipline Enumeration" ; skos:definition "Enumeration of academic and scientific disciplines." ; rdfs:comment "Discipline enumeration values are derived from EPFL Graph disciplines structure. (https://graphsearch.epfl.ch/en/category/academic-disciplines)".
+pulse:RepositoryTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Repository Type Enumeration" ; skos:definition "Enumeration of repository types used within the ontology." .
+pulse:OrganizationTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Organization Type Enumeration" ; skos:definition "Enumeration of organization types used within the ontology." .
+pulse:PlatformEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Platform Enumeration" ; skos:definition "Enumeration of external platforms on which a person can hold a profile." .
+
+# Enumeration Instances - Repository Types
+pulse:Software a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Software"@en ; skos:definition "A repository that contains software source code."@en .
+pulse:EducationalResource a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Educational Resource"@en ; skos:definition "A repository that contains educational materials."@en .
+pulse:Documentation a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Documentation"@en ; skos:definition "A repository that contains documentation."@en .
+pulse:Data a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Data"@en ; skos:definition "A repository that contains datasets."@en .
+pulse:Other a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Other"@en ; skos:definition "A repository that does not fit into the other categories."@en .
+
+# Enumeration Instances - Organization Types
+pulse:University a pulse:OrganizationTypeEnumeration ; skos:prefLabel "University"@en ; skos:definition "An educational institution."@en .
+pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Research Institution"@en ; skos:definition "a research institution is one that has made conducting research a vital part of its mission and goals."@en .
+pulse:GovernmentAgency a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Government Agency"@en ; skos:definition "A government organization."@en .
+pulse:SoftwareProject a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Software Project"@en ; skos:definition "An organization focused on development of specific software."@en .
+pulse:PrivateCompany a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Private Company"@en ; skos:definition "A privately owned business organization."@en .
+pulse:NonProfitOrganization a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Non-Profit Organization"@en ; skos:definition "An organization that operates for a charitable or social purpose rather than for profit."@en .
+pulse:CommunitySpace a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Community Space"@en ; skos:definition "A community-driven organization or space."@en .
+pulse:OtherOrganizationType a pulse:OrganizationTypeEnumeration ; skos:prefLabel "Other"@en ; skos:definition "An organization type that does not fit into the other categories."@en .
+
+# Enumeration Instances - Platforms
+pulse:GitHub a pulse:PlatformEnumeration ; skos:prefLabel "GitHub"@en ; skos:definition "The GitHub code-hosting platform."@en .
+pulse:Infoscience a pulse:PlatformEnumeration ; skos:prefLabel "Infoscience"@en ; skos:definition "EPFL's Infoscience institutional publication repository."@en .
+pulse:ORCID a pulse:PlatformEnumeration ; skos:prefLabel "ORCID"@en ; skos:definition "The ORCID researcher-identifier registry."@en .
+
+# Enumeration Instances - Disciplines
+wd:Q34749 a pulse:DisciplineEnumeration; skos:prefLabel "Social sciences"@en; rdfs:subClassOf wd:Q11862829 .
+wd:Q23404 a pulse:DisciplineEnumeration; skos:prefLabel "Anthropology"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q11680831 a pulse:DisciplineEnumeration; skos:prefLabel "Communication studies"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q8434 a pulse:DisciplineEnumeration; skos:prefLabel "Education"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q8162 a pulse:DisciplineEnumeration; skos:prefLabel "Linguistics"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q42240 a pulse:DisciplineEnumeration; skos:prefLabel "Research"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q21201 a pulse:DisciplineEnumeration; skos:prefLabel "Sociology"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q1071 a pulse:DisciplineEnumeration; skos:prefLabel "Geography"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q9418 a pulse:DisciplineEnumeration; skos:prefLabel "Psychology"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q7163 a pulse:DisciplineEnumeration; skos:prefLabel "Politics"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q8134 a pulse:DisciplineEnumeration; skos:prefLabel "Economics"@en; rdfs:subClassOf wd:Q34749 .
+wd:Q7112556 a pulse:DisciplineEnumeration; skos:prefLabel "Applied sciences"@en; rdfs:subClassOf wd:Q11862829 .
+wd:Q843601 a pulse:DisciplineEnumeration; skos:prefLabel "Health sciences"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q43035 a pulse:DisciplineEnumeration; skos:prefLabel "Electrical engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q83588 a pulse:DisciplineEnumeration; skos:prefLabel "Chemical engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q77590 a pulse:DisciplineEnumeration; skos:prefLabel "Civil engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q12271 a pulse:DisciplineEnumeration; skos:prefLabel "Architecture"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q428691 a pulse:DisciplineEnumeration; skos:prefLabel "Computer engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q3353193 a pulse:DisciplineEnumeration; skos:prefLabel "Energy engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q192386 a pulse:DisciplineEnumeration; skos:prefLabel "Military science"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q18351432 a pulse:DisciplineEnumeration; skos:prefLabel "Industrial and production engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q101333 a pulse:DisciplineEnumeration; skos:prefLabel "Mechanical engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q580689 a pulse:DisciplineEnumeration; skos:prefLabel "Biological engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q188847 a pulse:DisciplineEnumeration; skos:prefLabel "Environmental science"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q2167061 a pulse:DisciplineEnumeration; skos:prefLabel "Systems science and engineering"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q1254373 a pulse:DisciplineEnumeration; skos:prefLabel "Information engineering"@en;rdfs:subClassOf wd:Q7112556 .
+wd:Q3606845 a pulse:DisciplineEnumeration; skos:prefLabel "Agricultural and food sciences"@en;rdfs:subClassOf wd:Q7112556 .
+wd:Q4830453 a pulse:DisciplineEnumeration; skos:prefLabel "Business"@en; rdfs:subClassOf wd:Q7112556 .
+wd:Q80083 a pulse:DisciplineEnumeration; skos:prefLabel "Humanities"@en; rdfs:subClassOf wd:Q11862829 .
+wd:Q309 a pulse:DisciplineEnumeration; skos:prefLabel "History"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q8242 a pulse:DisciplineEnumeration; skos:prefLabel "Literature"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q735 a pulse:DisciplineEnumeration; skos:prefLabel "Art"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q9174 a pulse:DisciplineEnumeration; skos:prefLabel "Religion"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q5891 a pulse:DisciplineEnumeration; skos:prefLabel "Philosophy"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q7748 a pulse:DisciplineEnumeration; skos:prefLabel "Law"@en; rdfs:subClassOf wd:Q80083 .
+wd:Q816264 a pulse:DisciplineEnumeration; skos:prefLabel "Formal sciences"@en; rdfs:subClassOf wd:Q11862829 .
+wd:Q395 a pulse:DisciplineEnumeration; skos:prefLabel "Mathematics"@en .
+wd:Q8078 a pulse:DisciplineEnumeration; skos:prefLabel "Logic"@en; rdfs:subClassOf wd:Q816264 .
+wd:Q12483 a pulse:DisciplineEnumeration; skos:prefLabel "Statistics"@en; rdfs:subClassOf wd:Q816264 .
+wd:Q2878974 a pulse:DisciplineEnumeration; skos:prefLabel "Theoretical computer science"@en; rdfs:subClassOf wd:Q816264 .
+wd:Q7991 a pulse:DisciplineEnumeration; skos:prefLabel "Natural sciences"@en; rdfs:subClassOf wd:Q11862829 .
+wd:Q413 a pulse:DisciplineEnumeration; skos:prefLabel "Physics"@en .
+wd:Q333 a pulse:DisciplineEnumeration; skos:prefLabel "Astronomy"@en; rdfs:subClassOf wd:Q7991 .
+wd:Q420 a pulse:DisciplineEnumeration; skos:prefLabel "Biology"@en; rdfs:subClassOf wd:Q7991 .
+wd:Q2329 a pulse:DisciplineEnumeration; skos:prefLabel "Chemistry"@en; rdfs:subClassOf wd:Q7991 .
+wd:Q8008 a pulse:DisciplineEnumeration; skos:prefLabel "Earth science"@en; rdfs:subClassOf wd:Q7991 .

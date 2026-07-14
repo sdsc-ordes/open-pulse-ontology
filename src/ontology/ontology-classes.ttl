@@ -1,0 +1,88 @@
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix time:   <http://www.w3.org/2006/time#> .
+@prefix pulse:     <https://open-pulse.epfl.ch/ontology#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# ---------------------------------------------------------
+# CLASS & PROPERTY SECTION (semantic aspect)
+# ---------------------------------------------------------
+
+<https://open-pulse.epfl.ch/ontology#> a owl:Ontology ;
+    dct:abstract "The Open Pulse Ontology to model contributions to open source scientific software and research articles from EPFL." ;
+    dct:license <https://spdx.org/licenses/CC-BY-4.0.html> ;
+    dct:title "Open Pulse Ontology" ;
+    owl:versionInfo "v3.0.0-develop"^^xsd:string .
+
+# Classes
+schema:Person a rdfs:Class ; skos:prefLabel "Person" ; skos:definition "An individual researcher or contributor." .
+schema:ScholarlyArticle a rdfs:Class ; skos:prefLabel "Scholarly Article" ; skos:definition "A research paper or publication." .
+schema:SoftwareSourceCode a rdfs:Class ; skos:prefLabel "Software Repository" ; skos:definition "A software project or source code." .
+schema:Project a rdfs:Class ; skos:prefLabel "Project" ; skos:definition "A collaborative research endeavor with a particular aim, typically time-bounded and funded, that produces research outputs such as software repositories and scholarly articles." .
+org:Membership a rdfs:Class ; skos:prefLabel "Membership" ; skos:definition "An affiliation between a Person and an Organization." .
+org:Organization a rdfs:Class ; skos:prefLabel "Organization" ; skos:definition "Represents a collection of people organized together into a community or other social, commercial or political structure. The group has some common purpose or reason for existence which goes beyond the set of people belonging to it and can act as an Agent. Organizations are often decomposable into hierarchical structures." .
+pulse:Contribution a rdfs:Class ; skos:prefLabel "Contribution" ; skos:definition "Represents a person's aggregated contributions to a repository." .
+pulse:PlatformProfile a rdfs:Class ; skos:prefLabel "Platform Profile" ; skos:definition "An identity that a Person holds on a specific external platform (e.g. a GitHub account or an Infoscience author record), grouping the platform-scoped handle, display name and email that belong together." .
+
+# Properties
+schema:license a rdf:Property ; skos:prefLabel "license" ; skos:definition "A license document that applies to this content, typically indicated by URL." .
+schema:name a rdf:Property ; skos:prefLabel "name"; skos:definition "The name of the item." .
+schema:email a rdf:Property ; skos:prefLabel "email" ; skos:definition "Email address." .
+schema:url a rdf:Property ; skos:prefLabel "url" ; skos:definition "	URL of the item." .
+schema:identifier a rdf:Property ; skos:prefLabel "identifier" ; skos:definition "The identifier (URL/Text) property represents any kind of identifier for any kind of Thing" .
+schema:headline a rdf:Property ; skos:prefLabel "headline" ; skos:definition "The headline of the article." .
+schema:programmingLanguage a rdf:Property ; skos:prefLabel "programming language" ; skos:definition "The computer programming language." .
+schema:codeRepository a rdf:Property ; skos:prefLabel "code repository" ; skos:definition "Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex)."   .
+schema:dateCreated a rdf:Property ; skos:prefLabel "date created" ;  skos:definition "The date on which the CreativeWork was created or the item was added to a DataFeed." .
+schema:datePublished a rdf:Property ; skos:prefLabel "date published" ; skos:definition "Date of first publication or broadcast" .
+schema:author a rdf:Property ; skos:prefLabel "author" ; skos:definition "The author of this content or rating." .
+schema:sourceOrganization a rdf:Property ; skos:prefLabel "source organization" ; skos:definition "The organization where the work was created or published." .
+schema:description a rdf:Property ; skos:prefLabel "description" ; skos:definition "A description of the item." .
+schema:citation a rdf:Property ; skos:prefLabel "citation" ; skos:definition "A citation or reference to a creative work such as a publication or dataset." .
+schema:member a rdf:Property ; skos:prefLabel "member" ; skos:definition "A member of an Organization or a Project." .
+schema:funder a rdf:Property ; skos:prefLabel "funder" ; skos:definition "An organization that supports (sponsors) something through some kind of financial contribution." .
+org:hasUnit a rdf:Property ; skos:prefLabel "has unit"; skos:definition "Indicates a unit which is part of this Organization, e.g. a Department within a larger Organization.".
+org:unitOf a rdf:Property ; skos:prefLabel "unit of"; skos:definition "Indicates an Organization of which this Unit is a part, e.g. a Department within a larger Organization.".
+org:hasMembership a rdf:Property ; skos:prefLabel "has membership"; skos:definition "Indicates a membership relationship that the Agent plays." .
+org:organization a rdf:Property ; skos:prefLabel "organization" ; skos:definition "Indicates the organization in which the agent is a member." .
+org:role a rdf:Property ; skos:prefLabel "role"; skos:definition "Indicates the Role that the Agent plays in a Membership relationship with an Organization." .
+time:hasBeginning a rdf:Property ; skos:prefLabel "has beginning" ; skos:definition "The beginning of the temporal entity." .
+time:hasEnd a rdf:Property ; skos:prefLabel "has end" ; skos:definition "The end of the temporal entity." .
+pulse:githubUsername a rdf:Property ; skos:prefLabel "github username" ; skos:definition "The GitHub handle of a person." .
+pulse:githubOrganizationHandle a rdf:Property ; skos:prefLabel "github organization handle" ; skos:definition "The GitHub handle of an organization." .
+pulse:githubRepositoryHandle a rdf:Property ; skos:prefLabel "github repository handle" ; skos:definition "The handle of the GitHub repository in the format 'owner/repository'." .
+pulse:infosciencePersonIdentifier a rdf:Property ; skos:prefLabel "infoscience Identifier" ; skos:definition "The infoscience identifier of a person." .
+pulse:infoscienceOrganizationIdentifier a rdf:Property ; skos:prefLabel "infoscience organization identifier" ; skos:definition "The Infoscience identifier for an organization." .
+pulse:discipline a rdf:Property ; skos:prefLabel "discipline" ; skos:definition "The academic or scientific discipline associated with the resource." .
+pulse:repositoryType a rdf:Property ; skos:prefLabel "repository type" ; skos:definition "The type or category of the repository (e.g., software, data, publication)." .
+pulse:OrganizationType a rdf:Property ; skos:prefLabel "organization type" ; skos:definition "The type or category of the organization (e.g., university, research institute, company)." .
+pulse:githubOrgFollowers a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github organization followers" ; skos:definition "The number of followers of a GitHub organization." .
+pulse:githubRepoStars a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github repository stars" ; skos:definition "The number of stars (likes) a GitHub repository has received." .
+pulse:githubRepoForks a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github repository forks" ; skos:definition "The number of forks (copies) of a GitHub repository." .
+
+# Ownership and contribution properties
+pulse:owns a rdf:Property ; skos:prefLabel "owns" ; skos:definition "Links a Person or Organization to a software repository they own." ; owl:inverseOf pulse:ownedBy .
+pulse:ownedBy a rdf:Property ; skos:prefLabel "owned by" ; skos:definition "Links a software repository to its owning Person or Organization." .
+pulse:isForkOf a rdf:Property ; skos:prefLabel "is fork of" ; skos:definition "Links a repository to the parent-repository it was forked from." ; rdfs:domain schema:SoftwareSourceCode ; rdfs:range schema:SoftwareSourceCode .
+pulse:hasContribution a rdf:Property ; skos:prefLabel "has contribution" ; skos:definition "Links a Person to a Contribution they made to a repository." .
+pulse:contributionTo a rdf:Property ; skos:prefLabel "contribution to" ; skos:definition "Links a Contribution to the Repository it belongs to." ; rdfs:domain pulse:Contribution ; rdfs:range schema:SoftwareSourceCode .
+pulse:contributionCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "contribution count" ; skos:definition "The number of contributions (commits) made." .
+pulse:firstContributionDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:prefLabel "first contribution date" ; skos:definition "The date of the first contribution." .
+pulse:lastContributionDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:prefLabel "last contribution date" ; skos:definition "The date of the most recent contribution." .
+pulse:infoscienceArticleIdentifier a rdf:Property ; skos:prefLabel "infoscience article identifier" ; skos:definition "The Infoscience identifier for an article." .
+pulse:orcidIdentifier a rdf:Property ; skos:prefLabel "ORCID identifier" ; skos:definition "The ORCID identifier for a person." .
+
+# Platform profile properties
+pulse:hasProfile a rdf:Property ; skos:prefLabel "has profile" ; skos:definition "Links a Person to a platform profile (external account/identity) they hold." .
+pulse:profileOf a rdf:Property ; skos:prefLabel "profile of" ; skos:definition "Links a platform profile back to the Person it belongs to." .
+pulse:platform a rdf:Property ; rdfs:range pulse:PlatformEnumeration ; skos:prefLabel "platform" ; skos:definition "The external platform on which a profile exists." .
+
+# Project properties
+pulse:projectOutput a rdf:Property ; skos:prefLabel "project output" ; skos:definition "Links a Project to a research output (software repository or scholarly article) produced by the project." .
