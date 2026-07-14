@@ -40,6 +40,8 @@ schema:name a rdf:Property ; skos:prefLabel "name"; skos:definition "The name of
 schema:email a rdf:Property ; skos:prefLabel "email" ; skos:definition "Email address." .
 schema:url a rdf:Property ; skos:prefLabel "url" ; skos:definition "	URL of the item." .
 schema:identifier a rdf:Property ; skos:prefLabel "identifier" ; skos:definition "The identifier (URL/Text) property represents any kind of identifier for any kind of Thing" .
+pulse:doi a rdf:Property ; rdfs:subPropertyOf schema:identifier ; skos:prefLabel "DOI" ; skos:definition "The Digital Object Identifier of a scholarly article." ; skos:exactMatch datacite:doi .
+pulse:ror a rdf:Property ; rdfs:subPropertyOf schema:identifier ; skos:prefLabel "ROR identifier" ; skos:definition "The Research Organization Registry (ROR) identifier of an organization." ; skos:exactMatch datacite:ror .
 schema:headline a rdf:Property ; skos:prefLabel "headline" ; skos:definition "The headline of the article." .
 schema:programmingLanguage a rdf:Property ; skos:prefLabel "programming language" ; skos:definition "The computer programming language." .
 schema:codeRepository a rdf:Property ; skos:prefLabel "code repository" ; skos:definition "Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex)."   .
@@ -283,16 +285,15 @@ pulse:AccessRightShape
     sh:description "Must be a valid IRI from the Access Right enumeration (e.g., pulse:OpenAccess)." .
 
 
-pulse:DoiPropertyShape
+pulse:DoiShape
     a sh:PropertyShape ;
-    sh:path schema:identifier ;
+    sh:path pulse:doi ;
     sh:datatype xsd:string ;
     sh:minCount 1 ;
     sh:pattern "^10\\.\\d{4,9}/[-._;()/:a-zA-Z0-9]+$" ;
-    sh:description "Standard DOI validation." ;
-    skos:exactMatch datacite:doi .
+    sh:description "Standard DOI validation." .
 
-pulse:OrcidPropertyShape
+pulse:OrcidShape
     a sh:PropertyShape ;
     sh:path pulse:orcidIdentifier ;
     sh:datatype xsd:string ;
@@ -312,21 +313,20 @@ pulse:InfoscienceOrganizationIdentifierShape
     sh:pattern "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" ;
     sh:description "Infoscience Organization UUID4 validation." .
 
-pulse:RorPropertyShape
+pulse:RorShape
     a sh:PropertyShape ;
-    sh:path schema:identifier ;
+    sh:path pulse:ror ;
     sh:datatype xsd:string ;
     sh:pattern "^https://ror\\.org/[0-9a-z]{9}$" ;
-    sh:description "Standard ROR ID validation." ;
-    skos:exactMatch datacite:ror .
+    sh:description "Standard ROR ID validation." .
 
-pulse:HasUnitPropertyShape
+pulse:HasUnitShape
     a sh:PropertyShape ;
     sh:path org:hasUnit ;
     sh:class org:Organization ;
     sh:description "Link to a subunit, project, or department." .
 
-pulse:UnitOfPropertyShape
+pulse:UnitOfShape
     a sh:PropertyShape ;
     sh:path org:unitOf ;
     sh:class org:Organization ;
@@ -362,8 +362,8 @@ pulse:PersonShape
     sh:targetClass schema:Person ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
-    sh:property pulse:NameShape ;                       # canonical / preferred name of the human
-    sh:property pulse:OrcidPropertyShape ;              # cross-platform anchor identifier
+    sh:property pulse:NameShape ;  # canonical / preferred name of the human
+    sh:property pulse:OrcidShape ; # cross-platform anchor identifier
     sh:property [
         sh:path pulse:hasProfile ;
         sh:class pulse:PlatformProfile ;
@@ -432,7 +432,7 @@ pulse:ArticleShape
     sh:closed true ;
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property pulse:NameShape ;
-    sh:property pulse:DoiPropertyShape ;
+    sh:property pulse:DoiShape ;
     sh:property pulse:InfoscienceArticleIdentifierShape ;
     sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Publication Date" ] ;
     sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this article"   ] ;
@@ -446,13 +446,13 @@ pulse:OrganizationShape
     sh:closed true ;
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property pulse:NameShape ;
-    sh:property pulse:RorPropertyShape ;
+    sh:property pulse:RorShape ;
     sh:property pulse:GithubOrganizationHandleShape ;
     sh:property pulse:InfoscienceOrganizationIdentifierShape ;
     sh:property pulse:OrganizationTypeShape ;
     sh:property pulse:GithubOrgFollowersShape ;
-    sh:property pulse:HasUnitPropertyShape ;
-    sh:property pulse:UnitOfPropertyShape ;
+    sh:property pulse:HasUnitShape ;
+    sh:property pulse:UnitOfShape ;
     sh:property [
         sh:path pulse:owns ;
         sh:class schema:SoftwareSourceCode ;
@@ -460,7 +460,7 @@ pulse:OrganizationShape
         sh:description "Repositories owned by this organization."
     ] ;
     sh:or (
-        [ sh:property [ sh:path schema:identifier ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path pulse:ror ; sh:minCount 1 ] ]
         [ sh:property [ sh:path pulse:githubOrganizationHandle ; sh:minCount 1 ] ]
         [ sh:property [ sh:path pulse:infoscienceOrganizationIdentifier ; sh:minCount 1 ] ]
     ) .

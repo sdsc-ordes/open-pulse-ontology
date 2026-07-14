@@ -39,7 +39,7 @@ pulse:ClosedAccess a pulse:AccessRightEnumeration .
 # Organization 1: EPFL Computational Lab
 pulse:EPFLComputationalLab a org:Organization ;
     schema:name "EPFL Computational Lab" ;
-    schema:identifier "https://ror.org/02s376052" ;
+    pulse:ror "https://ror.org/02s376052" ;
     pulse:githubOrganizationHandle "epfl-complab" ;
     pulse:OrganizationType pulse:ResearchInstitution ;
     pulse:githubOrgFollowers "450"^^xsd:integer ;
@@ -49,7 +49,7 @@ pulse:EPFLComputationalLab a org:Organization ;
 # Organization 2: Swiss Research Alliance
 pulse:SwissResearchAlliance a org:Organization ;
     schema:name "Swiss Research Alliance" ;
-    schema:identifier "https://ror.org/01wyqb977" ;
+    pulse:ror "https://ror.org/01wyqb977" ;
     pulse:githubOrganizationHandle "swiss-research" ;
     pulse:OrganizationType pulse:ResearchInstitution ;
     pulse:githubOrgFollowers "230"^^xsd:integer ;
@@ -59,7 +59,7 @@ pulse:SwissResearchAlliance a org:Organization ;
 # Organization 3: Department of Physics (university)
 pulse:DepartmentPhysics a org:Organization ;
     schema:name "Department of Physics - ETH Zurich" ;
-    schema:identifier "https://ror.org/05a28qc87" ;
+    pulse:ror "https://ror.org/05a28qc87" ;
     pulse:githubOrganizationHandle "eth-physics" ;
     pulse:OrganizationType pulse:University ;
     pulse:githubOrgFollowers "125"^^xsd:integer ;
@@ -455,7 +455,7 @@ pulse:Article1 a schema:ScholarlyArticle ;
     schema:author pulse:BobKumar ;
     schema:sourceOrganization pulse:EPFLComputationalLab ;
     pulse:infoscienceArticleIdentifier "272853" ;
-    schema:identifier "10.1038/s41467-023-12345-6" ;
+    pulse:doi "10.1038/s41467-023-12345-6" ;
     pulse:publicationType pulse:JournalArticle ;
     pulse:accessRight pulse:OpenAccess .
 
@@ -466,7 +466,7 @@ pulse:Article2 a schema:ScholarlyArticle ;
     schema:author pulse:DavidLee ;
     schema:sourceOrganization pulse:SwissResearchAlliance ;
     pulse:infoscienceArticleIdentifier "273451" ;
-    schema:identifier "10.1038/s41467-023-23456-7" ;
+    pulse:doi "10.1038/s41467-023-23456-7" ;
     pulse:publicationType pulse:JournalArticle ;
     pulse:accessRight pulse:OpenAccess .
 
@@ -478,7 +478,7 @@ pulse:Article3 a schema:ScholarlyArticle ;
     schema:author pulse:CarolMartinez ;
     schema:sourceOrganization pulse:EPFLComputationalLab ;
     pulse:infoscienceArticleIdentifier "275612" ;
-    schema:identifier "10.1038/s41467-024-34567-8" ;
+    pulse:doi "10.1038/s41467-024-34567-8" ;
     pulse:publicationType pulse:ConferencePaper ;
     pulse:accessRight pulse:OpenAccess .
 
@@ -489,7 +489,7 @@ pulse:Article4 a schema:ScholarlyArticle ;
     schema:author pulse:BobKumar ;
     schema:sourceOrganization pulse:DepartmentPhysics ;
     pulse:infoscienceArticleIdentifier "274890" ;
-    schema:identifier "10.1038/s41467-023-45678-9" ;
+    pulse:doi "10.1038/s41467-023-45678-9" ;
     pulse:publicationType pulse:JournalArticle ;
     pulse:accessRight pulse:ClosedAccess .
 
@@ -501,7 +501,7 @@ pulse:Article5 a schema:ScholarlyArticle ;
     schema:author pulse:AliceChen ;
     schema:sourceOrganization pulse:EPFLComputationalLab ;
     pulse:infoscienceArticleIdentifier "276234" ;
-    schema:identifier "10.1038/s41467-024-56789-0" ;
+    pulse:doi "10.1038/s41467-024-56789-0" ;
     pulse:publicationType pulse:Preprint ;
     pulse:accessRight pulse:OpenAccess .
 
@@ -511,7 +511,7 @@ pulse:Article6 a schema:ScholarlyArticle ;
     schema:author pulse:BobKumar ;
     schema:sourceOrganization pulse:SwissResearchAlliance ;
     pulse:infoscienceArticleIdentifier "273012" ;
-    schema:identifier "10.1038/s41467-023-56789-1" ;
+    pulse:doi "10.1038/s41467-023-56789-1" ;
     pulse:publicationType pulse:JournalArticle ;
     pulse:accessRight pulse:ClosedAccess .
 

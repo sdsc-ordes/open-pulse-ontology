@@ -8,13 +8,13 @@ pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
 
 pulse:InvalidArticle a schema:ScholarlyArticle ;
     schema:name "Article With Org Author" ;
-    schema:identifier "10.1234/invalid.author" ;
+    pulse:doi "10.1234/invalid.author" ;
     schema:datePublished "2024-05-15"^^xsd:date ;
     schema:author pulse:OrgAuthor ;   # invalid type
     schema:sourceOrganization pulse:OrgAuthor .
 
 pulse:OrgAuthor a org:Organization ;
     schema:name "Publishing Org" ;
-    schema:identifier "https://ror.org/02s376052" ;
+    pulse:ror "https://ror.org/02s376052" ;
     pulse:githubOrganizationHandle "publishing-org" ;
     pulse:OrganizationType pulse:ResearchInstitution .

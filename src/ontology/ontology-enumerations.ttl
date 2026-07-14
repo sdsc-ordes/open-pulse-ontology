@@ -10,7 +10,6 @@
 @prefix dct:    <http://purl.org/dc/terms/> .
 @prefix wd: <http://www.wikidata.org/entity/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix datacite: <http://purl.org/spar/datacite/> .
 @prefix coar-access: <http://purl.org/coar/access_right/> .
 @prefix coar-resource: <http://purl.org/coar/resource_type/> .
 

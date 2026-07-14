@@ -38,13 +38,13 @@ pulse:ProjectLeadGitHubProfile a pulse:PlatformProfile ;
 
 pulse:HostLab a org:Organization ;
     schema:name "Host Lab" ;
-    schema:identifier "https://ror.org/02s376052" ;
+    pulse:ror "https://ror.org/02s376052" ;
     pulse:githubOrganizationHandle "host-lab" ;
     pulse:OrganizationType pulse:ResearchInstitution .
 
 pulse:FundingOrg a org:Organization ;
     schema:name "National Science Fund" ;
-    schema:identifier "https://ror.org/00yjd3n13" .
+    pulse:ror "https://ror.org/00yjd3n13" .
 
 pulse:ProjectRepo a schema:SoftwareSourceCode ;
     schema:name "Open Science Toolkit" ;
@@ -57,7 +57,7 @@ pulse:ProjectRepo a schema:SoftwareSourceCode ;
 
 pulse:ProjectArticle a schema:ScholarlyArticle ;
     schema:name "The Open Science Toolkit" ;
-    schema:identifier "10.1234/ost.2025" ;
+    pulse:doi "10.1234/ost.2025" ;
     schema:datePublished "2025-06-01"^^xsd:date ;
     schema:author pulse:ProjectLead ;
     schema:sourceOrganization pulse:HostLab ;

@@ -45,7 +45,7 @@ pulse:BrokenMembership a org:Membership ;
 
 pulse:TemporalLab a org:Organization ;
     schema:name "EPFL Temporal Lab" ;
-    schema:identifier "https://ror.org/02s376052" ;
+    pulse:ror "https://ror.org/02s376052" ;
     pulse:githubOrganizationHandle "DeepLabCut" ;
     pulse:OrganizationType pulse:ResearchInstitution ;
     pulse:owns pulse:InvalidTemporalRepo .

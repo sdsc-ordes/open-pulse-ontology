@@ -35,5 +35,5 @@ pulse:InvalidMembership a org:Membership ;
 
 pulse:SomeOrg a org:Organization ;
     schema:name "Some Organization" ;
-    schema:identifier "https://ror.org/987654321" ;
+    pulse:ror "https://ror.org/987654321" ;
     pulse:githubOrganizationHandle "someorg" .

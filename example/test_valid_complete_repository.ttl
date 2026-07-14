@@ -63,7 +63,7 @@ pulse:Membership1 a org:Membership ;
 
 pulse:EPFLLab a org:Organization ;
     schema:name "EPFL Computational Lab" ;
-    schema:identifier "https://ror.org/02s376052" ;
+    pulse:ror "https://ror.org/02s376052" ;
     pulse:githubOrganizationHandle "DeepLabCut" ;
     pulse:OrganizationType pulse:ResearchInstitution ;
     pulse:githubOrgFollowers "320"^^xsd:integer ;

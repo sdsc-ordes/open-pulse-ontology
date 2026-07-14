@@ -28,5 +28,5 @@ pulse:GithubUrlAuthorGitHubProfile a pulse:PlatformProfile ;
 
 pulse:InvalidGithubOrg a org:Organization ;
     schema:name "Invalid GitHub Org" ;
-    schema:identifier "https://ror.org/012345678" ;
+    pulse:ror "https://ror.org/012345678" ;
     pulse:githubOrganizationHandle <https://github.com/example-org> .  # Invalid: should be a string literal \"example-org\", not an IRI

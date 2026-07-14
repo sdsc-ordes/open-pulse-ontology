@@ -12,4 +12,4 @@ pulse:BadOutputProject a schema:Project ;
 
 pulse:NotAnOutput a org:Organization ;
     schema:name "Not An Output" ;
-    schema:identifier "https://ror.org/02s376052" .
+    pulse:ror "https://ror.org/02s376052" .

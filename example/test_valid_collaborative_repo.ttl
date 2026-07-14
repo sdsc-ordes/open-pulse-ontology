@@ -66,7 +66,7 @@ pulse:ContributorMembership a org:Membership ;
 
 pulse:EPFLCenter a org:Organization ;
     schema:name "EPFL Center for Systems Biology" ;
-    schema:identifier "https://ror.org/02s376052" ;
+    pulse:ror "https://ror.org/02s376052" ;
     pulse:githubOrganizationHandle "DeepLabCut" ;
     pulse:OrganizationType pulse:ResearchInstitution ;
     pulse:githubOrgFollowers "410"^^xsd:integer ;

@@ -33,6 +33,6 @@ pulse:RORAuthorGitHubProfile a pulse:PlatformProfile ;
 
 pulse:BadROROrg a org:Organization ;
     schema:name "Org With Bad ROR" ;
-    schema:identifier "https://ror.org/01234" ;  # invalid: only 5 characters, should be 9
+    pulse:ror "https://ror.org/01234" ;  # invalid: only 5 characters, should be 9
     pulse:githubOrganizationHandle "example-bad-ror" ;
     pulse:OrganizationType pulse:ResearchInstitution .

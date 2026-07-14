@@ -11,8 +11,6 @@
 @prefix wd: <http://www.wikidata.org/entity/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix datacite: <http://purl.org/spar/datacite/> .
-@prefix coar-access: <http://purl.org/coar/access_right/> .
-@prefix coar-resource: <http://purl.org/coar/resource_type/> .
 
 # ---------------------------------------------------------
 # CLASS & PROPERTY SECTION (semantic aspect)
@@ -40,6 +38,8 @@ schema:name a rdf:Property ; skos:prefLabel "name"; skos:definition "The name of
 schema:email a rdf:Property ; skos:prefLabel "email" ; skos:definition "Email address." .
 schema:url a rdf:Property ; skos:prefLabel "url" ; skos:definition "	URL of the item." .
 schema:identifier a rdf:Property ; skos:prefLabel "identifier" ; skos:definition "The identifier (URL/Text) property represents any kind of identifier for any kind of Thing" .
+pulse:doi a rdf:Property ; rdfs:subPropertyOf schema:identifier ; skos:prefLabel "DOI" ; skos:definition "The Digital Object Identifier of a scholarly article." ; skos:exactMatch datacite:doi .
+pulse:ror a rdf:Property ; rdfs:subPropertyOf schema:identifier ; skos:prefLabel "ROR identifier" ; skos:definition "The Research Organization Registry (ROR) identifier of an organization." ; skos:exactMatch datacite:ror .
 schema:headline a rdf:Property ; skos:prefLabel "headline" ; skos:definition "The headline of the article." .
 schema:programmingLanguage a rdf:Property ; skos:prefLabel "programming language" ; skos:definition "The computer programming language." .
 schema:codeRepository a rdf:Property ; skos:prefLabel "code repository" ; skos:definition "Link to the repository where the un-compiled, human readable code and related code is located (SVN, GitHub, CodePlex)."   .
