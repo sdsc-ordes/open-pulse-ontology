@@ -183,6 +183,16 @@
           "message": "chore: small formatting/description edits"
         }
       ]
+    },
+    "feature/platform-profiles": {
+      "commits": [
+        {
+          "hash": "379dd4d",
+          "date": "2026-07-14",
+          "author": "rmfranken",
+          "message": "feat(ontology): add Project concept for research endeavors"
+        }
+      ]
     }
   },
   "latestRelease": "v2.1.2",
