@@ -10,6 +10,9 @@
 @prefix dct:    <http://purl.org/dc/terms/> .
 @prefix wd: <http://www.wikidata.org/entity/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix datacite: <http://purl.org/spar/datacite/> .
+@prefix coar-access: <http://purl.org/coar/access_right/> .
+@prefix coar-resource: <http://purl.org/coar/resource_type/> .
 
 # ---------------------------------------------------------
 # CLASS & PROPERTY SECTION (semantic aspect)
@@ -77,7 +80,7 @@ pulse:contributionCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel
 pulse:firstContributionDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:prefLabel "first contribution date" ; skos:definition "The date of the first contribution." .
 pulse:lastContributionDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:prefLabel "last contribution date" ; skos:definition "The date of the most recent contribution." .
 pulse:infoscienceArticleIdentifier a rdf:Property ; skos:prefLabel "infoscience article identifier" ; skos:definition "The Infoscience identifier for an article." .
-pulse:orcidIdentifier a rdf:Property ; skos:prefLabel "ORCID identifier" ; skos:definition "The ORCID identifier for a person." .
+pulse:orcidIdentifier a rdf:Property ; skos:prefLabel "ORCID identifier" ; skos:definition "The ORCID identifier for a person." ; skos:exactMatch datacite:orcid .
 
 # Platform profile properties
 pulse:hasProfile a rdf:Property ; skos:prefLabel "has profile" ; skos:definition "Links a Person to a platform profile (external account/identity) they hold." .
@@ -86,6 +89,10 @@ pulse:platform a rdf:Property ; rdfs:range pulse:PlatformEnumeration ; skos:pref
 
 # Project properties
 pulse:projectOutput a rdf:Property ; skos:prefLabel "project output" ; skos:definition "Links a Project to a research output (software repository or scholarly article) produced by the project." .
+
+# Publication properties
+pulse:publicationType a rdf:Property ; skos:prefLabel "publication type" ; skos:definition "The type or category of the publication (e.g., journal article, conference paper, preprint)." .
+pulse:accessRight a rdf:Property ; skos:prefLabel "access right" ; skos:definition "The open-access status of the publication (e.g., open, closed, embargoed, restricted)." .
 
 # ---------------------------------------------------------
 # ENUMERATIONS SECTION
@@ -97,6 +104,8 @@ pulse:DisciplineEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; 
 pulse:RepositoryTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Repository Type Enumeration" ; skos:definition "Enumeration of repository types used within the ontology." .
 pulse:OrganizationTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Organization Type Enumeration" ; skos:definition "Enumeration of organization types used within the ontology." .
 pulse:PlatformEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Platform Enumeration" ; skos:definition "Enumeration of external platforms on which a person can hold a profile." .
+pulse:PublicationTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Publication Type Enumeration" ; skos:definition "Enumeration of scholarly publication types, aligned with DataCite's resourceTypeGeneral vocabulary." .
+pulse:AccessRightEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Access Right Enumeration" ; skos:definition "Enumeration of open-access statuses for a publication, aligned with OpenAIRE's access rights vocabulary." .
 
 # Enumeration Instances - Repository Types
 pulse:Software a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Software"@en ; skos:definition "A repository that contains software source code."@en .
@@ -119,6 +128,25 @@ pulse:OtherOrganizationType a pulse:OrganizationTypeEnumeration ; skos:prefLabel
 pulse:GitHub a pulse:PlatformEnumeration ; skos:prefLabel "GitHub"@en ; skos:definition "The GitHub code-hosting platform."@en .
 pulse:Infoscience a pulse:PlatformEnumeration ; skos:prefLabel "Infoscience"@en ; skos:definition "EPFL's Infoscience institutional publication repository."@en .
 pulse:ORCID a pulse:PlatformEnumeration ; skos:prefLabel "ORCID"@en ; skos:definition "The ORCID researcher-identifier registry."@en .
+
+# Enumeration Instances - Publication Types
+# skos:exactMatch/closeMatch align these with the COAR Resource Types vocabulary
+# (https://vocabularies.coar-repositories.org/resource_types/), which OpenAIRE mandates.
+pulse:JournalArticle a pulse:PublicationTypeEnumeration ; skos:prefLabel "Journal Article"@en ; skos:definition "An article published in a peer-reviewed journal."@en ; skos:exactMatch coar-resource:c_6501 .
+pulse:ConferencePaper a pulse:PublicationTypeEnumeration ; skos:prefLabel "Conference Paper"@en ; skos:definition "A paper presented at and published in the proceedings of a conference."@en ; skos:exactMatch coar-resource:c_5794 .
+pulse:Preprint a pulse:PublicationTypeEnumeration ; skos:prefLabel "Preprint"@en ; skos:definition "A version of a paper made publicly available before formal peer review."@en ; skos:exactMatch coar-resource:c_816b .
+pulse:BookChapter a pulse:PublicationTypeEnumeration ; skos:prefLabel "Book Chapter"@en ; skos:definition "A chapter published as part of an edited book."@en ; skos:exactMatch coar-resource:c_3248 .
+pulse:Dissertation a pulse:PublicationTypeEnumeration ; skos:prefLabel "Dissertation"@en ; skos:definition "A thesis submitted in support of an academic degree."@en ; skos:closeMatch coar-resource:c_46ec .
+pulse:Report a pulse:PublicationTypeEnumeration ; skos:prefLabel "Report"@en ; skos:definition "A technical or research report."@en ; skos:exactMatch coar-resource:c_93fc .
+pulse:OtherPublicationType a pulse:PublicationTypeEnumeration ; skos:prefLabel "Other"@en ; skos:definition "A publication type that does not fit into the other categories."@en .
+
+# Enumeration Instances - Access Rights
+# skos:exactMatch/closeMatch align these with the COAR Access Rights vocabulary
+# (https://vocabularies.coar-repositories.org/access_rights/), which OpenAIRE mandates.
+pulse:OpenAccess a pulse:AccessRightEnumeration ; skos:prefLabel "Open Access"@en ; skos:definition "The publication is freely accessible to anyone."@en ; skos:exactMatch coar-access:c_abf2 .
+pulse:ClosedAccess a pulse:AccessRightEnumeration ; skos:prefLabel "Closed Access"@en ; skos:definition "The publication is not publicly accessible."@en ; skos:closeMatch coar-access:c_14cb .
+pulse:EmbargoedAccess a pulse:AccessRightEnumeration ; skos:prefLabel "Embargoed Access"@en ; skos:definition "The publication will become openly accessible after an embargo period."@en ; skos:exactMatch coar-access:c_f1cf .
+pulse:RestrictedAccess a pulse:AccessRightEnumeration ; skos:prefLabel "Restricted Access"@en ; skos:definition "The publication is accessible only under certain conditions (e.g., registration, institutional access)."@en ; skos:exactMatch coar-access:c_16ec .
 
 # Enumeration Instances - Disciplines
 wd:Q34749 a pulse:DisciplineEnumeration; skos:prefLabel "Social sciences"@en; rdfs:subClassOf wd:Q11862829 .
@@ -239,6 +267,21 @@ pulse:RepositoryTypeShape
     sh:name "Repository Type" ;
     sh:description "Must be a valid IRI from the Repository Type enumeration (e.g., pulse:Software)." .
 
+pulse:PublicationTypeShape
+    a sh:PropertyShape ;
+    sh:path pulse:publicationType ;
+    sh:class pulse:PublicationTypeEnumeration ;
+    sh:name "Publication Type" ;
+    sh:description "Must be a valid IRI from the Publication Type enumeration (e.g., pulse:JournalArticle)." .
+
+pulse:AccessRightShape
+    a sh:PropertyShape ;
+    sh:path pulse:accessRight ;
+    sh:class pulse:AccessRightEnumeration ;
+    sh:maxCount 1 ;
+    sh:name "Access Right" ;
+    sh:description "Must be a valid IRI from the Access Right enumeration (e.g., pulse:OpenAccess)." .
+
 
 pulse:DoiPropertyShape
     a sh:PropertyShape ;
@@ -246,7 +289,8 @@ pulse:DoiPropertyShape
     sh:datatype xsd:string ;
     sh:minCount 1 ;
     sh:pattern "^10\\.\\d{4,9}/[-._;()/:a-zA-Z0-9]+$" ;
-    sh:description "Standard DOI validation." .
+    sh:description "Standard DOI validation." ;
+    skos:exactMatch datacite:doi .
 
 pulse:OrcidPropertyShape
     a sh:PropertyShape ;
@@ -273,7 +317,8 @@ pulse:RorPropertyShape
     sh:path schema:identifier ;
     sh:datatype xsd:string ;
     sh:pattern "^https://ror\\.org/[0-9a-z]{9}$" ;
-    sh:description "Standard ROR ID validation." .
+    sh:description "Standard ROR ID validation." ;
+    skos:exactMatch datacite:ror .
 
 pulse:HasUnitPropertyShape
     a sh:PropertyShape ;
@@ -391,7 +436,9 @@ pulse:ArticleShape
     sh:property pulse:InfoscienceArticleIdentifierShape ;
     sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Publication Date" ] ;
     sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this article"   ] ;
-    sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] .
+    sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] ;
+    sh:property pulse:PublicationTypeShape ;
+    sh:property pulse:AccessRightShape .
 
 pulse:OrganizationShape
     a sh:NodeShape ;

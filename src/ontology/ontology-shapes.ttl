@@ -10,6 +10,9 @@
 @prefix dct:    <http://purl.org/dc/terms/> .
 @prefix wd: <http://www.wikidata.org/entity/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix datacite: <http://purl.org/spar/datacite/> .
+@prefix coar-access: <http://purl.org/coar/access_right/> .
+@prefix coar-resource: <http://purl.org/coar/resource_type/> .
 
 # ---------------------------------------------------------
 # REUSABLE PROPERTY SHAPES
@@ -82,6 +85,21 @@ pulse:RepositoryTypeShape
     sh:name "Repository Type" ;
     sh:description "Must be a valid IRI from the Repository Type enumeration (e.g., pulse:Software)." .
 
+pulse:PublicationTypeShape
+    a sh:PropertyShape ;
+    sh:path pulse:publicationType ;
+    sh:class pulse:PublicationTypeEnumeration ;
+    sh:name "Publication Type" ;
+    sh:description "Must be a valid IRI from the Publication Type enumeration (e.g., pulse:JournalArticle)." .
+
+pulse:AccessRightShape
+    a sh:PropertyShape ;
+    sh:path pulse:accessRight ;
+    sh:class pulse:AccessRightEnumeration ;
+    sh:maxCount 1 ;
+    sh:name "Access Right" ;
+    sh:description "Must be a valid IRI from the Access Right enumeration (e.g., pulse:OpenAccess)." .
+
 
 pulse:DoiPropertyShape
     a sh:PropertyShape ;
@@ -89,7 +107,8 @@ pulse:DoiPropertyShape
     sh:datatype xsd:string ;
     sh:minCount 1 ;
     sh:pattern "^10\\.\\d{4,9}/[-._;()/:a-zA-Z0-9]+$" ;
-    sh:description "Standard DOI validation." .
+    sh:description "Standard DOI validation." ;
+    skos:exactMatch datacite:doi .
 
 pulse:OrcidPropertyShape
     a sh:PropertyShape ;
@@ -116,7 +135,8 @@ pulse:RorPropertyShape
     sh:path schema:identifier ;
     sh:datatype xsd:string ;
     sh:pattern "^https://ror\\.org/[0-9a-z]{9}$" ;
-    sh:description "Standard ROR ID validation." .
+    sh:description "Standard ROR ID validation." ;
+    skos:exactMatch datacite:ror .
 
 pulse:HasUnitPropertyShape
     a sh:PropertyShape ;
@@ -234,7 +254,9 @@ pulse:ArticleShape
     sh:property pulse:InfoscienceArticleIdentifierShape ;
     sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Publication Date" ] ;
     sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this article"   ] ;
-    sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] .
+    sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] ;
+    sh:property pulse:PublicationTypeShape ;
+    sh:property pulse:AccessRightShape .
 
 pulse:OrganizationShape
     a sh:NodeShape ;

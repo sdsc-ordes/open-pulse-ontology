@@ -8,6 +8,8 @@ wd:Q395 a pulse:DisciplineEnumeration .
 pulse:Software a pulse:RepositoryTypeEnumeration .
 pulse:GitHub a pulse:PlatformEnumeration .
 pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
+pulse:JournalArticle a pulse:PublicationTypeEnumeration .
+pulse:OpenAccess a pulse:AccessRightEnumeration .
 
 # VALID PROJECT - Should PASS validation
 # A research project linking members, outputs (repository + article),
@@ -58,4 +60,6 @@ pulse:ProjectArticle a schema:ScholarlyArticle ;
     schema:identifier "10.1234/ost.2025" ;
     schema:datePublished "2025-06-01"^^xsd:date ;
     schema:author pulse:ProjectLead ;
-    schema:sourceOrganization pulse:HostLab .
+    schema:sourceOrganization pulse:HostLab ;
+    pulse:publicationType pulse:JournalArticle ;
+    pulse:accessRight pulse:OpenAccess .
