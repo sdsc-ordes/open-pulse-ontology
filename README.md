@@ -30,13 +30,22 @@ uv sync
 uv sync --extra dev
 ```
 
+## Ontology Files
+
+The ontology is split by aspect under `src/ontology/`:
+
+- `ontology-classes.ttl` — ontology header, classes, and properties
+- `ontology-enumerations.ttl` — enumeration classes and instances
+- `ontology-shapes.ttl` — SHACL property and node shapes
+- `ontology-combined.ttl` — generated file combining the three above (see [CONTRIBUTING.md](CONTRIBUTING.md))
+
 ## Validation
 
 ### Running Validation
 
 ```bash
 # Validate test data
-uv run python tools/python/checks/shacl.py example/test_dataset_large_example.ttl ontology-combined.ttl
+uv run python tools/python/checks/shacl.py example/test_dataset_large_example.ttl src/ontology/ontology-combined.ttl
 
 # Run full test suite
 uv run python tools/python/checks/test_validation.py

@@ -15,11 +15,10 @@ def validate_test_file(test_file, shapes_file):
 
 
 def main():
-    # Determine project root
     script_dir = Path(__file__).parent
     project_root = script_dir.parent.parent.parent
 
-    shapes_file = project_root / "ontology-combined.ttl"
+    shapes_file = project_root / "src" / "ontology" / "ontology-combined.ttl"
     example_dir = project_root / "example"
 
     if not shapes_file.exists():
@@ -30,7 +29,6 @@ def main():
         print(f"❌ Example directory not found: {example_dir}")
         sys.exit(1)
 
-    # Collect test files, based on the file names indicating valid/invalid tests
     valid_tests = sorted(example_dir.glob("test_valid_*.ttl"))
     invalid_tests = sorted(example_dir.glob("test_invalid_*.ttl"))
 

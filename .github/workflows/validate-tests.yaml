@@ -34,4 +34,4 @@ jobs:
           name: validation-test-results
           path: |
             example/test_*.ttl
-            ontology-combined.ttl
+            src/ontology/ontology-combined.ttl

@@ -9,7 +9,6 @@ from rdflib import Graph, Namespace, RDF
 from bs4 import BeautifulSoup
 import sys
 
-# Define namespaces
 PULSE = Namespace("https://open-pulse.epfl.ch/ontology#")
 SCHEMA = Namespace("http://schema.org/")
 WD = Namespace("http://www.wikidata.org/entity/")
@@ -23,7 +22,6 @@ def extract_enumerations(ttl_file):
 
     enumerations = {}
 
-    # Find enumeration classes
     enum_classes = [
         PULSE.DisciplineEnumeration,
         PULSE.RepositoryTypeEnumeration,
@@ -33,7 +31,6 @@ def extract_enumerations(ttl_file):
     for enum_class in enum_classes:
         values = []
 
-        # Find all instances of this enumeration
         for s in g.subjects(RDF.type, enum_class):
             label = g.value(s, SKOS.prefLabel)
             comment = g.value(s, SKOS.definition)
@@ -54,7 +51,6 @@ def extract_enumerations(ttl_file):
             )
 
         if values:
-            # Get enum class info
             enum_label = g.value(enum_class, SKOS.prefLabel)
             enum_comment = g.value(enum_class, SKOS.definition)
 
@@ -125,8 +121,7 @@ def inject_references_to_enum_classes(soup, enumerations):
     for enum_uri, enum_data in enumerations.items():
         enum_id = enum_uri.split("#")[-1] if "#" in enum_uri else enum_uri.split("/")[-1]
 
-        # Try to find the section for this enumeration class
-        # Look for headings or sections that contain the class name
+        # Try several strategies to find the section for this enumeration class
         possible_selectors = [
             f"#{enum_id}",
             f'[id*="{enum_id}"]',
@@ -141,13 +136,11 @@ def inject_references_to_enum_classes(soup, enumerations):
                 if "contains" in selector:
                     for elem in soup.find_all(["h2", "h3", "h4"]):
                         if elem.get_text() and enum_data["label"] in elem.get_text():
-                            # Skip elements inside SVG
                             if not is_inside_svg(elem):
                                 target_element = elem
                                 break
                 else:
                     candidate = soup.select_one(selector)
-                    # Skip elements inside SVG
                     if candidate and not is_inside_svg(candidate):
                         target_element = candidate
 
@@ -158,19 +151,15 @@ def inject_references_to_enum_classes(soup, enumerations):
                 continue
 
         if target_element:
-            # Create a reference note
             reference = soup.new_tag("div", **{"class": "enum-reference"})
             reference.string = "See enumeration values in the "
             link = soup.new_tag("a", href=f"#enum-values-{enum_id}")
             link.string = "Enumerations section"
             reference.append(link)
 
-            # Insert after the heading or at the start of the section
             if target_element.name in ["h2", "h3", "h4"]:
-                # Insert after the heading
                 target_element.insert_after(reference)
             else:
-                # Insert at the start of the section
                 target_element.insert(0, reference)
 
 
@@ -179,15 +168,12 @@ def inject_into_html(html_file, enumeration_html, enumerations):
     with open(html_file, "r", encoding="utf-8") as f:
         soup = BeautifulSoup(f.read(), "html.parser")
 
-    # Find the main content area (adjust selector based on SHACL Play's structure)
-    # Try to find the container after the main content sections
+    # Selector depends on SHACL Play's generated structure; adjust if it changes.
     main_content = soup.find("div", class_="container") or soup.find("main") or soup.find("body")
 
     if main_content:
-        # Create a new div for enumerations
         enum_section = BeautifulSoup(enumeration_html, "html.parser")
 
-        # Add some CSS for styling
         style_tag = soup.new_tag("style")
         style_tag.string = """
         #enumerations {
@@ -252,23 +238,19 @@ def inject_into_html(html_file, enumeration_html, enumerations):
         }
         """
 
-        # Add style to head
         head = soup.find("head")
         if head:
             head.append(style_tag)
 
-        # Append enumeration section to main content
         main_content.append(enum_section)
 
-    # Add references to enumeration classes
     inject_references_to_enum_classes(soup, enumerations)
 
-    # Replace all occurrences of schema1 with schema
+    # rdflib serializes a colliding prefix as "schema1"; fold it back to "schema".
     html_content = str(soup)
     html_content = html_content.replace("schema1:", "schema:")
     html_content = html_content.replace("schema1", "schema")
 
-    # Write back
     with open(html_file, "w", encoding="utf-8") as f:
         f.write(html_content)
 

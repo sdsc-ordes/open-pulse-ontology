@@ -4,6 +4,24 @@ Welcome! To keep our ontology stable, our history clean, and our releases predic
 
 Please read these guidelines before contributing.
 
+## 0. Ontology Source Files
+
+The ontology is split by semantic aspect into three source files:
+
+- `src/ontology/ontology-classes.ttl` — the ontology header (`owl:versionInfo` lives here) plus classes and properties.
+- `src/ontology/ontology-enumerations.ttl` — enumeration classes and their instances (repository types, organization types, platforms, disciplines).
+- `src/ontology/ontology-shapes.ttl` — reusable SHACL property shapes and node shapes.
+
+`src/ontology/ontology-combined.ttl` is a **generated file**, kept for tools and CI that expect a single ontology file (SHACL validation, releases, docs generation). Never edit it by hand.
+
+After editing any of the three source files, regenerate it:
+
+```bash
+uv run python tools/python/build/combine_ontology.py
+```
+
+Commit the regenerated `src/ontology/ontology-combined.ttl` together with your source changes.
+
 ## 1. Branching Strategy
 
 We use a two-branch model to protect production data:
@@ -32,18 +50,20 @@ We use **Conventional Commits**. Our CI/CD pipeline reads your commit messages t
 During normal development, you are just adding work to the `develop` bucket.
 
 1. Create a branch off `develop` (e.g., `git checkout -b feature/new-logic`).
-2. Make your changes (edit the ontology, add scripts, update `README`).
-3. Open a Pull Request into `develop` and merge it.
+2. Make your changes (edit `src/ontology/ontology-classes.ttl`, `src/ontology/ontology-enumerations.ttl`, or `src/ontology/ontology-shapes.ttl`, add scripts, update `README`).
+3. Regenerate `src/ontology/ontology-combined.ttl` (see [Section 0](#0-ontology-source-files)) and include it in your commit.
+4. Open a Pull Request into `develop` and merge it.
 
-🛑 **CRITICAL:** Do **NOT** remove the `-develop` suffix from `owl:versionInfo` in `ontology-combined.ttl` during this phase. Just merge your code. The release bot will handle versions and collect your commits later.
+🛑 **CRITICAL:** Do **NOT** remove the `-develop` suffix from `owl:versionInfo` in `src/ontology/ontology-classes.ttl` during this phase. Just merge your code. The release bot will handle versions and collect your commits later.
 
 ## 4. Preparing the Next Version (In Develop)
 
 After a production release is finished, or when starting a new milestone, ensure the `develop` branch reflects the *upcoming* version with a pre-release suffix.
 
-1. Open `ontology-combined.ttl` on the `develop` branch.
+1. Open `src/ontology/ontology-classes.ttl` on the `develop` branch.
 2. Update the `owl:versionInfo` triple to the next anticipated version with a development suffix (e.g., bump `v2.2.0` to `v2.3.0-develop`).
-3. Commit this change directly or via a quick PR to `develop`.
+3. Regenerate `src/ontology/ontology-combined.ttl` (see [Section 0](#0-ontology-source-files)).
+4. Commit these changes directly or via a quick PR to `develop`.
 
 ## 5. Promoting to Production (Stable Release)
 

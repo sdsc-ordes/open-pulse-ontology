@@ -24,10 +24,10 @@ jobs:
 
       - name: Convert ontology to N-Triples
         run: |
-          sop parse ontology-combined.ttl ! serialize -o ontology-combined.nt
+          sop parse src/ontology/ontology-combined.ttl ! serialize -o ontology-combined.nt
 
       - name: Upload Release Assets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release upload "${{ github.event.release.tag_name }}" ontology-combined.ttl ontology-combined.nt --clobber
+          gh release upload "${{ github.event.release.tag_name }}" src/ontology/ontology-combined.ttl ontology-combined.nt --clobber

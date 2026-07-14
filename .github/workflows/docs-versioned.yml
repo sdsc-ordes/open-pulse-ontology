@@ -12,9 +12,10 @@ on:
       - "**"
       - "!docs" # Exclude docs branch to prevent loops
     paths:
-      - "ontology-combined.ttl"
-      - "ontology.ttl"
-      - "shapes.ttl"
+      - "src/ontology/ontology-combined.ttl"
+      - "src/ontology/ontology-classes.ttl"
+      - "src/ontology/ontology-enumerations.ttl"
+      - "src/ontology/ontology-shapes.ttl"
   # Tag pushes can't share this trigger: GitHub's `paths:` filter applies to
   # both branches and tags, and for merge-commit tags it silently drops
   # everything — that's why v2.1.0/v2.1.2 never reached versions.json.
@@ -50,11 +51,9 @@ jobs:
       - name: Determine version info
         id: version-info
         run: |
-          # Get commit info
           COMMIT_HASH=$(git rev-parse --short=7 HEAD)
           COMMIT_DATE=$(git log -1 --format=%cs)
           COMMIT_AUTHOR=$(git log -1 --format=%an)
-          # Escape quotes and limit message length
           COMMIT_MESSAGE=$(git log -1 --format=%s | head -c 100 | sed 's/"/\\"/g')
 
           # Source of truth for the ref we're documenting:
@@ -136,7 +135,7 @@ jobs:
           java -jar shacl-play-cli.jar \
             doc \
             -d \
-            -i ontology-combined.ttl \
+            -i src/ontology/ontology-combined.ttl \
             -l en \
             -o generated-docs/index.html
 
@@ -144,7 +143,7 @@ jobs:
         run: |
           java -jar shacl-play-cli.jar \
             draw \
-            -i ontology-combined.ttl \
+            -i src/ontology/ontology-combined.ttl \
             -o generated-docs/ontology.svg
 
       - name: Fix SVG namespace issue
@@ -155,7 +154,7 @@ jobs:
 
       - name: Inject Enumerations into HTML
         run: |
-          uv run tools/python/docs/inject_enumerations.py ontology-combined.ttl generated-docs/index.html
+          uv run tools/python/docs/inject_enumerations.py src/ontology/ontology-combined.ttl generated-docs/index.html
 
       - name: Upload generated documentation as artifact
         uses: actions/upload-artifact@v6
@@ -197,10 +196,8 @@ jobs:
           COMMIT_HASH="${{ needs.generate-docs.outputs.commit_hash }}"
           
           if [ "$VERSION_TYPE" == "release" ]; then
-            # For releases: versions/{tag}/
             TARGET_PATH="versions/$VERSION_NAME"
           else
-            # For branches: branches/{name}/{commit}/
             TARGET_PATH="branches/$VERSION_NAME/$COMMIT_HASH"
           fi
           
@@ -214,10 +211,8 @@ jobs:
         run: |
           TARGET_PATH="${{ steps.target.outputs.path }}"
           
-          # Create target directory
           mkdir -p "$TARGET_PATH"
-          
-          # Copy generated docs
+
           cp -r generated-docs/* "$TARGET_PATH/"
           
           # Rename generated index.html to doc.html and use the header wrapper as index.html
@@ -229,7 +224,6 @@ jobs:
             echo "Wrapper index.html placed, generated docs renamed to doc.html"
           fi
           
-          # Cleanup downloaded artifact folder
           rm -rf generated-docs
           
           echo "Files deployed to $TARGET_PATH:"
@@ -244,21 +238,17 @@ jobs:
           COMMIT_AUTHOR="${{ needs.generate-docs.outputs.commit_author }}"
           COMMIT_MESSAGE="${{ needs.generate-docs.outputs.commit_message }}"
           
-          # Create versions.json if it doesn't exist
           if [ ! -f "versions.json" ]; then
             echo "Creating new versions.json"
             echo '{"releases":[],"branches":{},"latestRelease":null,"priorityBranches":["main","develop"]}' > versions.json
           fi
-          
-          # Export variables for Python script
+
           export VERSION_TYPE VERSION_NAME COMMIT_HASH COMMIT_DATE COMMIT_AUTHOR COMMIT_MESSAGE
-          
-          # Use Python to update versions.json
+
           python3 << 'PYTHON_SCRIPT'
           import json
           import os
           
-          # Read environment variables
           version_type = os.environ.get('VERSION_TYPE', '')
           version_name = os.environ.get('VERSION_NAME', '')
           commit_hash = os.environ.get('COMMIT_HASH', '')
@@ -272,7 +262,6 @@ jobs:
               data = json.load(f)
           
           if version_type == "release":
-              # Add or update release
               releases = data.get('releases', [])
               
               release_entry = {
@@ -326,7 +315,6 @@ jobs:
                       data['latestRelease'] = version_name
           
           else:
-              # Add commit to branch
               branches = data.get('branches', {})
               
               if version_name not in branches:
@@ -353,7 +341,6 @@ jobs:
                   commits.insert(0, commit_entry)
                   print(f"Added new commit: {commit_hash}")
               
-              # Limit to 50 commits per branch
               max_commits = 50
               if len(commits) > max_commits:
                   commits = commits[:max_commits]

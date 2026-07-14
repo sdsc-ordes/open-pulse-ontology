@@ -4,10 +4,16 @@ on:
   workflow_call:
   push:
     paths:
-      - 'ontology-combined.ttl'
+      - 'src/ontology/ontology-combined.ttl'
+      - 'src/ontology/ontology-classes.ttl'
+      - 'src/ontology/ontology-enumerations.ttl'
+      - 'src/ontology/ontology-shapes.ttl'
   pull_request:
     paths:
-      - 'ontology-combined.ttl'
+      - 'src/ontology/ontology-combined.ttl'
+      - 'src/ontology/ontology-classes.ttl'
+      - 'src/ontology/ontology-enumerations.ttl'
+      - 'src/ontology/ontology-shapes.ttl'
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -26,4 +32,4 @@ jobs:
 
       - name: SHACL validation
         run: |
-          uv run python tools/python/checks/shacl.py ontology-combined.ttl src/quality-checks/shacl-shacl.ttl
+          uv run python tools/python/checks/shacl.py src/ontology/ontology-combined.ttl src/quality-checks/shacl-shacl.ttl
