@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "69971d9",
+          "date": "2026-07-15",
+          "author": "rmfranken",
+          "message": "feat(ontology): deepen discipline tree, rename files"
+        },
+        {
           "hash": "5a3a1a0",
           "date": "2026-07-14",
           "author": "rmfranken",
