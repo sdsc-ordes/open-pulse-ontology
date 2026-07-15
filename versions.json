@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "290e0e1",
+          "date": "2026-07-15",
+          "author": "rmfranken",
+          "message": "feat: regen, fix spelling mistake, rename files"
+        },
+        {
           "hash": "69971d9",
           "date": "2026-07-15",
           "author": "rmfranken",
