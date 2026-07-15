@@ -20,13 +20,13 @@ jobs:
       - name: Bump Version
         id: bump
         run: |
-          CURRENT=$(grep -oP 'owl:versionInfo\s+"v?\K[^"]+' src/ontology/ontology-classes.ttl | head -1)
+          CURRENT=$(grep -oP 'owl:versionInfo\s+"v?\K[^"]+' src/ontology/ontology-definitions.ttl | head -1)
           CLEAN=$(echo "$CURRENT" | sed 's/-.*//')
           if [[ ! "$CLEAN" =~ ^v ]]; then CLEAN="v$CLEAN"; fi
 
-          # owl:versionInfo lives in src/ontology/ontology-classes.ttl (source of truth);
+          # owl:versionInfo lives in src/ontology/ontology-definitions.ttl (source of truth);
           # ontology-combined.ttl is generated from it further down.
-          sed -i "s|owl:versionInfo \"v\?$CURRENT\"|owl:versionInfo \"$CLEAN\"|" src/ontology/ontology-classes.ttl
+          sed -i "s|owl:versionInfo \"v\?$CURRENT\"|owl:versionInfo \"$CLEAN\"|" src/ontology/ontology-definitions.ttl
           echo "clean_version=$CLEAN" >> $GITHUB_OUTPUT
 
       - name: Install uv

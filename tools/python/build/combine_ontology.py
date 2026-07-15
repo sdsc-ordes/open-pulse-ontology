@@ -1,6 +1,6 @@
 """Regenerate ontology-combined.ttl from the split source files.
 
-ontology-classes.ttl, ontology-enumerations.ttl and ontology-shapes.ttl are the
+ontology-definitions.ttl, ontology-enumerations.ttl and ontology-shapes.ttl are the
 source of truth. ontology-combined.ttl is a generated artifact kept for tools
 and CI that expect a single file (SHACL validation, releases).
 """
@@ -10,7 +10,7 @@ from pathlib import Path
 ONTOLOGY_DIR = Path("src/ontology")
 
 SOURCE_FILES = [
-    "ontology-classes.ttl",
+    "ontology-definitions.ttl",
     "ontology-enumerations.ttl",
     "ontology-shapes.ttl",
 ]

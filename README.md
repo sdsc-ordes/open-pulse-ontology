@@ -34,7 +34,7 @@ uv sync --extra dev
 
 The ontology is split by aspect under `src/ontology/`:
 
-- `ontology-classes.ttl` — ontology header, classes, and properties
+- `ontology-definitions.ttl` — ontology header, classes, and properties
 - `ontology-enumerations.ttl` — enumeration classes and instances
 - `ontology-shapes.ttl` — SHACL property and node shapes
 - `ontology-combined.ttl` — generated file combining the three above (see [CONTRIBUTING.md](CONTRIBUTING.md))

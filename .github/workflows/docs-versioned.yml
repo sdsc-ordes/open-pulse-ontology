@@ -13,7 +13,7 @@ on:
       - "!docs" # Exclude docs branch to prevent loops
     paths:
       - "src/ontology/ontology-combined.ttl"
-      - "src/ontology/ontology-classes.ttl"
+      - "src/ontology/ontology-definitions.ttl"
       - "src/ontology/ontology-enumerations.ttl"
       - "src/ontology/ontology-shapes.ttl"
   # Tag pushes can't share this trigger: GitHub's `paths:` filter applies to

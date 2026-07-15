@@ -8,6 +8,7 @@ wd:Q395 a pulse:DisciplineEnumeration .
 pulse:Software a pulse:RepositoryTypeEnumeration .
 pulse:GitHub a pulse:PlatformEnumeration .
 pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
+pulse:Publisher a pulse:OrganizationTypeEnumeration .
 pulse:JournalArticle a pulse:PublicationTypeEnumeration .
 pulse:OpenAccess a pulse:AccessRightEnumeration .
 
@@ -46,6 +47,11 @@ pulse:FundingOrg a org:Organization ;
     schema:name "National Science Fund" ;
     pulse:ror "https://ror.org/00yjd3n13" .
 
+pulse:OpenSciencePress a org:Organization ;
+    schema:name "Open Science Press" ;
+    pulse:ror "https://ror.org/01aabb234" ;
+    pulse:OrganizationType pulse:Publisher .
+
 pulse:ProjectRepo a schema:SoftwareSourceCode ;
     schema:name "Open Science Toolkit" ;
     schema:dateCreated "2024-02-01T09:00:00"^^xsd:dateTime ;
@@ -61,5 +67,6 @@ pulse:ProjectArticle a schema:ScholarlyArticle ;
     schema:datePublished "2025-06-01"^^xsd:date ;
     schema:author pulse:ProjectLead ;
     schema:sourceOrganization pulse:HostLab ;
+    schema:publisher pulse:OpenSciencePress ;
     pulse:publicationType pulse:JournalArticle ;
     pulse:accessRight pulse:OpenAccess .
