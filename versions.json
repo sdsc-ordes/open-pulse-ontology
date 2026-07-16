@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "683b149",
+          "date": "2026-07-16",
+          "author": "rmfranken",
+          "message": "refactor: make repo generic and update related tests"
+        },
+        {
           "hash": "a9ead8d",
           "date": "2026-07-16",
           "author": "rmfranken",
