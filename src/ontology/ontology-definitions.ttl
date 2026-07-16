@@ -31,6 +31,7 @@ org:Membership a rdfs:Class ; skos:prefLabel "Membership" ; skos:definition "An 
 org:Organization a rdfs:Class ; skos:prefLabel "Organization" ; skos:definition "Represents a collection of people organized together into a community or other social, commercial or political structure. The group has some common purpose or reason for existence which goes beyond the set of people belonging to it and can act as an Agent. Organizations are often decomposable into hierarchical structures." .
 pulse:Contribution a rdfs:Class ; skos:prefLabel "Contribution" ; skos:definition "Represents a person's aggregated contributions to a repository." .
 pulse:PlatformProfile a rdfs:Class ; skos:prefLabel "Platform Profile" ; skos:definition "An identity that a Person holds on a specific external platform (e.g. a GitHub account or an Infoscience author record), grouping the platform-scoped handle, display name and email that belong together." .
+pulse:OrganizationProfile a rdfs:Class ; skos:prefLabel "Organization Profile" ; skos:definition "An identity that an Organization holds on a specific external platform (e.g. a GitHub org or a Hugging Face org), grouping the platform-scoped handle, display name and URL that belong together." .
 
 # Properties
 schema:license a rdf:Property ; skos:prefLabel "license" ; skos:definition "A license document that applies to this content, typically indicated by URL." .
@@ -60,10 +61,10 @@ org:role a rdf:Property ; skos:prefLabel "role"; skos:definition "Indicates the 
 time:hasBeginning a rdf:Property ; skos:prefLabel "has beginning" ; skos:definition "The beginning of the temporal entity." .
 time:hasEnd a rdf:Property ; skos:prefLabel "has end" ; skos:definition "The end of the temporal entity." .
 pulse:githubUsername a rdf:Property ; skos:prefLabel "github username" ; skos:definition "The GitHub handle of a person." .
-pulse:githubOrganizationHandle a rdf:Property ; skos:prefLabel "github organization handle" ; skos:definition "The GitHub handle of an organization." .
+pulse:huggingfaceUsername a rdf:Property ; skos:prefLabel "hugging face username" ; skos:definition "The Hugging Face handle of a person." .
 pulse:repositoryHandle a rdf:Property ; skos:prefLabel "repository handle" ; skos:definition "The handle of the repository (e.g. 'owner/repository' on GitHub/Bitbucket, or 'group/subgroup/project' on GitLab), interpreted relative to pulse:platform." .
 pulse:infosciencePersonIdentifier a rdf:Property ; skos:prefLabel "infoscience Identifier" ; skos:definition "The infoscience identifier of a person." .
-pulse:infoscienceOrganizationIdentifier a rdf:Property ; skos:prefLabel "infoscience organization identifier" ; skos:definition "The Infoscience identifier for an organization." .
+pulse:organizationHandle a rdf:Property ; skos:prefLabel "organization handle" ; skos:definition "The handle/slug of the organization on an external platform (e.g. a GitHub login, a Hugging Face org slug, or an Infoscience organization UUID), interpreted relative to pulse:platform." .
 pulse:discipline a rdf:Property ; skos:prefLabel "discipline" ; skos:definition "The academic or scientific discipline associated with the resource." .
 pulse:repositoryType a rdf:Property ; skos:prefLabel "repository type" ; skos:definition "The type or category of the repository (e.g., software, data, publication)." .
 pulse:OrganizationType a rdf:Property ; skos:prefLabel "organization type" ; skos:definition "The type or category of the organization (e.g., university, research institute, company)." .
@@ -88,7 +89,9 @@ pulse:orcidIdentifier a rdf:Property ; skos:prefLabel "ORCID identifier" ; skos:
 # Platform profile properties
 pulse:hasProfile a rdf:Property ; skos:prefLabel "has profile" ; skos:definition "Links a Person to a platform profile (external account/identity) they hold." .
 pulse:profileOf a rdf:Property ; skos:prefLabel "profile of" ; skos:definition "Links a platform profile back to the Person it belongs to." .
-pulse:platform a rdf:Property ; rdfs:range pulse:PlatformEnumeration ; skos:prefLabel "platform" ; skos:definition "The external platform associated with this resource (e.g. the platform a PlatformProfile exists on, or the platform hosting a repository)." .
+pulse:hasOrganizationProfile a rdf:Property ; skos:prefLabel "has organization profile" ; skos:definition "Links an Organization to a platform profile (external account/identity) it holds. Adding support for a new platform requires only a new pulse:PlatformEnumeration instance, not a new property." .
+pulse:organizationProfileOf a rdf:Property ; skos:prefLabel "organization profile of" ; skos:definition "Links a platform profile back to the Organization it belongs to." .
+pulse:platform a rdf:Property ; rdfs:range pulse:PlatformEnumeration ; skos:prefLabel "platform" ; skos:definition "The external platform associated with this resource (e.g. the platform a PlatformProfile/OrganizationProfile exists on, or the platform hosting a repository)." .
 
 # Project properties
 pulse:projectOutput a rdf:Property ; skos:prefLabel "project output" ; skos:definition "Links a Project to a research output (software repository or scholarly article) produced by the project." .

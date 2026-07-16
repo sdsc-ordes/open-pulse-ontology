@@ -65,7 +65,7 @@ pulse:Membership1 a org:Membership ;
 pulse:EPFLLab a org:Organization ;
     schema:name "EPFL Computational Lab" ;
     pulse:ror "https://ror.org/02s376052" ;
-    pulse:githubOrganizationHandle "DeepLabCut" ;
+    pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "DeepLabCut" ] ;
     pulse:OrganizationType pulse:ResearchInstitution ;
     pulse:githubOrgFollowers "320"^^xsd:integer ;
     pulse:owns pulse:CompleteRepo .

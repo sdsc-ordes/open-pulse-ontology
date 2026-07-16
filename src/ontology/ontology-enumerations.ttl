@@ -31,6 +31,8 @@ pulse:Software a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Software"@en 
 pulse:EducationalResource a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Educational Resource"@en ; skos:definition "A repository that contains educational materials."@en .
 pulse:Documentation a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Documentation"@en ; skos:definition "A repository that contains documentation."@en .
 pulse:Data a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Data"@en ; skos:definition "A repository that contains datasets."@en .
+pulse:Model a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Model"@en ; skos:definition "A repository that contains a trained machine learning model."@en .
+pulse:Space a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Space"@en ; skos:definition "A repository that hosts an interactive application or demo (e.g. a Hugging Face Space)."@en .
 pulse:Other a pulse:RepositoryTypeEnumeration ; skos:prefLabel "Other"@en ; skos:definition "A repository that does not fit into the other categories."@en .
 
 # Enumeration Instances - Organization Types
@@ -50,6 +52,8 @@ pulse:GitLab a pulse:PlatformEnumeration ; skos:prefLabel "GitLab"@en ; skos:def
 pulse:Bitbucket a pulse:PlatformEnumeration ; skos:prefLabel "Bitbucket"@en ; skos:definition "The Bitbucket code-hosting platform."@en .
 pulse:Infoscience a pulse:PlatformEnumeration ; skos:prefLabel "Infoscience"@en ; skos:definition "EPFL's Infoscience institutional publication repository."@en .
 pulse:ORCID a pulse:PlatformEnumeration ; skos:prefLabel "ORCID"@en ; skos:definition "The ORCID researcher-identifier registry."@en .
+pulse:HuggingFace a pulse:PlatformEnumeration ; skos:prefLabel "Hugging Face"@en ; skos:definition "The Hugging Face platform for hosting models, datasets, and Spaces."@en .
+pulse:Zenodo a pulse:PlatformEnumeration ; skos:prefLabel "Zenodo"@en ; skos:definition "The Zenodo research-data and software archive operated by CERN."@en .
 
 # Enumeration Instances - Publication Types
 # skos:exactMatch/closeMatch align these with the COAR Resource Types vocabulary

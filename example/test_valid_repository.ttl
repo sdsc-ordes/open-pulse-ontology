@@ -46,4 +46,4 @@ pulse:ValidAuthorGitHubProfile a pulse:PlatformProfile ;
 pulse:ValidOrganization a org:Organization ;
     schema:name "Example Research Lab" ;
     pulse:ror "https://ror.org/012345678" ;
-    pulse:githubOrganizationHandle "DeepLabCut" .
+    pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "DeepLabCut" ] .

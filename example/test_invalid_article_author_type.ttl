@@ -16,5 +16,5 @@ pulse:InvalidArticle a schema:ScholarlyArticle ;
 pulse:OrgAuthor a org:Organization ;
     schema:name "Publishing Org" ;
     pulse:ror "https://ror.org/02s376052" ;
-    pulse:githubOrganizationHandle "publishing-org" ;
+    pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "publishing-org" ] ;
     pulse:OrganizationType pulse:ResearchInstitution .

@@ -40,12 +40,12 @@ pulse:AliceInfoscienceProfile a pulse:PlatformProfile ;
 pulse:EPFL a org:Organization ;
     schema:name "EPFL" ;
     pulse:ror "https://ror.org/02aj6n233" ;
-    pulse:githubOrganizationHandle "epfl" .
+    pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "epfl" ] .
 
 pulse:SDSC a org:Organization ;
     schema:name "Swiss Data Science Center" ;
     pulse:ror "https://ror.org/03v8tnc06" ;
-    pulse:githubOrganizationHandle "swissdatasciencecenter" ;
+    pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "swissdatasciencecenter" ] ;
     pulse:owns pulse:RenkuRepo .
 
 pulse:AliceEPFLMembership a org:Membership ;

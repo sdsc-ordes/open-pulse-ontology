@@ -5,7 +5,7 @@
 pulse:GitHub a pulse:PlatformEnumeration .
 
 # INVALID ORGANIZATION - Should FAIL validation
-# Organization githubOrganizationHandle should be a simple string handle, not a URL or IRI
+# Organization pulse:organizationHandle should be a simple string handle, not a URL or IRI
 
 pulse:InvalidGithubUrlRepo a schema:SoftwareSourceCode ;
     schema:name "Invalid GitHub URL Test" ;
@@ -30,4 +30,8 @@ pulse:GithubUrlAuthorGitHubProfile a pulse:PlatformProfile ;
 pulse:InvalidGithubOrg a org:Organization ;
     schema:name "Invalid GitHub Org" ;
     pulse:ror "https://ror.org/012345678" ;
-    pulse:githubOrganizationHandle <https://github.com/example-org> .  # Invalid: should be a string literal \"example-org\", not an IRI
+    pulse:hasOrganizationProfile [
+        a pulse:OrganizationProfile ;
+        pulse:platform pulse:GitHub ;
+        pulse:organizationHandle <https://github.com/example-org>  # Invalid: should be a string literal "example-org", not an IRI
+    ] .

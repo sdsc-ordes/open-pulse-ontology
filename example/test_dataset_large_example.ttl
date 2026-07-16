@@ -40,7 +40,7 @@ pulse:ClosedAccess a pulse:AccessRightEnumeration .
 pulse:EPFLComputationalLab a org:Organization ;
     schema:name "EPFL Computational Lab" ;
     pulse:ror "https://ror.org/02s376052" ;
-    pulse:githubOrganizationHandle "epfl-complab" ;
+    pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "epfl-complab" ] ;
     pulse:OrganizationType pulse:ResearchInstitution ;
     pulse:githubOrgFollowers "450"^^xsd:integer ;
     pulse:owns pulse:SimulationFramework ;
@@ -50,7 +50,7 @@ pulse:EPFLComputationalLab a org:Organization ;
 pulse:SwissResearchAlliance a org:Organization ;
     schema:name "Swiss Research Alliance" ;
     pulse:ror "https://ror.org/01wyqb977" ;
-    pulse:githubOrganizationHandle "swiss-research" ;
+    pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "swiss-research" ] ;
     pulse:OrganizationType pulse:ResearchInstitution ;
     pulse:githubOrgFollowers "230"^^xsd:integer ;
     pulse:owns pulse:NetworkAnalysis ;
@@ -60,14 +60,14 @@ pulse:SwissResearchAlliance a org:Organization ;
 pulse:DepartmentPhysics a org:Organization ;
     schema:name "Department of Physics - ETH Zurich" ;
     pulse:ror "https://ror.org/05a28qc87" ;
-    pulse:githubOrganizationHandle "eth-physics" ;
+    pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "eth-physics" ] ;
     pulse:OrganizationType pulse:University ;
     pulse:githubOrgFollowers "125"^^xsd:integer ;
     org:hasUnit pulse:PhysicsSimulationUnit .
 
 # Organization 4: Physics Simulation Unit (subunit)
 pulse:PhysicsSimulationUnit a org:Organization ;
-    pulse:githubOrganizationHandle "physics-sim" ;
+    pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "physics-sim" ] ;
     schema:name "Physics Simulation Unit" ;
     org:unitOf pulse:DepartmentPhysics ;
     pulse:owns pulse:SimulationFramework .
