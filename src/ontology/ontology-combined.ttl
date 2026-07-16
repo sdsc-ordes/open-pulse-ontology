@@ -38,7 +38,7 @@ pulse:PlatformProfile a rdfs:Class ; skos:prefLabel "Platform Profile" ; skos:de
 schema:license a rdf:Property ; skos:prefLabel "license" ; skos:definition "A license document that applies to this content, typically indicated by URL." .
 schema:name a rdf:Property ; skos:prefLabel "name"; skos:definition "The name of the item." .
 schema:email a rdf:Property ; skos:prefLabel "email" ; skos:definition "Email address." .
-schema:url a rdf:Property ; skos:prefLabel "url" ; skos:definition "	URL of the item." .
+schema:url a rdf:Property ; skos:prefLabel "url" ; skos:definition "URL of the item." .
 schema:identifier a rdf:Property ; skos:prefLabel "identifier" ; skos:definition "The identifier (URL/Text) property represents any kind of identifier for any kind of Thing" .
 pulse:doi a rdf:Property ; rdfs:subPropertyOf schema:identifier ; skos:prefLabel "DOI" ; skos:definition "The Digital Object Identifier of a scholarly article." ; skos:exactMatch datacite:doi .
 pulse:ror a rdf:Property ; rdfs:subPropertyOf schema:identifier ; skos:prefLabel "ROR identifier" ; skos:definition "The Research Organization Registry (ROR) identifier of an organization." ; skos:exactMatch datacite:ror .
