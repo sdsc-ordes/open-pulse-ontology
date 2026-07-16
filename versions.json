@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "5b294f6",
+          "date": "2026-07-16",
+          "author": "rmfranken",
+          "message": "chore: remove old file and fix spelling mistake"
+        },
+        {
           "hash": "290e0e1",
           "date": "2026-07-15",
           "author": "rmfranken",
