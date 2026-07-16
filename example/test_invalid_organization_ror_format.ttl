@@ -13,7 +13,8 @@ pulse:GitHub a pulse:PlatformEnumeration .
 pulse:BadRORRepo a schema:SoftwareSourceCode ;
     schema:name "Bad ROR Repo" ;
     schema:dateCreated "2024-06-20T12:00:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "example/bad-ror" ;
+    pulse:repositoryHandle "example/bad-ror" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/Apache-2.0.html> ;
     schema:citation <https://doi.org/10.1234/example.badror> ;
     schema:author pulse:RORAuthor ;

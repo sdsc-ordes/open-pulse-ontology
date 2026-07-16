@@ -59,14 +59,14 @@ pulse:GithubOrganizationHandleShape a sh:PropertyShape ;
     sh:datatype xsd:string ;
     sh:description "The GitHub handle of an organization." .
 
-pulse:GithubRepositoryHandleShape
+pulse:RepositoryHandleShape
     a sh:PropertyShape ;
-    sh:path pulse:githubRepositoryHandle ;
+    sh:path pulse:repositoryHandle ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
     sh:datatype xsd:string ;
-    sh:pattern "^[a-zA-Z0-9\\-_]+/[a-zA-Z0-9\\-_\\.]+$" ;
-    sh:description "The GitHub repository handle in the format 'owner/repository'." .
+    sh:pattern "^[a-zA-Z0-9\\-_.]+(/[a-zA-Z0-9\\-_.]+)+$" ;
+    sh:description "The repository handle, e.g. 'owner/repository' (GitHub, Bitbucket) or 'group/subgroup/project' (GitLab's nested groups)." .
 
 pulse:DisciplineShape
     a sh:PropertyShape ;
@@ -152,19 +152,19 @@ pulse:GithubOrgFollowersShape
     sh:maxCount 1 ;
     sh:description "Number of followers for the GitHub organization." .
 
-pulse:GithubRepoStarsShape
+pulse:RepositoryStarsShape
     a sh:PropertyShape ;
-    sh:path pulse:githubRepoStars ;
+    sh:path pulse:repositoryStars ;
     sh:datatype xsd:integer ;
     sh:maxCount 1 ;
-    sh:description "Number of stars for the Software GitHub repository." .
+    sh:description "Number of stars for the repository." .
 
-pulse:GithubRepoForksShape
+pulse:RepositoryForksShape
     a sh:PropertyShape ;
-    sh:path pulse:githubRepoForks ;
+    sh:path pulse:repositoryForks ;
     sh:datatype xsd:integer ;
     sh:maxCount 1 ;
-    sh:description "Number of forks for the Software GitHub repository." .
+    sh:description "Number of forks for the repository." .
 
 # ---------------------------------------------------------
 # NODE SHAPES
@@ -286,10 +286,18 @@ pulse:RepositoryShape
     sh:property pulse:RepositoryTypeShape ;
     sh:property pulse:DisciplineShape ;
     sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this repository."   ] ;
-    sh:property pulse:GithubRepoStarsShape ;
-    sh:property pulse:GithubRepoForksShape ;
+    sh:property [
+        sh:path pulse:platform ;
+        sh:class pulse:PlatformEnumeration ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Platform" ;
+        sh:description "The code-hosting platform this repository lives on (e.g. pulse:GitHub, pulse:GitLab, pulse:Bitbucket)."
+    ] ;
+    sh:property pulse:RepositoryStarsShape ;
+    sh:property pulse:RepositoryForksShape ;
     sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Creation Date" ] ;
-    sh:property pulse:GithubRepositoryHandleShape ;
+    sh:property pulse:RepositoryHandleShape ;
     sh:property [ sh:path schema:license ; sh:nodeKind sh:IRI ; sh:name "License" ] ;
     sh:property [ sh:path schema:citation ; sh:nodeKind sh:IRI ; sh:name "Citation" ] ;
     sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
@@ -348,6 +356,20 @@ pulse:ContributionShape
         sh:maxCount 1 ;
         sh:name "Git Author" ;
         sh:description "The person who made these contributions."
+    ] ;
+    sh:property [
+        sh:path pulse:gitAuthorName ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Git Author Name" ;
+        sh:description "The author name as it literally appeared in the aggregated commits."
+    ] ;
+    sh:property [
+        sh:path pulse:gitAuthorEmail ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Git Author Email" ;
+        sh:description "The author email as it literally appeared in the aggregated commits."
     ] .
 
 pulse:MembershipShape

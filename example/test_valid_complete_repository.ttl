@@ -16,12 +16,13 @@ pulse:Infoscience a pulse:PlatformEnumeration .
 pulse:CompleteRepo a schema:SoftwareSourceCode ;
     schema:name "Complete Research Software" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "epfl/research-software" ;
+    pulse:repositoryHandle "epfl/research-software" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/BSD-3-Clause.html> ;
     schema:citation <https://doi.org/10.5281/zenodo.1234567> ;
     schema:programmingLanguage "Python" ;
-    pulse:githubRepoStars "128"^^xsd:integer ;
-    pulse:githubRepoForks "14"^^xsd:integer ;
+    pulse:repositoryStars "128"^^xsd:integer ;
+    pulse:repositoryForks "14"^^xsd:integer ;
     schema:author pulse:LeadResearcher ;
     pulse:ownedBy pulse:EPFLLab ;
     pulse:repositoryType pulse:Software ;

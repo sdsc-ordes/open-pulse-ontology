@@ -12,7 +12,8 @@ pulse:GitHub a pulse:PlatformEnumeration .
 pulse:InvalidContributionRepo a schema:SoftwareSourceCode ;
     schema:name "Invalid Contribution Test" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "example/invalid-contrib" ;
+    pulse:repositoryHandle "example/invalid-contrib" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.invalid> ;
     schema:programmingLanguage "JavaScript" ;

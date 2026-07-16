@@ -10,7 +10,8 @@ pulse:GitHub a pulse:PlatformEnumeration .
 pulse:InvalidGithubUrlRepo a schema:SoftwareSourceCode ;
     schema:name "Invalid GitHub URL Test" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "example/test-repo" ;
+    pulse:repositoryHandle "example/test-repo" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.citation> ;
     schema:author pulse:GithubUrlAuthor ;

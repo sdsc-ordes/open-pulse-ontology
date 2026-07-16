@@ -11,7 +11,8 @@ pulse:GitHub a pulse:PlatformEnumeration .
 
 pulse:InvalidMissingRequired a schema:SoftwareSourceCode ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "example/invalid-repo" ;
+    pulse:repositoryHandle "example/invalid-repo" ;
+    pulse:platform pulse:GitHub ;
     schema:programmingLanguage "Python" .
 
 pulse:InvalidPerson a schema:Person ;

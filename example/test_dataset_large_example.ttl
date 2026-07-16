@@ -251,7 +251,8 @@ pulse:EmmaMembershipPhysics a org:Membership ;
 # (owned by EPFL ComputationalLab, contributed to by: Alice, Bob, Carol)
 pulse:SimulationFramework a schema:SoftwareSourceCode ;
     schema:name "Advanced Physics Simulation Framework" ;
-    pulse:githubRepositoryHandle "epfl-complab/simulation-framework" ;
+    pulse:repositoryHandle "epfl-complab/simulation-framework" ;
+    pulse:platform pulse:GitHub ;
     schema:author pulse:AliceChen ;
     pulse:ownedBy pulse:EPFLComputationalLab ;
     schema:dateCreated "2019-03-10T14:30:00"^^xsd:dateTime ;
@@ -261,15 +262,16 @@ pulse:SimulationFramework a schema:SoftwareSourceCode ;
     schema:citation <https://doi.org/10.5281/zenodo.1234567> ;
     schema:programmingLanguage "Python" ;
     schema:programmingLanguage "Cython" ;
-    pulse:githubRepoStars "487"^^xsd:integer ;
-    pulse:githubRepoForks "52"^^xsd:integer ;
+    pulse:repositoryStars "487"^^xsd:integer ;
+    pulse:repositoryForks "52"^^xsd:integer ;
     pulse:isForkOf pulse:OriginalSimFramework .
 
 # Repository 2: Network Analysis
 # (owned by both Swiss Research Alliance AND Bob Kumar, contributed to by: Alice, Bob, David)
 pulse:NetworkAnalysis a schema:SoftwareSourceCode ;
     schema:name "Graph Neural Network Analysis Toolkit" ;
-    pulse:githubRepositoryHandle "swiss-research/gnn-analysis" ;
+    pulse:repositoryHandle "swiss-research/gnn-analysis" ;
+    pulse:platform pulse:GitHub ;
     schema:author pulse:BobKumar ;
     pulse:ownedBy pulse:SwissResearchAlliance ;
     schema:dateCreated "2020-07-22T09:15:00"^^xsd:dateTime ;
@@ -279,14 +281,15 @@ pulse:NetworkAnalysis a schema:SoftwareSourceCode ;
     schema:citation <https://doi.org/10.5281/zenodo.2345678> ;
     schema:programmingLanguage "Python" ;
     schema:programmingLanguage "Julia" ;
-    pulse:githubRepoStars "623"^^xsd:integer ;
-    pulse:githubRepoForks "89"^^xsd:integer .
+    pulse:repositoryStars "623"^^xsd:integer ;
+    pulse:repositoryForks "89"^^xsd:integer .
 
 # Repository 3: Data Processing
 # (owned by EPFL ComputationalLab, contributed to by: Alice, Carol, David, Emma)
 pulse:DataProcessing a schema:SoftwareSourceCode ;
     schema:name "High-Performance Data Processing Pipeline" ;
-    pulse:githubRepositoryHandle "epfl-complab/data-pipeline" ;
+    pulse:repositoryHandle "epfl-complab/data-pipeline" ;
+    pulse:platform pulse:GitHub ;
     schema:author pulse:AliceChen ;
     pulse:ownedBy pulse:EPFLComputationalLab ;
     schema:dateCreated "2021-01-15T11:20:00"^^xsd:dateTime ;
@@ -295,20 +298,22 @@ pulse:DataProcessing a schema:SoftwareSourceCode ;
     schema:license <https://spdx.org/licenses/GPL-3.0-or-later.html> ;
     schema:citation <https://doi.org/10.5281/zenodo.3456789> ;
     schema:programmingLanguage "Python" ;
-    pulse:githubRepoStars "312"^^xsd:integer ;
-    pulse:githubRepoForks "34"^^xsd:integer ;
+    pulse:repositoryStars "312"^^xsd:integer ;
+    pulse:repositoryForks "34"^^xsd:integer ;
     pulse:isForkOf pulse:OriginalDataPipeline .
 
 # Parent repository (upstream)
 pulse:OriginalSimFramework a schema:SoftwareSourceCode ;
     schema:name "Original Physics Simulation" ;
     schema:author pulse:BobKumar ;
-    pulse:githubRepositoryHandle "university-lab/original-sim" .
+    pulse:repositoryHandle "university-lab/original-sim" ;
+    pulse:platform pulse:GitHub .
 
 pulse:OriginalDataPipeline a schema:SoftwareSourceCode ;
     schema:name "Original Data Pipeline" ;
     schema:author pulse:AliceChen ;
-    pulse:githubRepositoryHandle "research-group/data-pipeline" .
+    pulse:repositoryHandle "research-group/data-pipeline" ;
+    pulse:platform pulse:GitHub .
 
 # ============================================================
 # CONTRIBUTIONS (15 total: 5 per repository, some contributors in multiple repos)
@@ -321,35 +326,45 @@ pulse:AliceContribSimulation a pulse:Contribution ;
     pulse:contributionTo pulse:SimulationFramework ;
     pulse:contributionCount "342"^^xsd:integer ;
     pulse:firstContributionDate "2019-03-15T10:00:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-11-20T16:45:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-11-20T16:45:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "Alice Chen" ;
+    pulse:gitAuthorEmail "alicechen@users.noreply.github.com" .
 
 pulse:BobContribSimulation a pulse:Contribution ;
     schema:author pulse:BobKumar ;
     pulse:contributionTo pulse:SimulationFramework ;
     pulse:contributionCount "178"^^xsd:integer ;
     pulse:firstContributionDate "2019-06-01T08:30:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-10-15T14:20:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-10-15T14:20:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "Bob Kumar" ;
+    pulse:gitAuthorEmail "bobkumar42@users.noreply.github.com" .
 
 pulse:CarolContribSimulation a pulse:Contribution ;
     schema:author pulse:CarolMartinez ;
     pulse:contributionTo pulse:SimulationFramework ;
     pulse:contributionCount "95"^^xsd:integer ;
     pulse:firstContributionDate "2021-02-10T09:00:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-09-30T11:30:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-09-30T11:30:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "Carol Martinez" ;
+    pulse:gitAuthorEmail "cmartinez@users.noreply.github.com" .
 
 pulse:AliceContribSimulation2 a pulse:Contribution ;
     schema:author pulse:AliceChen ;
     pulse:contributionTo pulse:SimulationFramework ;
     pulse:contributionCount "156"^^xsd:integer ;
     pulse:firstContributionDate "2022-01-05T13:15:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-11-25T10:00:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-11-25T10:00:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "Alice Chen" ;
+    pulse:gitAuthorEmail "alicechen@users.noreply.github.com" .
 
 pulse:ContribSim5 a pulse:Contribution ;
     schema:author pulse:BobKumar ;
     pulse:contributionTo pulse:SimulationFramework ;
     pulse:contributionCount "67"^^xsd:integer ;
     pulse:firstContributionDate "2023-04-20T10:30:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-08-12T15:45:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-08-12T15:45:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "Bob Kumar" ;
+    pulse:gitAuthorEmail "bobkumar42@users.noreply.github.com" .
 
 # REPOSITORY 2: Network Analysis Contributions
 
@@ -358,35 +373,45 @@ pulse:AliceContribNetwork a pulse:Contribution ;
     pulse:contributionTo pulse:NetworkAnalysis ;
     pulse:contributionCount "268"^^xsd:integer ;
     pulse:firstContributionDate "2020-08-10T11:00:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-12-01T17:00:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-12-01T17:00:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "Alice Chen" ;
+    pulse:gitAuthorEmail "alicechen@users.noreply.github.com" .
 
 pulse:BobContribNetwork a pulse:Contribution ;
     schema:author pulse:BobKumar ;
     pulse:contributionTo pulse:NetworkAnalysis ;
     pulse:contributionCount "412"^^xsd:integer ;
     pulse:firstContributionDate "2020-07-25T09:30:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-11-28T14:15:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-11-28T14:15:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "Bob Kumar" ;
+    pulse:gitAuthorEmail "bobkumar42@users.noreply.github.com" .
 
 pulse:DavidContribNetwork a pulse:Contribution ;
     schema:author pulse:DavidLee ;
     pulse:contributionTo pulse:NetworkAnalysis ;
     pulse:contributionCount "189"^^xsd:integer ;
     pulse:firstContributionDate "2021-05-15T10:00:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-10-20T13:00:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-10-20T13:00:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "David Lee" ;
+    pulse:gitAuthorEmail "davidlee88@users.noreply.github.com" .
 
 pulse:ContribNet4 a pulse:Contribution ;
     schema:author pulse:AliceChen ;
     pulse:contributionTo pulse:NetworkAnalysis ;
     pulse:contributionCount "134"^^xsd:integer ;
     pulse:firstContributionDate "2022-11-01T14:20:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-11-15T09:30:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-11-15T09:30:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "Alice Chen" ;
+    pulse:gitAuthorEmail "alicechen@users.noreply.github.com" .
 
 pulse:ContribNet5 a pulse:Contribution ;
     schema:author pulse:DavidLee ;
     pulse:contributionTo pulse:NetworkAnalysis ;
     pulse:contributionCount "76"^^xsd:integer ;
     pulse:firstContributionDate "2023-02-14T11:00:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-09-22T16:45:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-09-22T16:45:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "David Lee" ;
+    pulse:gitAuthorEmail "davidlee88@users.noreply.github.com" .
 
 # REPOSITORY 3: Data Processing Contributions
 
@@ -395,35 +420,45 @@ pulse:AliceContribData a pulse:Contribution ;
     pulse:contributionTo pulse:DataProcessing ;
     pulse:contributionCount "198"^^xsd:integer ;
     pulse:firstContributionDate "2021-01-20T10:00:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-11-30T15:00:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-11-30T15:00:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "Alice Chen" ;
+    pulse:gitAuthorEmail "alicechen@users.noreply.github.com" .
 
 pulse:CarolContribData a pulse:Contribution ;
     schema:author pulse:CarolMartinez ;
     pulse:contributionTo pulse:DataProcessing ;
     pulse:contributionCount "156"^^xsd:integer ;
     pulse:firstContributionDate "2021-02-01T09:00:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-11-10T12:30:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-11-10T12:30:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "Carol Martinez" ;
+    pulse:gitAuthorEmail "cmartinez@users.noreply.github.com" .
 
 pulse:DavidContribData a pulse:Contribution ;
     schema:author pulse:DavidLee ;
     pulse:contributionTo pulse:DataProcessing ;
     pulse:contributionCount "134"^^xsd:integer ;
     pulse:firstContributionDate "2022-03-10T08:45:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-10-25T14:00:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-10-25T14:00:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "David Lee" ;
+    pulse:gitAuthorEmail "davidlee88@users.noreply.github.com" .
 
 pulse:EmmaContribData a pulse:Contribution ;
     schema:author pulse:EmmaWilson ;
     pulse:contributionTo pulse:DataProcessing ;
     pulse:contributionCount "267"^^xsd:integer ;
     pulse:firstContributionDate "2020-07-01T13:30:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-11-28T11:45:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-11-28T11:45:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "Emma Wilson" ;
+    pulse:gitAuthorEmail "ewilson@users.noreply.github.com" .
 
 pulse:ContribData5 a pulse:Contribution ;
     schema:author pulse:AliceChen ;
     pulse:contributionTo pulse:DataProcessing ;
     pulse:contributionCount "89"^^xsd:integer ;
     pulse:firstContributionDate "2023-06-15T10:15:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-11-20T16:20:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-11-20T16:20:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "Alice Chen" ;
+    pulse:gitAuthorEmail "alicechen@users.noreply.github.com" .
 
 # ============================================================
 # RESEARCH PROJECT (ties people, repos, articles and orgs together)

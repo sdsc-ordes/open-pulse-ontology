@@ -8,7 +8,7 @@ The Open Pulse Ontology provides a structured vocabulary and validation rules (S
 
 - **People**: Researchers and contributors with GitHub usernames, ORCID identifiers, and institutional affiliations
 - **Organizations**: Universities, research institutions, and companies with ROR identifiers and GitHub handles
-- **Software Repositories**: GitHub repositories with metadata, ownership, and contribution tracking
+- **Software Repositories**: Repositories hosted on GitHub, GitLab, or Bitbucket, with metadata, ownership, and contribution tracking
 - **Research Articles**: Scholarly publications with DOI identifiers and author information
 - **Contributions**: Individual commit-level contributions linking people to repositories
 - **Memberships**: Affiliations between people and organizations with time periods and roles

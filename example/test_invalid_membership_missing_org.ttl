@@ -13,7 +13,8 @@ pulse:GitHub a pulse:PlatformEnumeration .
 pulse:MissingOrgRepo a schema:SoftwareSourceCode ;
     schema:name "Membership Missing Org Repo" ;
     schema:dateCreated "2024-05-10T08:00:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "example/missing-org" ;
+    pulse:repositoryHandle "example/missing-org" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/BSD-3-Clause.html> ;
     schema:citation <https://doi.org/10.1234/example.missingorg> ;
     schema:author pulse:MemberlessPerson ;

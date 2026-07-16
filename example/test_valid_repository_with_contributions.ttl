@@ -16,12 +16,13 @@ pulse:GitHub a pulse:PlatformEnumeration .
 pulse:RepoWithContributions a schema:SoftwareSourceCode ;
     schema:name "Math Library with Contributions" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "example/math-lib" ;
+    pulse:repositoryHandle "example/math-lib" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.mathlib> ;
     schema:programmingLanguage "Python" ;
-    pulse:githubRepoStars "42"^^xsd:integer ;
-    pulse:githubRepoForks "8"^^xsd:integer ;
+    pulse:repositoryStars "42"^^xsd:integer ;
+    pulse:repositoryForks "8"^^xsd:integer ;
     schema:author pulse:LeadContributor ;
     schema:author pulse:SecondaryContributor ;
     pulse:ownedBy pulse:MathOrg ;
@@ -58,14 +59,18 @@ pulse:AliceContribution a pulse:Contribution ;
     pulse:contributionTo pulse:RepoWithContributions ;
     pulse:contributionCount "127"^^xsd:integer ;
     pulse:firstContributionDate "2024-01-15T10:30:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-12-20T16:45:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-12-20T16:45:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "Alice Developer" ;
+    pulse:gitAuthorEmail "12345+alicedev@users.noreply.github.com" .
 
 pulse:BobContribution a pulse:Contribution ;
     schema:author pulse:SecondaryContributor ;
     pulse:contributionTo pulse:RepoWithContributions ;
     pulse:contributionCount "43"^^xsd:integer ;
     pulse:firstContributionDate "2024-03-10T09:15:00"^^xsd:dateTime ;
-    pulse:lastContributionDate "2024-11-05T14:30:00"^^xsd:dateTime .
+    pulse:lastContributionDate "2024-11-05T14:30:00"^^xsd:dateTime ;
+    pulse:gitAuthorName "bob coder" ;
+    pulse:gitAuthorEmail "bob.coder@example.com" .
 
 pulse:AliceMembership a org:Membership ;
     org:organization pulse:MathOrg ;

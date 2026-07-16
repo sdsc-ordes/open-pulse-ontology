@@ -61,15 +61,15 @@ time:hasBeginning a rdf:Property ; skos:prefLabel "has beginning" ; skos:definit
 time:hasEnd a rdf:Property ; skos:prefLabel "has end" ; skos:definition "The end of the temporal entity." .
 pulse:githubUsername a rdf:Property ; skos:prefLabel "github username" ; skos:definition "The GitHub handle of a person." .
 pulse:githubOrganizationHandle a rdf:Property ; skos:prefLabel "github organization handle" ; skos:definition "The GitHub handle of an organization." .
-pulse:githubRepositoryHandle a rdf:Property ; skos:prefLabel "github repository handle" ; skos:definition "The handle of the GitHub repository in the format 'owner/repository'." .
+pulse:repositoryHandle a rdf:Property ; skos:prefLabel "repository handle" ; skos:definition "The handle of the repository (e.g. 'owner/repository' on GitHub/Bitbucket, or 'group/subgroup/project' on GitLab), interpreted relative to pulse:platform." .
 pulse:infosciencePersonIdentifier a rdf:Property ; skos:prefLabel "infoscience Identifier" ; skos:definition "The infoscience identifier of a person." .
 pulse:infoscienceOrganizationIdentifier a rdf:Property ; skos:prefLabel "infoscience organization identifier" ; skos:definition "The Infoscience identifier for an organization." .
 pulse:discipline a rdf:Property ; skos:prefLabel "discipline" ; skos:definition "The academic or scientific discipline associated with the resource." .
 pulse:repositoryType a rdf:Property ; skos:prefLabel "repository type" ; skos:definition "The type or category of the repository (e.g., software, data, publication)." .
 pulse:OrganizationType a rdf:Property ; skos:prefLabel "organization type" ; skos:definition "The type or category of the organization (e.g., university, research institute, company)." .
 pulse:githubOrgFollowers a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github organization followers" ; skos:definition "The number of followers of a GitHub organization." .
-pulse:githubRepoStars a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github repository stars" ; skos:definition "The number of stars (likes) a GitHub repository has received." .
-pulse:githubRepoForks a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github repository forks" ; skos:definition "The number of forks (copies) of a GitHub repository." .
+pulse:repositoryStars a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "repository stars" ; skos:definition "The number of stars (likes) a repository has received." .
+pulse:repositoryForks a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "repository forks" ; skos:definition "The number of forks (copies) of a repository." .
 
 # Ownership and contribution properties
 pulse:owns a rdf:Property ; skos:prefLabel "owns" ; skos:definition "Links a Person or Organization to a software repository they own." ; owl:inverseOf pulse:ownedBy .
@@ -80,13 +80,15 @@ pulse:contributionTo a rdf:Property ; skos:prefLabel "contribution to" ; skos:de
 pulse:contributionCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "contribution count" ; skos:definition "The number of contributions (commits) made." .
 pulse:firstContributionDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:prefLabel "first contribution date" ; skos:definition "The date of the first contribution." .
 pulse:lastContributionDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:prefLabel "last contribution date" ; skos:definition "The date of the most recent contribution." .
+pulse:gitAuthorName a rdf:Property ; skos:prefLabel "git author name" ; skos:definition "The author name as it literally appears in the aggregated git commits, which may differ from the person's current platform profile name." .
+pulse:gitAuthorEmail a rdf:Property ; skos:prefLabel "git author email" ; skos:definition "The author email as it literally appears in the aggregated git commits, which may differ from the person's current platform profile email." .
 pulse:infoscienceArticleIdentifier a rdf:Property ; skos:prefLabel "infoscience article identifier" ; skos:definition "The Infoscience identifier for an article." .
 pulse:orcidIdentifier a rdf:Property ; skos:prefLabel "ORCID identifier" ; skos:definition "The ORCID identifier for a person." ; skos:exactMatch datacite:orcid .
 
 # Platform profile properties
 pulse:hasProfile a rdf:Property ; skos:prefLabel "has profile" ; skos:definition "Links a Person to a platform profile (external account/identity) they hold." .
 pulse:profileOf a rdf:Property ; skos:prefLabel "profile of" ; skos:definition "Links a platform profile back to the Person it belongs to." .
-pulse:platform a rdf:Property ; rdfs:range pulse:PlatformEnumeration ; skos:prefLabel "platform" ; skos:definition "The external platform on which a profile exists." .
+pulse:platform a rdf:Property ; rdfs:range pulse:PlatformEnumeration ; skos:prefLabel "platform" ; skos:definition "The external platform associated with this resource (e.g. the platform a PlatformProfile exists on, or the platform hosting a repository)." .
 
 # Project properties
 pulse:projectOutput a rdf:Property ; skos:prefLabel "project output" ; skos:definition "Links a Project to a research output (software repository or scholarly article) produced by the project." .

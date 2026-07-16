@@ -12,7 +12,8 @@ pulse:GitHub a pulse:PlatformEnumeration .
 pulse:InvalidLicenseCitationRepo a schema:SoftwareSourceCode ;
     schema:name "Literal License/Citation Repo" ;
     schema:dateCreated "2024-04-01T09:00:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "example/literal-license" ;
+    pulse:repositoryHandle "example/literal-license" ;
+    pulse:platform pulse:GitHub ;
     schema:license "MIT" ;             # invalid: expected IRI
     schema:citation "10.1000/foo" ;    # invalid: expected IRI
     schema:author pulse:LiteralAuthor ;

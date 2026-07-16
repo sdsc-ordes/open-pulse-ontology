@@ -15,7 +15,8 @@ pulse:GitHub a pulse:PlatformEnumeration .
 pulse:InvalidTemporalRepo a schema:SoftwareSourceCode ;
     schema:name "Temporal Misaligned Repo" ;
     schema:dateCreated "2024-02-01T08:00:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "epfl/temporal-misaligned" ;
+    pulse:repositoryHandle "epfl/temporal-misaligned" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.temporal> ;
     schema:programmingLanguage "Scala" ;

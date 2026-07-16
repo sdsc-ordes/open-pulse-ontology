@@ -15,14 +15,15 @@ pulse:GitHub a pulse:PlatformEnumeration .
 pulse:CollabRepo a schema:SoftwareSourceCode ;
     schema:name "Collaborative EPFL Toolkit" ;
     schema:dateCreated "2024-06-15T10:00:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "epfl/collab-toolkit" ;
+    pulse:repositoryHandle "epfl/collab-toolkit" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/Apache-2.0.html> ;
     schema:citation <https://doi.org/10.9999/example.collab> ;
     schema:programmingLanguage "Python" ;
     schema:programmingLanguage "C++" ;
     schema:programmingLanguage "Javascript" ;
-    pulse:githubRepoStars "45"^^xsd:integer ;
-    pulse:githubRepoForks "6"^^xsd:integer ;
+    pulse:repositoryStars "45"^^xsd:integer ;
+    pulse:repositoryForks "6"^^xsd:integer ;
     schema:author pulse:LeadDev ;
     schema:author pulse:Contributor ;
     pulse:ownedBy pulse:EPFLCenter ;

@@ -12,14 +12,15 @@ pulse:GitHub a pulse:PlatformEnumeration .
 pulse:InvalidMetricsRepo a schema:SoftwareSourceCode ;
     schema:name "Bad Metrics Repo" ;
     schema:dateCreated "2024-03-01T10:00:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "example/bad-metrics" ;
+    pulse:repositoryHandle "example/bad-metrics" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.badmetrics> ;
     schema:author pulse:MetricsAuthor ;
     pulse:repositoryType pulse:Software ;
     pulse:discipline wd:Q395 ;
-    pulse:githubRepoStars "12k" ;      # invalid datatype
-    pulse:githubRepoForks "forty" .    # invalid datatype
+    pulse:repositoryStars "12k" ;      # invalid datatype
+    pulse:repositoryForks "forty" .    # invalid datatype
 
 pulse:MetricsAuthor a schema:Person ;
     schema:name "Pat Metrics" ;

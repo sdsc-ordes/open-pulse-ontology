@@ -63,15 +63,15 @@ time:hasBeginning a rdf:Property ; skos:prefLabel "has beginning" ; skos:definit
 time:hasEnd a rdf:Property ; skos:prefLabel "has end" ; skos:definition "The end of the temporal entity." .
 pulse:githubUsername a rdf:Property ; skos:prefLabel "github username" ; skos:definition "The GitHub handle of a person." .
 pulse:githubOrganizationHandle a rdf:Property ; skos:prefLabel "github organization handle" ; skos:definition "The GitHub handle of an organization." .
-pulse:githubRepositoryHandle a rdf:Property ; skos:prefLabel "github repository handle" ; skos:definition "The handle of the GitHub repository in the format 'owner/repository'." .
+pulse:repositoryHandle a rdf:Property ; skos:prefLabel "repository handle" ; skos:definition "The handle of the repository (e.g. 'owner/repository' on GitHub/Bitbucket, or 'group/subgroup/project' on GitLab), interpreted relative to pulse:platform." .
 pulse:infosciencePersonIdentifier a rdf:Property ; skos:prefLabel "infoscience Identifier" ; skos:definition "The infoscience identifier of a person." .
 pulse:infoscienceOrganizationIdentifier a rdf:Property ; skos:prefLabel "infoscience organization identifier" ; skos:definition "The Infoscience identifier for an organization." .
 pulse:discipline a rdf:Property ; skos:prefLabel "discipline" ; skos:definition "The academic or scientific discipline associated with the resource." .
 pulse:repositoryType a rdf:Property ; skos:prefLabel "repository type" ; skos:definition "The type or category of the repository (e.g., software, data, publication)." .
 pulse:OrganizationType a rdf:Property ; skos:prefLabel "organization type" ; skos:definition "The type or category of the organization (e.g., university, research institute, company)." .
 pulse:githubOrgFollowers a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github organization followers" ; skos:definition "The number of followers of a GitHub organization." .
-pulse:githubRepoStars a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github repository stars" ; skos:definition "The number of stars (likes) a GitHub repository has received." .
-pulse:githubRepoForks a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github repository forks" ; skos:definition "The number of forks (copies) of a GitHub repository." .
+pulse:repositoryStars a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "repository stars" ; skos:definition "The number of stars (likes) a repository has received." .
+pulse:repositoryForks a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "repository forks" ; skos:definition "The number of forks (copies) of a repository." .
 
 # Ownership and contribution properties
 pulse:owns a rdf:Property ; skos:prefLabel "owns" ; skos:definition "Links a Person or Organization to a software repository they own." ; owl:inverseOf pulse:ownedBy .
@@ -82,13 +82,15 @@ pulse:contributionTo a rdf:Property ; skos:prefLabel "contribution to" ; skos:de
 pulse:contributionCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "contribution count" ; skos:definition "The number of contributions (commits) made." .
 pulse:firstContributionDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:prefLabel "first contribution date" ; skos:definition "The date of the first contribution." .
 pulse:lastContributionDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:prefLabel "last contribution date" ; skos:definition "The date of the most recent contribution." .
+pulse:gitAuthorName a rdf:Property ; skos:prefLabel "git author name" ; skos:definition "The author name as it literally appears in the aggregated git commits, which may differ from the person's current platform profile name." .
+pulse:gitAuthorEmail a rdf:Property ; skos:prefLabel "git author email" ; skos:definition "The author email as it literally appears in the aggregated git commits, which may differ from the person's current platform profile email." .
 pulse:infoscienceArticleIdentifier a rdf:Property ; skos:prefLabel "infoscience article identifier" ; skos:definition "The Infoscience identifier for an article." .
 pulse:orcidIdentifier a rdf:Property ; skos:prefLabel "ORCID identifier" ; skos:definition "The ORCID identifier for a person." ; skos:exactMatch datacite:orcid .
 
 # Platform profile properties
 pulse:hasProfile a rdf:Property ; skos:prefLabel "has profile" ; skos:definition "Links a Person to a platform profile (external account/identity) they hold." .
 pulse:profileOf a rdf:Property ; skos:prefLabel "profile of" ; skos:definition "Links a platform profile back to the Person it belongs to." .
-pulse:platform a rdf:Property ; rdfs:range pulse:PlatformEnumeration ; skos:prefLabel "platform" ; skos:definition "The external platform on which a profile exists." .
+pulse:platform a rdf:Property ; rdfs:range pulse:PlatformEnumeration ; skos:prefLabel "platform" ; skos:definition "The external platform associated with this resource (e.g. the platform a PlatformProfile exists on, or the platform hosting a repository)." .
 
 # Project properties
 pulse:projectOutput a rdf:Property ; skos:prefLabel "project output" ; skos:definition "Links a Project to a research output (software repository or scholarly article) produced by the project." .
@@ -130,6 +132,8 @@ pulse:OtherOrganizationType a pulse:OrganizationTypeEnumeration ; skos:prefLabel
 
 # Enumeration Instances - Platforms
 pulse:GitHub a pulse:PlatformEnumeration ; skos:prefLabel "GitHub"@en ; skos:definition "The GitHub code-hosting platform."@en .
+pulse:GitLab a pulse:PlatformEnumeration ; skos:prefLabel "GitLab"@en ; skos:definition "The GitLab code-hosting platform."@en .
+pulse:Bitbucket a pulse:PlatformEnumeration ; skos:prefLabel "Bitbucket"@en ; skos:definition "The Bitbucket code-hosting platform."@en .
 pulse:Infoscience a pulse:PlatformEnumeration ; skos:prefLabel "Infoscience"@en ; skos:definition "EPFL's Infoscience institutional publication repository."@en .
 pulse:ORCID a pulse:PlatformEnumeration ; skos:prefLabel "ORCID"@en ; skos:definition "The ORCID researcher-identifier registry."@en .
 
@@ -1813,14 +1817,14 @@ pulse:GithubOrganizationHandleShape a sh:PropertyShape ;
     sh:datatype xsd:string ;
     sh:description "The GitHub handle of an organization." .
 
-pulse:GithubRepositoryHandleShape
+pulse:RepositoryHandleShape
     a sh:PropertyShape ;
-    sh:path pulse:githubRepositoryHandle ;
+    sh:path pulse:repositoryHandle ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
     sh:datatype xsd:string ;
-    sh:pattern "^[a-zA-Z0-9\\-_]+/[a-zA-Z0-9\\-_\\.]+$" ;
-    sh:description "The GitHub repository handle in the format 'owner/repository'." .
+    sh:pattern "^[a-zA-Z0-9\\-_.]+(/[a-zA-Z0-9\\-_.]+)+$" ;
+    sh:description "The repository handle, e.g. 'owner/repository' (GitHub, Bitbucket) or 'group/subgroup/project' (GitLab's nested groups)." .
 
 pulse:DisciplineShape
     a sh:PropertyShape ;
@@ -1906,19 +1910,19 @@ pulse:GithubOrgFollowersShape
     sh:maxCount 1 ;
     sh:description "Number of followers for the GitHub organization." .
 
-pulse:GithubRepoStarsShape
+pulse:RepositoryStarsShape
     a sh:PropertyShape ;
-    sh:path pulse:githubRepoStars ;
+    sh:path pulse:repositoryStars ;
     sh:datatype xsd:integer ;
     sh:maxCount 1 ;
-    sh:description "Number of stars for the Software GitHub repository." .
+    sh:description "Number of stars for the repository." .
 
-pulse:GithubRepoForksShape
+pulse:RepositoryForksShape
     a sh:PropertyShape ;
-    sh:path pulse:githubRepoForks ;
+    sh:path pulse:repositoryForks ;
     sh:datatype xsd:integer ;
     sh:maxCount 1 ;
-    sh:description "Number of forks for the Software GitHub repository." .
+    sh:description "Number of forks for the repository." .
 
 # ---------------------------------------------------------
 # NODE SHAPES
@@ -2040,10 +2044,18 @@ pulse:RepositoryShape
     sh:property pulse:RepositoryTypeShape ;
     sh:property pulse:DisciplineShape ;
     sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this repository."   ] ;
-    sh:property pulse:GithubRepoStarsShape ;
-    sh:property pulse:GithubRepoForksShape ;
+    sh:property [
+        sh:path pulse:platform ;
+        sh:class pulse:PlatformEnumeration ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Platform" ;
+        sh:description "The code-hosting platform this repository lives on (e.g. pulse:GitHub, pulse:GitLab, pulse:Bitbucket)."
+    ] ;
+    sh:property pulse:RepositoryStarsShape ;
+    sh:property pulse:RepositoryForksShape ;
     sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Creation Date" ] ;
-    sh:property pulse:GithubRepositoryHandleShape ;
+    sh:property pulse:RepositoryHandleShape ;
     sh:property [ sh:path schema:license ; sh:nodeKind sh:IRI ; sh:name "License" ] ;
     sh:property [ sh:path schema:citation ; sh:nodeKind sh:IRI ; sh:name "Citation" ] ;
     sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
@@ -2102,6 +2114,20 @@ pulse:ContributionShape
         sh:maxCount 1 ;
         sh:name "Git Author" ;
         sh:description "The person who made these contributions."
+    ] ;
+    sh:property [
+        sh:path pulse:gitAuthorName ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Git Author Name" ;
+        sh:description "The author name as it literally appeared in the aggregated commits."
+    ] ;
+    sh:property [
+        sh:path pulse:gitAuthorEmail ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Git Author Email" ;
+        sh:description "The author email as it literally appeared in the aggregated commits."
     ] .
 
 pulse:MembershipShape

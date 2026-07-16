@@ -46,6 +46,8 @@ pulse:OtherOrganizationType a pulse:OrganizationTypeEnumeration ; skos:prefLabel
 
 # Enumeration Instances - Platforms
 pulse:GitHub a pulse:PlatformEnumeration ; skos:prefLabel "GitHub"@en ; skos:definition "The GitHub code-hosting platform."@en .
+pulse:GitLab a pulse:PlatformEnumeration ; skos:prefLabel "GitLab"@en ; skos:definition "The GitLab code-hosting platform."@en .
+pulse:Bitbucket a pulse:PlatformEnumeration ; skos:prefLabel "Bitbucket"@en ; skos:definition "The Bitbucket code-hosting platform."@en .
 pulse:Infoscience a pulse:PlatformEnumeration ; skos:prefLabel "Infoscience"@en ; skos:definition "EPFL's Infoscience institutional publication repository."@en .
 pulse:ORCID a pulse:PlatformEnumeration ; skos:prefLabel "ORCID"@en ; skos:definition "The ORCID researcher-identifier registry."@en .
 
