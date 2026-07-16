@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "a9ead8d",
+          "date": "2026-07-16",
+          "author": "rmfranken",
+          "message": "chore: regen"
+        },
+        {
           "hash": "5b294f6",
           "date": "2026-07-16",
           "author": "rmfranken",
