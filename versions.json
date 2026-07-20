@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "b4a8eec",
+          "date": "2026-07-20",
+          "author": "rmfranken",
+          "message": "fix: move platform ID's to core, update tests"
+        },
+        {
           "hash": "8c50c11",
           "date": "2026-07-20",
           "author": "rmfranken",
