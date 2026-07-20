@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "63dc986",
+          "date": "2026-07-20",
+          "author": "rmfranken",
+          "message": "chore: remove comments"
+        },
+        {
           "hash": "b4a8eec",
           "date": "2026-07-20",
           "author": "rmfranken",
