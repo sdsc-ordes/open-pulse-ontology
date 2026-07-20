@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "8c50c11",
+          "date": "2026-07-20",
+          "author": "rmfranken",
+          "message": "feat: introduce \"verbose\" ontology extension"
+        },
+        {
           "hash": "b1c5155",
           "date": "2026-07-16",
           "author": "rmfranken",
