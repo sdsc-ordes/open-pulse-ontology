@@ -1,0 +1,122 @@
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix time:   <http://www.w3.org/2006/time#> .
+@prefix pulse:     <https://open-pulse.epfl.ch/ontology#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix datacite: <http://purl.org/spar/datacite/> .
+
+# ---------------------------------------------------------
+# VERBOSE CLASS & PROPERTY SECTION
+#
+# Additive extension of ontology-definitions.ttl: every class and property
+# below is new. Nothing here redefines or re-constrains a core term.
+# Combined with the core files (see combine_ontology.py), this lets the
+# verbose graph reach full parity with the GitHub/Hugging Face/Zenodo/ORCID
+# field inventory while the core graph stays minimal.
+# ---------------------------------------------------------
+
+# Classes
+pulse:Collection a rdfs:Class ; skos:prefLabel "Collection" ; skos:definition "A curated group of repositories, models, datasets, Spaces or papers assembled by a Person or Organization (e.g. a Hugging Face Collection)." .
+pulse:Community a rdfs:Class ; skos:prefLabel "Community" ; skos:definition "A curated group of records on an archive platform (e.g. a Zenodo Community), with its own curators and members distinct from the records it contains." .
+pulse:Funding a rdfs:Class ; skos:prefLabel "Funding" ; skos:definition "A grant or funding award held directly by a Person (e.g. an ORCID Funding record), distinct from schema:Project's funder relationship." .
+pulse:ExternalIdentifier a rdfs:Class ; skos:prefLabel "External Identifier" ; skos:definition "A (scheme, value) pair representing an identifier from an external registry (e.g. arXiv, Scopus, ResearcherID, ISBN) that isn't already a first-class property such as pulse:doi or pulse:orcidIdentifier." .
+
+# Identity properties shared across platform-scoped profiles, repositories and records
+pulse:platformInternalId a rdf:Property ; skos:prefLabel "platform internal ID" ; skos:definition "The stable, platform-issued internal identifier for this resource (e.g. a GitHub user/org/repo numeric ID, a Hugging Face internal ID, or a Zenodo record ID), interpreted relative to pulse:platform. Unlike a username or handle, this value does not change if the resource is renamed." .
+pulse:platformNodeId a rdf:Property ; skos:prefLabel "platform node ID" ; skos:definition "A platform's own opaque global node identifier for this resource (e.g. a GitHub GraphQL node ID), interpreted relative to pulse:platform." .
+
+# Profile-level properties (Person and Organization platform profiles)
+pulse:biography a rdf:Property ; skos:prefLabel "biography" ; skos:definition "A free-text biography or self-description." .
+schema:image a rdf:Property ; skos:prefLabel "image" ; skos:definition "An image representing the item (e.g. a person's or organization's avatar, or a community's logo)." .
+pulse:location a rdf:Property ; skos:prefLabel "location" ; skos:definition "A free-text location associated with a person or organization." .
+pulse:socialLink a rdf:Property ; skos:prefLabel "social link" ; skos:definition "A link to a social media profile or other secondary web presence, distinct from the primary schema:url." .
+pulse:followerCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "follower count" ; skos:definition "The number of followers this profile has on its platform." .
+pulse:followingCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "following count" ; skos:definition "The number of other profiles this profile follows on its platform." .
+schema:dateModified a rdf:Property ; skos:prefLabel "date modified" ; skos:definition "The date on which the item was most recently modified." .
+
+# Person-specific verbose properties
+pulse:company a rdf:Property ; skos:prefLabel "company" ; skos:definition "The free-text company/affiliation string a person has set on a platform profile (not validated against any Organization node)." .
+pulse:publicRepositoryCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "public repository count" ; skos:definition "The number of public repositories owned by this profile, as reported by the platform." .
+pulse:publicGistCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "public gist count" ; skos:definition "The number of public gists (or platform-equivalent code snippets) owned by this profile." .
+pulse:keyword a rdf:Property ; skos:prefLabel "keyword" ; skos:definition "A free-text keyword associated with a person's research interests or a work's subject matter." .
+pulse:country a rdf:Property ; skos:prefLabel "country" ; skos:definition "The country associated with a researcher." .
+
+# Repository-level verbose properties
+pulse:tag a rdf:Property ; skos:prefLabel "tag" ; skos:definition "A free-text categorization label attached to a repository (GitHub's Topics, Hugging Face's Tags)." .
+pulse:visibility a rdf:Property ; rdfs:range pulse:VisibilityEnumeration ; skos:prefLabel "visibility" ; skos:definition "Whether the repository is public, private, or internal." .
+pulse:archived a rdf:Property ; rdfs:range xsd:boolean ; skos:prefLabel "archived" ; skos:definition "Whether the repository has been archived (read-only) by its owner." .
+pulse:isTemplate a rdf:Property ; rdfs:range xsd:boolean ; skos:prefLabel "is template" ; skos:definition "Whether the repository is marked as a template repository." .
+pulse:defaultBranch a rdf:Property ; skos:prefLabel "default branch" ; skos:definition "The name of the repository's default branch." .
+pulse:watcherCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "watcher count" ; skos:definition "The number of users watching the repository for activity notifications." .
+pulse:openIssueCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "open issue count" ; skos:definition "The number of currently open issues on the repository." .
+pulse:hasDiscussions a rdf:Property ; rdfs:range xsd:boolean ; skos:prefLabel "has discussions" ; skos:definition "Whether the repository has discussions enabled." .
+pulse:hasWiki a rdf:Property ; rdfs:range xsd:boolean ; skos:prefLabel "has wiki" ; skos:definition "Whether the repository has its wiki enabled." .
+pulse:hasPages a rdf:Property ; rdfs:range xsd:boolean ; skos:prefLabel "has pages" ; skos:definition "Whether the repository has a hosted pages site enabled." .
+pulse:releaseCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "release count" ; skos:definition "The number of published releases." .
+pulse:gitTagCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "git tag count" ; skos:definition "The number of git tags (e.g. version markers such as v1.2.0), distinct from pulse:tag's free-text categorization labels." .
+pulse:branchCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "branch count" ; skos:definition "The number of branches in the repository." .
+pulse:readme a rdf:Property ; skos:prefLabel "README" ; skos:definition "A link to the repository's README file. Also used for a Hugging Face model card or dataset card, which are README.md files with YAML frontmatter." .
+pulse:fundingConfig a rdf:Property ; skos:prefLabel "funding config" ; skos:definition "A link to the repository's FUNDING.yml file." .
+pulse:publicCodeManifest a rdf:Property ; skos:prefLabel "publiccode manifest" ; skos:definition "A link to the repository's publiccode.yml file." .
+pulse:securityPolicy a rdf:Property ; skos:prefLabel "security policy" ; skos:definition "A link to the repository's SECURITY.md file." .
+pulse:codeOfConduct a rdf:Property ; skos:prefLabel "code of conduct" ; skos:definition "A link to the repository's CODE_OF_CONDUCT.md file." .
+pulse:dependencyCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "dependency count" ; skos:definition "The number of packages this repository depends on." .
+pulse:dependentCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "dependent count" ; skos:definition "The number of packages/repositories that depend on this repository." .
+pulse:dependsOn a rdf:Property ; skos:prefLabel "depends on" ; skos:definition "Links a repository to another repository it depends on." ; rdfs:domain schema:SoftwareSourceCode ; rdfs:range schema:SoftwareSourceCode ; owl:inverseOf pulse:dependencyOf .
+pulse:dependencyOf a rdf:Property ; skos:prefLabel "dependency of" ; skos:definition "Links a repository to another repository that depends on it." .
+pulse:pushedDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:prefLabel "pushed date" ; skos:definition "The timestamp of the most recent commit push, distinct from schema:dateModified which covers metadata edits." .
+
+# Hugging Face repository-kind verbose properties (Model / Dataset / Space)
+pulse:likeCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "like count" ; skos:definition "The number of likes a Hugging Face repository (Model, Dataset, or Space) has received. Kept separate from pulse:repositoryStars, which is GitHub-flavored and reused verbatim for GitLab/Bitbucket stars -- Hugging Face's like graph is a distinct metric on a distinct platform, not a rename of the same one." .
+pulse:pipelineTag a rdf:Property ; skos:prefLabel "pipeline tag" ; skos:definition "The Hugging Face pipeline tag describing a model's primary task (e.g. 'text-classification')." .
+pulse:task a rdf:Property ; skos:prefLabel "task" ; skos:definition "A machine-learning task associated with a model or dataset (e.g. 'translation', 'image-segmentation')." .
+pulse:library a rdf:Property ; skos:prefLabel "library" ; skos:definition "The software library used to load or run a model (e.g. 'transformers', 'diffusers')." .
+pulse:framework a rdf:Property ; skos:prefLabel "framework" ; skos:definition "The machine-learning framework a model is built with (e.g. 'pytorch', 'tensorflow', 'jax')." .
+pulse:language a rdf:Property ; skos:prefLabel "language" ; skos:definition "A natural (spoken/written) language covered by a model or dataset, distinct from schema:programmingLanguage." .
+pulse:downloadCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "download count" ; skos:definition "The number of times this resource has been downloaded." .
+pulse:gated a rdf:Property ; rdfs:range xsd:boolean ; skos:prefLabel "gated" ; skos:definition "Whether access to this public resource requires accepting terms or requesting access first." .
+pulse:modality a rdf:Property ; rdfs:range pulse:ModalityEnumeration ; skos:prefLabel "modality" ; skos:definition "The data modality/modalities covered by a dataset (e.g. text, image, audio)." .
+pulse:datasetSplit a rdf:Property ; skos:prefLabel "dataset split" ; skos:definition "The name of a data split defined by a dataset (e.g. 'train', 'test', 'validation')." .
+pulse:configuration a rdf:Property ; skos:prefLabel "configuration" ; skos:definition "The name of a named configuration/subset defined by a dataset." .
+pulse:sdk a rdf:Property ; rdfs:range pulse:SpaceSdkEnumeration ; skos:prefLabel "SDK" ; skos:definition "The SDK a Hugging Face Space is built with." .
+pulse:hardware a rdf:Property ; skos:prefLabel "hardware" ; skos:definition "The compute hardware tier a Space runs on (e.g. 'cpu-basic', 't4-medium')." .
+pulse:runtimeStatus a rdf:Property ; rdfs:range pulse:SpaceRuntimeStatusEnumeration ; skos:prefLabel "runtime status" ; skos:definition "The current runtime status of a Space." .
+pulse:relatedRepository a rdf:Property ; skos:prefLabel "related repository" ; skos:definition "Links a repository, paper, or record to another repository it references or uses (e.g. a Space linking to the models/datasets it depends on, or a paper linking to the models/datasets/Spaces that implement it)." .
+pulse:fileCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "file count" ; skos:definition "The number of files stored in this resource (a repository, dataset, Space, or archive record)." .
+pulse:lfsObjectCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "LFS object count" ; skos:definition "The number of Git LFS-tracked objects stored in this repository." .
+pulse:xetObjectCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "Xet object count" ; skos:definition "The number of Xet-backed storage objects stored in this repository." .
+pulse:externalReference a rdf:Property ; skos:prefLabel "external reference" ; skos:definition "A link to an external resource referenced by this repository but not hosted or modeled as its own node (e.g. a base model hosted elsewhere)." .
+
+# Article/Record-level verbose properties
+pulse:conceptDoi a rdf:Property ; rdfs:subPropertyOf schema:identifier ; skos:prefLabel "concept DOI" ; skos:definition "The version-independent 'concept' DOI that resolves to the latest version of a record (e.g. a Zenodo concept DOI), distinct from pulse:doi which identifies one specific version." .
+pulse:version a rdf:Property ; skos:prefLabel "version" ; skos:definition "The version label of this specific record/release." .
+pulse:contributor a rdf:Property ; skos:prefLabel "contributor" ; skos:definition "A person who contributed to a work without being a primary author/creator (schema:author)." .
+pulse:hasExternalIdentifier a rdf:Property ; skos:prefLabel "has external identifier" ; skos:definition "Links a person or a work to an ExternalIdentifier (scheme + value) not already covered by a first-class identifier property." .
+pulse:references a rdf:Property ; skos:prefLabel "references" ; skos:definition "Links a scholarly article/record to another scholarly work it cites or references." .
+pulse:memberOfCommunity a rdf:Property ; skos:prefLabel "member of community" ; skos:definition "Links a record to a Community it has been added to (e.g. a Zenodo Community)." .
+
+# Membership-kind properties (Employment / Education / Membership)
+pulse:membershipType a rdf:Property ; rdfs:range pulse:MembershipTypeEnumeration ; skos:prefLabel "membership type" ; skos:definition "Which kind of affiliation a Membership represents (Employment, Education, or a society/professional Membership)." .
+pulse:department a rdf:Property ; skos:prefLabel "department" ; skos:definition "The department or unit within the organization that an Employment membership is scoped to." .
+pulse:qualification a rdf:Property ; skos:prefLabel "qualification" ; skos:definition "The degree or qualification obtained, for an Education membership." .
+
+# Funding properties
+pulse:hasFunding a rdf:Property ; skos:prefLabel "has funding" ; skos:definition "Links a Person directly to a Funding record they hold (e.g. an ORCID Funding entry), independent of any schema:Project." .
+
+# Collection properties
+pulse:ownsCollection a rdf:Property ; skos:prefLabel "owns collection" ; skos:definition "Links a Person or Organization to a Collection they curate." ; owl:inverseOf pulse:collectionOwnedBy .
+pulse:collectionOwnedBy a rdf:Property ; skos:prefLabel "collection owned by" ; skos:definition "Links a Collection back to the Person or Organization that curates it." .
+pulse:collectionIncludes a rdf:Property ; skos:prefLabel "collection includes" ; skos:definition "Links a Collection to a repository or scholarly article it contains." .
+
+# Community properties
+pulse:curator a rdf:Property ; skos:prefLabel "curator" ; skos:definition "A person who curates a Community." .
+
+# Identifier scheme property
+pulse:identifierScheme a rdf:Property ; rdfs:range pulse:IdentifierSchemeEnumeration ; skos:prefLabel "identifier scheme" ; skos:definition "The registry/scheme an ExternalIdentifier's value belongs to (e.g. arXiv, Scopus, ISBN)." .

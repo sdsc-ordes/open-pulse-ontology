@@ -25,7 +25,7 @@ pulse:AliceGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
     pulse:profileOf pulse:Alice ;
     schema:name "alice-dev" ;
-    pulse:githubUsername "alice-dev" ;
+    pulse:platformUsername "alice-dev" ;
     schema:email "1024+alice-dev@users.noreply.github.com" ;
     schema:url <https://github.com/alice-dev> .
 
@@ -35,7 +35,7 @@ pulse:AliceInfoscienceProfile a pulse:PlatformProfile ;
     pulse:profileOf pulse:Alice ;
     schema:name "Müller, Alice" ;
     schema:email "alice@epfl.ch" ;
-    pulse:infosciencePersonIdentifier "550e8400-e29b-41d4-a716-446655440000" .
+    pulse:platformUsername "550e8400-e29b-41d4-a716-446655440000" .
 
 pulse:EPFL a org:Organization ;
     schema:name "EPFL" ;

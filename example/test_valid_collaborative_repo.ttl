@@ -38,7 +38,7 @@ pulse:LeadDev a schema:Person ;
 
 pulse:LeadDevGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
-    pulse:githubUsername "linam" ;
+    pulse:platformUsername "linam" ;
     schema:email "lina.morel@epfl.ch" ;
     schema:url <https://people.epfl.ch/lina.morel> .
 
@@ -50,7 +50,7 @@ pulse:Contributor a schema:Person ;
 
 pulse:ContributorGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
-    pulse:githubUsername "marcor" ;
+    pulse:platformUsername "marcor" ;
     schema:email "marco.ruiz@epfl.ch" .
 
 pulse:LeadMembership a org:Membership ;

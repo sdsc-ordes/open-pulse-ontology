@@ -1,0 +1,23 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# INVALID - pulse:membershipType must be an IRI from pulse:MembershipTypeEnumeration
+# (e.g. pulse:Employment). Using pulse:GitHub (a PlatformEnumeration instance, wrong
+# class) should FAIL validation.
+
+pulse:BadMembershipResearcher a schema:Person ;
+    schema:name "Bad Membership Researcher" ;
+    pulse:orcidIdentifier "0000-0006-7777-8888" ;
+    org:hasMembership pulse:BadMembership .
+
+pulse:BadMembershipOrg a org:Organization ;
+    schema:name "Bad Membership Org" ;
+    pulse:ror "https://ror.org/01234abcd" .
+
+pulse:BadMembership a org:Membership ;
+    org:organization pulse:BadMembershipOrg ;
+    pulse:membershipType pulse:GitHub ;
+    time:hasBeginning "2020-01-01"^^xsd:date .

@@ -27,5 +27,5 @@ pulse:LiteralAuthor a schema:Person ;
 
 pulse:LiteralAuthorGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
-    pulse:githubUsername "cliteral" ;
+    pulse:platformUsername "cliteral" ;
     schema:email "casey.literal@example.com" .

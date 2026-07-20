@@ -2223,3 +2223,483 @@ pulse:ProjectShape
         sh:name "Start Date"
     ] ;
     sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ; sh:name "End Date" ] .
+
+# ---------------------------------------------------------
+# VERBOSE CLASS & PROPERTY SECTION
+#
+# Additive extension of ontology-definitions.ttl: every class and property
+# below is new. Nothing here redefines or re-constrains a core term.
+# Combined with the core files (see combine_ontology.py), this lets the
+# verbose graph reach full parity with the GitHub/Hugging Face/Zenodo/ORCID
+# field inventory while the core graph stays minimal.
+# ---------------------------------------------------------
+
+# Classes
+pulse:Collection a rdfs:Class ; skos:prefLabel "Collection" ; skos:definition "A curated group of repositories, models, datasets, Spaces or papers assembled by a Person or Organization (e.g. a Hugging Face Collection)." .
+pulse:Community a rdfs:Class ; skos:prefLabel "Community" ; skos:definition "A curated group of records on an archive platform (e.g. a Zenodo Community), with its own curators and members distinct from the records it contains." .
+pulse:Funding a rdfs:Class ; skos:prefLabel "Funding" ; skos:definition "A grant or funding award held directly by a Person (e.g. an ORCID Funding record), distinct from schema:Project's funder relationship." .
+pulse:ExternalIdentifier a rdfs:Class ; skos:prefLabel "External Identifier" ; skos:definition "A (scheme, value) pair representing an identifier from an external registry (e.g. arXiv, Scopus, ResearcherID, ISBN) that isn't already a first-class property such as pulse:doi or pulse:orcidIdentifier." .
+
+# Identity properties shared across platform-scoped profiles, repositories and records
+pulse:platformInternalId a rdf:Property ; skos:prefLabel "platform internal ID" ; skos:definition "The stable, platform-issued internal identifier for this resource (e.g. a GitHub user/org/repo numeric ID, a Hugging Face internal ID, or a Zenodo record ID), interpreted relative to pulse:platform. Unlike a username or handle, this value does not change if the resource is renamed." .
+pulse:platformNodeId a rdf:Property ; skos:prefLabel "platform node ID" ; skos:definition "A platform's own opaque global node identifier for this resource (e.g. a GitHub GraphQL node ID), interpreted relative to pulse:platform." .
+
+# Profile-level properties (Person and Organization platform profiles)
+pulse:biography a rdf:Property ; skos:prefLabel "biography" ; skos:definition "A free-text biography or self-description." .
+schema:image a rdf:Property ; skos:prefLabel "image" ; skos:definition "An image representing the item (e.g. a person's or organization's avatar, or a community's logo)." .
+pulse:location a rdf:Property ; skos:prefLabel "location" ; skos:definition "A free-text location associated with a person or organization." .
+pulse:socialLink a rdf:Property ; skos:prefLabel "social link" ; skos:definition "A link to a social media profile or other secondary web presence, distinct from the primary schema:url." .
+pulse:followerCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "follower count" ; skos:definition "The number of followers this profile has on its platform." .
+pulse:followingCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "following count" ; skos:definition "The number of other profiles this profile follows on its platform." .
+schema:dateModified a rdf:Property ; skos:prefLabel "date modified" ; skos:definition "The date on which the item was most recently modified." .
+
+# Person-specific verbose properties
+pulse:company a rdf:Property ; skos:prefLabel "company" ; skos:definition "The free-text company/affiliation string a person has set on a platform profile (not validated against any Organization node)." .
+pulse:publicRepositoryCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "public repository count" ; skos:definition "The number of public repositories owned by this profile, as reported by the platform." .
+pulse:publicGistCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "public gist count" ; skos:definition "The number of public gists (or platform-equivalent code snippets) owned by this profile." .
+pulse:keyword a rdf:Property ; skos:prefLabel "keyword" ; skos:definition "A free-text keyword associated with a person's research interests or a work's subject matter." .
+pulse:country a rdf:Property ; skos:prefLabel "country" ; skos:definition "The country associated with a researcher." .
+
+# Repository-level verbose properties
+pulse:tag a rdf:Property ; skos:prefLabel "tag" ; skos:definition "A free-text categorization label attached to a repository (GitHub's Topics, Hugging Face's Tags)." .
+pulse:visibility a rdf:Property ; rdfs:range pulse:VisibilityEnumeration ; skos:prefLabel "visibility" ; skos:definition "Whether the repository is public, private, or internal." .
+pulse:archived a rdf:Property ; rdfs:range xsd:boolean ; skos:prefLabel "archived" ; skos:definition "Whether the repository has been archived (read-only) by its owner." .
+pulse:isTemplate a rdf:Property ; rdfs:range xsd:boolean ; skos:prefLabel "is template" ; skos:definition "Whether the repository is marked as a template repository." .
+pulse:defaultBranch a rdf:Property ; skos:prefLabel "default branch" ; skos:definition "The name of the repository's default branch." .
+pulse:watcherCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "watcher count" ; skos:definition "The number of users watching the repository for activity notifications." .
+pulse:openIssueCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "open issue count" ; skos:definition "The number of currently open issues on the repository." .
+pulse:hasDiscussions a rdf:Property ; rdfs:range xsd:boolean ; skos:prefLabel "has discussions" ; skos:definition "Whether the repository has discussions enabled." .
+pulse:hasWiki a rdf:Property ; rdfs:range xsd:boolean ; skos:prefLabel "has wiki" ; skos:definition "Whether the repository has its wiki enabled." .
+pulse:hasPages a rdf:Property ; rdfs:range xsd:boolean ; skos:prefLabel "has pages" ; skos:definition "Whether the repository has a hosted pages site enabled." .
+pulse:releaseCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "release count" ; skos:definition "The number of published releases." .
+pulse:gitTagCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "git tag count" ; skos:definition "The number of git tags (e.g. version markers such as v1.2.0), distinct from pulse:tag's free-text categorization labels." .
+pulse:branchCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "branch count" ; skos:definition "The number of branches in the repository." .
+pulse:readme a rdf:Property ; skos:prefLabel "README" ; skos:definition "A link to the repository's README file. Also used for a Hugging Face model card or dataset card, which are README.md files with YAML frontmatter." .
+pulse:fundingConfig a rdf:Property ; skos:prefLabel "funding config" ; skos:definition "A link to the repository's FUNDING.yml file." .
+pulse:publicCodeManifest a rdf:Property ; skos:prefLabel "publiccode manifest" ; skos:definition "A link to the repository's publiccode.yml file." .
+pulse:securityPolicy a rdf:Property ; skos:prefLabel "security policy" ; skos:definition "A link to the repository's SECURITY.md file." .
+pulse:codeOfConduct a rdf:Property ; skos:prefLabel "code of conduct" ; skos:definition "A link to the repository's CODE_OF_CONDUCT.md file." .
+pulse:dependencyCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "dependency count" ; skos:definition "The number of packages this repository depends on." .
+pulse:dependentCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "dependent count" ; skos:definition "The number of packages/repositories that depend on this repository." .
+pulse:dependsOn a rdf:Property ; skos:prefLabel "depends on" ; skos:definition "Links a repository to another repository it depends on." ; rdfs:domain schema:SoftwareSourceCode ; rdfs:range schema:SoftwareSourceCode ; owl:inverseOf pulse:dependencyOf .
+pulse:dependencyOf a rdf:Property ; skos:prefLabel "dependency of" ; skos:definition "Links a repository to another repository that depends on it." .
+pulse:pushedDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:prefLabel "pushed date" ; skos:definition "The timestamp of the most recent commit push, distinct from schema:dateModified which covers metadata edits." .
+
+# Hugging Face repository-kind verbose properties (Model / Dataset / Space)
+pulse:likeCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "like count" ; skos:definition "The number of likes a Hugging Face repository (Model, Dataset, or Space) has received. Kept separate from pulse:repositoryStars, which is GitHub-flavored and reused verbatim for GitLab/Bitbucket stars -- Hugging Face's like graph is a distinct metric on a distinct platform, not a rename of the same one." .
+pulse:pipelineTag a rdf:Property ; skos:prefLabel "pipeline tag" ; skos:definition "The Hugging Face pipeline tag describing a model's primary task (e.g. 'text-classification')." .
+pulse:task a rdf:Property ; skos:prefLabel "task" ; skos:definition "A machine-learning task associated with a model or dataset (e.g. 'translation', 'image-segmentation')." .
+pulse:library a rdf:Property ; skos:prefLabel "library" ; skos:definition "The software library used to load or run a model (e.g. 'transformers', 'diffusers')." .
+pulse:framework a rdf:Property ; skos:prefLabel "framework" ; skos:definition "The machine-learning framework a model is built with (e.g. 'pytorch', 'tensorflow', 'jax')." .
+pulse:language a rdf:Property ; skos:prefLabel "language" ; skos:definition "A natural (spoken/written) language covered by a model or dataset, distinct from schema:programmingLanguage." .
+pulse:downloadCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "download count" ; skos:definition "The number of times this resource has been downloaded." .
+pulse:gated a rdf:Property ; rdfs:range xsd:boolean ; skos:prefLabel "gated" ; skos:definition "Whether access to this public resource requires accepting terms or requesting access first." .
+pulse:modality a rdf:Property ; rdfs:range pulse:ModalityEnumeration ; skos:prefLabel "modality" ; skos:definition "The data modality/modalities covered by a dataset (e.g. text, image, audio)." .
+pulse:datasetSplit a rdf:Property ; skos:prefLabel "dataset split" ; skos:definition "The name of a data split defined by a dataset (e.g. 'train', 'test', 'validation')." .
+pulse:configuration a rdf:Property ; skos:prefLabel "configuration" ; skos:definition "The name of a named configuration/subset defined by a dataset." .
+pulse:sdk a rdf:Property ; rdfs:range pulse:SpaceSdkEnumeration ; skos:prefLabel "SDK" ; skos:definition "The SDK a Hugging Face Space is built with." .
+pulse:hardware a rdf:Property ; skos:prefLabel "hardware" ; skos:definition "The compute hardware tier a Space runs on (e.g. 'cpu-basic', 't4-medium')." .
+pulse:runtimeStatus a rdf:Property ; rdfs:range pulse:SpaceRuntimeStatusEnumeration ; skos:prefLabel "runtime status" ; skos:definition "The current runtime status of a Space." .
+pulse:relatedRepository a rdf:Property ; skos:prefLabel "related repository" ; skos:definition "Links a repository, paper, or record to another repository it references or uses (e.g. a Space linking to the models/datasets it depends on, or a paper linking to the models/datasets/Spaces that implement it)." .
+pulse:fileCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "file count" ; skos:definition "The number of files stored in this resource (a repository, dataset, Space, or archive record)." .
+pulse:lfsObjectCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "LFS object count" ; skos:definition "The number of Git LFS-tracked objects stored in this repository." .
+pulse:xetObjectCount a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "Xet object count" ; skos:definition "The number of Xet-backed storage objects stored in this repository." .
+pulse:externalReference a rdf:Property ; skos:prefLabel "external reference" ; skos:definition "A link to an external resource referenced by this repository but not hosted or modeled as its own node (e.g. a base model hosted elsewhere)." .
+
+# Article/Record-level verbose properties
+pulse:conceptDoi a rdf:Property ; rdfs:subPropertyOf schema:identifier ; skos:prefLabel "concept DOI" ; skos:definition "The version-independent 'concept' DOI that resolves to the latest version of a record (e.g. a Zenodo concept DOI), distinct from pulse:doi which identifies one specific version." .
+pulse:version a rdf:Property ; skos:prefLabel "version" ; skos:definition "The version label of this specific record/release." .
+pulse:contributor a rdf:Property ; skos:prefLabel "contributor" ; skos:definition "A person who contributed to a work without being a primary author/creator (schema:author)." .
+pulse:hasExternalIdentifier a rdf:Property ; skos:prefLabel "has external identifier" ; skos:definition "Links a person or a work to an ExternalIdentifier (scheme + value) not already covered by a first-class identifier property." .
+pulse:references a rdf:Property ; skos:prefLabel "references" ; skos:definition "Links a scholarly article/record to another scholarly work it cites or references." .
+pulse:memberOfCommunity a rdf:Property ; skos:prefLabel "member of community" ; skos:definition "Links a record to a Community it has been added to (e.g. a Zenodo Community)." .
+
+# Membership-kind properties (Employment / Education / Membership)
+pulse:membershipType a rdf:Property ; rdfs:range pulse:MembershipTypeEnumeration ; skos:prefLabel "membership type" ; skos:definition "Which kind of affiliation a Membership represents (Employment, Education, or a society/professional Membership)." .
+pulse:department a rdf:Property ; skos:prefLabel "department" ; skos:definition "The department or unit within the organization that an Employment membership is scoped to." .
+pulse:qualification a rdf:Property ; skos:prefLabel "qualification" ; skos:definition "The degree or qualification obtained, for an Education membership." .
+
+# Funding properties
+pulse:hasFunding a rdf:Property ; skos:prefLabel "has funding" ; skos:definition "Links a Person directly to a Funding record they hold (e.g. an ORCID Funding entry), independent of any schema:Project." .
+
+# Collection properties
+pulse:ownsCollection a rdf:Property ; skos:prefLabel "owns collection" ; skos:definition "Links a Person or Organization to a Collection they curate." ; owl:inverseOf pulse:collectionOwnedBy .
+pulse:collectionOwnedBy a rdf:Property ; skos:prefLabel "collection owned by" ; skos:definition "Links a Collection back to the Person or Organization that curates it." .
+pulse:collectionIncludes a rdf:Property ; skos:prefLabel "collection includes" ; skos:definition "Links a Collection to a repository or scholarly article it contains." .
+
+# Community properties
+pulse:curator a rdf:Property ; skos:prefLabel "curator" ; skos:definition "A person who curates a Community." .
+
+# Identifier scheme property
+pulse:identifierScheme a rdf:Property ; rdfs:range pulse:IdentifierSchemeEnumeration ; skos:prefLabel "identifier scheme" ; skos:definition "The registry/scheme an ExternalIdentifier's value belongs to (e.g. arXiv, Scopus, ISBN)." .
+
+# ---------------------------------------------------------
+# VERBOSE ENUMERATIONS SECTION
+#
+# New enumeration classes needed only by the verbose graph, plus additional
+# instances of the core pulse:PublicationTypeEnumeration class (Zenodo's
+# upload types are broader than the journal-article-shaped core set).
+# ---------------------------------------------------------
+
+# Enumeration Classes
+pulse:VisibilityEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Visibility Enumeration" ; skos:definition "Enumeration of repository visibility levels." .
+pulse:ModalityEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Modality Enumeration" ; skos:definition "Enumeration of data modalities covered by a dataset." .
+pulse:SpaceSdkEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Space SDK Enumeration" ; skos:definition "Enumeration of SDKs a Hugging Face Space can be built with." .
+pulse:SpaceRuntimeStatusEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Space Runtime Status Enumeration" ; skos:definition "Enumeration of runtime statuses a Hugging Face Space can be in." .
+pulse:MembershipTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Membership Type Enumeration" ; skos:definition "Enumeration of the kinds of affiliation an org:Membership can represent." .
+pulse:IdentifierSchemeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Identifier Scheme Enumeration" ; skos:definition "Enumeration of external identifier registries/schemes." .
+
+# Enumeration Instances - Visibility
+pulse:PublicVisibility a pulse:VisibilityEnumeration ; skos:prefLabel "Public"@en ; skos:definition "The repository is visible to anyone."@en .
+pulse:PrivateVisibility a pulse:VisibilityEnumeration ; skos:prefLabel "Private"@en ; skos:definition "The repository is visible only to explicitly granted users."@en .
+pulse:InternalVisibility a pulse:VisibilityEnumeration ; skos:prefLabel "Internal"@en ; skos:definition "The repository is visible to all members of the owning organization."@en .
+
+# Enumeration Instances - Modality
+pulse:TextModality a pulse:ModalityEnumeration ; skos:prefLabel "Text"@en ; skos:definition "The dataset consists primarily of text."@en .
+pulse:ImageModality a pulse:ModalityEnumeration ; skos:prefLabel "Image"@en ; skos:definition "The dataset consists primarily of images."@en .
+pulse:AudioModality a pulse:ModalityEnumeration ; skos:prefLabel "Audio"@en ; skos:definition "The dataset consists primarily of audio."@en .
+pulse:VideoModality a pulse:ModalityEnumeration ; skos:prefLabel "Video"@en ; skos:definition "The dataset consists primarily of video."@en .
+pulse:TabularModality a pulse:ModalityEnumeration ; skos:prefLabel "Tabular"@en ; skos:definition "The dataset consists primarily of tabular/structured data."@en .
+pulse:MultimodalModality a pulse:ModalityEnumeration ; skos:prefLabel "Multimodal"@en ; skos:definition "The dataset combines more than one modality."@en .
+
+# Enumeration Instances - Space SDK
+pulse:Gradio a pulse:SpaceSdkEnumeration ; skos:prefLabel "Gradio"@en ; skos:definition "The Space is built with the Gradio SDK."@en .
+pulse:Streamlit a pulse:SpaceSdkEnumeration ; skos:prefLabel "Streamlit"@en ; skos:definition "The Space is built with the Streamlit SDK."@en .
+pulse:DockerSdk a pulse:SpaceSdkEnumeration ; skos:prefLabel "Docker"@en ; skos:definition "The Space is built from a custom Docker image."@en .
+pulse:StaticSdk a pulse:SpaceSdkEnumeration ; skos:prefLabel "Static"@en ; skos:definition "The Space serves static files with no server-side runtime."@en .
+
+# Enumeration Instances - Space Runtime Status
+pulse:RunningStatus a pulse:SpaceRuntimeStatusEnumeration ; skos:prefLabel "Running"@en ; skos:definition "The Space is currently running."@en .
+pulse:SleepingStatus a pulse:SpaceRuntimeStatusEnumeration ; skos:prefLabel "Sleeping"@en ; skos:definition "The Space is paused due to inactivity."@en .
+pulse:BuildingStatus a pulse:SpaceRuntimeStatusEnumeration ; skos:prefLabel "Building"@en ; skos:definition "The Space is currently being built."@en .
+pulse:RuntimeErrorStatus a pulse:SpaceRuntimeStatusEnumeration ; skos:prefLabel "Error"@en ; skos:definition "The Space failed to build or run."@en .
+pulse:PausedStatus a pulse:SpaceRuntimeStatusEnumeration ; skos:prefLabel "Paused"@en ; skos:definition "The Space has been manually paused by its owner."@en .
+
+# Enumeration Instances - Membership Type
+pulse:Employment a pulse:MembershipTypeEnumeration ; skos:prefLabel "Employment"@en ; skos:definition "A paid employment affiliation (e.g. an ORCID Employment entry)."@en .
+pulse:Education a pulse:MembershipTypeEnumeration ; skos:prefLabel "Education"@en ; skos:definition "An education/training affiliation (e.g. an ORCID Education entry)."@en .
+pulse:SocietyMembership a pulse:MembershipTypeEnumeration ; skos:prefLabel "Society Membership"@en ; skos:definition "A professional society or association membership (e.g. an ORCID Membership entry)."@en .
+
+# Enumeration Instances - Identifier Scheme
+pulse:ArXiv a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "arXiv"@en ; skos:definition "The arXiv preprint identifier scheme."@en .
+pulse:Scopus a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "Scopus"@en ; skos:definition "The Scopus Author ID scheme."@en .
+pulse:ResearcherId a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ResearcherID"@en ; skos:definition "The Web of Science ResearcherID scheme."@en .
+pulse:Isbn a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISBN"@en ; skos:definition "The International Standard Book Number scheme."@en .
+pulse:Issn a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISSN"@en ; skos:definition "The International Standard Serial Number scheme."@en .
+pulse:Pmid a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "PMID"@en ; skos:definition "The PubMed identifier scheme."@en .
+pulse:OtherIdentifierScheme a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "Other"@en ; skos:definition "An identifier scheme that does not fit into the other categories."@en .
+
+# Additional Enumeration Instances - Publication Types (broadens core to cover Zenodo's non-article upload types)
+# COAR alignment status per term (checked against https://github.com/coar-repositories/vocabularies
+# v1.1 snapshot and web search; the live vocabularies.coar-repositories.org site blocks automated
+# fetches, and appears to have moved to a different ID scheme in a newer version -- e.g. "conference
+# presentation" now resolves at .../resource_types/R60J-J5BD/ rather than a c_XXXX code -- so even
+# these confirmed v1.1 codes should be spot-checked against the current vocabulary before relying on
+# them for OpenAIRE reporting. Software and Dataset were independently corroborated across two
+# separate lookups; Poster/Presentation/Image/Video/Workflow/PhysicalObject could not be verified with
+# confidence (one candidate code, c_18ws, turned out to mean "research report", not "physical object")
+# and are left unaligned rather than guessed.
+pulse:SoftwarePublication a pulse:PublicationTypeEnumeration ; skos:prefLabel "Software"@en ; skos:definition "A software deposit (e.g. a Zenodo software upload)."@en ; skos:exactMatch coar-resource:c_5ce6 .
+pulse:DatasetPublication a pulse:PublicationTypeEnumeration ; skos:prefLabel "Dataset"@en ; skos:definition "A dataset deposit (e.g. a Zenodo dataset upload)."@en ; skos:exactMatch coar-resource:c_ddb1 .
+pulse:Poster a pulse:PublicationTypeEnumeration ; skos:prefLabel "Poster"@en ; skos:definition "A conference or research poster."@en .
+pulse:Presentation a pulse:PublicationTypeEnumeration ; skos:prefLabel "Presentation"@en ; skos:definition "A slide deck or recorded presentation."@en .
+pulse:Image a pulse:PublicationTypeEnumeration ; skos:prefLabel "Image"@en ; skos:definition "An image or figure deposit."@en .
+pulse:Video a pulse:PublicationTypeEnumeration ; skos:prefLabel "Video"@en ; skos:definition "A video or audiovisual deposit."@en .
+pulse:Workflow a pulse:PublicationTypeEnumeration ; skos:prefLabel "Workflow"@en ; skos:definition "A computational workflow deposit."@en .
+pulse:PhysicalObject a pulse:PublicationTypeEnumeration ; skos:prefLabel "Physical Object"@en ; skos:definition "A physical object deposit (e.g. a 3D-printable design)."@en .
+
+# ---------------------------------------------------------
+# VERBOSE SHAPES SECTION
+#
+# This file only ADDS sh:property statements to shape IRIs that already
+# exist in ontology-shapes.ttl (pulse:PersonShape, pulse:PlatformProfileShape,
+# pulse:OrganizationShape, pulse:OrganizationProfileShape, pulse:ArticleShape,
+# pulse:RepositoryShape, pulse:MembershipShape). Because SHACL shapes are
+# identified by IRI, RDF-merging these extra sh:property triples into the
+# same shape (via ontology-combined-verbose.ttl) simply widens that shape's
+# sh:closed allow-list -- no shape here re-declares sh:closed/sh:targetClass/
+# sh:ignoredProperties, and no sh:property added here touches a property path
+# the core shape already constrains (that would conflict rather than widen).
+# New classes (Collection, Community, Funding, ExternalIdentifier) get their
+# own complete NodeShape below since core says nothing about them at all.
+# ---------------------------------------------------------
+
+# ---------------------------------------------------------
+# REUSABLE VERBOSE PROPERTY SHAPES
+# ---------------------------------------------------------
+
+pulse:PlatformInternalIdShape
+    a sh:PropertyShape ;
+    sh:path pulse:platformInternalId ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:description "The stable platform-issued internal ID, interpreted relative to pulse:platform." .
+
+pulse:PlatformNodeIdShape
+    a sh:PropertyShape ;
+    sh:path pulse:platformNodeId ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:description "A platform's own opaque global node ID, interpreted relative to pulse:platform." .
+
+pulse:DescriptionShape
+    a sh:PropertyShape ;
+    sh:path schema:description ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 .
+
+pulse:ImageShape
+    a sh:PropertyShape ;
+    sh:path schema:image ;
+    sh:nodeKind sh:IRI ;
+    sh:maxCount 1 .
+
+# ---------------------------------------------------------
+# EXTEND pulse:PersonShape (ORCID Researcher fields)
+# ---------------------------------------------------------
+
+pulse:PersonShape
+    sh:property pulse:EmailShape ;
+    sh:property pulse:UrlShape ;
+    sh:property [ sh:path pulse:biography ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Biography" ] ;
+    sh:property [ sh:path pulse:keyword ; sh:datatype xsd:string ; sh:name "Keyword" ] ;
+    sh:property [ sh:path pulse:country ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Country" ] ;
+    sh:property [
+        sh:path pulse:hasExternalIdentifier ;
+        sh:class pulse:ExternalIdentifier ;
+        sh:name "Has External Identifier" ;
+        sh:description "Other identifiers not already covered by pulse:orcidIdentifier (e.g. Scopus ID, ResearcherID)."
+    ] ;
+    sh:property [
+        sh:path pulse:hasFunding ;
+        sh:class pulse:Funding ;
+        sh:name "Has Funding" ;
+        sh:description "Grants held directly by this person (ORCID's Funding section)."
+    ] ;
+    sh:property [
+        sh:path pulse:ownsCollection ;
+        sh:class pulse:Collection ;
+        sh:name "Owns Collection"
+    ] .
+
+# ---------------------------------------------------------
+# EXTEND pulse:PlatformProfileShape (GitHub/Hugging Face Account fields)
+# ---------------------------------------------------------
+
+pulse:PlatformProfileShape
+    sh:property pulse:PlatformInternalIdShape ;
+    sh:property pulse:PlatformNodeIdShape ;
+    sh:property [ sh:path pulse:biography ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Bio" ] ;
+    sh:property pulse:ImageShape ;
+    sh:property [ sh:path pulse:location ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Location" ] ;
+    sh:property [ sh:path pulse:socialLink ; sh:nodeKind sh:IRI ; sh:name "Social Link" ] ;
+    sh:property [ sh:path pulse:followerCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Followers" ] ;
+    sh:property [ sh:path pulse:followingCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Following" ] ;
+    sh:property [ sh:path pulse:company ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Company" ] ;
+    sh:property [ sh:path pulse:publicRepositoryCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Public Repositories" ] ;
+    sh:property [ sh:path pulse:publicGistCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Public Gists" ] ;
+    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:maxCount 1 ; sh:name "Created Date" ] ;
+    sh:property [ sh:path schema:dateModified ; sh:datatype xsd:dateTime ; sh:maxCount 1 ; sh:name "Updated Date" ] .
+
+# ---------------------------------------------------------
+# EXTEND pulse:OrganizationProfileShape (GitHub/Hugging Face Organization fields)
+# ---------------------------------------------------------
+
+pulse:OrganizationProfileShape
+    sh:property pulse:PlatformInternalIdShape ;
+    sh:property pulse:DescriptionShape ;
+    sh:property [ sh:path pulse:location ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Location" ] ;
+    sh:property [ sh:path pulse:followerCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Followers" ] ;
+    sh:property [ sh:path schema:dateModified ; sh:datatype xsd:dateTime ; sh:maxCount 1 ; sh:name "Updated Date" ] .
+
+# ---------------------------------------------------------
+# EXTEND pulse:OrganizationShape (org-wide fields, not platform-scoped)
+# ---------------------------------------------------------
+
+pulse:OrganizationShape
+    sh:property [ sh:path schema:member ; sh:class schema:Person ; sh:name "Members" ] ;
+    sh:property [ sh:path pulse:ownsCollection ; sh:class pulse:Collection ; sh:name "Owns Collection" ] .
+
+# ---------------------------------------------------------
+# EXTEND pulse:RepositoryShape (GitHub Repository + Hugging Face Model/Dataset/Space)
+# ---------------------------------------------------------
+
+pulse:RepositoryShape
+    sh:property pulse:PlatformInternalIdShape ;
+    sh:property pulse:PlatformNodeIdShape ;
+    sh:property pulse:DescriptionShape ;
+    sh:property [ sh:path pulse:tag ; sh:datatype xsd:string ; sh:name "Tag" ; sh:description "GitHub Topics or Hugging Face Tags." ] ;
+    sh:property [ sh:path schema:url ; sh:nodeKind sh:IRI ; sh:maxCount 1 ; sh:name "Homepage" ] ;
+    sh:property [ sh:path pulse:visibility ; sh:class pulse:VisibilityEnumeration ; sh:maxCount 1 ; sh:name "Visibility" ] ;
+    sh:property [ sh:path pulse:archived ; sh:datatype xsd:boolean ; sh:maxCount 1 ; sh:name "Archived" ] ;
+    sh:property [ sh:path pulse:isTemplate ; sh:datatype xsd:boolean ; sh:maxCount 1 ; sh:name "Template Repository" ] ;
+    sh:property [ sh:path pulse:defaultBranch ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Default Branch" ] ;
+    sh:property [ sh:path pulse:watcherCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Watchers" ] ;
+    sh:property [ sh:path pulse:openIssueCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Open Issues" ] ;
+    sh:property [ sh:path pulse:hasDiscussions ; sh:datatype xsd:boolean ; sh:maxCount 1 ; sh:name "Discussions" ] ;
+    sh:property [ sh:path pulse:hasWiki ; sh:datatype xsd:boolean ; sh:maxCount 1 ; sh:name "Wiki Enabled" ] ;
+    sh:property [ sh:path pulse:hasPages ; sh:datatype xsd:boolean ; sh:maxCount 1 ; sh:name "Pages Enabled" ] ;
+    sh:property [ sh:path pulse:releaseCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Releases" ] ;
+    sh:property [ sh:path pulse:gitTagCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Tags" ] ;
+    sh:property [ sh:path pulse:branchCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Branches" ] ;
+    sh:property [ sh:path pulse:readme ; sh:nodeKind sh:IRI ; sh:maxCount 1 ; sh:name "README" ; sh:description "Also used for a Hugging Face model card / dataset card." ] ;
+    sh:property [ sh:path pulse:fundingConfig ; sh:nodeKind sh:IRI ; sh:maxCount 1 ; sh:name "FUNDING.yml" ] ;
+    sh:property [ sh:path pulse:publicCodeManifest ; sh:nodeKind sh:IRI ; sh:maxCount 1 ; sh:name "publiccode.yml" ] ;
+    sh:property [ sh:path pulse:securityPolicy ; sh:nodeKind sh:IRI ; sh:maxCount 1 ; sh:name "SECURITY.md" ] ;
+    sh:property [ sh:path pulse:codeOfConduct ; sh:nodeKind sh:IRI ; sh:maxCount 1 ; sh:name "CODE_OF_CONDUCT.md" ] ;
+    sh:property [ sh:path pulse:dependencyCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Dependencies" ] ;
+    sh:property [ sh:path pulse:dependentCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Dependents" ] ;
+    sh:property [ sh:path pulse:dependsOn ; sh:class schema:SoftwareSourceCode ; sh:name "Depends On" ] ;
+    sh:property [ sh:path pulse:dependencyOf ; sh:class schema:SoftwareSourceCode ; sh:name "Dependency Of" ] ;
+    sh:property [ sh:path pulse:pushedDate ; sh:datatype xsd:dateTime ; sh:maxCount 1 ; sh:name "Pushed Date" ] ;
+    sh:property [ sh:path schema:dateModified ; sh:datatype xsd:dateTime ; sh:maxCount 1 ; sh:name "Updated Date" ] ;
+    sh:property [ sh:path pulse:likeCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Likes" ; sh:description "Hugging Face's like count, distinct from pulse:repositoryStars." ] ;
+    sh:property [ sh:path pulse:pipelineTag ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Pipeline Tag" ] ;
+    sh:property [ sh:path pulse:task ; sh:datatype xsd:string ; sh:name "Task" ] ;
+    sh:property [ sh:path pulse:library ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Library" ] ;
+    sh:property [ sh:path pulse:framework ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Framework" ] ;
+    sh:property [ sh:path pulse:language ; sh:datatype xsd:string ; sh:name "Language" ] ;
+    sh:property [ sh:path pulse:downloadCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Downloads" ] ;
+    sh:property [ sh:path pulse:gated ; sh:datatype xsd:boolean ; sh:maxCount 1 ; sh:name "Gated" ] ;
+    sh:property [ sh:path pulse:modality ; sh:class pulse:ModalityEnumeration ; sh:name "Modality" ] ;
+    sh:property [ sh:path pulse:datasetSplit ; sh:datatype xsd:string ; sh:name "Split" ] ;
+    sh:property [ sh:path pulse:configuration ; sh:datatype xsd:string ; sh:name "Configuration" ] ;
+    sh:property [ sh:path pulse:sdk ; sh:class pulse:SpaceSdkEnumeration ; sh:maxCount 1 ; sh:name "SDK" ] ;
+    sh:property [ sh:path pulse:hardware ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Hardware" ] ;
+    sh:property [ sh:path pulse:runtimeStatus ; sh:class pulse:SpaceRuntimeStatusEnumeration ; sh:maxCount 1 ; sh:name "Runtime Status" ] ;
+    sh:property [ sh:path pulse:relatedRepository ; sh:class schema:SoftwareSourceCode ; sh:name "Related Repository" ; sh:description "Linked models/datasets for a Space, or linked models/datasets for another repository." ] ;
+    sh:property [ sh:path pulse:fileCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Files" ] ;
+    sh:property [ sh:path pulse:lfsObjectCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "LFS Objects" ] ;
+    sh:property [ sh:path pulse:xetObjectCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Xet Objects" ] ;
+    sh:property [ sh:path pulse:externalReference ; sh:nodeKind sh:IRI ; sh:name "External Reference" ] .
+
+# ---------------------------------------------------------
+# EXTEND pulse:ArticleShape (Zenodo Record + Hugging Face Paper + ORCID Work)
+# ---------------------------------------------------------
+
+pulse:ArticleShape
+    sh:property [
+        sh:path pulse:platform ;
+        sh:class pulse:PlatformEnumeration ;
+        sh:maxCount 1 ;
+        sh:name "Platform" ;
+        sh:description "The archive/publication platform this record lives on (e.g. pulse:Zenodo, pulse:Infoscience)."
+    ] ;
+    sh:property pulse:PlatformInternalIdShape ;
+    sh:property [ sh:path pulse:conceptDoi ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Concept DOI" ] ;
+    sh:property [ sh:path pulse:version ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Version" ] ;
+    sh:property pulse:DescriptionShape ;
+    sh:property [ sh:path pulse:keyword ; sh:datatype xsd:string ; sh:name "Keyword" ] ;
+    sh:property pulse:DisciplineShape ;
+    sh:property [ sh:path schema:license ; sh:nodeKind sh:IRI ; sh:maxCount 1 ; sh:name "License" ] ;
+    sh:property [ sh:path pulse:contributor ; sh:class schema:Person ; sh:name "Contributor" ] ;
+    sh:property [ sh:path schema:funder ; sh:class org:Organization ; sh:name "Grant" ] ;
+    sh:property [
+        sh:path pulse:hasExternalIdentifier ;
+        sh:class pulse:ExternalIdentifier ;
+        sh:name "Has External Identifier" ;
+        sh:description "Related identifiers (e.g. an arXiv ID for a Hugging Face Paper, or a Zenodo related identifier)."
+    ] ;
+    sh:property [ sh:path pulse:references ; sh:class schema:ScholarlyArticle ; sh:name "References" ] ;
+    sh:property [ sh:path pulse:fileCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Files" ] ;
+    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:maxCount 1 ; sh:name "Created Date" ] ;
+    sh:property [ sh:path schema:dateModified ; sh:datatype xsd:dateTime ; sh:maxCount 1 ; sh:name "Updated Date" ] ;
+    sh:property [ sh:path pulse:memberOfCommunity ; sh:class pulse:Community ; sh:name "Community" ] ;
+    sh:property [
+        sh:path pulse:relatedRepository ;
+        sh:class schema:SoftwareSourceCode ;
+        sh:name "Related Repository" ;
+        sh:description "Models/datasets/Spaces linked from a Hugging Face Paper."
+    ] .
+
+# ---------------------------------------------------------
+# EXTEND pulse:MembershipShape (ORCID Employment / Education / Membership)
+# ---------------------------------------------------------
+
+pulse:MembershipShape
+    sh:property [
+        sh:path pulse:membershipType ;
+        sh:class pulse:MembershipTypeEnumeration ;
+        sh:maxCount 1 ;
+        sh:name "Membership Type" ;
+        sh:description "Distinguishes an ORCID Employment entry from Education or a society Membership."
+    ] ;
+    sh:property [ sh:path pulse:department ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Department" ] ;
+    sh:property [ sh:path pulse:qualification ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Qualification" ] .
+
+# ---------------------------------------------------------
+# NEW NODE SHAPES
+# ---------------------------------------------------------
+
+pulse:CollectionShape
+    a sh:NodeShape ;
+    sh:targetClass pulse:Collection ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property pulse:NameShape ;
+    sh:property pulse:PlatformInternalIdShape ;
+    sh:property [ sh:path pulse:platform ; sh:class pulse:PlatformEnumeration ; sh:maxCount 1 ; sh:name "Platform" ] ;
+    sh:property [
+        sh:path pulse:collectionOwnedBy ;
+        sh:or ( [ sh:class schema:Person ] [ sh:class org:Organization ] ) ;
+        sh:maxCount 1 ;
+        sh:name "Owner"
+    ] ;
+    sh:property [
+        sh:path pulse:collectionIncludes ;
+        sh:or ( [ sh:class schema:SoftwareSourceCode ] [ sh:class schema:ScholarlyArticle ] ) ;
+        sh:name "Includes"
+    ] .
+
+pulse:CommunityShape
+    a sh:NodeShape ;
+    sh:targetClass pulse:Community ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property pulse:NameShape ;
+    sh:property pulse:PlatformInternalIdShape ;
+    sh:property pulse:DescriptionShape ;
+    sh:property pulse:UrlShape ;
+    sh:property [ sh:path schema:image ; sh:nodeKind sh:IRI ; sh:maxCount 1 ; sh:name "Logo" ] ;
+    sh:property [ sh:path pulse:curator ; sh:class schema:Person ; sh:name "Curator" ] ;
+    sh:property [ sh:path schema:member ; sh:class schema:Person ; sh:name "Member" ] .
+
+pulse:FundingShape
+    a sh:NodeShape ;
+    sh:targetClass pulse:Funding ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property pulse:NameShape ;
+    sh:property [ sh:path schema:funder ; sh:class org:Organization ; sh:maxCount 1 ; sh:name "Funder" ] ;
+    sh:property [
+        sh:path pulse:hasExternalIdentifier ;
+        sh:class pulse:ExternalIdentifier ;
+        sh:name "Grant Identifier"
+    ] ;
+    sh:property [
+        sh:path time:hasBeginning ;
+        sh:datatype xsd:date ;
+        sh:lessThanOrEquals time:hasEnd ;
+        sh:name "Start Date"
+    ] ;
+    sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ; sh:name "End Date" ] .
+
+pulse:ExternalIdentifierShape
+    a sh:NodeShape ;
+    sh:targetClass pulse:ExternalIdentifier ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property [
+        sh:path pulse:identifierScheme ;
+        sh:class pulse:IdentifierSchemeEnumeration ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Scheme"
+    ] ;
+    sh:property [
+        sh:path schema:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Value"
+    ] .

@@ -1,0 +1,13 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+
+# INVALID - pulse:ExternalIdentifier requires exactly one pulse:identifierScheme
+# (sh:minCount 1). Should FAIL validation.
+
+pulse:ResearcherWithBadId a schema:Person ;
+    schema:name "Researcher With Bad Identifier" ;
+    pulse:orcidIdentifier "0000-0006-5555-6666" ;
+    pulse:hasExternalIdentifier pulse:IncompleteExternalId .
+
+pulse:IncompleteExternalId a pulse:ExternalIdentifier ;
+    schema:identifier "57200000001" .

@@ -39,6 +39,14 @@ The ontology is split by aspect under `src/ontology/`:
 - `ontology-shapes.ttl` — SHACL property and node shapes
 - `ontology-combined.ttl` — generated file combining the three above (see [CONTRIBUTING.md](CONTRIBUTING.md))
 
+There is also a **verbose** track that additively extends the core files to reach full
+field-parity with GitHub, Hugging Face, Zenodo and ORCID (internal/node IDs, repository
+file artifacts, Hugging Face Model/Dataset/Space fields, Zenodo Records/Communities, ORCID
+Employment/Education/Funding, etc): `ontology-definitions-verbose.ttl`,
+`ontology-enumerations-verbose.ttl`, `ontology-shapes-verbose.ttl`, combined into
+`ontology-combined-verbose.ttl`. See [CONTRIBUTING.md](CONTRIBUTING.md) for how core and
+verbose relate.
+
 ## Validation
 
 ### Running Validation
@@ -53,10 +61,15 @@ uv run python tools/python/checks/test_validation.py
 
 ### Example Test Cases
 
-The `example/` directory contains test files demonstrating both valid and invalid data patterns:
+The `example/` directory contains test files demonstrating both valid and invalid data patterns,
+validated against the core `ontology-combined.ttl`:
 
 - `test_valid_*.ttl` - Valid data conforming to the ontology
 - `test_invalid_*.ttl` - Invalid data triggering specific validation errors
+
+`example/verbose/` mirrors this same `test_valid_*.ttl` / `test_invalid_*.ttl` convention for the
+verbose track, validated against `ontology-combined-verbose.ttl`. `test_validation.py` runs both
+tracks and reports a combined summary.
 
 ## License
 

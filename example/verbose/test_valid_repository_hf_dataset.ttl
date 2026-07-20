@@ -1,0 +1,32 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+pulse:HuggingFace a pulse:PlatformEnumeration .
+pulse:Data a pulse:RepositoryTypeEnumeration .
+pulse:TextModality a pulse:ModalityEnumeration .
+
+# VALID - a Hugging Face Dataset, modeled as schema:SoftwareSourceCode with
+# pulse:repositoryType pulse:Data. Exercises Modalities/Splits/Configurations/
+# Files, plus Dataset card reusing pulse:readme.
+
+pulse:HfDatasetAuthor a schema:Person ;
+    schema:name "Dataset Author" ;
+    pulse:hasProfile [ a pulse:PlatformProfile ; pulse:platform pulse:HuggingFace ; pulse:platformUsername "datasetauthor" ] .
+
+pulse:VerboseParallelCorpus a schema:SoftwareSourceCode ;
+    schema:name "verbose-lab/en-fr-parallel-corpus" ;
+    schema:dateCreated "2023-11-01T00:00:00"^^xsd:dateTime ;
+    pulse:repositoryHandle "verbose-lab/en-fr-parallel-corpus" ;
+    pulse:platform pulse:HuggingFace ;
+    pulse:repositoryType pulse:Data ;
+    schema:author pulse:HfDatasetAuthor ;
+    schema:license <https://spdx.org/licenses/CC-BY-4.0.html> ;
+    pulse:readme <https://huggingface.co/datasets/verbose-lab/en-fr-parallel-corpus/blob/main/README.md> ;
+    pulse:language "en" , "fr" ;
+    pulse:modality pulse:TextModality ;
+    pulse:datasetSplit "train" , "validation" , "test" ;
+    pulse:configuration "default" , "raw" ;
+    pulse:downloadCount 4021 ;
+    pulse:likeCount 21 ;
+    pulse:fileCount 6 ;
+    schema:dateModified "2026-04-12T00:00:00"^^xsd:dateTime .

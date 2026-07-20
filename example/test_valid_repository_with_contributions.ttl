@@ -38,7 +38,7 @@ pulse:LeadContributor a schema:Person ;
 
 pulse:LeadContributorGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
-    pulse:githubUsername "alicedev" ;
+    pulse:platformUsername "alicedev" ;
     schema:email "alice.dev@example.com" ;
     schema:url <https://github.com/alicedev> .
 
@@ -50,7 +50,7 @@ pulse:SecondaryContributor a schema:Person ;
 
 pulse:SecondaryContributorGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
-    pulse:githubUsername "bobcoder" ;
+    pulse:platformUsername "bobcoder" ;
     schema:email "bob.coder@example.com" .
 
 # Contribution objects track aggregated statistics

@@ -1,0 +1,22 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# INVALID - pulse:collectionOwnedBy must point to a schema:Person or an
+# org:Organization (sh:or). Pointing it at a schema:SoftwareSourceCode
+# should FAIL validation.
+
+pulse:BadCollectionOwnerRepo a schema:SoftwareSourceCode ;
+    schema:name "not-an-owner" ;
+    schema:dateCreated "2024-01-01T00:00:00"^^xsd:dateTime ;
+    pulse:repositoryHandle "example/not-an-owner" ;
+    pulse:platform pulse:GitHub ;
+    schema:author pulse:BadCollectionOwnerAuthor .
+
+pulse:BadCollectionOwnerAuthor a schema:Person ;
+    schema:name "Bad Collection Owner Author" ;
+    pulse:orcidIdentifier "0000-0006-9999-0000" .
+
+pulse:BadOwnerCollection a pulse:Collection ;
+    schema:name "Misowned Collection" ;
+    pulse:collectionOwnedBy pulse:BadCollectionOwnerRepo .

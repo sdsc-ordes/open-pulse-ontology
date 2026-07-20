@@ -60,10 +60,8 @@ org:organization a rdf:Property ; skos:prefLabel "organization" ; skos:definitio
 org:role a rdf:Property ; skos:prefLabel "role"; skos:definition "Indicates the Role that the Agent plays in a Membership relationship with an Organization." .
 time:hasBeginning a rdf:Property ; skos:prefLabel "has beginning" ; skos:definition "The beginning of the temporal entity." .
 time:hasEnd a rdf:Property ; skos:prefLabel "has end" ; skos:definition "The end of the temporal entity." .
-pulse:githubUsername a rdf:Property ; skos:prefLabel "github username" ; skos:definition "The GitHub handle of a person." .
-pulse:huggingfaceUsername a rdf:Property ; skos:prefLabel "hugging face username" ; skos:definition "The Hugging Face handle of a person." .
+pulse:platformUsername a rdf:Property ; skos:prefLabel "platform username" ; skos:definition "The person's handle/username on an external platform (e.g. a GitHub login, a Hugging Face username, or an Infoscience person identifier), interpreted relative to pulse:platform." .
 pulse:repositoryHandle a rdf:Property ; skos:prefLabel "repository handle" ; skos:definition "The handle of the repository (e.g. 'owner/repository' on GitHub/Bitbucket, or 'group/subgroup/project' on GitLab), interpreted relative to pulse:platform." .
-pulse:infosciencePersonIdentifier a rdf:Property ; skos:prefLabel "infoscience Identifier" ; skos:definition "The infoscience identifier of a person." .
 pulse:organizationHandle a rdf:Property ; skos:prefLabel "organization handle" ; skos:definition "The handle/slug of the organization on an external platform (e.g. a GitHub login, a Hugging Face org slug, or an Infoscience organization UUID), interpreted relative to pulse:platform." .
 pulse:discipline a rdf:Property ; skos:prefLabel "discipline" ; skos:definition "The academic or scientific discipline associated with the resource." .
 pulse:repositoryType a rdf:Property ; skos:prefLabel "repository type" ; skos:definition "The type or category of the repository (e.g., software, data, publication)." .
@@ -83,7 +81,6 @@ pulse:firstContributionDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:pref
 pulse:lastContributionDate a rdf:Property ; rdfs:range xsd:dateTime ; skos:prefLabel "last contribution date" ; skos:definition "The date of the most recent contribution." .
 pulse:gitAuthorName a rdf:Property ; skos:prefLabel "git author name" ; skos:definition "The author name as it literally appears in the aggregated git commits, which may differ from the person's current platform profile name." .
 pulse:gitAuthorEmail a rdf:Property ; skos:prefLabel "git author email" ; skos:definition "The author email as it literally appears in the aggregated git commits, which may differ from the person's current platform profile email." .
-pulse:infoscienceArticleIdentifier a rdf:Property ; skos:prefLabel "infoscience article identifier" ; skos:definition "The Infoscience identifier for an article." .
 pulse:orcidIdentifier a rdf:Property ; skos:prefLabel "ORCID identifier" ; skos:definition "The ORCID identifier for a person." ; skos:exactMatch datacite:orcid .
 
 # Platform profile properties

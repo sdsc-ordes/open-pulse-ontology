@@ -6,7 +6,7 @@ Please read these guidelines before contributing.
 
 ## 0. Ontology Source Files
 
-The ontology is split by semantic aspect into three source files:
+The ontology is split by semantic aspect into three core source files:
 
 - `src/ontology/ontology-definitions.ttl` — the ontology header (`owl:versionInfo` lives here) plus classes and properties.
 - `src/ontology/ontology-enumerations.ttl` — enumeration classes and their instances (repository types, organization types, platforms, disciplines).
@@ -14,13 +14,25 @@ The ontology is split by semantic aspect into three source files:
 
 `src/ontology/ontology-combined.ttl` is a **generated file**, kept for tools and CI that expect a single ontology file (SHACL validation, releases, docs generation). Never edit it by hand.
 
-After editing any of the three source files, regenerate it:
+### Verbose track
+
+Alongside the core files sits a **verbose** track, one file per aspect:
+
+- `src/ontology/ontology-definitions-verbose.ttl`
+- `src/ontology/ontology-enumerations-verbose.ttl`
+- `src/ontology/ontology-shapes-verbose.ttl`
+
+These *additively extend* the core files to reach full field-parity with GitHub, Hugging Face, Zenodo and ORCID (internal/node IDs, repository file artifacts, Hugging Face Model/Dataset/Space fields, Zenodo Records/Communities, ORCID Employment/Education/Funding, etc). "Additive" is a hard rule here: a verbose file may only add brand-new classes/properties, or add new `sh:property` statements to an *existing* shape IRI (which RDF-merges into that shape's allow-list once combined) — it must never re-declare or narrow a constraint the core file already put on a property path. If a verbose change needs to loosen something core already constrains (e.g. a `sh:class` restriction), introduce a new property name instead of touching the constrained one.
+
+`src/ontology/ontology-combined-verbose.ttl` is generated from all six files (core + verbose) and is likewise never hand-edited.
+
+After editing any source file, regenerate both combined outputs in one step:
 
 ```bash
 uv run python tools/python/build/combine_ontology.py
 ```
 
-Commit the regenerated `src/ontology/ontology-combined.ttl` together with your source changes.
+Commit the regenerated `ontology-combined.ttl` and `ontology-combined-verbose.ttl` together with your source changes.
 
 ## 1. Branching Strategy
 

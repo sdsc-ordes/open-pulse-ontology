@@ -34,7 +34,7 @@ pulse:ProjectLead a schema:Person ;
 
 pulse:ProjectLeadGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
-    pulse:githubUsername "noralead" ;
+    pulse:platformUsername "noralead" ;
     schema:email "nora.lead@example.org" .
 
 pulse:HostLab a org:Organization ;

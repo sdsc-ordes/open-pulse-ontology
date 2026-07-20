@@ -29,7 +29,7 @@ pulse:MemberlessPerson a schema:Person ;
 
 pulse:MemberlessPersonGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
-    pulse:githubUsername "memmissing" ;
+    pulse:platformUsername "memmissing" ;
     schema:email "morgan.missing@example.com" .
 
 pulse:MembershipWithoutOrg a org:Membership ; # Missing org:organization

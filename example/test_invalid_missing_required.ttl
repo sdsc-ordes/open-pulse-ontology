@@ -22,5 +22,5 @@ pulse:InvalidPerson a schema:Person ;
 
 pulse:InvalidPersonGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
-    pulse:githubUsername "invaliduser" ;
+    pulse:platformUsername "invaliduser" ;
     schema:email "invalid@example.com" .

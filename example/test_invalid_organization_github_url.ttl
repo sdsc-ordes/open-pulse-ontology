@@ -24,7 +24,7 @@ pulse:GithubUrlAuthor a schema:Person ;
 
 pulse:GithubUrlAuthorGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
-    pulse:githubUsername "githubauthor" ;
+    pulse:platformUsername "githubauthor" ;
     schema:email "github@example.com" .
 
 pulse:InvalidGithubOrg a org:Organization ;

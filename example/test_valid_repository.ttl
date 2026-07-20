@@ -40,7 +40,7 @@ pulse:ValidAuthor a schema:Person ;
 
 pulse:ValidAuthorGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
-    pulse:githubUsername "janedoe" ;
+    pulse:platformUsername "janedoe" ;
     schema:email "jane.doe@example.com" .
 
 pulse:ValidOrganization a org:Organization ;

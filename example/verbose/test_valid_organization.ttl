@@ -1,0 +1,37 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+pulse:GitHub a pulse:PlatformEnumeration .
+pulse:HuggingFace a pulse:PlatformEnumeration .
+
+# VALID - exercises the verbose OrganizationProfileShape additions (Internal ID,
+# Description, Location, Followers, Updated date) and the verbose OrganizationShape
+# additions (Members via schema:member, Owns Collection).
+
+pulse:VerboseLab a org:Organization ;
+    schema:name "Verbose Systems Lab" ;
+    pulse:ror "https://ror.org/02s376052" ;
+    schema:member pulse:AdaResearcher2 ;
+    pulse:ownsCollection pulse:VerboseLabCollection ;
+    pulse:hasOrganizationProfile [
+        a pulse:OrganizationProfile ;
+        pulse:platform pulse:GitHub ;
+        pulse:organizationHandle "verbose-systems-lab" ;
+        schema:name "Verbose Systems Lab" ;
+        schema:url <https://github.com/verbose-systems-lab> ;
+        pulse:platformInternalId "5501234" ;
+        schema:description "We build open research software." ;
+        pulse:location "Lausanne, Switzerland" ;
+        pulse:followerCount 76 ;
+        schema:dateModified "2026-05-20T12:00:00"^^xsd:dateTime
+    ] .
+
+pulse:AdaResearcher2 a schema:Person ;
+    schema:name "Ada Researcher" ;
+    pulse:orcidIdentifier "0000-0001-2345-6780" .
+
+pulse:VerboseLabCollection a pulse:Collection ;
+    schema:name "Lab Models & Datasets" ;
+    pulse:platform pulse:HuggingFace ;
+    pulse:collectionOwnedBy pulse:VerboseLab .

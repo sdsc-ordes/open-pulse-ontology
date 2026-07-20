@@ -25,7 +25,7 @@ pulse:PersonWithInvalidMembership a schema:Person ;
 
 pulse:CharlieBrownGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
-    pulse:githubUsername "charliebrown" ;
+    pulse:platformUsername "charliebrown" ;
     schema:email "charlie@example.com" .
 
 pulse:InvalidMembership a org:Membership ;

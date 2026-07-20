@@ -9,4 +9,4 @@ pulse:ProfilePerson a schema:Person ;
     pulse:hasProfile pulse:OrphanProfile .
 
 pulse:OrphanProfile a pulse:PlatformProfile ;
-    pulse:githubUsername "paulaprofile" .
+    pulse:platformUsername "paulaprofile" .

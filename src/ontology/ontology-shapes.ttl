@@ -48,17 +48,11 @@ pulse:OrganizationTypeShape
     sh:name "Organization Type" ;
     sh:description "Must be a valid IRI from the Organization Type enumeration (e.g., pulse:University)." .
 
-pulse:GithubUsernameShape
+pulse:PlatformUsernameShape
     a sh:PropertyShape ;
-    sh:path pulse:githubUsername ;
+    sh:path pulse:platformUsername ;
     sh:datatype xsd:string ;
-    sh:description "The GitHub handle of a person." .
-
-pulse:HuggingfaceUsernameShape
-    a sh:PropertyShape ;
-    sh:path pulse:huggingfaceUsername ;
-    sh:datatype xsd:string ;
-    sh:description "The Hugging Face handle of a person." .
+    sh:description "The person's handle on this platform (e.g. a GitHub login, Hugging Face username, or Infoscience person identifier), interpreted relative to pulse:platform." .
 
 pulse:RepositoryHandleShape
     a sh:PropertyShape ;
@@ -113,12 +107,6 @@ pulse:OrcidShape
     sh:datatype xsd:string ;
     sh:pattern "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$" ;
     sh:description "ORCID identifier validation." .
-
-pulse:InfoscienceArticleIdentifierShape
-    a sh:PropertyShape ;
-    sh:path pulse:infoscienceArticleIdentifier ;
-    sh:datatype xsd:string ;
-    sh:description "Infoscience article identifier." .
 
 pulse:RorShape
     a sh:PropertyShape ;
@@ -222,13 +210,9 @@ pulse:PlatformProfileShape
     ] ;
     sh:property pulse:ProfileEmailShape ;
     sh:property pulse:UrlShape ;
-    sh:property pulse:GithubUsernameShape ;
-    sh:property pulse:HuggingfaceUsernameShape ;
-    sh:property [ sh:path pulse:infosciencePersonIdentifier ; sh:datatype xsd:string ; sh:name "Infoscience Identifier" ] ;
+    sh:property pulse:PlatformUsernameShape ;
     sh:or (
-        [ sh:property [ sh:path pulse:githubUsername ; sh:minCount 1 ] ]
-        [ sh:property [ sh:path pulse:huggingfaceUsername ; sh:minCount 1 ] ]
-        [ sh:property [ sh:path pulse:infosciencePersonIdentifier ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path pulse:platformUsername ; sh:minCount 1 ] ]
         [ sh:property [ sh:path schema:email ; sh:minCount 1 ] ]
         [ sh:property [ sh:path schema:url ; sh:minCount 1 ] ]
     ) .
@@ -276,7 +260,6 @@ pulse:ArticleShape
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property pulse:NameShape ;
     sh:property pulse:DoiShape ;
-    sh:property pulse:InfoscienceArticleIdentifierShape ;
     sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Publication Date" ] ;
     sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this article"   ] ;
     sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] ;

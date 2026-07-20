@@ -29,7 +29,7 @@ pulse:ContribAuthor a schema:Person ;
 
 pulse:ContribAuthorGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
-    pulse:githubUsername "charliec" ;
+    pulse:platformUsername "charliec" ;
     schema:email "charlie@example.com" .
 
 # Invalid: missing contributionCount (required, minCount 1)

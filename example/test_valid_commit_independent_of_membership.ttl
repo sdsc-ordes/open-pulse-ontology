@@ -35,7 +35,7 @@ pulse:TemporalAuthor a schema:Person ;
 
 pulse:TemporalAuthorGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
-    pulse:githubUsername "alextemporal" ;
+    pulse:platformUsername "alextemporal" ;
     schema:email "alex.temporal@epfl.ch" .
 
 pulse:BrokenMembership a org:Membership ;

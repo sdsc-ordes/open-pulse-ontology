@@ -28,5 +28,5 @@ pulse:Author2 a schema:Person ;
 
 pulse:Author2GitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
-    pulse:githubUsername "alicejohnson" ;
+    pulse:platformUsername "alicejohnson" ;
     schema:email "alice@example.com" .

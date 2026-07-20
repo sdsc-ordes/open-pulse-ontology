@@ -29,5 +29,5 @@ pulse:PersonWithExtraProps a schema:Person ;
 
 pulse:EveGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
-    pulse:githubUsername "eveextra" ;
+    pulse:platformUsername "eveextra" ;
     schema:email "eve@example.com" .

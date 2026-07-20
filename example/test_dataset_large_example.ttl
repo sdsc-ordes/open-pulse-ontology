@@ -92,13 +92,13 @@ pulse:AliceChenGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
     pulse:profileOf pulse:AliceChen ;
     schema:name "alicechen" ;
-    pulse:githubUsername "alicechen" .
+    pulse:platformUsername "alicechen" .
 
 pulse:AliceChenInfoscienceProfile a pulse:PlatformProfile ;
     pulse:platform pulse:Infoscience ;
     pulse:profileOf pulse:AliceChen ;
     schema:name "Chen, Alice" ;
-    pulse:infosciencePersonIdentifier "alice.chen" ;
+    pulse:platformUsername "alice.chen" ;
     schema:email "alice.chen@epfl.ch" ;
     schema:url <https://people.epfl.ch/alice.chen> .
 
@@ -129,13 +129,13 @@ pulse:BobKumarGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
     pulse:profileOf pulse:BobKumar ;
     schema:name "bobkumar42" ;
-    pulse:githubUsername "bobkumar42" .
+    pulse:platformUsername "bobkumar42" .
 
 pulse:BobKumarInfoscienceProfile a pulse:PlatformProfile ;
     pulse:platform pulse:Infoscience ;
     pulse:profileOf pulse:BobKumar ;
     schema:name "Kumar, Bob" ;
-    pulse:infosciencePersonIdentifier "b.kumar" ;
+    pulse:platformUsername "b.kumar" ;
     schema:email "b.kumar@eth.ch" ;
     schema:url <https://people.eth.ch/bob.kumar> .
 
@@ -164,13 +164,13 @@ pulse:CarolMartinezGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
     pulse:profileOf pulse:CarolMartinez ;
     schema:name "cmartinez" ;
-    pulse:githubUsername "cmartinez" .
+    pulse:platformUsername "cmartinez" .
 
 pulse:CarolMartinezInfoscienceProfile a pulse:PlatformProfile ;
     pulse:platform pulse:Infoscience ;
     pulse:profileOf pulse:CarolMartinez ;
     schema:name "Martinez, Carol" ;
-    pulse:infosciencePersonIdentifier "carol.martinez" ;
+    pulse:platformUsername "carol.martinez" ;
     schema:email "carol.martinez@epfl.ch" ;
     schema:url <https://people.epfl.ch/carol.martinez> .
 
@@ -193,13 +193,13 @@ pulse:DavidLeeGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
     pulse:profileOf pulse:DavidLee ;
     schema:name "davidlee88" ;
-    pulse:githubUsername "davidlee88" .
+    pulse:platformUsername "davidlee88" .
 
 pulse:DavidLeeInfoscienceProfile a pulse:PlatformProfile ;
     pulse:platform pulse:Infoscience ;
     pulse:profileOf pulse:DavidLee ;
     schema:name "Lee, David" ;
-    pulse:infosciencePersonIdentifier "d.lee" ;
+    pulse:platformUsername "d.lee" ;
     schema:email "d.lee@eth.ch" ;
     schema:url <https://people.eth.ch/david.lee> .
 
@@ -223,13 +223,13 @@ pulse:EmmaWilsonGitHubProfile a pulse:PlatformProfile ;
     pulse:platform pulse:GitHub ;
     pulse:profileOf pulse:EmmaWilson ;
     schema:name "ewilson" ;
-    pulse:githubUsername "ewilson" .
+    pulse:platformUsername "ewilson" .
 
 pulse:EmmaWilsonInfoscienceProfile a pulse:PlatformProfile ;
     pulse:platform pulse:Infoscience ;
     pulse:profileOf pulse:EmmaWilson ;
     schema:name "Wilson, Emma" ;
-    pulse:infosciencePersonIdentifier "emma.wilson" ;
+    pulse:platformUsername "emma.wilson" ;
     schema:email "emma.wilson@epfl.ch" ;
     schema:url <https://people.epfl.ch/emma.wilson> .
 
@@ -489,7 +489,6 @@ pulse:Article1 a schema:ScholarlyArticle ;
     schema:author pulse:AliceChen ;
     schema:author pulse:BobKumar ;
     schema:sourceOrganization pulse:EPFLComputationalLab ;
-    pulse:infoscienceArticleIdentifier "272853" ;
     pulse:doi "10.1038/s41467-023-12345-6" ;
     pulse:publicationType pulse:JournalArticle ;
     pulse:accessRight pulse:OpenAccess .
@@ -500,7 +499,6 @@ pulse:Article2 a schema:ScholarlyArticle ;
     schema:author pulse:BobKumar ;
     schema:author pulse:DavidLee ;
     schema:sourceOrganization pulse:SwissResearchAlliance ;
-    pulse:infoscienceArticleIdentifier "273451" ;
     pulse:doi "10.1038/s41467-023-23456-7" ;
     pulse:publicationType pulse:JournalArticle ;
     pulse:accessRight pulse:OpenAccess .
@@ -512,7 +510,6 @@ pulse:Article3 a schema:ScholarlyArticle ;
     schema:author pulse:EmmaWilson ;
     schema:author pulse:CarolMartinez ;
     schema:sourceOrganization pulse:EPFLComputationalLab ;
-    pulse:infoscienceArticleIdentifier "275612" ;
     pulse:doi "10.1038/s41467-024-34567-8" ;
     pulse:publicationType pulse:ConferencePaper ;
     pulse:accessRight pulse:OpenAccess .
@@ -523,7 +520,6 @@ pulse:Article4 a schema:ScholarlyArticle ;
     schema:author pulse:DavidLee ;
     schema:author pulse:BobKumar ;
     schema:sourceOrganization pulse:DepartmentPhysics ;
-    pulse:infoscienceArticleIdentifier "274890" ;
     pulse:doi "10.1038/s41467-023-45678-9" ;
     pulse:publicationType pulse:JournalArticle ;
     pulse:accessRight pulse:ClosedAccess .
@@ -535,7 +531,6 @@ pulse:Article5 a schema:ScholarlyArticle ;
     schema:author pulse:EmmaWilson ;
     schema:author pulse:AliceChen ;
     schema:sourceOrganization pulse:EPFLComputationalLab ;
-    pulse:infoscienceArticleIdentifier "276234" ;
     pulse:doi "10.1038/s41467-024-56789-0" ;
     pulse:publicationType pulse:Preprint ;
     pulse:accessRight pulse:OpenAccess .
@@ -545,7 +540,6 @@ pulse:Article6 a schema:ScholarlyArticle ;
     schema:datePublished "2023-05-20"^^xsd:date ;
     schema:author pulse:BobKumar ;
     schema:sourceOrganization pulse:SwissResearchAlliance ;
-    pulse:infoscienceArticleIdentifier "273012" ;
     pulse:doi "10.1038/s41467-023-56789-1" ;
     pulse:publicationType pulse:JournalArticle ;
     pulse:accessRight pulse:ClosedAccess .
