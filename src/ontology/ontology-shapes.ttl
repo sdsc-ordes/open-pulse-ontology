@@ -54,6 +54,20 @@ pulse:PlatformUsernameShape
     sh:datatype xsd:string ;
     sh:description "The person's handle on this platform (e.g. a GitHub login, Hugging Face username, or Infoscience person identifier), interpreted relative to pulse:platform." .
 
+pulse:PlatformInternalIdShape
+    a sh:PropertyShape ;
+    sh:path pulse:platformInternalId ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:description "The stable platform-issued internal ID, interpreted relative to pulse:platform." .
+
+pulse:PlatformNodeIdShape
+    a sh:PropertyShape ;
+    sh:path pulse:platformNodeId ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:description "A platform's own opaque global node ID, interpreted relative to pulse:platform." .
+
 pulse:RepositoryHandleShape
     a sh:PropertyShape ;
     sh:path pulse:repositoryHandle ;
@@ -126,13 +140,6 @@ pulse:UnitOfShape
     sh:path org:unitOf ;
     sh:class org:Organization ;
     sh:description "Link back to the managing/parent organization." .
-
-pulse:GithubOrgFollowersShape
-    a sh:PropertyShape ;
-    sh:path pulse:githubOrgFollowers ;
-    sh:datatype xsd:integer ;
-    sh:maxCount 1 ;
-    sh:description "Number of followers for the GitHub organization." .
 
 pulse:RepositoryStarsShape
     a sh:PropertyShape ;
@@ -211,6 +218,8 @@ pulse:PlatformProfileShape
     sh:property pulse:ProfileEmailShape ;
     sh:property pulse:UrlShape ;
     sh:property pulse:PlatformUsernameShape ;
+    sh:property pulse:PlatformInternalIdShape ;
+    sh:property pulse:PlatformNodeIdShape ;
     sh:or (
         [ sh:property [ sh:path pulse:platformUsername ; sh:minCount 1 ] ]
         [ sh:property [ sh:path schema:email ; sh:minCount 1 ] ]
@@ -251,7 +260,8 @@ pulse:OrganizationProfileShape
         sh:name "Display Name" ;
         sh:description "The name as it appears on this platform (may differ per platform)."
     ] ;
-    sh:property pulse:UrlShape .
+    sh:property pulse:UrlShape ;
+    sh:property pulse:PlatformInternalIdShape .
 
 pulse:ArticleShape
     a sh:NodeShape ;
@@ -260,6 +270,14 @@ pulse:ArticleShape
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property pulse:NameShape ;
     sh:property pulse:DoiShape ;
+    sh:property [
+        sh:path pulse:platform ;
+        sh:class pulse:PlatformEnumeration ;
+        sh:maxCount 1 ;
+        sh:name "Platform" ;
+        sh:description "The archive/publication platform this record lives on (e.g. pulse:Zenodo, pulse:Infoscience)."
+    ] ;
+    sh:property pulse:PlatformInternalIdShape ;
     sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Publication Date" ] ;
     sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this article"   ] ;
     sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] ;
@@ -275,7 +293,6 @@ pulse:OrganizationShape
     sh:property pulse:NameShape ;
     sh:property pulse:RorShape ;
     sh:property pulse:OrganizationTypeShape ;
-    sh:property pulse:GithubOrgFollowersShape ;
     sh:property pulse:HasUnitShape ;
     sh:property pulse:UnitOfShape ;
     sh:property [
@@ -304,6 +321,8 @@ pulse:RepositoryShape
     sh:property pulse:NameShape ;
     sh:property pulse:RepositoryTypeShape ;
     sh:property pulse:DisciplineShape ;
+    sh:property pulse:PlatformInternalIdShape ;
+    sh:property pulse:PlatformNodeIdShape ;
     sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this repository."   ] ;
     sh:property [
         sh:path pulse:platform ;

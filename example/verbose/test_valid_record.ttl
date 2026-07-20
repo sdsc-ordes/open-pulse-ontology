@@ -6,7 +6,7 @@
 pulse:Zenodo a pulse:PlatformEnumeration .
 pulse:OpenAccess a pulse:AccessRightEnumeration .
 pulse:SoftwarePublication a pulse:PublicationTypeEnumeration .
-pulse:ArXiv a pulse:IdentifierSchemeEnumeration .
+pulse:arXiv a pulse:IdentifierSchemeEnumeration .
 wd:Q2374463 a pulse:DisciplineEnumeration .
 
 # VALID - exercises the verbose ArticleShape additions covering a Zenodo Record,
@@ -59,7 +59,7 @@ pulse:VerboseZenodoRecord a schema:ScholarlyArticle ;
     pulse:memberOfCommunity pulse:VerboseCommunity .
 
 pulse:VerboseRecordArxivId a pulse:ExternalIdentifier ;
-    pulse:identifierScheme pulse:ArXiv ;
+    pulse:identifierScheme pulse:arXiv ;
     schema:identifier "2605.01234" .
 
 pulse:VerboseCommunity a pulse:Community ;

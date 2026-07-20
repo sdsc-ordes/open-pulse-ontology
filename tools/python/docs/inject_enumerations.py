@@ -5,7 +5,7 @@ This script parses the ontology to extract enumeration values and injects them
 into the generated HTML documentation.
 """
 
-from rdflib import Graph, Namespace, RDF
+from rdflib import Graph, Namespace, RDF, RDFS
 from bs4 import BeautifulSoup
 import sys
 
@@ -22,11 +22,7 @@ def extract_enumerations(ttl_file):
 
     enumerations = {}
 
-    enum_classes = [
-        PULSE.DisciplineEnumeration,
-        PULSE.RepositoryTypeEnumeration,
-        PULSE.OrganizationTypeEnumeration,
-    ]
+    enum_classes = sorted(g.subjects(RDFS.subClassOf, SCHEMA.Enumeration))
 
     for enum_class in enum_classes:
         values = []

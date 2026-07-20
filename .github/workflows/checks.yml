@@ -8,12 +8,20 @@ on:
       - 'src/ontology/ontology-definitions.ttl'
       - 'src/ontology/ontology-enumerations.ttl'
       - 'src/ontology/ontology-shapes.ttl'
+      - 'src/ontology/ontology-combined-verbose.ttl'
+      - 'src/ontology/ontology-definitions-verbose.ttl'
+      - 'src/ontology/ontology-enumerations-verbose.ttl'
+      - 'src/ontology/ontology-shapes-verbose.ttl'
   pull_request:
     paths:
       - 'src/ontology/ontology-combined.ttl'
       - 'src/ontology/ontology-definitions.ttl'
       - 'src/ontology/ontology-enumerations.ttl'
       - 'src/ontology/ontology-shapes.ttl'
+      - 'src/ontology/ontology-combined-verbose.ttl'
+      - 'src/ontology/ontology-definitions-verbose.ttl'
+      - 'src/ontology/ontology-enumerations-verbose.ttl'
+      - 'src/ontology/ontology-shapes-verbose.ttl'
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -30,6 +38,10 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: SHACL validation
+      - name: SHACL validation (core)
         run: |
           uv run python tools/python/checks/shacl.py src/ontology/ontology-combined.ttl src/quality-checks/shacl-shacl.ttl
+
+      - name: SHACL validation (verbose)
+        run: |
+          uv run python tools/python/checks/shacl.py src/ontology/ontology-combined-verbose.ttl src/quality-checks/shacl-shacl.ttl

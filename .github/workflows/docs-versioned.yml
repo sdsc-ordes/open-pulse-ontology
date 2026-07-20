@@ -16,6 +16,10 @@ on:
       - "src/ontology/ontology-definitions.ttl"
       - "src/ontology/ontology-enumerations.ttl"
       - "src/ontology/ontology-shapes.ttl"
+      - "src/ontology/ontology-combined-verbose.ttl"
+      - "src/ontology/ontology-definitions-verbose.ttl"
+      - "src/ontology/ontology-enumerations-verbose.ttl"
+      - "src/ontology/ontology-shapes-verbose.ttl"
   # Tag pushes can't share this trigger: GitHub's `paths:` filter applies to
   # both branches and tags, and for merge-commit tags it silently drops
   # everything — that's why v2.1.0/v2.1.2 never reached versions.json.
@@ -131,13 +135,19 @@ jobs:
 
       - name: Generate Documentation
         run: |
-          mkdir -p generated-docs
+          mkdir -p generated-docs generated-docs/verbose
           java -jar shacl-play-cli.jar \
             doc \
             -d \
             -i src/ontology/ontology-combined.ttl \
             -l en \
             -o generated-docs/index.html
+          java -jar shacl-play-cli.jar \
+            doc \
+            -d \
+            -i src/ontology/ontology-combined-verbose.ttl \
+            -l en \
+            -o generated-docs/verbose/index.html
 
       - name: Generate Ontology Diagram
         run: |
@@ -145,16 +155,21 @@ jobs:
             draw \
             -i src/ontology/ontology-combined.ttl \
             -o generated-docs/ontology.svg
+          java -jar shacl-play-cli.jar \
+            draw \
+            -i src/ontology/ontology-combined-verbose.ttl \
+            -o generated-docs/verbose/ontology.svg
 
       - name: Fix SVG namespace issue
         run: |
-          sed -i 's/ xmlns=""//g' generated-docs/ontology.svg generated-docs/index.html
+          sed -i 's/ xmlns=""//g' generated-docs/ontology.svg generated-docs/index.html generated-docs/verbose/ontology.svg generated-docs/verbose/index.html
           # Remove XML declaration from inline SVG (breaks HTML rendering)
-          sed -i 's/<?xml version="1.0" encoding="us-ascii" standalone="no"?>//g' generated-docs/index.html
+          sed -i 's/<?xml version="1.0" encoding="us-ascii" standalone="no"?>//g' generated-docs/index.html generated-docs/verbose/index.html
 
       - name: Inject Enumerations into HTML
         run: |
           uv run tools/python/docs/inject_enumerations.py src/ontology/ontology-combined.ttl generated-docs/index.html
+          uv run tools/python/docs/inject_enumerations.py src/ontology/ontology-combined-verbose.ttl generated-docs/verbose/index.html
 
       - name: Upload generated documentation as artifact
         uses: actions/upload-artifact@v6
@@ -214,16 +229,24 @@ jobs:
           mkdir -p "$TARGET_PATH"
 
           cp -r generated-docs/* "$TARGET_PATH/"
-          
+
           # Rename generated index.html to doc.html and use the header wrapper as index.html
           # The wrapper dynamically resolves asset paths at runtime, so it works at any
-          # directory depth (including branch names with slashes like feat/my-feature)
+          # directory depth (including branch names with slashes like feat/my-feature).
+          # Applied to both the core docs (root) and the verbose docs (verbose/ subfolder,
+          # copied in by the `cp -r` above since generated-docs/verbose/ already exists).
           if [ -f "$TARGET_PATH/index.html" ]; then
             mv "$TARGET_PATH/index.html" "$TARGET_PATH/doc.html"
             cp assets/index-header.html "$TARGET_PATH/index.html"
             echo "Wrapper index.html placed, generated docs renamed to doc.html"
           fi
-          
+
+          if [ -f "$TARGET_PATH/verbose/index.html" ]; then
+            mv "$TARGET_PATH/verbose/index.html" "$TARGET_PATH/verbose/doc.html"
+            cp assets/index-header.html "$TARGET_PATH/verbose/index.html"
+            echo "Wrapper index.html placed for verbose docs, renamed to doc.html"
+          fi
+
           rm -rf generated-docs
           
           echo "Files deployed to $TARGET_PATH:"

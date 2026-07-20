@@ -65,11 +65,12 @@ time:hasEnd a rdf:Property ; skos:prefLabel "has end" ; skos:definition "The end
 pulse:platformUsername a rdf:Property ; skos:prefLabel "platform username" ; skos:definition "The person's handle/username on an external platform (e.g. a GitHub login, a Hugging Face username, or an Infoscience person identifier), interpreted relative to pulse:platform." .
 pulse:repositoryHandle a rdf:Property ; skos:prefLabel "repository handle" ; skos:definition "The handle of the repository (e.g. 'owner/repository' on GitHub/Bitbucket, or 'group/subgroup/project' on GitLab), interpreted relative to pulse:platform." .
 pulse:organizationHandle a rdf:Property ; skos:prefLabel "organization handle" ; skos:definition "The handle/slug of the organization on an external platform (e.g. a GitHub login, a Hugging Face org slug, or an Infoscience organization UUID), interpreted relative to pulse:platform." .
+pulse:platformInternalId a rdf:Property ; skos:prefLabel "platform internal ID" ; skos:definition "The stable, platform-issued internal identifier for this resource (e.g. a GitHub user/org/repo numeric ID, a Hugging Face internal ID, or an Infoscience/Zenodo record ID), interpreted relative to pulse:platform. Unlike a username or handle, this value does not change if the resource is renamed." .
+pulse:platformNodeId a rdf:Property ; skos:prefLabel "platform node ID" ; skos:definition "A platform's own opaque global node identifier for this resource (e.g. a GitHub GraphQL node ID), interpreted relative to pulse:platform." .
 pulse:discipline a rdf:Property ; skos:prefLabel "discipline" ; skos:definition "The academic or scientific discipline associated with the resource." .
 pulse:repositoryType a rdf:Property ; skos:prefLabel "repository type" ; skos:definition "The type or category of the repository (e.g., software, data, publication)." .
 pulse:OrganizationType a rdf:Property ; skos:prefLabel "organization type" ; skos:definition "The type or category of the organization (e.g., university, research institute, company)." .
-pulse:githubOrgFollowers a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github organization followers" ; skos:definition "The number of followers of a GitHub organization." .
-pulse:repositoryStars a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "repository stars" ; skos:definition "The number of stars (likes) a repository has received." .
+pulse:repositoryStars a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "repository stars" ; skos:definition "The number of stars a repository has received." .
 pulse:repositoryForks a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "repository forks" ; skos:definition "The number of forks (copies) of a repository." .
 
 # Ownership and contribution properties
@@ -1816,6 +1817,20 @@ pulse:PlatformUsernameShape
     sh:datatype xsd:string ;
     sh:description "The person's handle on this platform (e.g. a GitHub login, Hugging Face username, or Infoscience person identifier), interpreted relative to pulse:platform." .
 
+pulse:PlatformInternalIdShape
+    a sh:PropertyShape ;
+    sh:path pulse:platformInternalId ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:description "The stable platform-issued internal ID, interpreted relative to pulse:platform." .
+
+pulse:PlatformNodeIdShape
+    a sh:PropertyShape ;
+    sh:path pulse:platformNodeId ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:description "A platform's own opaque global node ID, interpreted relative to pulse:platform." .
+
 pulse:RepositoryHandleShape
     a sh:PropertyShape ;
     sh:path pulse:repositoryHandle ;
@@ -1888,13 +1903,6 @@ pulse:UnitOfShape
     sh:path org:unitOf ;
     sh:class org:Organization ;
     sh:description "Link back to the managing/parent organization." .
-
-pulse:GithubOrgFollowersShape
-    a sh:PropertyShape ;
-    sh:path pulse:githubOrgFollowers ;
-    sh:datatype xsd:integer ;
-    sh:maxCount 1 ;
-    sh:description "Number of followers for the GitHub organization." .
 
 pulse:RepositoryStarsShape
     a sh:PropertyShape ;
@@ -1973,6 +1981,8 @@ pulse:PlatformProfileShape
     sh:property pulse:ProfileEmailShape ;
     sh:property pulse:UrlShape ;
     sh:property pulse:PlatformUsernameShape ;
+    sh:property pulse:PlatformInternalIdShape ;
+    sh:property pulse:PlatformNodeIdShape ;
     sh:or (
         [ sh:property [ sh:path pulse:platformUsername ; sh:minCount 1 ] ]
         [ sh:property [ sh:path schema:email ; sh:minCount 1 ] ]
@@ -2013,7 +2023,8 @@ pulse:OrganizationProfileShape
         sh:name "Display Name" ;
         sh:description "The name as it appears on this platform (may differ per platform)."
     ] ;
-    sh:property pulse:UrlShape .
+    sh:property pulse:UrlShape ;
+    sh:property pulse:PlatformInternalIdShape .
 
 pulse:ArticleShape
     a sh:NodeShape ;
@@ -2022,6 +2033,14 @@ pulse:ArticleShape
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property pulse:NameShape ;
     sh:property pulse:DoiShape ;
+    sh:property [
+        sh:path pulse:platform ;
+        sh:class pulse:PlatformEnumeration ;
+        sh:maxCount 1 ;
+        sh:name "Platform" ;
+        sh:description "The archive/publication platform this record lives on (e.g. pulse:Zenodo, pulse:Infoscience)."
+    ] ;
+    sh:property pulse:PlatformInternalIdShape ;
     sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Publication Date" ] ;
     sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this article"   ] ;
     sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] ;
@@ -2037,7 +2056,6 @@ pulse:OrganizationShape
     sh:property pulse:NameShape ;
     sh:property pulse:RorShape ;
     sh:property pulse:OrganizationTypeShape ;
-    sh:property pulse:GithubOrgFollowersShape ;
     sh:property pulse:HasUnitShape ;
     sh:property pulse:UnitOfShape ;
     sh:property [
@@ -2066,6 +2084,8 @@ pulse:RepositoryShape
     sh:property pulse:NameShape ;
     sh:property pulse:RepositoryTypeShape ;
     sh:property pulse:DisciplineShape ;
+    sh:property pulse:PlatformInternalIdShape ;
+    sh:property pulse:PlatformNodeIdShape ;
     sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this repository."   ] ;
     sh:property [
         sh:path pulse:platform ;
@@ -2240,9 +2260,10 @@ pulse:Community a rdfs:Class ; skos:prefLabel "Community" ; skos:definition "A c
 pulse:Funding a rdfs:Class ; skos:prefLabel "Funding" ; skos:definition "A grant or funding award held directly by a Person (e.g. an ORCID Funding record), distinct from schema:Project's funder relationship." .
 pulse:ExternalIdentifier a rdfs:Class ; skos:prefLabel "External Identifier" ; skos:definition "A (scheme, value) pair representing an identifier from an external registry (e.g. arXiv, Scopus, ResearcherID, ISBN) that isn't already a first-class property such as pulse:doi or pulse:orcidIdentifier." .
 
-# Identity properties shared across platform-scoped profiles, repositories and records
-pulse:platformInternalId a rdf:Property ; skos:prefLabel "platform internal ID" ; skos:definition "The stable, platform-issued internal identifier for this resource (e.g. a GitHub user/org/repo numeric ID, a Hugging Face internal ID, or a Zenodo record ID), interpreted relative to pulse:platform. Unlike a username or handle, this value does not change if the resource is renamed." .
-pulse:platformNodeId a rdf:Property ; skos:prefLabel "platform node ID" ; skos:definition "A platform's own opaque global node identifier for this resource (e.g. a GitHub GraphQL node ID), interpreted relative to pulse:platform." .
+# NOTE: pulse:platformInternalId and pulse:platformNodeId used to live here but were
+# promoted to core (ontology-definitions.ttl) -- they're identity-critical (the same
+# family as pulse:platformUsername/organizationHandle/repositoryHandle, which are
+# already core), not verbose-only enrichment. See ontology-shapes.ttl for their wiring.
 
 # Profile-level properties (Person and Organization platform profiles)
 pulse:biography a rdf:Property ; skos:prefLabel "biography" ; skos:definition "A free-text biography or self-description." .
@@ -2381,13 +2402,17 @@ pulse:Education a pulse:MembershipTypeEnumeration ; skos:prefLabel "Education"@e
 pulse:SocietyMembership a pulse:MembershipTypeEnumeration ; skos:prefLabel "Society Membership"@en ; skos:definition "A professional society or association membership (e.g. an ORCID Membership entry)."@en .
 
 # Enumeration Instances - Identifier Scheme
-pulse:ArXiv a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "arXiv"@en ; skos:definition "The arXiv preprint identifier scheme."@en .
+pulse:arXiv a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "arXiv"@en ; skos:definition "The arXiv preprint identifier scheme."@en .
 pulse:Scopus a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "Scopus"@en ; skos:definition "The Scopus Author ID scheme."@en .
 pulse:ResearcherId a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ResearcherID"@en ; skos:definition "The Web of Science ResearcherID scheme."@en .
-pulse:Isbn a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISBN"@en ; skos:definition "The International Standard Book Number scheme."@en .
-pulse:Issn a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISSN"@en ; skos:definition "The International Standard Serial Number scheme."@en .
-pulse:Pmid a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "PMID"@en ; skos:definition "The PubMed identifier scheme."@en .
+pulse:ISBN a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISBN"@en ; skos:definition "The International Standard Book Number scheme."@en .
+pulse:ISSN a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISSN"@en ; skos:definition "The International Standard Serial Number scheme."@en .
+pulse:PMID a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "PMID"@en ; skos:definition "The PubMed identifier scheme."@en .
 pulse:OtherIdentifierScheme a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "Other"@en ; skos:definition "An identifier scheme that does not fit into the other categories."@en .
+pulse:Ringgold a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "Ringgold"@en ; skos:definition "The Ringgold Identifier organization registry scheme."@en .
+pulse:GRID a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "GRID"@en ; skos:definition "The Global Research Identifier Database organization scheme (superseded by ROR but still in wide use)."@en .
+pulse:ISNI a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISNI"@en ; skos:definition "The International Standard Name Identifier scheme, used for both organizations and people."@en .
+pulse:SWHID a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "SWHID"@en ; skos:definition "The Software Heritage persistent identifier scheme for a repository or a specific artifact within it."@en .
 
 # Additional Enumeration Instances - Publication Types (broadens core to cover Zenodo's non-article upload types)
 # COAR alignment status per term (checked against https://github.com/coar-repositories/vocabularies
@@ -2426,21 +2451,13 @@ pulse:PhysicalObject a pulse:PublicationTypeEnumeration ; skos:prefLabel "Physic
 
 # ---------------------------------------------------------
 # REUSABLE VERBOSE PROPERTY SHAPES
+#
+# NOTE: pulse:PlatformInternalIdShape and pulse:PlatformNodeIdShape used to be
+# declared here but were promoted to ontology-shapes.ttl (core) along with their
+# properties. They're still referenced by IRI below (e.g. from CollectionShape/
+# CommunityShape) -- that keeps working since combine_ontology.py merges core and
+# verbose into one graph, so the shape just needs to be defined somewhere.
 # ---------------------------------------------------------
-
-pulse:PlatformInternalIdShape
-    a sh:PropertyShape ;
-    sh:path pulse:platformInternalId ;
-    sh:datatype xsd:string ;
-    sh:maxCount 1 ;
-    sh:description "The stable platform-issued internal ID, interpreted relative to pulse:platform." .
-
-pulse:PlatformNodeIdShape
-    a sh:PropertyShape ;
-    sh:path pulse:platformNodeId ;
-    sh:datatype xsd:string ;
-    sh:maxCount 1 ;
-    sh:description "A platform's own opaque global node ID, interpreted relative to pulse:platform." .
 
 pulse:DescriptionShape
     a sh:PropertyShape ;
@@ -2487,8 +2504,6 @@ pulse:PersonShape
 # ---------------------------------------------------------
 
 pulse:PlatformProfileShape
-    sh:property pulse:PlatformInternalIdShape ;
-    sh:property pulse:PlatformNodeIdShape ;
     sh:property [ sh:path pulse:biography ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Bio" ] ;
     sh:property pulse:ImageShape ;
     sh:property [ sh:path pulse:location ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Location" ] ;
@@ -2506,7 +2521,6 @@ pulse:PlatformProfileShape
 # ---------------------------------------------------------
 
 pulse:OrganizationProfileShape
-    sh:property pulse:PlatformInternalIdShape ;
     sh:property pulse:DescriptionShape ;
     sh:property [ sh:path pulse:location ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Location" ] ;
     sh:property [ sh:path pulse:followerCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Followers" ] ;
@@ -2518,15 +2532,19 @@ pulse:OrganizationProfileShape
 
 pulse:OrganizationShape
     sh:property [ sh:path schema:member ; sh:class schema:Person ; sh:name "Members" ] ;
-    sh:property [ sh:path pulse:ownsCollection ; sh:class pulse:Collection ; sh:name "Owns Collection" ] .
+    sh:property [ sh:path pulse:ownsCollection ; sh:class pulse:Collection ; sh:name "Owns Collection" ] ;
+    sh:property [
+        sh:path pulse:hasExternalIdentifier ;
+        sh:class pulse:ExternalIdentifier ;
+        sh:name "Has External Identifier" ;
+        sh:description "Institutional registry identifiers not already covered by pulse:ror (e.g. Ringgold, GRID, ISNI)."
+    ] .
 
 # ---------------------------------------------------------
 # EXTEND pulse:RepositoryShape (GitHub Repository + Hugging Face Model/Dataset/Space)
 # ---------------------------------------------------------
 
 pulse:RepositoryShape
-    sh:property pulse:PlatformInternalIdShape ;
-    sh:property pulse:PlatformNodeIdShape ;
     sh:property pulse:DescriptionShape ;
     sh:property [ sh:path pulse:tag ; sh:datatype xsd:string ; sh:name "Tag" ; sh:description "GitHub Topics or Hugging Face Tags." ] ;
     sh:property [ sh:path schema:url ; sh:nodeKind sh:IRI ; sh:maxCount 1 ; sh:name "Homepage" ] ;
@@ -2571,7 +2589,13 @@ pulse:RepositoryShape
     sh:property [ sh:path pulse:fileCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Files" ] ;
     sh:property [ sh:path pulse:lfsObjectCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "LFS Objects" ] ;
     sh:property [ sh:path pulse:xetObjectCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Xet Objects" ] ;
-    sh:property [ sh:path pulse:externalReference ; sh:nodeKind sh:IRI ; sh:name "External Reference" ] .
+    sh:property [ sh:path pulse:externalReference ; sh:nodeKind sh:IRI ; sh:name "External Reference" ] ;
+    sh:property [
+        sh:path pulse:hasExternalIdentifier ;
+        sh:class pulse:ExternalIdentifier ;
+        sh:name "Has External Identifier" ;
+        sh:description "Registry identifiers not already covered by pulse:repositoryHandle (e.g. a Software Heritage SWHID)."
+    ] .
 
 # ---------------------------------------------------------
 # EXTEND pulse:ArticleShape (Zenodo Record + Hugging Face Paper + ORCID Work)
@@ -2579,14 +2603,13 @@ pulse:RepositoryShape
 
 pulse:ArticleShape
     sh:property [
-        sh:path pulse:platform ;
-        sh:class pulse:PlatformEnumeration ;
+        sh:path pulse:conceptDoi ;
+        sh:datatype xsd:string ;
         sh:maxCount 1 ;
-        sh:name "Platform" ;
-        sh:description "The archive/publication platform this record lives on (e.g. pulse:Zenodo, pulse:Infoscience)."
+        sh:pattern "^10\\.\\d{4,9}/[-._;()/:a-zA-Z0-9]+$" ;
+        sh:name "Concept DOI" ;
+        sh:description "Same DOI-format validation as pulse:doi (DoiShape); optional here since only versioned records have a concept DOI."
     ] ;
-    sh:property pulse:PlatformInternalIdShape ;
-    sh:property [ sh:path pulse:conceptDoi ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Concept DOI" ] ;
     sh:property [ sh:path pulse:version ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Version" ] ;
     sh:property pulse:DescriptionShape ;
     sh:property [ sh:path pulse:keyword ; sh:datatype xsd:string ; sh:name "Keyword" ] ;
@@ -2620,9 +2643,10 @@ pulse:MembershipShape
     sh:property [
         sh:path pulse:membershipType ;
         sh:class pulse:MembershipTypeEnumeration ;
+        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:name "Membership Type" ;
-        sh:description "Distinguishes an ORCID Employment entry from Education or a society Membership."
+        sh:description "Distinguishes an ORCID Employment entry from Education or a society Membership. Required so every Membership is unambiguously one of the three kinds."
     ] ;
     sh:property [ sh:path pulse:department ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Department" ] ;
     sh:property [ sh:path pulse:qualification ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Qualification" ] .

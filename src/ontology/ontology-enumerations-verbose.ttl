@@ -60,13 +60,17 @@ pulse:Education a pulse:MembershipTypeEnumeration ; skos:prefLabel "Education"@e
 pulse:SocietyMembership a pulse:MembershipTypeEnumeration ; skos:prefLabel "Society Membership"@en ; skos:definition "A professional society or association membership (e.g. an ORCID Membership entry)."@en .
 
 # Enumeration Instances - Identifier Scheme
-pulse:ArXiv a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "arXiv"@en ; skos:definition "The arXiv preprint identifier scheme."@en .
+pulse:arXiv a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "arXiv"@en ; skos:definition "The arXiv preprint identifier scheme."@en .
 pulse:Scopus a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "Scopus"@en ; skos:definition "The Scopus Author ID scheme."@en .
 pulse:ResearcherId a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ResearcherID"@en ; skos:definition "The Web of Science ResearcherID scheme."@en .
-pulse:Isbn a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISBN"@en ; skos:definition "The International Standard Book Number scheme."@en .
-pulse:Issn a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISSN"@en ; skos:definition "The International Standard Serial Number scheme."@en .
-pulse:Pmid a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "PMID"@en ; skos:definition "The PubMed identifier scheme."@en .
+pulse:ISBN a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISBN"@en ; skos:definition "The International Standard Book Number scheme."@en .
+pulse:ISSN a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISSN"@en ; skos:definition "The International Standard Serial Number scheme."@en .
+pulse:PMID a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "PMID"@en ; skos:definition "The PubMed identifier scheme."@en .
 pulse:OtherIdentifierScheme a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "Other"@en ; skos:definition "An identifier scheme that does not fit into the other categories."@en .
+pulse:Ringgold a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "Ringgold"@en ; skos:definition "The Ringgold Identifier organization registry scheme."@en .
+pulse:GRID a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "GRID"@en ; skos:definition "The Global Research Identifier Database organization scheme (superseded by ROR but still in wide use)."@en .
+pulse:ISNI a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISNI"@en ; skos:definition "The International Standard Name Identifier scheme, used for both organizations and people."@en .
+pulse:SWHID a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "SWHID"@en ; skos:definition "The Software Heritage persistent identifier scheme for a repository or a specific artifact within it."@en .
 
 # Additional Enumeration Instances - Publication Types (broadens core to cover Zenodo's non-article upload types)
 # COAR alignment status per term (checked against https://github.com/coar-repositories/vocabularies

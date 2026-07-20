@@ -28,9 +28,10 @@ pulse:Community a rdfs:Class ; skos:prefLabel "Community" ; skos:definition "A c
 pulse:Funding a rdfs:Class ; skos:prefLabel "Funding" ; skos:definition "A grant or funding award held directly by a Person (e.g. an ORCID Funding record), distinct from schema:Project's funder relationship." .
 pulse:ExternalIdentifier a rdfs:Class ; skos:prefLabel "External Identifier" ; skos:definition "A (scheme, value) pair representing an identifier from an external registry (e.g. arXiv, Scopus, ResearcherID, ISBN) that isn't already a first-class property such as pulse:doi or pulse:orcidIdentifier." .
 
-# Identity properties shared across platform-scoped profiles, repositories and records
-pulse:platformInternalId a rdf:Property ; skos:prefLabel "platform internal ID" ; skos:definition "The stable, platform-issued internal identifier for this resource (e.g. a GitHub user/org/repo numeric ID, a Hugging Face internal ID, or a Zenodo record ID), interpreted relative to pulse:platform. Unlike a username or handle, this value does not change if the resource is renamed." .
-pulse:platformNodeId a rdf:Property ; skos:prefLabel "platform node ID" ; skos:definition "A platform's own opaque global node identifier for this resource (e.g. a GitHub GraphQL node ID), interpreted relative to pulse:platform." .
+# NOTE: pulse:platformInternalId and pulse:platformNodeId used to live here but were
+# promoted to core (ontology-definitions.ttl) -- they're identity-critical (the same
+# family as pulse:platformUsername/organizationHandle/repositoryHandle, which are
+# already core), not verbose-only enrichment. See ontology-shapes.ttl for their wiring.
 
 # Profile-level properties (Person and Organization platform profiles)
 pulse:biography a rdf:Property ; skos:prefLabel "biography" ; skos:definition "A free-text biography or self-description." .

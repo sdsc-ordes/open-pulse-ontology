@@ -63,11 +63,12 @@ time:hasEnd a rdf:Property ; skos:prefLabel "has end" ; skos:definition "The end
 pulse:platformUsername a rdf:Property ; skos:prefLabel "platform username" ; skos:definition "The person's handle/username on an external platform (e.g. a GitHub login, a Hugging Face username, or an Infoscience person identifier), interpreted relative to pulse:platform." .
 pulse:repositoryHandle a rdf:Property ; skos:prefLabel "repository handle" ; skos:definition "The handle of the repository (e.g. 'owner/repository' on GitHub/Bitbucket, or 'group/subgroup/project' on GitLab), interpreted relative to pulse:platform." .
 pulse:organizationHandle a rdf:Property ; skos:prefLabel "organization handle" ; skos:definition "The handle/slug of the organization on an external platform (e.g. a GitHub login, a Hugging Face org slug, or an Infoscience organization UUID), interpreted relative to pulse:platform." .
+pulse:platformInternalId a rdf:Property ; skos:prefLabel "platform internal ID" ; skos:definition "The stable, platform-issued internal identifier for this resource (e.g. a GitHub user/org/repo numeric ID, a Hugging Face internal ID, or an Infoscience/Zenodo record ID), interpreted relative to pulse:platform. Unlike a username or handle, this value does not change if the resource is renamed." .
+pulse:platformNodeId a rdf:Property ; skos:prefLabel "platform node ID" ; skos:definition "A platform's own opaque global node identifier for this resource (e.g. a GitHub GraphQL node ID), interpreted relative to pulse:platform." .
 pulse:discipline a rdf:Property ; skos:prefLabel "discipline" ; skos:definition "The academic or scientific discipline associated with the resource." .
 pulse:repositoryType a rdf:Property ; skos:prefLabel "repository type" ; skos:definition "The type or category of the repository (e.g., software, data, publication)." .
 pulse:OrganizationType a rdf:Property ; skos:prefLabel "organization type" ; skos:definition "The type or category of the organization (e.g., university, research institute, company)." .
-pulse:githubOrgFollowers a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "github organization followers" ; skos:definition "The number of followers of a GitHub organization." .
-pulse:repositoryStars a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "repository stars" ; skos:definition "The number of stars (likes) a repository has received." .
+pulse:repositoryStars a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "repository stars" ; skos:definition "The number of stars a repository has received." .
 pulse:repositoryForks a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "repository forks" ; skos:definition "The number of forks (copies) of a repository." .
 
 # Ownership and contribution properties

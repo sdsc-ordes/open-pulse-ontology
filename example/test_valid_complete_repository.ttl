@@ -67,5 +67,4 @@ pulse:EPFLLab a org:Organization ;
     pulse:ror "https://ror.org/02s376052" ;
     pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "DeepLabCut" ] ;
     pulse:OrganizationType pulse:ResearchInstitution ;
-    pulse:githubOrgFollowers "320"^^xsd:integer ;
     pulse:owns pulse:CompleteRepo .

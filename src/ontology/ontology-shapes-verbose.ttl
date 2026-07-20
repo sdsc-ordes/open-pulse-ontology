@@ -29,21 +29,13 @@
 
 # ---------------------------------------------------------
 # REUSABLE VERBOSE PROPERTY SHAPES
+#
+# NOTE: pulse:PlatformInternalIdShape and pulse:PlatformNodeIdShape used to be
+# declared here but were promoted to ontology-shapes.ttl (core) along with their
+# properties. They're still referenced by IRI below (e.g. from CollectionShape/
+# CommunityShape) -- that keeps working since combine_ontology.py merges core and
+# verbose into one graph, so the shape just needs to be defined somewhere.
 # ---------------------------------------------------------
-
-pulse:PlatformInternalIdShape
-    a sh:PropertyShape ;
-    sh:path pulse:platformInternalId ;
-    sh:datatype xsd:string ;
-    sh:maxCount 1 ;
-    sh:description "The stable platform-issued internal ID, interpreted relative to pulse:platform." .
-
-pulse:PlatformNodeIdShape
-    a sh:PropertyShape ;
-    sh:path pulse:platformNodeId ;
-    sh:datatype xsd:string ;
-    sh:maxCount 1 ;
-    sh:description "A platform's own opaque global node ID, interpreted relative to pulse:platform." .
 
 pulse:DescriptionShape
     a sh:PropertyShape ;
@@ -90,8 +82,6 @@ pulse:PersonShape
 # ---------------------------------------------------------
 
 pulse:PlatformProfileShape
-    sh:property pulse:PlatformInternalIdShape ;
-    sh:property pulse:PlatformNodeIdShape ;
     sh:property [ sh:path pulse:biography ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Bio" ] ;
     sh:property pulse:ImageShape ;
     sh:property [ sh:path pulse:location ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Location" ] ;
@@ -109,7 +99,6 @@ pulse:PlatformProfileShape
 # ---------------------------------------------------------
 
 pulse:OrganizationProfileShape
-    sh:property pulse:PlatformInternalIdShape ;
     sh:property pulse:DescriptionShape ;
     sh:property [ sh:path pulse:location ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Location" ] ;
     sh:property [ sh:path pulse:followerCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Followers" ] ;
@@ -121,15 +110,19 @@ pulse:OrganizationProfileShape
 
 pulse:OrganizationShape
     sh:property [ sh:path schema:member ; sh:class schema:Person ; sh:name "Members" ] ;
-    sh:property [ sh:path pulse:ownsCollection ; sh:class pulse:Collection ; sh:name "Owns Collection" ] .
+    sh:property [ sh:path pulse:ownsCollection ; sh:class pulse:Collection ; sh:name "Owns Collection" ] ;
+    sh:property [
+        sh:path pulse:hasExternalIdentifier ;
+        sh:class pulse:ExternalIdentifier ;
+        sh:name "Has External Identifier" ;
+        sh:description "Institutional registry identifiers not already covered by pulse:ror (e.g. Ringgold, GRID, ISNI)."
+    ] .
 
 # ---------------------------------------------------------
 # EXTEND pulse:RepositoryShape (GitHub Repository + Hugging Face Model/Dataset/Space)
 # ---------------------------------------------------------
 
 pulse:RepositoryShape
-    sh:property pulse:PlatformInternalIdShape ;
-    sh:property pulse:PlatformNodeIdShape ;
     sh:property pulse:DescriptionShape ;
     sh:property [ sh:path pulse:tag ; sh:datatype xsd:string ; sh:name "Tag" ; sh:description "GitHub Topics or Hugging Face Tags." ] ;
     sh:property [ sh:path schema:url ; sh:nodeKind sh:IRI ; sh:maxCount 1 ; sh:name "Homepage" ] ;
@@ -174,7 +167,13 @@ pulse:RepositoryShape
     sh:property [ sh:path pulse:fileCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Files" ] ;
     sh:property [ sh:path pulse:lfsObjectCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "LFS Objects" ] ;
     sh:property [ sh:path pulse:xetObjectCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Xet Objects" ] ;
-    sh:property [ sh:path pulse:externalReference ; sh:nodeKind sh:IRI ; sh:name "External Reference" ] .
+    sh:property [ sh:path pulse:externalReference ; sh:nodeKind sh:IRI ; sh:name "External Reference" ] ;
+    sh:property [
+        sh:path pulse:hasExternalIdentifier ;
+        sh:class pulse:ExternalIdentifier ;
+        sh:name "Has External Identifier" ;
+        sh:description "Registry identifiers not already covered by pulse:repositoryHandle (e.g. a Software Heritage SWHID)."
+    ] .
 
 # ---------------------------------------------------------
 # EXTEND pulse:ArticleShape (Zenodo Record + Hugging Face Paper + ORCID Work)
@@ -182,14 +181,13 @@ pulse:RepositoryShape
 
 pulse:ArticleShape
     sh:property [
-        sh:path pulse:platform ;
-        sh:class pulse:PlatformEnumeration ;
+        sh:path pulse:conceptDoi ;
+        sh:datatype xsd:string ;
         sh:maxCount 1 ;
-        sh:name "Platform" ;
-        sh:description "The archive/publication platform this record lives on (e.g. pulse:Zenodo, pulse:Infoscience)."
+        sh:pattern "^10\\.\\d{4,9}/[-._;()/:a-zA-Z0-9]+$" ;
+        sh:name "Concept DOI" ;
+        sh:description "Same DOI-format validation as pulse:doi (DoiShape); optional here since only versioned records have a concept DOI."
     ] ;
-    sh:property pulse:PlatformInternalIdShape ;
-    sh:property [ sh:path pulse:conceptDoi ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Concept DOI" ] ;
     sh:property [ sh:path pulse:version ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Version" ] ;
     sh:property pulse:DescriptionShape ;
     sh:property [ sh:path pulse:keyword ; sh:datatype xsd:string ; sh:name "Keyword" ] ;
@@ -223,9 +221,10 @@ pulse:MembershipShape
     sh:property [
         sh:path pulse:membershipType ;
         sh:class pulse:MembershipTypeEnumeration ;
+        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:name "Membership Type" ;
-        sh:description "Distinguishes an ORCID Employment entry from Education or a society Membership."
+        sh:description "Distinguishes an ORCID Employment entry from Education or a society Membership. Required so every Membership is unambiguously one of the three kinds."
     ] ;
     sh:property [ sh:path pulse:department ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Department" ] ;
     sh:property [ sh:path pulse:qualification ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Qualification" ] .

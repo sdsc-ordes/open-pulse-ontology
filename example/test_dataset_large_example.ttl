@@ -42,7 +42,6 @@ pulse:EPFLComputationalLab a org:Organization ;
     pulse:ror "https://ror.org/02s376052" ;
     pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "epfl-complab" ] ;
     pulse:OrganizationType pulse:ResearchInstitution ;
-    pulse:githubOrgFollowers "450"^^xsd:integer ;
     pulse:owns pulse:SimulationFramework ;
     pulse:owns pulse:DataProcessing .
 
@@ -52,7 +51,6 @@ pulse:SwissResearchAlliance a org:Organization ;
     pulse:ror "https://ror.org/01wyqb977" ;
     pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "swiss-research" ] ;
     pulse:OrganizationType pulse:ResearchInstitution ;
-    pulse:githubOrgFollowers "230"^^xsd:integer ;
     pulse:owns pulse:NetworkAnalysis ;
     pulse:owns pulse:SimulationFramework .
 
@@ -62,7 +60,6 @@ pulse:DepartmentPhysics a org:Organization ;
     pulse:ror "https://ror.org/05a28qc87" ;
     pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "eth-physics" ] ;
     pulse:OrganizationType pulse:University ;
-    pulse:githubOrgFollowers "125"^^xsd:integer ;
     org:hasUnit pulse:PhysicsSimulationUnit .
 
 # Organization 4: Physics Simulation Unit (subunit)
@@ -490,6 +487,8 @@ pulse:Article1 a schema:ScholarlyArticle ;
     schema:author pulse:BobKumar ;
     schema:sourceOrganization pulse:EPFLComputationalLab ;
     pulse:doi "10.1038/s41467-023-12345-6" ;
+    pulse:platform pulse:Infoscience ;
+    pulse:platformInternalId "272853" ;
     pulse:publicationType pulse:JournalArticle ;
     pulse:accessRight pulse:OpenAccess .
 

@@ -3,12 +3,14 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 pulse:GitHub a pulse:PlatformEnumeration .
 pulse:PublicVisibility a pulse:VisibilityEnumeration .
+pulse:SWHID a pulse:IdentifierSchemeEnumeration .
 
 # VALID - exercises the verbose RepositoryShape additions for a GitHub-flavored
 # repository: Internal ID/Node ID, Description, Topics, Homepage, Visibility,
 # Archived, Template repository, Default branch, Watchers, Open issues,
 # Discussions/Wiki/Pages toggles, Releases/Tags/Branches counts, README and
-# the well-known file links, Dependencies/Dependents, Pushed/Updated date.
+# the well-known file links, Dependencies/Dependents, Pushed/Updated date,
+# and a Software Heritage SWHID via the generic hasExternalIdentifier mechanism.
 
 pulse:VerboseRepoAuthor a schema:Person ;
     schema:name "Repo Author" ;
@@ -53,4 +55,9 @@ pulse:VerboseRepo a schema:SoftwareSourceCode ;
     pulse:dependentCount 2 ;
     pulse:dependsOn pulse:OtherDependencyRepo ;
     pulse:pushedDate "2026-07-10T18:22:00"^^xsd:dateTime ;
-    schema:dateModified "2026-07-10T18:22:00"^^xsd:dateTime .
+    schema:dateModified "2026-07-10T18:22:00"^^xsd:dateTime ;
+    pulse:hasExternalIdentifier pulse:VerboseRepoSwhid .
+
+pulse:VerboseRepoSwhid a pulse:ExternalIdentifier ;
+    pulse:identifierScheme pulse:SWHID ;
+    schema:identifier "swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505" .
