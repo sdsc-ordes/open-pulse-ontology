@@ -9,12 +9,8 @@ pulse:SoftwarePublication a pulse:PublicationTypeEnumeration .
 pulse:arXiv a pulse:IdentifierSchemeEnumeration .
 wd:Q2374463 a pulse:DisciplineEnumeration .
 
-# VALID - exercises the verbose ArticleShape additions covering a Zenodo Record,
-# a Hugging Face Paper, and an ORCID Work all at once (all three reuse
-# schema:ScholarlyArticle per the "Reuse schema:ScholarlyArticle" decision):
-# Platform/Record ID, Concept DOI, Version, Description, Keywords, Subjects,
-# License, Contributors, Grants, Related identifiers (arXiv ID), References,
-# Files, Created/Updated date, and Community membership.
+# VALID - verbose ArticleShape additions, covering a Zenodo Record, a Hugging
+# Face Paper, and an ORCID Work at once (all reuse schema:ScholarlyArticle).
 
 pulse:RecordCreator a schema:Person ;
     schema:name "Record Creator" ;

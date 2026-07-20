@@ -233,8 +233,6 @@ jobs:
           # Rename generated index.html to doc.html and use the header wrapper as index.html
           # The wrapper dynamically resolves asset paths at runtime, so it works at any
           # directory depth (including branch names with slashes like feat/my-feature).
-          # Applied to both the core docs (root) and the verbose docs (verbose/ subfolder,
-          # copied in by the `cp -r` above since generated-docs/verbose/ already exists).
           if [ -f "$TARGET_PATH/index.html" ]; then
             mv "$TARGET_PATH/index.html" "$TARGET_PATH/doc.html"
             cp assets/index-header.html "$TARGET_PATH/index.html"

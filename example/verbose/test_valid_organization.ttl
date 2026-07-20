@@ -6,11 +6,8 @@ pulse:GitHub a pulse:PlatformEnumeration .
 pulse:HuggingFace a pulse:PlatformEnumeration .
 pulse:Ringgold a pulse:IdentifierSchemeEnumeration .
 
-# VALID - exercises the verbose OrganizationProfileShape additions (Internal ID,
-# Description, Location, Followers, Updated date), the verbose OrganizationShape
-# additions (Members via schema:member, Owns Collection), and the generic
-# hasExternalIdentifier mechanism for an institutional registry ID (Ringgold)
-# not covered by the dedicated pulse:ror property.
+# VALID - verbose OrganizationProfileShape/OrganizationShape additions, plus a
+# Ringgold ID via the generic hasExternalIdentifier mechanism.
 
 pulse:VerboseLab a org:Organization ;
     schema:name "Verbose Systems Lab" ;

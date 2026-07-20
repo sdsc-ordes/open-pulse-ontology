@@ -1,12 +1,7 @@
-"""Regenerate the combined ontology files from the split source files.
+"""Regenerate the combined ontology files (core and verbose) from the split source files.
 
-ontology-definitions.ttl, ontology-enumerations.ttl and ontology-shapes.ttl are the
-core source of truth. ontology-definitions-verbose.ttl, ontology-enumerations-verbose.ttl
-and ontology-shapes-verbose.ttl additively extend the core files (same shape/class/property
-IRIs get more triples, never redefined ones) to reach full parity with the GitHub/Hugging
-Face/Zenodo/ORCID field inventory. ontology-combined.ttl and ontology-combined-verbose.ttl
-are generated artifacts kept for tools and CI that expect a single file (SHACL validation,
-releases): the former from the core files only, the latter from core + verbose.
+ontology-combined.ttl and ontology-combined-verbose.ttl are generated artifacts kept for
+tools and CI that expect a single file (SHACL validation, releases). Never edit by hand.
 """
 
 from pathlib import Path

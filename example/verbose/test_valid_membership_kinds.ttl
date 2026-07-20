@@ -7,9 +7,7 @@ pulse:Employment a pulse:MembershipTypeEnumeration .
 pulse:Education a pulse:MembershipTypeEnumeration .
 pulse:SocietyMembership a pulse:MembershipTypeEnumeration .
 
-# VALID - exercises the verbose MembershipShape additions distinguishing ORCID's
-# Employment/Education/Membership sections via pulse:membershipType, plus the
-# Employment-only Department field and the Education-only Qualification field.
+# VALID - verbose MembershipShape additions: pulse:membershipType, Department, Qualification.
 
 pulse:MultiAffiliatedResearcher a schema:Person ;
     schema:name "Multi Affiliated Researcher" ;

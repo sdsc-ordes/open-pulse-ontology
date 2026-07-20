@@ -2,9 +2,7 @@
 @prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-# INVALID - pulse:collectionOwnedBy must point to a schema:Person or an
-# org:Organization (sh:or). Pointing it at a schema:SoftwareSourceCode
-# should FAIL validation.
+# INVALID - pulse:collectionOwnedBy must be a schema:Person or org:Organization, not a SoftwareSourceCode.
 
 pulse:BadCollectionOwnerRepo a schema:SoftwareSourceCode ;
     schema:name "not-an-owner" ;

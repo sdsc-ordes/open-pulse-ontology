@@ -5,9 +5,7 @@ pulse:HuggingFace a pulse:PlatformEnumeration .
 pulse:Data a pulse:RepositoryTypeEnumeration .
 pulse:TextModality a pulse:ModalityEnumeration .
 
-# VALID - a Hugging Face Dataset, modeled as schema:SoftwareSourceCode with
-# pulse:repositoryType pulse:Data. Exercises Modalities/Splits/Configurations/
-# Files, plus Dataset card reusing pulse:readme.
+# VALID - a Hugging Face Dataset: schema:SoftwareSourceCode with pulse:repositoryType pulse:Data.
 
 pulse:HfDatasetAuthor a schema:Person ;
     schema:name "Dataset Author" ;

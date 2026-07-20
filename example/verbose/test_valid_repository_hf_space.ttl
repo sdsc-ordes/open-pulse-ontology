@@ -8,9 +8,7 @@ pulse:Data a pulse:RepositoryTypeEnumeration .
 pulse:Gradio a pulse:SpaceSdkEnumeration .
 pulse:RunningStatus a pulse:SpaceRuntimeStatusEnumeration .
 
-# VALID - a Hugging Face Space, modeled as schema:SoftwareSourceCode with
-# pulse:repositoryType pulse:Space. Exercises SDK/Hardware/Runtime status and
-# Linked models/Linked datasets (both collapsed into pulse:relatedRepository).
+# VALID - a Hugging Face Space: schema:SoftwareSourceCode with pulse:repositoryType pulse:Space.
 
 pulse:HfSpaceAuthor a schema:Person ;
     schema:name "Space Author" ;

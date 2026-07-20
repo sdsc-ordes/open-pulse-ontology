@@ -2246,12 +2246,6 @@ pulse:ProjectShape
 
 # ---------------------------------------------------------
 # VERBOSE CLASS & PROPERTY SECTION
-#
-# Additive extension of ontology-definitions.ttl: every class and property
-# below is new. Nothing here redefines or re-constrains a core term.
-# Combined with the core files (see combine_ontology.py), this lets the
-# verbose graph reach full parity with the GitHub/Hugging Face/Zenodo/ORCID
-# field inventory while the core graph stays minimal.
 # ---------------------------------------------------------
 
 # Classes
@@ -2259,11 +2253,6 @@ pulse:Collection a rdfs:Class ; skos:prefLabel "Collection" ; skos:definition "A
 pulse:Community a rdfs:Class ; skos:prefLabel "Community" ; skos:definition "A curated group of records on an archive platform (e.g. a Zenodo Community), with its own curators and members distinct from the records it contains." .
 pulse:Funding a rdfs:Class ; skos:prefLabel "Funding" ; skos:definition "A grant or funding award held directly by a Person (e.g. an ORCID Funding record), distinct from schema:Project's funder relationship." .
 pulse:ExternalIdentifier a rdfs:Class ; skos:prefLabel "External Identifier" ; skos:definition "A (scheme, value) pair representing an identifier from an external registry (e.g. arXiv, Scopus, ResearcherID, ISBN) that isn't already a first-class property such as pulse:doi or pulse:orcidIdentifier." .
-
-# NOTE: pulse:platformInternalId and pulse:platformNodeId used to live here but were
-# promoted to core (ontology-definitions.ttl) -- they're identity-critical (the same
-# family as pulse:platformUsername/organizationHandle/repositoryHandle, which are
-# already core), not verbose-only enrichment. See ontology-shapes.ttl for their wiring.
 
 # Profile-level properties (Person and Organization platform profiles)
 pulse:biography a rdf:Property ; skos:prefLabel "biography" ; skos:definition "A free-text biography or self-description." .
@@ -2356,10 +2345,6 @@ pulse:identifierScheme a rdf:Property ; rdfs:range pulse:IdentifierSchemeEnumera
 
 # ---------------------------------------------------------
 # VERBOSE ENUMERATIONS SECTION
-#
-# New enumeration classes needed only by the verbose graph, plus additional
-# instances of the core pulse:PublicationTypeEnumeration class (Zenodo's
-# upload types are broader than the journal-article-shaped core set).
 # ---------------------------------------------------------
 
 # Enumeration Classes
@@ -2415,15 +2400,8 @@ pulse:ISNI a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISNI"@en ; skos
 pulse:SWHID a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "SWHID"@en ; skos:definition "The Software Heritage persistent identifier scheme for a repository or a specific artifact within it."@en .
 
 # Additional Enumeration Instances - Publication Types (broadens core to cover Zenodo's non-article upload types)
-# COAR alignment status per term (checked against https://github.com/coar-repositories/vocabularies
-# v1.1 snapshot and web search; the live vocabularies.coar-repositories.org site blocks automated
-# fetches, and appears to have moved to a different ID scheme in a newer version -- e.g. "conference
-# presentation" now resolves at .../resource_types/R60J-J5BD/ rather than a c_XXXX code -- so even
-# these confirmed v1.1 codes should be spot-checked against the current vocabulary before relying on
-# them for OpenAIRE reporting. Software and Dataset were independently corroborated across two
-# separate lookups; Poster/Presentation/Image/Video/Workflow/PhysicalObject could not be verified with
-# confidence (one candidate code, c_18ws, turned out to mean "research report", not "physical object")
-# and are left unaligned rather than guessed.
+# Only Software/Dataset have a verified COAR skos:exactMatch; the rest are unaligned
+# pending manual confirmation against the current vocabulary.
 pulse:SoftwarePublication a pulse:PublicationTypeEnumeration ; skos:prefLabel "Software"@en ; skos:definition "A software deposit (e.g. a Zenodo software upload)."@en ; skos:exactMatch coar-resource:c_5ce6 .
 pulse:DatasetPublication a pulse:PublicationTypeEnumeration ; skos:prefLabel "Dataset"@en ; skos:definition "A dataset deposit (e.g. a Zenodo dataset upload)."@en ; skos:exactMatch coar-resource:c_ddb1 .
 pulse:Poster a pulse:PublicationTypeEnumeration ; skos:prefLabel "Poster"@en ; skos:definition "A conference or research poster."@en .
@@ -2435,28 +2413,10 @@ pulse:PhysicalObject a pulse:PublicationTypeEnumeration ; skos:prefLabel "Physic
 
 # ---------------------------------------------------------
 # VERBOSE SHAPES SECTION
-#
-# This file only ADDS sh:property statements to shape IRIs that already
-# exist in ontology-shapes.ttl (pulse:PersonShape, pulse:PlatformProfileShape,
-# pulse:OrganizationShape, pulse:OrganizationProfileShape, pulse:ArticleShape,
-# pulse:RepositoryShape, pulse:MembershipShape). Because SHACL shapes are
-# identified by IRI, RDF-merging these extra sh:property triples into the
-# same shape (via ontology-combined-verbose.ttl) simply widens that shape's
-# sh:closed allow-list -- no shape here re-declares sh:closed/sh:targetClass/
-# sh:ignoredProperties, and no sh:property added here touches a property path
-# the core shape already constrains (that would conflict rather than widen).
-# New classes (Collection, Community, Funding, ExternalIdentifier) get their
-# own complete NodeShape below since core says nothing about them at all.
 # ---------------------------------------------------------
 
 # ---------------------------------------------------------
 # REUSABLE VERBOSE PROPERTY SHAPES
-#
-# NOTE: pulse:PlatformInternalIdShape and pulse:PlatformNodeIdShape used to be
-# declared here but were promoted to ontology-shapes.ttl (core) along with their
-# properties. They're still referenced by IRI below (e.g. from CollectionShape/
-# CommunityShape) -- that keeps working since combine_ontology.py merges core and
-# verbose into one graph, so the shape just needs to be defined somewhere.
 # ---------------------------------------------------------
 
 pulse:DescriptionShape

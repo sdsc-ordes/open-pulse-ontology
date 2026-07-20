@@ -13,28 +13,10 @@
 
 # ---------------------------------------------------------
 # VERBOSE SHAPES SECTION
-#
-# This file only ADDS sh:property statements to shape IRIs that already
-# exist in ontology-shapes.ttl (pulse:PersonShape, pulse:PlatformProfileShape,
-# pulse:OrganizationShape, pulse:OrganizationProfileShape, pulse:ArticleShape,
-# pulse:RepositoryShape, pulse:MembershipShape). Because SHACL shapes are
-# identified by IRI, RDF-merging these extra sh:property triples into the
-# same shape (via ontology-combined-verbose.ttl) simply widens that shape's
-# sh:closed allow-list -- no shape here re-declares sh:closed/sh:targetClass/
-# sh:ignoredProperties, and no sh:property added here touches a property path
-# the core shape already constrains (that would conflict rather than widen).
-# New classes (Collection, Community, Funding, ExternalIdentifier) get their
-# own complete NodeShape below since core says nothing about them at all.
 # ---------------------------------------------------------
 
 # ---------------------------------------------------------
 # REUSABLE VERBOSE PROPERTY SHAPES
-#
-# NOTE: pulse:PlatformInternalIdShape and pulse:PlatformNodeIdShape used to be
-# declared here but were promoted to ontology-shapes.ttl (core) along with their
-# properties. They're still referenced by IRI below (e.g. from CollectionShape/
-# CommunityShape) -- that keeps working since combine_ontology.py merges core and
-# verbose into one graph, so the shape just needs to be defined somewhere.
 # ---------------------------------------------------------
 
 pulse:DescriptionShape

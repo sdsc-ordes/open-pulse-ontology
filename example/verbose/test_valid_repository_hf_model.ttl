@@ -4,10 +4,7 @@
 pulse:HuggingFace a pulse:PlatformEnumeration .
 pulse:Model a pulse:RepositoryTypeEnumeration .
 
-# VALID - a Hugging Face Model, modeled as schema:SoftwareSourceCode with
-# pulse:repositoryType pulse:Model (per the additive-extension decision).
-# Exercises Pipeline tag/Tasks/Library/Framework/Languages/Downloads/Likes
-# /Gated/Model card (reusing pulse:readme).
+# VALID - a Hugging Face Model: schema:SoftwareSourceCode with pulse:repositoryType pulse:Model.
 
 pulse:HfModelAuthor a schema:Person ;
     schema:name "Model Author" ;

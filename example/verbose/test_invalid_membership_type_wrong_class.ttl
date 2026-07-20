@@ -4,9 +4,7 @@
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-# INVALID - pulse:membershipType must be an IRI from pulse:MembershipTypeEnumeration
-# (e.g. pulse:Employment). Using pulse:GitHub (a PlatformEnumeration instance, wrong
-# class) should FAIL validation.
+# INVALID - pulse:membershipType must be from MembershipTypeEnumeration, not pulse:GitHub.
 
 pulse:BadMembershipResearcher a schema:Person ;
     schema:name "Bad Membership Researcher" ;

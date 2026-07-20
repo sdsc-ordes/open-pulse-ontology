@@ -5,12 +5,7 @@ pulse:GitHub a pulse:PlatformEnumeration .
 pulse:PublicVisibility a pulse:VisibilityEnumeration .
 pulse:SWHID a pulse:IdentifierSchemeEnumeration .
 
-# VALID - exercises the verbose RepositoryShape additions for a GitHub-flavored
-# repository: Internal ID/Node ID, Description, Topics, Homepage, Visibility,
-# Archived, Template repository, Default branch, Watchers, Open issues,
-# Discussions/Wiki/Pages toggles, Releases/Tags/Branches counts, README and
-# the well-known file links, Dependencies/Dependents, Pushed/Updated date,
-# and a Software Heritage SWHID via the generic hasExternalIdentifier mechanism.
+# VALID - verbose RepositoryShape additions for a GitHub-flavored repository.
 
 pulse:VerboseRepoAuthor a schema:Person ;
     schema:name "Repo Author" ;

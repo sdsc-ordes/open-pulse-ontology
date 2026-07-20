@@ -4,10 +4,7 @@
 pulse:GitHub a pulse:PlatformEnumeration .
 pulse:Scopus a pulse:IdentifierSchemeEnumeration .
 
-# VALID - exercises the verbose PersonShape and PlatformProfileShape additions:
-# Researcher-level Biography/Keywords/Emails/Websites/Country/External identifiers,
-# and Account-level Internal ID/Node ID/Bio/Avatar/Location/Social links/
-# Followers/Following/Company/Public repos/Public gists/Created/Updated date.
+# VALID - verbose PersonShape and PlatformProfileShape additions.
 
 pulse:AdaResearcher a schema:Person ;
     schema:name "Ada Researcher" ;

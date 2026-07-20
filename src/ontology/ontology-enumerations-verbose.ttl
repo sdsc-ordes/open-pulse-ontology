@@ -14,10 +14,6 @@
 
 # ---------------------------------------------------------
 # VERBOSE ENUMERATIONS SECTION
-#
-# New enumeration classes needed only by the verbose graph, plus additional
-# instances of the core pulse:PublicationTypeEnumeration class (Zenodo's
-# upload types are broader than the journal-article-shaped core set).
 # ---------------------------------------------------------
 
 # Enumeration Classes
@@ -73,15 +69,8 @@ pulse:ISNI a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISNI"@en ; skos
 pulse:SWHID a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "SWHID"@en ; skos:definition "The Software Heritage persistent identifier scheme for a repository or a specific artifact within it."@en .
 
 # Additional Enumeration Instances - Publication Types (broadens core to cover Zenodo's non-article upload types)
-# COAR alignment status per term (checked against https://github.com/coar-repositories/vocabularies
-# v1.1 snapshot and web search; the live vocabularies.coar-repositories.org site blocks automated
-# fetches, and appears to have moved to a different ID scheme in a newer version -- e.g. "conference
-# presentation" now resolves at .../resource_types/R60J-J5BD/ rather than a c_XXXX code -- so even
-# these confirmed v1.1 codes should be spot-checked against the current vocabulary before relying on
-# them for OpenAIRE reporting. Software and Dataset were independently corroborated across two
-# separate lookups; Poster/Presentation/Image/Video/Workflow/PhysicalObject could not be verified with
-# confidence (one candidate code, c_18ws, turned out to mean "research report", not "physical object")
-# and are left unaligned rather than guessed.
+# Only Software/Dataset have a verified COAR skos:exactMatch; the rest are unaligned
+# pending manual confirmation against the current vocabulary.
 pulse:SoftwarePublication a pulse:PublicationTypeEnumeration ; skos:prefLabel "Software"@en ; skos:definition "A software deposit (e.g. a Zenodo software upload)."@en ; skos:exactMatch coar-resource:c_5ce6 .
 pulse:DatasetPublication a pulse:PublicationTypeEnumeration ; skos:prefLabel "Dataset"@en ; skos:definition "A dataset deposit (e.g. a Zenodo dataset upload)."@en ; skos:exactMatch coar-resource:c_ddb1 .
 pulse:Poster a pulse:PublicationTypeEnumeration ; skos:prefLabel "Poster"@en ; skos:definition "A conference or research poster."@en .

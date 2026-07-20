@@ -7,10 +7,7 @@ pulse:OtherIdentifierScheme a pulse:IdentifierSchemeEnumeration .
 pulse:HuggingFace a pulse:PlatformEnumeration .
 pulse:Model a pulse:RepositoryTypeEnumeration .
 
-# VALID - exercises the new pulse:Funding class (ORCID's Funding section, held
-# directly by a Person, independent of schema:Project) and a Person-owned
-# pulse:Collection (Hugging Face Collections can be owned by a user, not just
-# an organization).
+# VALID - the new pulse:Funding class and a Person-owned pulse:Collection.
 
 pulse:FundedResearcher a schema:Person ;
     schema:name "Funded Researcher" ;
