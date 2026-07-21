@@ -26,25 +26,32 @@ pulse:FunderOrg a org:Organization ;
 
 pulse:VerbosePriorWork a schema:ScholarlyArticle ;
     schema:name "Earlier Work On Verbose Ontologies" ;
-    schema:datePublished "2023-01-15"^^xsd:date ;
     schema:author pulse:RecordCreator ;
-    pulse:doi "10.5281/zenodo.1111111" .
+    pulse:doi "10.5281/zenodo.1111111" ;
+    pulse:hasDeposit [
+        a pulse:Deposit ;
+        pulse:platform pulse:Zenodo ;
+        schema:datePublished "2023-01-15"^^xsd:date
+    ] .
 
 pulse:VerboseZenodoRecord a schema:ScholarlyArticle ;
     schema:name "A Verbose Ontology for Research Software Metadata" ;
-    schema:datePublished "2026-05-01"^^xsd:date ;
     schema:author pulse:RecordCreator ;
     pulse:doi "10.5281/zenodo.1234567" ;
-    pulse:platform pulse:Zenodo ;
-    pulse:platformInternalId "1234567" ;
+    pulse:hasDeposit [
+        a pulse:Deposit ;
+        pulse:platform pulse:Zenodo ;
+        pulse:platformInternalId "1234567" ;
+        schema:datePublished "2026-05-01"^^xsd:date ;
+        pulse:accessRight pulse:OpenAccess ;
+        pulse:publicationType pulse:SoftwarePublication
+    ] ;
     pulse:conceptDoi "10.5281/zenodo.1234566" ;
     pulse:version "2.0.0" ;
     schema:description "Describes a verbose extension to the Open Pulse Ontology." ;
     pulse:keyword "ontology" , "research software" ;
     pulse:discipline wd:Q2374463 ;
     schema:license <https://spdx.org/licenses/CC-BY-4.0.html> ;
-    pulse:accessRight pulse:OpenAccess ;
-    pulse:publicationType pulse:SoftwarePublication ;
     pulse:contributor pulse:RecordContributor ;
     schema:funder pulse:FunderOrg ;
     pulse:hasExternalIdentifier pulse:VerboseRecordArxivId ;

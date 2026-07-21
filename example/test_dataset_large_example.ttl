@@ -482,66 +482,89 @@ pulse:SimulationProject a schema:Project ;
 
 pulse:Article1 a schema:ScholarlyArticle ;
     schema:name "Efficient Physics Simulations Using Modern Accelerators" ;
-    schema:datePublished "2023-03-15"^^xsd:date ;
     schema:author pulse:AliceChen ;
     schema:author pulse:BobKumar ;
     schema:sourceOrganization pulse:EPFLComputationalLab ;
     pulse:doi "10.1038/s41467-023-12345-6" ;
-    pulse:platform pulse:Infoscience ;
-    pulse:platformInternalId "272853" ;
-    pulse:publicationType pulse:JournalArticle ;
-    pulse:accessRight pulse:OpenAccess .
+    pulse:hasDeposit [
+        a pulse:Deposit ;
+        pulse:platform pulse:Infoscience ;
+        pulse:platformInternalId "272853" ;
+        schema:datePublished "2023-03-15"^^xsd:date ;
+        pulse:publicationType pulse:JournalArticle ;
+        pulse:accessRight pulse:OpenAccess
+    ] .
 
 pulse:Article2 a schema:ScholarlyArticle ;
     schema:name "Graph Neural Networks for Complex System Analysis" ;
-    schema:datePublished "2023-07-22"^^xsd:date ;
     schema:author pulse:BobKumar ;
     schema:author pulse:DavidLee ;
     schema:sourceOrganization pulse:SwissResearchAlliance ;
     pulse:doi "10.1038/s41467-023-23456-7" ;
-    pulse:publicationType pulse:JournalArticle ;
-    pulse:accessRight pulse:OpenAccess .
+    pulse:hasDeposit [
+        a pulse:Deposit ;
+        pulse:platform pulse:Infoscience ;
+        schema:datePublished "2023-07-22"^^xsd:date ;
+        pulse:publicationType pulse:JournalArticle ;
+        pulse:accessRight pulse:OpenAccess
+    ] .
 
 pulse:Article3 a schema:ScholarlyArticle ;
     schema:name "Scalable Data Processing for Scientific Computing" ;
-    schema:datePublished "2024-01-10"^^xsd:date ;
     schema:author pulse:AliceChen ;
     schema:author pulse:EmmaWilson ;
     schema:author pulse:CarolMartinez ;
     schema:sourceOrganization pulse:EPFLComputationalLab ;
     pulse:doi "10.1038/s41467-024-34567-8" ;
-    pulse:publicationType pulse:ConferencePaper ;
-    pulse:accessRight pulse:OpenAccess .
+    pulse:hasDeposit [
+        a pulse:Deposit ;
+        pulse:platform pulse:Infoscience ;
+        schema:datePublished "2024-01-10"^^xsd:date ;
+        pulse:publicationType pulse:ConferencePaper ;
+        pulse:accessRight pulse:OpenAccess
+    ] .
 
 pulse:Article4 a schema:ScholarlyArticle ;
     schema:name "Machine Learning Methods in Physics: A Comprehensive Review" ;
-    schema:datePublished "2023-11-05"^^xsd:date ;
     schema:author pulse:DavidLee ;
     schema:author pulse:BobKumar ;
     schema:sourceOrganization pulse:DepartmentPhysics ;
     pulse:doi "10.1038/s41467-023-45678-9" ;
-    pulse:publicationType pulse:JournalArticle ;
-    pulse:accessRight pulse:ClosedAccess .
+    pulse:hasDeposit [
+        a pulse:Deposit ;
+        pulse:platform pulse:Infoscience ;
+        schema:datePublished "2023-11-05"^^xsd:date ;
+        pulse:publicationType pulse:JournalArticle ;
+        pulse:accessRight pulse:ClosedAccess
+    ] .
 
 pulse:Article5 a schema:ScholarlyArticle ;
     schema:name "Software Engineering Best Practices for Scientific Code" ;
-    schema:datePublished "2024-02-28"^^xsd:date ;
     schema:author pulse:CarolMartinez ;
     schema:author pulse:EmmaWilson ;
     schema:author pulse:AliceChen ;
     schema:sourceOrganization pulse:EPFLComputationalLab ;
     pulse:doi "10.1038/s41467-024-56789-0" ;
-    pulse:publicationType pulse:Preprint ;
-    pulse:accessRight pulse:OpenAccess .
+    pulse:hasDeposit [
+        a pulse:Deposit ;
+        pulse:platform pulse:Infoscience ;
+        schema:datePublished "2024-02-28"^^xsd:date ;
+        pulse:publicationType pulse:Preprint ;
+        pulse:accessRight pulse:OpenAccess
+    ] .
 
 pulse:Article6 a schema:ScholarlyArticle ;
     schema:name "High-Performance Computing for Data Analysis" ;
-    schema:datePublished "2023-05-20"^^xsd:date ;
     schema:author pulse:BobKumar ;
     schema:sourceOrganization pulse:SwissResearchAlliance ;
     pulse:doi "10.1038/s41467-023-56789-1" ;
-    pulse:publicationType pulse:JournalArticle ;
-    pulse:accessRight pulse:ClosedAccess .
+    pulse:hasDeposit [
+        a pulse:Deposit ;
+        pulse:platform pulse:Infoscience ;
+        schema:datePublished "2023-05-20"^^xsd:date ;
+        pulse:publicationType pulse:JournalArticle ;
+        pulse:accessRight pulse:ClosedAccess
+    ] .
 
 # ============================================================
 # SUMMARY STATISTICS

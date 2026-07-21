@@ -34,6 +34,7 @@ org:Organization a rdfs:Class ; skos:prefLabel "Organization" ; skos:definition 
 pulse:Contribution a rdfs:Class ; skos:prefLabel "Contribution" ; skos:definition "Represents a person's aggregated contributions to a repository." .
 pulse:PlatformProfile a rdfs:Class ; skos:prefLabel "Platform Profile" ; skos:definition "An identity that a Person holds on a specific external platform (e.g. a GitHub account or an Infoscience author record), grouping the platform-scoped handle, display name and email that belong together." .
 pulse:OrganizationProfile a rdfs:Class ; skos:prefLabel "Organization Profile" ; skos:definition "An identity that an Organization holds on a specific external platform (e.g. a GitHub org or a Hugging Face org), grouping the platform-scoped handle, display name and URL that belong together." .
+pulse:Deposit a rdfs:Class ; skos:prefLabel "Deposit" ; skos:definition "A specific instance of a ScholarlyArticle deposited or registered on one external platform (e.g. a Zenodo record, an Infoscience entry, an arXiv submission), grouping that platform's own internal ID, access right, publisher and publication date." .
 
 # Properties
 schema:license a rdf:Property ; skos:prefLabel "license" ; skos:definition "A license document that applies to this content, typically indicated by URL." .
@@ -99,6 +100,13 @@ pulse:projectOutput a rdf:Property ; skos:prefLabel "project output" ; skos:defi
 # Publication properties
 pulse:publicationType a rdf:Property ; skos:prefLabel "publication type" ; skos:definition "The type or category of the publication (e.g., journal article, conference paper, preprint)." .
 pulse:accessRight a rdf:Property ; skos:prefLabel "access right" ; skos:definition "The open-access status of the publication (e.g., open, closed, embargoed, restricted)." .
+
+# Deposit properties
+pulse:hasDeposit a rdf:Property ; skos:prefLabel "has deposit" ; skos:definition "Links a ScholarlyArticle to a platform-specific deposit or registration of it (e.g. its Zenodo record, its Infoscience entry, its arXiv submission)." .
+pulse:depositOf a rdf:Property ; skos:prefLabel "deposit of" ; skos:definition "Links a Deposit back to the ScholarlyArticle it is a deposit of." .
+
+# Authorship properties
+pulse:hasAuthoredArticle a rdf:Property ; skos:prefLabel "has authored article" ; skos:definition "Links a Person to a ScholarlyArticle they authored." ; owl:inverseOf schema:author .
 
 # ---------------------------------------------------------
 # ENUMERATIONS SECTION
@@ -1946,6 +1954,12 @@ pulse:PersonShape
         sh:class schema:SoftwareSourceCode ;
         sh:name "Owns Repository"
     ] ;
+    sh:property [
+        sh:path pulse:hasAuthoredArticle ;
+        sh:class schema:ScholarlyArticle ;
+        sh:name "Has Authored Article" ;
+        sh:description "Scholarly articles authored by this person."
+    ] ;
     # A person is identifiable either by a cross-platform ORCID anchor or by at least one platform profile.
     sh:or (
         [ sh:property [ sh:path pulse:orcidIdentifier ; sh:minCount 1 ] ]
@@ -2033,18 +2047,52 @@ pulse:ArticleShape
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property pulse:NameShape ;
     sh:property pulse:DoiShape ;
+    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this article"   ] ;
+    sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] ;
+    sh:property [
+        sh:path pulse:hasDeposit ;
+        sh:class pulse:Deposit ;
+        sh:minCount 1 ;
+        sh:name "Has Deposit" ;
+        sh:description "Platform-specific deposits of this article (e.g. its Zenodo record, its Infoscience entry, its arXiv submission). Each carries that platform's own internal ID, access right, publisher and publication date."
+    ] .
+
+pulse:DepositShape
+    a sh:NodeShape ;
+    sh:targetClass pulse:Deposit ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property [
         sh:path pulse:platform ;
         sh:class pulse:PlatformEnumeration ;
+        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:name "Platform" ;
-        sh:description "The archive/publication platform this record lives on (e.g. pulse:Zenodo, pulse:Infoscience)."
+        sh:description "Which platform this deposit lives on (e.g. pulse:Zenodo, pulse:Infoscience, pulse:ArXiv)."
+    ] ;
+    sh:property [
+        sh:path pulse:depositOf ;
+        sh:class schema:ScholarlyArticle ;
+        sh:maxCount 1 ;
+        sh:name "Deposit Of" ;
+        sh:description "Back-link to the article this is a deposit of."
     ] ;
     sh:property pulse:PlatformInternalIdShape ;
-    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Publication Date" ] ;
-    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this article"   ] ;
-    sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] ;
-    sh:property [ sh:path schema:publisher ; sh:class org:Organization ; sh:maxCount 1 ; sh:name "Publisher" ; sh:description "The entity that holds, archives, publishes, or distributes this article (e.g. a journal publisher)." ] ;
+    sh:property [
+        sh:path schema:datePublished ;
+        sh:datatype xsd:date ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Publication Date" ;
+        sh:description "The date this deposit was published/registered on its platform."
+    ] ;
+    sh:property [
+        sh:path schema:publisher ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Publisher" ;
+        sh:description "The publisher's name, as free text."
+    ] ;
     sh:property pulse:PublicationTypeShape ;
     sh:property pulse:AccessRightShape .
 

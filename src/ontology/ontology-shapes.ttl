@@ -183,6 +183,12 @@ pulse:PersonShape
         sh:class schema:SoftwareSourceCode ;
         sh:name "Owns Repository"
     ] ;
+    sh:property [
+        sh:path pulse:hasAuthoredArticle ;
+        sh:class schema:ScholarlyArticle ;
+        sh:name "Has Authored Article" ;
+        sh:description "Scholarly articles authored by this person."
+    ] ;
     # A person is identifiable either by a cross-platform ORCID anchor or by at least one platform profile.
     sh:or (
         [ sh:property [ sh:path pulse:orcidIdentifier ; sh:minCount 1 ] ]
@@ -270,18 +276,52 @@ pulse:ArticleShape
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property pulse:NameShape ;
     sh:property pulse:DoiShape ;
+    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this article"   ] ;
+    sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] ;
+    sh:property [
+        sh:path pulse:hasDeposit ;
+        sh:class pulse:Deposit ;
+        sh:minCount 1 ;
+        sh:name "Has Deposit" ;
+        sh:description "Platform-specific deposits of this article (e.g. its Zenodo record, its Infoscience entry, its arXiv submission). Each carries that platform's own internal ID, access right, publisher and publication date."
+    ] .
+
+pulse:DepositShape
+    a sh:NodeShape ;
+    sh:targetClass pulse:Deposit ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property [
         sh:path pulse:platform ;
         sh:class pulse:PlatformEnumeration ;
+        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:name "Platform" ;
-        sh:description "The archive/publication platform this record lives on (e.g. pulse:Zenodo, pulse:Infoscience)."
+        sh:description "Which platform this deposit lives on (e.g. pulse:Zenodo, pulse:Infoscience, pulse:ArXiv)."
+    ] ;
+    sh:property [
+        sh:path pulse:depositOf ;
+        sh:class schema:ScholarlyArticle ;
+        sh:maxCount 1 ;
+        sh:name "Deposit Of" ;
+        sh:description "Back-link to the article this is a deposit of."
     ] ;
     sh:property pulse:PlatformInternalIdShape ;
-    sh:property [ sh:path schema:datePublished ; sh:datatype xsd:date ; sh:minCount 1 ; sh:name "Publication Date" ] ;
-    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this article"   ] ;
-    sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] ;
-    sh:property [ sh:path schema:publisher ; sh:class org:Organization ; sh:maxCount 1 ; sh:name "Publisher" ; sh:description "The entity that holds, archives, publishes, or distributes this article (e.g. a journal publisher)." ] ;
+    sh:property [
+        sh:path schema:datePublished ;
+        sh:datatype xsd:date ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Publication Date" ;
+        sh:description "The date this deposit was published/registered on its platform."
+    ] ;
+    sh:property [
+        sh:path schema:publisher ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Publisher" ;
+        sh:description "The publisher's name, as free text."
+    ] ;
     sh:property pulse:PublicationTypeShape ;
     sh:property pulse:AccessRightShape .
 

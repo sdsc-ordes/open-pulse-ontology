@@ -32,6 +32,7 @@ org:Organization a rdfs:Class ; skos:prefLabel "Organization" ; skos:definition 
 pulse:Contribution a rdfs:Class ; skos:prefLabel "Contribution" ; skos:definition "Represents a person's aggregated contributions to a repository." .
 pulse:PlatformProfile a rdfs:Class ; skos:prefLabel "Platform Profile" ; skos:definition "An identity that a Person holds on a specific external platform (e.g. a GitHub account or an Infoscience author record), grouping the platform-scoped handle, display name and email that belong together." .
 pulse:OrganizationProfile a rdfs:Class ; skos:prefLabel "Organization Profile" ; skos:definition "An identity that an Organization holds on a specific external platform (e.g. a GitHub org or a Hugging Face org), grouping the platform-scoped handle, display name and URL that belong together." .
+pulse:Deposit a rdfs:Class ; skos:prefLabel "Deposit" ; skos:definition "A specific instance of a ScholarlyArticle deposited or registered on one external platform (e.g. a Zenodo record, an Infoscience entry, an arXiv submission), grouping that platform's own internal ID, access right, publisher and publication date." .
 
 # Properties
 schema:license a rdf:Property ; skos:prefLabel "license" ; skos:definition "A license document that applies to this content, typically indicated by URL." .
@@ -97,3 +98,10 @@ pulse:projectOutput a rdf:Property ; skos:prefLabel "project output" ; skos:defi
 # Publication properties
 pulse:publicationType a rdf:Property ; skos:prefLabel "publication type" ; skos:definition "The type or category of the publication (e.g., journal article, conference paper, preprint)." .
 pulse:accessRight a rdf:Property ; skos:prefLabel "access right" ; skos:definition "The open-access status of the publication (e.g., open, closed, embargoed, restricted)." .
+
+# Deposit properties
+pulse:hasDeposit a rdf:Property ; skos:prefLabel "has deposit" ; skos:definition "Links a ScholarlyArticle to a platform-specific deposit or registration of it (e.g. its Zenodo record, its Infoscience entry, its arXiv submission)." .
+pulse:depositOf a rdf:Property ; skos:prefLabel "deposit of" ; skos:definition "Links a Deposit back to the ScholarlyArticle it is a deposit of." .
+
+# Authorship properties
+pulse:hasAuthoredArticle a rdf:Property ; skos:prefLabel "has authored article" ; skos:definition "Links a Person to a ScholarlyArticle they authored." ; owl:inverseOf schema:author .
