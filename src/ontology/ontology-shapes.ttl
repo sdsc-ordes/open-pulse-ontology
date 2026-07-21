@@ -39,7 +39,7 @@ pulse:ProfileEmailShape
     sh:path schema:email ;
     sh:nodeKind sh:Literal ;
     sh:pattern "^[\\w\\-\\.\\+]+@([\\w-]+\\.)+[\\w-]{2,}$" ;
-    sh:description "Platform email. Unlike pulse:EmailShape this allows '+' sub-addressing so provider noreply forms validate (e.g. GitHub '1024+user@users.noreply.github.com')." .
+    sh:description "Platform email pattern allowing '+' sub-addressing (e.g. GitHub '1024+user@users.noreply.github.com')." .
 
 pulse:OrganizationTypeShape
     a sh:PropertyShape ;

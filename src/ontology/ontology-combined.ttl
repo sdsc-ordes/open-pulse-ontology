@@ -90,7 +90,7 @@ pulse:orcidIdentifier a rdf:Property ; skos:prefLabel "ORCID identifier" ; skos:
 # Platform profile properties
 pulse:hasProfile a rdf:Property ; skos:prefLabel "has profile" ; skos:definition "Links a Person to a platform profile (external account/identity) they hold." .
 pulse:profileOf a rdf:Property ; skos:prefLabel "profile of" ; skos:definition "Links a platform profile back to the Person it belongs to." .
-pulse:hasOrganizationProfile a rdf:Property ; skos:prefLabel "has organization profile" ; skos:definition "Links an Organization to a platform profile (external account/identity) it holds. Adding support for a new platform requires only a new pulse:PlatformEnumeration instance, not a new property." .
+pulse:hasOrganizationProfile a rdf:Property ; skos:prefLabel "has organization profile" ; skos:definition "Links an Organization to a platform profile (external account/identity) it holds." .
 pulse:organizationProfileOf a rdf:Property ; skos:prefLabel "organization profile of" ; skos:definition "Links a platform profile back to the Organization it belongs to." .
 pulse:platform a rdf:Property ; rdfs:range pulse:PlatformEnumeration ; skos:prefLabel "platform" ; skos:definition "The external platform associated with this resource (e.g. the platform a PlatformProfile/OrganizationProfile exists on, or the platform hosting a repository)." .
 
@@ -1810,7 +1810,7 @@ pulse:ProfileEmailShape
     sh:path schema:email ;
     sh:nodeKind sh:Literal ;
     sh:pattern "^[\\w\\-\\.\\+]+@([\\w-]+\\.)+[\\w-]{2,}$" ;
-    sh:description "Platform email. Unlike pulse:EmailShape this allows '+' sub-addressing so provider noreply forms validate (e.g. GitHub '1024+user@users.noreply.github.com')." .
+    sh:description "Platform email pattern allowing '+' sub-addressing (e.g. GitHub '1024+user@users.noreply.github.com')." .
 
 pulse:OrganizationTypeShape
     a sh:PropertyShape ;

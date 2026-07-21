@@ -168,7 +168,7 @@ pulse:ArticleShape
         sh:maxCount 1 ;
         sh:pattern "^10\\.\\d{4,9}/[-._;()/:a-zA-Z0-9]+$" ;
         sh:name "Concept DOI" ;
-        sh:description "Same DOI-format validation as pulse:doi (DoiShape); optional here since only versioned records have a concept DOI."
+        sh:description "Same DOI-format validation as pulse:doi (DoiShape)."
     ] ;
     sh:property [ sh:path pulse:version ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Version" ] ;
     sh:property pulse:DescriptionShape ;
@@ -206,7 +206,7 @@ pulse:MembershipShape
         sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:name "Membership Type" ;
-        sh:description "Distinguishes an ORCID Employment entry from Education or a society Membership. Required so every Membership is unambiguously one of the three kinds."
+        sh:description "Distinguishes an ORCID Employment entry from Education or a society Membership."
     ] ;
     sh:property [ sh:path pulse:department ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Department" ] ;
     sh:property [ sh:path pulse:qualification ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Qualification" ] .
