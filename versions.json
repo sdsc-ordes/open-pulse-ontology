@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "9227c5d",
+          "date": "2026-07-21",
+          "author": "rmfranken",
+          "message": "chore: remove \"why\" in descriptions or definitions"
+        },
+        {
           "hash": "1e2c8a3",
           "date": "2026-07-21",
           "author": "rmfranken",
