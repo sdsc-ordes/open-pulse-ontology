@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "1e2c8a3",
+          "date": "2026-07-21",
+          "author": "rmfranken",
+          "message": "feat: make article generic"
+        },
+        {
           "hash": "63dc986",
           "date": "2026-07-20",
           "author": "rmfranken",
