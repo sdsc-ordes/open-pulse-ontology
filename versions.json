@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "ceb9777",
+          "date": "2026-07-22",
+          "author": "rmfranken",
+          "message": "fix: file naming"
+        },
+        {
           "hash": "9227c5d",
           "date": "2026-07-21",
           "author": "rmfranken",
