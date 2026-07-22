@@ -81,6 +81,10 @@ pulse:AliceMembership a org:Membership ;
 pulse:MathOrg a org:Organization ;
     schema:name "Mathematics Institute" ;
     pulse:ror "https://ror.org/0abcdef12" ;
-    pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "DeepLabCut" ] ;
+    pulse:hasOrganizationProfile pulse:MathOrgGitHubProfile ;
     pulse:OrganizationType pulse:University ;
     pulse:owns pulse:RepoWithContributions .
+
+pulse:MathOrgGitHubProfile a pulse:OrganizationProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:organizationHandle "DeepLabCut" .

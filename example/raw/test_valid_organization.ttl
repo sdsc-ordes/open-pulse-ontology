@@ -15,22 +15,27 @@ pulse:VerboseLab a org:Organization ;
     schema:member pulse:AdaResearcher2 ;
     pulse:ownsCollection pulse:VerboseLabCollection ;
     pulse:hasExternalIdentifier pulse:VerboseLabRinggoldId ;
-    pulse:hasOrganizationProfile [
-        a pulse:OrganizationProfile ;
-        pulse:platform pulse:GitHub ;
-        pulse:organizationHandle "verbose-systems-lab" ;
-        schema:name "Verbose Systems Lab" ;
-        schema:url <https://github.com/verbose-systems-lab> ;
-        pulse:platformInternalId "5501234" ;
-        schema:description "We build open research software." ;
-        pulse:location "Lausanne, Switzerland" ;
-        pulse:followerCount 76 ;
-        schema:dateModified "2026-05-20T12:00:00"^^xsd:dateTime
-    ] .
+    pulse:hasOrganizationProfile pulse:VerboseLabGitHubProfile .
+
+pulse:VerboseLabGitHubProfile a pulse:OrganizationProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:organizationHandle "verbose-systems-lab" ;
+    schema:name "Verbose Systems Lab" ;
+    schema:url <https://github.com/verbose-systems-lab> ;
+    pulse:platformInternalId "5501234" ;
+    schema:description "We build open research software." ;
+    pulse:location "Lausanne, Switzerland" ;
+    pulse:followerCount 76 ;
+    schema:dateModified "2026-05-20T12:00:00"^^xsd:dateTime .
 
 pulse:AdaResearcher2 a schema:Person ;
     schema:name "Ada Researcher" ;
-    pulse:orcidIdentifier "0000-0001-2345-6780" .
+    pulse:orcidIdentifier "0000-0001-2345-6780" ;
+    pulse:hasProfile pulse:AdaResearcher2GitHubProfile .
+
+pulse:AdaResearcher2GitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:platformUsername "adaresearcher2" .
 
 pulse:VerboseLabRinggoldId a pulse:ExternalIdentifier ;
     pulse:identifierScheme pulse:Ringgold ;

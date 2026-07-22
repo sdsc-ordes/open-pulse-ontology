@@ -11,14 +11,18 @@ pulse:InvalidArticle a schema:ScholarlyArticle ;
     pulse:doi "10.1234/invalid.author" ;
     schema:author pulse:OrgAuthor ;   # invalid type
     schema:sourceOrganization pulse:OrgAuthor ;
-    pulse:hasDeposit [
-        a pulse:Deposit ;
-        pulse:platform pulse:Infoscience ;
-        schema:datePublished "2024-05-15"^^xsd:date
-    ] .
+    pulse:hasDeposit pulse:InvalidArticleDeposit .
+
+pulse:InvalidArticleDeposit a pulse:Deposit ;
+    pulse:platform pulse:Infoscience ;
+    schema:datePublished "2024-05-15"^^xsd:date .
 
 pulse:OrgAuthor a org:Organization ;
     schema:name "Publishing Org" ;
     pulse:ror "https://ror.org/02s376052" ;
-    pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "publishing-org" ] ;
+    pulse:hasOrganizationProfile pulse:OrgAuthorGitHubProfile ;
     pulse:OrganizationType pulse:ResearchInstitution .
+
+pulse:OrgAuthorGitHubProfile a pulse:OrganizationProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:organizationHandle "publishing-org" .

@@ -1,0 +1,119 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+
+# ---------------------------------------------------------
+# PROVENANCE SCHEMA (graph:prov)
+#
+# Not SHACL-shaped, deliberately. Winner-links are recorded as RDF-star
+# annotations directly on the quoted triple they explain — SHACL has
+# no way to target a quoted triple as a focus node (pySHACL has no
+# RDF-star support at all as of 0.40.0; rdflib can't even parse
+# Turtle-star as of 7.6.0). This file exists purely to document the
+# vocabulary and the exact triple patterns expected in graph:prov, so
+# there's one structured reference for what to generate and query —
+# it is not enforced by any tool in this repo.
+# ---------------------------------------------------------
+
+# ---------------------------------------------------------
+# CLASSES
+# ---------------------------------------------------------
+
+pulse:ExtractionRun
+    a rdfs:Class ;
+    rdfs:subClassOf prov:Activity ;
+    skos:prefLabel "Extraction Run" ;
+    skos:definition "One execution of the extraction pipeline over a source, producing a named substrate graph of raw, per-source assertions. The run's IRI is used as the named-graph IRI of the substrate graph it wrote." ;
+    rdfs:comment """Typical triples on a run:
+  <run-iri> a pulse:ExtractionRun ;
+      prov:startedAtTime "2026-01-05T02:00:00"^^xsd:dateTime ;
+      prov:endedAtTime "2026-01-05T02:14:00"^^xsd:dateTime ;
+      pulse:platform pulse:GitHub .""" .
+
+# ---------------------------------------------------------
+# RDF-STAR ANNOTATION PROPERTIES
+#
+# Each is asserted directly on the quoted triple it explains, not on
+# a separate reified node — the quoted triple's own subject/predicate/
+# object already carry what would otherwise need observedSubject/
+# observedProperty/observedValue. Query pattern to find where a
+# canonical value came from:
+#
+#   SELECT ?run ?kind ?confidence WHERE {
+#     GRAPH <graph:canonical> { pulse:Jordan schema:name ?name }
+#     GRAPH <graph:prov> {
+#       << pulse:Jordan schema:name ?name >> prov:wasDerivedFrom ?run ;
+#          pulse:observationKind ?kind ;
+#          pulse:observationConfidence ?confidence .
+#     }
+#   }
+# ---------------------------------------------------------
+
+prov:wasDerivedFrom
+    a rdf:Property ;
+    skos:prefLabel "was derived from" ;
+    skos:definition "Links a value to the source it was derived from." ;
+    rdfs:comment "<< ?s ?p ?o >> prov:wasDerivedFrom ?run — the ExtractionRun this quoted triple's value was read from." .
+
+pulse:observationKind
+    a rdf:Property ;
+    rdfs:range xsd:string ;
+    skos:prefLabel "observation kind" ;
+    skos:definition "The value-selection rule that produced this quoted triple's winning value (e.g. 'single-source', 'highest-confidence')." ;
+    rdfs:comment "<< ?s ?p ?o >> pulse:observationKind \"highest-confidence\" ." .
+
+pulse:observationConfidence
+    a rdf:Property ;
+    rdfs:range xsd:decimal ;
+    skos:prefLabel "observation confidence" ;
+    skos:definition "A confidence score, between 0 and 1, for this quoted triple's value." ;
+    rdfs:comment "<< ?s ?p ?o >> pulse:observationConfidence \"0.92\"^^xsd:decimal ." .
+
+pulse:observedOn
+    a rdf:Property ;
+    rdfs:range xsd:dateTime ;
+    skos:prefLabel "observed on" ;
+    skos:definition "The timestamp this quoted triple's value was (re-)recorded." ;
+    rdfs:comment "<< ?s ?p ?o >> pulse:observedOn \"2026-01-05T02:10:00\"^^xsd:dateTime ." .
+
+pulse:firstObservedOn
+    a rdf:Property ;
+    rdfs:range xsd:dateTime ;
+    skos:prefLabel "first observed on" ;
+    skos:definition "The timestamp this value was first observed, across all runs." ;
+    rdfs:comment "<< ?s ?p ?o >> pulse:firstObservedOn \"2025-11-01T00:00:00\"^^xsd:dateTime — upserted, not appended." .
+
+pulse:lastConfirmedOn
+    a rdf:Property ;
+    rdfs:range xsd:dateTime ;
+    skos:prefLabel "last confirmed on" ;
+    skos:definition "The timestamp this value was most recently re-observed." ;
+    rdfs:comment "<< ?s ?p ?o >> pulse:lastConfirmedOn \"2026-01-05T02:10:00\"^^xsd:dateTime — upserted on every re-confirmation." .
+
+pulse:observationCount
+    a rdf:Property ;
+    rdfs:range xsd:integer ;
+    skos:prefLabel "observation count" ;
+    skos:definition "The number of times this value has been (re-)observed across runs." ;
+    rdfs:comment "<< ?s ?p ?o >> pulse:observationCount 4 — a running counter, upserted, never one triple per observation." .
+
+# ---------------------------------------------------------
+# PLAIN TRIPLES (not RDF-star annotations)
+# ---------------------------------------------------------
+
+pulse:samePersonAs
+    a rdf:Property ;
+    rdfs:subPropertyOf owl:sameAs ;
+    skos:prefLabel "same person as" ;
+    skos:definition "Links two Person nodes the unifier has asserted are the same real-world individual." ;
+    rdfs:comment "Plain triple in graph:prov, not a quoted-triple annotation: :person1 pulse:samePersonAs :person2 ." .
+
+pulse:partOfRun
+    a rdf:Property ;
+    skos:prefLabel "part of run" ;
+    skos:definition "Links a substrate-level resource (e.g. a PlatformProfile, a Contribution) to the ExtractionRun that produced it." ;
+    rdfs:comment "Plain triple, asserted on the raw entity itself (graph:{source}/{run}), not in graph:prov: :someProfile pulse:partOfRun <run-iri> ." .

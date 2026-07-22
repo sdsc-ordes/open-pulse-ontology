@@ -12,7 +12,11 @@ pulse:RunningStatus a pulse:SpaceRuntimeStatusEnumeration .
 
 pulse:HfSpaceAuthor a schema:Person ;
     schema:name "Space Author" ;
-    pulse:hasProfile [ a pulse:PlatformProfile ; pulse:platform pulse:HuggingFace ; pulse:platformUsername "spaceauthor" ] .
+    pulse:hasProfile pulse:HfSpaceAuthorHuggingFaceProfile .
+
+pulse:HfSpaceAuthorHuggingFaceProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:HuggingFace ;
+    pulse:platformUsername "spaceauthor" .
 
 pulse:VerboseTranslatorDemoSpace a schema:SoftwareSourceCode ;
     schema:name "verbose-lab/translator-demo" ;

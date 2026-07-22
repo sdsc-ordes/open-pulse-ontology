@@ -9,7 +9,11 @@ pulse:TextModality a pulse:ModalityEnumeration .
 
 pulse:HfDatasetAuthor a schema:Person ;
     schema:name "Dataset Author" ;
-    pulse:hasProfile [ a pulse:PlatformProfile ; pulse:platform pulse:HuggingFace ; pulse:platformUsername "datasetauthor" ] .
+    pulse:hasProfile pulse:HfDatasetAuthorHuggingFaceProfile .
+
+pulse:HfDatasetAuthorHuggingFaceProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:HuggingFace ;
+    pulse:platformUsername "datasetauthor" .
 
 pulse:VerboseParallelCorpus a schema:SoftwareSourceCode ;
     schema:name "verbose-lab/en-fr-parallel-corpus" ;

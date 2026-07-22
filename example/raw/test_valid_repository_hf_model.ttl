@@ -8,7 +8,11 @@ pulse:Model a pulse:RepositoryTypeEnumeration .
 
 pulse:HfModelAuthor a schema:Person ;
     schema:name "Model Author" ;
-    pulse:hasProfile [ a pulse:PlatformProfile ; pulse:platform pulse:HuggingFace ; pulse:platformUsername "modelauthor" ] .
+    pulse:hasProfile pulse:HfModelAuthorHuggingFaceProfile .
+
+pulse:HfModelAuthorHuggingFaceProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:HuggingFace ;
+    pulse:platformUsername "modelauthor" .
 
 pulse:VerboseTranslationModel a schema:SoftwareSourceCode ;
     schema:name "verbose-lab/en-fr-translator" ;

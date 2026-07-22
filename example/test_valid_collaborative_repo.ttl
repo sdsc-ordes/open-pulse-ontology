@@ -68,6 +68,10 @@ pulse:ContributorMembership a org:Membership ;
 pulse:EPFLCenter a org:Organization ;
     schema:name "EPFL Center for Systems Biology" ;
     pulse:ror "https://ror.org/02s376052" ;
-    pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "DeepLabCut" ] ;
+    pulse:hasOrganizationProfile pulse:EPFLCenterGitHubProfile ;
     pulse:OrganizationType pulse:ResearchInstitution ;
     pulse:owns pulse:CollabRepo .
+
+pulse:EPFLCenterGitHubProfile a pulse:OrganizationProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:organizationHandle "DeepLabCut" .

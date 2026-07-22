@@ -9,7 +9,12 @@ pulse:SWHID a pulse:IdentifierSchemeEnumeration .
 
 pulse:VerboseRepoAuthor a schema:Person ;
     schema:name "Repo Author" ;
-    pulse:orcidIdentifier "0000-0002-1111-2222" .
+    pulse:orcidIdentifier "0000-0002-1111-2222" ;
+    pulse:hasProfile pulse:VerboseRepoAuthorGitHubProfile .
+
+pulse:VerboseRepoAuthorGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:platformUsername "verboserepoauthor" .
 
 pulse:OtherDependencyRepo a schema:SoftwareSourceCode ;
     schema:name "utility-lib" ;

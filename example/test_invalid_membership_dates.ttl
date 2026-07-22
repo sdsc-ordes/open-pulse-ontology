@@ -37,4 +37,8 @@ pulse:InvalidMembership a org:Membership ;
 pulse:SomeOrg a org:Organization ;
     schema:name "Some Organization" ;
     pulse:ror "https://ror.org/987654321" ;
-    pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "someorg" ] .
+    pulse:hasOrganizationProfile pulse:SomeOrgGitHubProfile .
+
+pulse:SomeOrgGitHubProfile a pulse:OrganizationProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:organizationHandle "someorg" .

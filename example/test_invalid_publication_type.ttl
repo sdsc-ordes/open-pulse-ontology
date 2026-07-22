@@ -9,12 +9,12 @@ pulse:Software a pulse:RepositoryTypeEnumeration .
 pulse:BadPublicationTypeArticle a schema:ScholarlyArticle ;
     schema:name "Article With Wrong Publication Type" ;
     schema:author pulse:PubTypeAuthor ;
-    pulse:hasDeposit [
-        a pulse:Deposit ;
-        pulse:platform pulse:Infoscience ;
-        schema:datePublished "2025-03-01"^^xsd:date ;
-        pulse:publicationType pulse:Software
-    ] .
+    pulse:hasDeposit pulse:BadPublicationTypeArticleDeposit .
+
+pulse:BadPublicationTypeArticleDeposit a pulse:Deposit ;
+    pulse:platform pulse:Infoscience ;
+    schema:datePublished "2025-03-01"^^xsd:date ;
+    pulse:publicationType pulse:Software .
 
 pulse:PubTypeAuthor a schema:Person ;
     schema:name "Pub Type Author" ;

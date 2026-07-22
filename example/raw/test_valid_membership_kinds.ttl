@@ -6,13 +6,19 @@
 pulse:Employment a pulse:MembershipTypeEnumeration .
 pulse:Education a pulse:MembershipTypeEnumeration .
 pulse:SocietyMembership a pulse:MembershipTypeEnumeration .
+pulse:ORCID a pulse:PlatformEnumeration .
 
 # VALID - verbose MembershipShape additions: pulse:membershipType, Department, Qualification.
 
 pulse:MultiAffiliatedResearcher a schema:Person ;
     schema:name "Multi Affiliated Researcher" ;
     pulse:orcidIdentifier "0000-0005-9999-0000" ;
+    pulse:hasProfile pulse:MultiAffiliatedResearcherOrcidProfile ;
     org:hasMembership pulse:EmploymentAtEpfl , pulse:EducationAtEth , pulse:IeeeMembership .
+
+pulse:MultiAffiliatedResearcherOrcidProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:ORCID ;
+    pulse:platformUsername "0000-0005-9999-0000" .
 
 pulse:EPFL a org:Organization ;
     schema:name "EPFL" ;

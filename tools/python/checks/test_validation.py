@@ -3,8 +3,13 @@ Test runner for SHACL validation test suite.
 Validates that 'valid' test files pass (conforms=true) and 'invalid' test files fail (conforms=false).
 
 Runs two variants:
-  - core:    ontology-combined.ttl against example/
-  - verbose: ontology-combined-verbose.ttl against example/verbose/
+  - canonical: ontology-combined.ttl against example/
+  - raw:       ontology-combined-raw.ttl against example/raw/
+
+The provenance ontology (ontology-combined-provenance.ttl) is intentionally not SHACL-shaped
+— it documents RDF-star annotation patterns on quoted triples, which SHACL cannot target as
+focus nodes (no tool in this repo's stack supports RDF-star: rdflib can't parse Turtle-star,
+pySHACL has no quoted-triple support). There is nothing to validate here.
 """
 
 import sys
@@ -85,8 +90,8 @@ def main():
     ontology_dir = project_root / "src" / "ontology"
 
     variants = [
-        ("core", ontology_dir / "ontology-combined.ttl", project_root / "example"),
-        ("verbose", ontology_dir / "ontology-combined-verbose.ttl", project_root / "example" / "verbose"),
+        ("canonical", ontology_dir / "ontology-combined.ttl", project_root / "example"),
+        ("raw", ontology_dir / "ontology-combined-raw.ttl", project_root / "example" / "raw"),
     ]
 
     total_passed = 0

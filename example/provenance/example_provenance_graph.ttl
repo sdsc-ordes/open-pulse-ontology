@@ -1,0 +1,41 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# ILLUSTRATIVE ONLY — not run by test_validation.py, not parseable by
+# this repo's tooling. rdflib 7.6.0 cannot parse Turtle-star syntax
+# (confirmed: `<<` is read as a broken URI, not a quoted triple), and
+# this ontology has no SHACL shapes to validate against regardless
+# (see ontology-definitions-provenance.ttl). This is a worked example
+# of graph:prov content for a given graph:canonical, meant to be
+# checked by eye against that file's rdfs:comment patterns.
+#
+# Made-up scenario, no correspondence to any real person: the unifier
+# merged two provisional profiles into canonical :Jordan, and had to
+# pick a winning schema:name. GitHub's spelling ("Jordan Reyes") was
+# chosen over Infoscience's abbreviated form ("J. Reyes") — a
+# normalized/contested pick, exactly the case graph:prov exists for,
+# since matching the winning object value alone could never recover
+# which source it came from.
+
+pulse:Run2026W01GitHub a pulse:ExtractionRun ;
+    prov:startedAtTime "2026-01-05T02:00:00"^^xsd:dateTime ;
+    prov:endedAtTime "2026-01-05T02:14:00"^^xsd:dateTime ;
+    pulse:platform pulse:GitHub .
+
+# The winning triple `pulse:Jordan schema:name "Jordan Reyes"` lives in
+# graph:canonical. This is its provenance record, in graph:prov:
+<< pulse:Jordan schema:name "Jordan Reyes" >>
+    prov:wasDerivedFrom pulse:Run2026W01GitHub ;
+    pulse:observationKind "highest-confidence" ;
+    pulse:observationConfidence "0.9"^^xsd:decimal ;
+    pulse:observedOn "2026-01-05T02:10:00"^^xsd:dateTime ;
+    pulse:firstObservedOn "2025-11-01T00:00:00"^^xsd:dateTime ;
+    pulse:lastConfirmedOn "2026-01-05T02:10:00"^^xsd:dateTime ;
+    pulse:observationCount 4 .
+
+# The two provisional Person profiles the unifier merged into :Jordan —
+# plain triples, not RDF-star annotations:
+pulse:GitHubJordanProfilePerson pulse:samePersonAs pulse:Jordan .
+pulse:InfoscienceJordanProfilePerson pulse:samePersonAs pulse:Jordan .

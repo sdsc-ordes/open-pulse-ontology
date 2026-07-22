@@ -6,14 +6,20 @@
 pulse:OtherIdentifierScheme a pulse:IdentifierSchemeEnumeration .
 pulse:HuggingFace a pulse:PlatformEnumeration .
 pulse:Model a pulse:RepositoryTypeEnumeration .
+pulse:ORCID a pulse:PlatformEnumeration .
 
 # VALID - the new pulse:Funding class and a Person-owned pulse:Collection.
 
 pulse:FundedResearcher a schema:Person ;
     schema:name "Funded Researcher" ;
     pulse:orcidIdentifier "0000-0004-7777-8888" ;
+    pulse:hasProfile pulse:FundedResearcherOrcidProfile ;
     pulse:hasFunding pulse:VerboseGrant ;
     pulse:ownsCollection pulse:PersonalCollection .
+
+pulse:FundedResearcherOrcidProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:ORCID ;
+    pulse:platformUsername "0000-0004-7777-8888" .
 
 pulse:GrantFunder a org:Organization ;
     schema:name "Swiss National Science Foundation" ;

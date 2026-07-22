@@ -164,7 +164,7 @@ pulse:PersonShape
     sh:targetClass schema:Person ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
-    sh:property pulse:NameShape ; 
+    sh:property pulse:NameShape ;
     sh:property pulse:OrcidShape ;
     sh:property [
         sh:path pulse:hasProfile ;

@@ -1,0 +1,18 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+pulse:GitHub a pulse:PlatformEnumeration .
+
+# VALID - a provisional Person as extraction actually emits one: no ORCID
+# resolved yet, identity anchored only by a PlatformProfile, plus an
+# extractor-specific field the closed canonical PersonShape would reject
+# but the open RawPersonShape tolerates. Made-up data, no correspondence
+# to any real person.
+
+pulse:ProvisionalJordan a schema:Person ;
+    schema:name "jordan-reyes" ;
+    pulse:hasProfile pulse:JordanGitHubProfile ;
+    pulse:scrapeBatchId "2026-07-run-042" .
+
+pulse:JordanGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:platformUsername "jordan-reyes" .

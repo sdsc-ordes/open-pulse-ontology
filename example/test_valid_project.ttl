@@ -39,8 +39,12 @@ pulse:ProjectLeadGitHubProfile a pulse:PlatformProfile ;
 pulse:HostLab a org:Organization ;
     schema:name "Host Lab" ;
     pulse:ror "https://ror.org/02s376052" ;
-    pulse:hasOrganizationProfile [ a pulse:OrganizationProfile ; pulse:platform pulse:GitHub ; pulse:organizationHandle "host-lab" ] ;
+    pulse:hasOrganizationProfile pulse:HostLabGitHubProfile ;
     pulse:OrganizationType pulse:ResearchInstitution .
+
+pulse:HostLabGitHubProfile a pulse:OrganizationProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:organizationHandle "host-lab" .
 
 pulse:FundingOrg a org:Organization ;
     schema:name "National Science Fund" ;
@@ -61,11 +65,11 @@ pulse:ProjectArticle a schema:ScholarlyArticle ;
     pulse:doi "10.1234/ost.2025" ;
     schema:author pulse:ProjectLead ;
     schema:sourceOrganization pulse:HostLab ;
-    pulse:hasDeposit [
-        a pulse:Deposit ;
-        pulse:platform pulse:GitHub ;
-        schema:datePublished "2025-06-01"^^xsd:date ;
-        schema:publisher "Open Science Press" ;
-        pulse:publicationType pulse:JournalArticle ;
-        pulse:accessRight pulse:OpenAccess
-    ] .
+    pulse:hasDeposit pulse:ProjectArticleDeposit .
+
+pulse:ProjectArticleDeposit a pulse:Deposit ;
+    pulse:platform pulse:GitHub ;
+    schema:datePublished "2025-06-01"^^xsd:date ;
+    schema:publisher "Open Science Press" ;
+    pulse:publicationType pulse:JournalArticle ;
+    pulse:accessRight pulse:OpenAccess .

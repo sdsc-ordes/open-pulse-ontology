@@ -1,28 +1,36 @@
-"""Regenerate the combined ontology files (core and verbose) from the split source files.
+"""Regenerate the combined ontology files (canonical, raw, provenance) from the split source files.
 
-ontology-combined.ttl and ontology-combined-verbose.ttl are generated artifacts kept for
-tools and CI that expect a single file (SHACL validation, releases). Never edit by hand.
+ontology-combined*.ttl are generated artifacts kept for tools and CI that expect a single
+file per ontology (SHACL validation, releases). Never edit by hand.
 """
 
 from pathlib import Path
 
 ONTOLOGY_DIR = Path("src/ontology")
 
-CORE_FILES = [
+SHARED_FILES = [
     "ontology-definitions.ttl",
     "ontology-enumerations.ttl",
+]
+
+CANONICAL_FILES = SHARED_FILES + [
     "ontology-shapes.ttl",
 ]
 
-VERBOSE_FILES = CORE_FILES + [
-    "ontology-definitions-verbose.ttl",
-    "ontology-enumerations-verbose.ttl",
-    "ontology-shapes-verbose.ttl",
+RAW_FILES = SHARED_FILES + [
+    "ontology-definitions-raw.ttl",
+    "ontology-enumerations-raw.ttl",
+    "ontology-shapes-raw.ttl",
+]
+
+PROVENANCE_FILES = SHARED_FILES + [
+    "ontology-definitions-provenance.ttl",
 ]
 
 VARIANTS = {
-    "ontology-combined.ttl": CORE_FILES,
-    "ontology-combined-verbose.ttl": VERBOSE_FILES,
+    "ontology-combined.ttl": CANONICAL_FILES,
+    "ontology-combined-raw.ttl": RAW_FILES,
+    "ontology-combined-provenance.ttl": PROVENANCE_FILES,
 }
 
 

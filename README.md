@@ -32,44 +32,55 @@ uv sync --extra dev
 
 ## Ontology Files
 
-The ontology is split by aspect under `src/ontology/`:
+This repo models three separate ontologies under `src/ontology/`, one per stage of the
+extract → unify → canonical pipeline (see [CONTRIBUTING.md](CONTRIBUTING.md) for how they
+relate and how each is combined):
 
-- `ontology-definitions.ttl` — ontology header, classes, and properties
-- `ontology-enumerations.ttl` — enumeration classes and instances
-- `ontology-shapes.ttl` — SHACL property and node shapes
-- `ontology-combined.ttl` — generated file combining the three above (see [CONTRIBUTING.md](CONTRIBUTING.md))
+- **Canonical** — the deduplicated, query-friendly graph (`graph:canonical`): one
+  `schema:Person`/`org:Organization`/etc. per real-world entity, closed shapes, a single
+  value per functional property. Source files: `ontology-definitions.ttl`,
+  `ontology-enumerations.ttl`, `ontology-shapes.ttl` → generated `ontology-combined.ttl`.
+- **Raw** — data as extractors actually emit it, before unification: one `PlatformProfile`
+  per source, provisional identity (no ORCID/ROR resolved yet), open shapes, plus every
+  platform-specific field needed for full field-parity with GitHub, Hugging Face, Zenodo
+  and ORCID. Source files: `ontology-definitions-raw.ttl`, `ontology-enumerations-raw.ttl`,
+  `ontology-shapes-raw.ttl` (standalone — does not extend the canonical shapes) → generated
+  `ontology-combined-raw.ttl`.
+- **Provenance** — `graph:prov`: for a canonical triple, which `ExtractionRun` it was
+  derived from. Lives in its own graph; canonical/raw entities never carry these properties
+  directly. Recorded as RDF-star annotations on quoted triples, so it is **not
+  SHACL-shaped** — no tool in this repo's stack can target a quoted triple as a focus node
+  (rdflib can't parse Turtle-star; pySHACL has no RDF-star support). Source file:
+  `ontology-definitions-provenance.ttl` (a plain RDFS/OWL vocabulary documenting the
+  expected triple patterns via `rdfs:comment`, not enforcing them) → generated
+  `ontology-combined-provenance.ttl`.
 
-There is also a **verbose** track that additively extends the core files to reach full
-field-parity with GitHub, Hugging Face, Zenodo and ORCID (internal/node IDs, repository
-file artifacts, Hugging Face Model/Dataset/Space fields, Zenodo Records/Communities, ORCID
-Employment/Education/Funding, etc): `ontology-definitions-verbose.ttl`,
-`ontology-enumerations-verbose.ttl`, `ontology-shapes-verbose.ttl`, combined into
-`ontology-combined-verbose.ttl`. See [CONTRIBUTING.md](CONTRIBUTING.md) for how core and
-verbose relate.
+All three share the base classes/properties/enumerations declared in
+`ontology-definitions.ttl` / `ontology-enumerations.ttl`.
 
 ## Validation
 
 ### Running Validation
 
 ```bash
-# Validate test data
+# Validate test data against any one of the three ontologies
 uv run python tools/python/checks/shacl.py example/test_dataset_large_example.ttl src/ontology/ontology-combined.ttl
 
-# Run full test suite
+# Run the full test suite (all three ontologies)
 uv run python tools/python/checks/test_validation.py
 ```
 
 ### Example Test Cases
 
-The `example/` directory contains test files demonstrating both valid and invalid data patterns,
-validated against the core `ontology-combined.ttl`:
+The `example/` directory contains test files demonstrating both valid and invalid data patterns:
 
 - `test_valid_*.ttl` - Valid data conforming to the ontology
 - `test_invalid_*.ttl` - Invalid data triggering specific validation errors
 
-`example/verbose/` mirrors this same `test_valid_*.ttl` / `test_invalid_*.ttl` convention for the
-verbose track, validated against `ontology-combined-verbose.ttl`. `test_validation.py` runs both
-tracks and reports a combined summary.
+`example/` (canonical) and `example/raw/` each follow this same convention, validated
+against their respective combined file. `test_validation.py` runs both and reports a
+combined summary. There are no example fixtures for provenance — it isn't SHACL-shaped, so
+there's nothing to validate against (see above).
 
 ## License
 

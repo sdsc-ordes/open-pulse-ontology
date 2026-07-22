@@ -6,33 +6,58 @@ Please read these guidelines before contributing.
 
 ## 0. Ontology Source Files
 
-The ontology is split by semantic aspect into three core source files:
+This repo models **three separate ontologies**, one per stage of the extract → unify →
+canonical pipeline. They share a common base (`ontology-definitions.ttl` /
+`ontology-enumerations.ttl`) but are combined and validated independently — never load two
+of them into the same SHACL shapes graph (see "Why raw is standalone" below).
 
-- `src/ontology/ontology-definitions.ttl` — the ontology header (`owl:versionInfo` lives here) plus classes and properties.
-- `src/ontology/ontology-enumerations.ttl` — enumeration classes and their instances (repository types, organization types, platforms, disciplines).
+### Shared base files
+
+- `src/ontology/ontology-definitions.ttl` — the ontology header (`owl:versionInfo` lives here) plus the base classes and properties reused by all three ontologies.
+- `src/ontology/ontology-enumerations.ttl` — the base enumeration classes and their instances (repository types, organization types, platforms, disciplines).
+
+### Canonical ontology
+
+The deduplicated, query-friendly graph (`graph:canonical`): one value per functional
+property, closed shapes, one node per real-world entity.
+
 - `src/ontology/ontology-shapes.ttl` — reusable SHACL property shapes and node shapes.
 
-`src/ontology/ontology-combined.ttl` is a **generated file**, kept for tools and CI that expect a single ontology file (SHACL validation, releases, docs generation). Never edit it by hand.
+`src/ontology/ontology-combined.ttl` is a **generated file** (shared base + the above), kept for tools and CI that expect a single ontology file (SHACL validation, releases, docs generation). Never edit it by hand.
 
-### Verbose track
+### Raw ontology
 
-Alongside the core files sits a **verbose** track, one file per aspect:
+Data exactly as extractors emit it, pre-unification: one `PlatformProfile`/`OrganizationProfile` per source, provisional identity (no ORCID/ROR required), open shapes, plus every platform-specific field needed for full field-parity with GitHub, Hugging Face, Zenodo and ORCID (internal/node IDs, repository file artifacts, Hugging Face Model/Dataset/Space fields, Zenodo Records/Communities, ORCID Employment/Education/Funding, etc).
 
-- `src/ontology/ontology-definitions-verbose.ttl`
-- `src/ontology/ontology-enumerations-verbose.ttl`
-- `src/ontology/ontology-shapes-verbose.ttl`
+- `src/ontology/ontology-definitions-raw.ttl`
+- `src/ontology/ontology-enumerations-raw.ttl`
+- `src/ontology/ontology-shapes-raw.ttl`
 
-These *additively extend* the core files to reach full field-parity with GitHub, Hugging Face, Zenodo and ORCID (internal/node IDs, repository file artifacts, Hugging Face Model/Dataset/Space fields, Zenodo Records/Communities, ORCID Employment/Education/Funding, etc). "Additive" is a hard rule here: a verbose file may only add brand-new classes/properties, or add new `sh:property` statements to an *existing* shape IRI (which RDF-merges into that shape's allow-list once combined) — it must never re-declare or narrow a constraint the core file already put on a property path. If a verbose change needs to loosen something core already constrains (e.g. a `sh:class` restriction), introduce a new property name instead of touching the constrained one.
+`src/ontology/ontology-combined-raw.ttl` is generated from the shared base + these three files.
 
-`src/ontology/ontology-combined-verbose.ttl` is generated from all six files (core + verbose) and is likewise never hand-edited.
+**Why raw is standalone, not additive-to-canonical:** `sh:targetClass` applies to *every* node of that class across the whole loaded shapes graph. A looser raw shape (`sh:closed false`, no ORCID required) cannot coexist with the closed canonical `PersonShape`/`OrganizationShape` in the same shapes graph — SHACL would enforce both, and the closed one wins. So `ontology-shapes-raw.ttl` declares its own complete node shapes (`RawPersonShape`, `RawOrganizationShape`, `RawRepositoryShape`, etc.) rather than extending the canonical ones. New classes with no canonical counterpart (`Collection`, `Community`, `Funding`, `ExternalIdentifier`) keep their plain names, since there's no name collision to avoid.
 
-After editing any source file, regenerate both combined outputs in one step:
+### Provenance ontology
+
+`graph:prov`: for a canonical triple, which `ExtractionRun` it was derived from
+(`Observation`, `observedFrom`/`observedProperty`/`observedValue`, `partOfRun`,
+`samePersonAs`, etc). This lives in its own graph — a canonical or raw entity never carries
+these properties itself.
+
+- `src/ontology/ontology-definitions-provenance.ttl`
+- `src/ontology/ontology-shapes-provenance.ttl`
+
+`src/ontology/ontology-combined-provenance.ttl` is generated from the shared base + these two files.
+
+### Regenerating
+
+After editing any source file, regenerate all three combined outputs in one step:
 
 ```bash
 uv run python tools/python/build/combine_ontology.py
 ```
 
-Commit the regenerated `ontology-combined.ttl` and `ontology-combined-verbose.ttl` together with your source changes.
+Commit the regenerated `ontology-combined.ttl`, `ontology-combined-raw.ttl`, and `ontology-combined-provenance.ttl` together with your source changes.
 
 ## 1. Branching Strategy
 
@@ -62,8 +87,8 @@ We use **Conventional Commits**. Our CI/CD pipeline reads your commit messages t
 During normal development, you are just adding work to the `develop` bucket.
 
 1. Create a branch off `develop` (e.g., `git checkout -b feature/new-logic`).
-2. Make your changes (edit `src/ontology/ontology-definitions.ttl`, `src/ontology/ontology-enumerations.ttl`, or `src/ontology/ontology-shapes.ttl`, add scripts, update `README`).
-3. Regenerate `src/ontology/ontology-combined.ttl` (see [Section 0](#0-ontology-source-files)) and include it in your commit.
+2. Make your changes (edit the shared base files, or the canonical/raw/provenance source files for the ontology you're changing — see [Section 0](#0-ontology-source-files) — add scripts, update `README`).
+3. Regenerate all three `ontology-combined*.ttl` files (see [Section 0](#0-ontology-source-files)) and include them in your commit.
 4. Open a Pull Request into `develop` and merge it.
 
 🛑 **CRITICAL:** Do **NOT** remove the `-develop` suffix from `owl:versionInfo` in `src/ontology/ontology-definitions.ttl` during this phase. Just merge your code. The release bot will handle versions and collect your commits later.
