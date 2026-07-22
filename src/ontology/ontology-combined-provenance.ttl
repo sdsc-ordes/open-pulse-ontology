@@ -1789,6 +1789,18 @@ wd:Q473750 a pulse:DisciplineEnumeration; skos:prefLabel "World economy"@en; rdf
 wd:Q103495 a pulse:DisciplineEnumeration; skos:prefLabel "World war"@en; rdfs:subClassOf wd:Q198 .
 wd:Q6984185 a pulse:DisciplineEnumeration; skos:prefLabel "Writers"@en; rdfs:subClassOf wd:Q6497044 .
 
+# ---------------------------------------------------------
+# PROVENANCE SCHEMA (graph:prov)
+#
+# Not SHACL-shaped, deliberately. Winner-links are recorded as RDF-star
+# annotations directly on the quoted triple they explain — SHACL has
+# no way to target a quoted triple as a focus node (pySHACL has no
+# RDF-star support at all as of 0.40.0; rdflib can't even parse
+# Turtle-star as of 7.6.0). This file exists purely to document the
+# vocabulary and the exact triple patterns expected in graph:prov, so
+# there's one structured reference for what to generate and query —
+# it is not enforced by any tool in this repo.
+# ---------------------------------------------------------
 
 # ---------------------------------------------------------
 # CLASSES
@@ -1804,6 +1816,25 @@ pulse:ExtractionRun
       prov:startedAtTime "2026-01-05T02:00:00"^^xsd:dateTime ;
       prov:endedAtTime "2026-01-05T02:14:00"^^xsd:dateTime ;
       pulse:platform pulse:GitHub .""" .
+
+# ---------------------------------------------------------
+# RDF-STAR ANNOTATION PROPERTIES
+#
+# Each is asserted directly on the quoted triple it explains, not on
+# a separate reified node — the quoted triple's own subject/predicate/
+# object already carry what would otherwise need observedSubject/
+# observedProperty/observedValue. Query pattern to find where a
+# canonical value came from:
+#
+#   SELECT ?run ?kind ?confidence WHERE {
+#     GRAPH <graph:canonical> { pulse:Jordan schema:name ?name }
+#     GRAPH <graph:prov> {
+#       << pulse:Jordan schema:name ?name >> prov:wasDerivedFrom ?run ;
+#          pulse:observationKind ?kind ;
+#          pulse:observationConfidence ?confidence .
+#     }
+#   }
+# ---------------------------------------------------------
 
 prov:wasDerivedFrom
     a rdf:Property ;

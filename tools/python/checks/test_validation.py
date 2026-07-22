@@ -3,7 +3,7 @@ Test runner for SHACL validation test suite.
 Validates that 'valid' test files pass (conforms=true) and 'invalid' test files fail (conforms=false).
 
 Runs two variants:
-  - canonical: ontology-combined.ttl against example/
+  - canonical: ontology-combined-canonical.ttl against example/
   - raw:       ontology-combined-raw.ttl against example/raw/
 
 The provenance ontology (ontology-combined-provenance.ttl) is intentionally not SHACL-shaped
@@ -90,7 +90,7 @@ def main():
     ontology_dir = project_root / "src" / "ontology"
 
     variants = [
-        ("canonical", ontology_dir / "ontology-combined.ttl", project_root / "example"),
+        ("canonical", ontology_dir / "ontology-combined-canonical.ttl", project_root / "example"),
         ("raw", ontology_dir / "ontology-combined-raw.ttl", project_root / "example" / "raw"),
     ]
 

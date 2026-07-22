@@ -20,19 +20,19 @@ jobs:
       - name: Bump Version
         id: bump
         run: |
-          CURRENT=$(grep -oP 'owl:versionInfo\s+"v?\K[^"]+' src/ontology/ontology-definitions.ttl | head -1)
+          CURRENT=$(grep -oP 'owl:versionInfo\s+"v?\K[^"]+' src/ontology/ontology-definitions-canonical.ttl | head -1)
           CLEAN=$(echo "$CURRENT" | sed 's/-.*//')
           if [[ ! "$CLEAN" =~ ^v ]]; then CLEAN="v$CLEAN"; fi
 
-          # owl:versionInfo lives in src/ontology/ontology-definitions.ttl (source of truth);
-          # ontology-combined.ttl is generated from it further down.
-          sed -i "s|owl:versionInfo \"v\?$CURRENT\"|owl:versionInfo \"$CLEAN\"|" src/ontology/ontology-definitions.ttl
+          # owl:versionInfo lives in src/ontology/ontology-definitions-canonical.ttl (source of truth);
+          # ontology-combined-canonical.ttl is generated from it further down.
+          sed -i "s|owl:versionInfo \"v\?$CURRENT\"|owl:versionInfo \"$CLEAN\"|" src/ontology/ontology-definitions-canonical.ttl
           echo "clean_version=$CLEAN" >> $GITHUB_OUTPUT
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
 
-      - name: Regenerate ontology-combined.ttl
+      - name: Regenerate ontology-combined*.ttl
         run: uv run --no-project python tools/python/build/combine_ontology.py
 
       - name: Install git-cliff

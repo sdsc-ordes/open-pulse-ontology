@@ -38,8 +38,8 @@ relate and how each is combined):
 
 - **Canonical** — the deduplicated, query-friendly graph (`graph:canonical`): one
   `schema:Person`/`org:Organization`/etc. per real-world entity, closed shapes, a single
-  value per functional property. Source files: `ontology-definitions.ttl`,
-  `ontology-enumerations.ttl`, `ontology-shapes.ttl` → generated `ontology-combined.ttl`.
+  value per functional property. Source files: `ontology-definitions-canonical.ttl`,
+  `ontology-enumerations-canonical.ttl`, `ontology-shapes-canonical.ttl` → generated `ontology-combined-canonical.ttl`.
 - **Raw** — data as extractors actually emit it, before unification: one `PlatformProfile`
   per source, provisional identity (no ORCID/ROR resolved yet), open shapes, plus every
   platform-specific field needed for full field-parity with GitHub, Hugging Face, Zenodo
@@ -56,7 +56,7 @@ relate and how each is combined):
   `ontology-combined-provenance.ttl`.
 
 All three share the base classes/properties/enumerations declared in
-`ontology-definitions.ttl` / `ontology-enumerations.ttl`.
+`ontology-definitions-canonical.ttl` / `ontology-enumerations-canonical.ttl`.
 
 ## Validation
 
@@ -64,7 +64,7 @@ All three share the base classes/properties/enumerations declared in
 
 ```bash
 # Validate test data against any one of the three ontologies
-uv run python tools/python/checks/shacl.py example/test_dataset_large_example.ttl src/ontology/ontology-combined.ttl
+uv run python tools/python/checks/shacl.py example/test_dataset_large_example.ttl src/ontology/ontology-combined-canonical.ttl
 
 # Run the full test suite (all three ontologies)
 uv run python tools/python/checks/test_validation.py

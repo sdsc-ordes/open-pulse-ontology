@@ -59,6 +59,6 @@ WHERE {
 
 if __name__ == "__main__":
     repo_root = Path(__file__).resolve().parent.parent.parent.parent
-    ontology_file = repo_root / "src" / "ontology" / "ontology-combined.ttl"
+    ontology_file = repo_root / "src" / "ontology" / "ontology-combined-canonical.ttl"
     output_file = repo_root / "ontology-enriched.ttl"
     enrich_ontology(ontology_file, output_file)

@@ -15,15 +15,15 @@
 # resolved yet, plus every platform-specific field needed for full
 # field-parity with GitHub/Hugging Face/Zenodo/ORCID.
 #
-# This file is standalone — it does NOT extend ontology-shapes.ttl's
+# This file is standalone — it does NOT extend ontology-shapes-canonical.ttl's
 # canonical PersonShape/OrganizationShape/etc. sh:targetClass applies
 # to every node of that class across the whole loaded shapes graph,
 # so a looser raw shape cannot coexist with the closed canonical one
 # in the same graph. Load this file together with the shared
-# ontology-definitions.ttl + ontology-enumerations.ttl (for the base
-# classes/enums it reuses) and this repo's own
+# ontology-definitions-canonical.ttl + ontology-enumerations-canonical.ttl
+# (for the base classes/enums it reuses) and this repo's own
 # ontology-definitions-raw.ttl + ontology-enumerations-raw.ttl — never
-# together with ontology-shapes.ttl.
+# together with ontology-shapes-canonical.ttl.
 # ---------------------------------------------------------
 
 # ---------------------------------------------------------

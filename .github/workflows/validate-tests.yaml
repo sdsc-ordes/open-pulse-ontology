@@ -34,6 +34,6 @@ jobs:
           name: validation-test-results
           path: |
             example/test_*.ttl
-            example/verbose/test_*.ttl
-            src/ontology/ontology-combined.ttl
-            src/ontology/ontology-combined-verbose.ttl
+            example/raw/test_*.ttl
+            src/ontology/ontology-combined-canonical.ttl
+            src/ontology/ontology-combined-raw.ttl

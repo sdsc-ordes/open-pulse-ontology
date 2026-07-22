@@ -7,23 +7,23 @@ Please read these guidelines before contributing.
 ## 0. Ontology Source Files
 
 This repo models **three separate ontologies**, one per stage of the extract → unify →
-canonical pipeline. They share a common base (`ontology-definitions.ttl` /
-`ontology-enumerations.ttl`) but are combined and validated independently — never load two
+canonical pipeline. They share a common base (`ontology-definitions-canonical.ttl` /
+`ontology-enumerations-canonical.ttl`) but are combined and validated independently — never load two
 of them into the same SHACL shapes graph (see "Why raw is standalone" below).
 
 ### Shared base files
 
-- `src/ontology/ontology-definitions.ttl` — the ontology header (`owl:versionInfo` lives here) plus the base classes and properties reused by all three ontologies.
-- `src/ontology/ontology-enumerations.ttl` — the base enumeration classes and their instances (repository types, organization types, platforms, disciplines).
+- `src/ontology/ontology-definitions-canonical.ttl` — the ontology header (`owl:versionInfo` lives here) plus the base classes and properties reused by all three ontologies.
+- `src/ontology/ontology-enumerations-canonical.ttl` — the base enumeration classes and their instances (repository types, organization types, platforms, disciplines).
 
 ### Canonical ontology
 
 The deduplicated, query-friendly graph (`graph:canonical`): one value per functional
 property, closed shapes, one node per real-world entity.
 
-- `src/ontology/ontology-shapes.ttl` — reusable SHACL property shapes and node shapes.
+- `src/ontology/ontology-shapes-canonical.ttl` — reusable SHACL property shapes and node shapes.
 
-`src/ontology/ontology-combined.ttl` is a **generated file** (shared base + the above), kept for tools and CI that expect a single ontology file (SHACL validation, releases, docs generation). Never edit it by hand.
+`src/ontology/ontology-combined-canonical.ttl` is a **generated file** (shared base + the above), kept for tools and CI that expect a single ontology file (SHACL validation, releases, docs generation). Never edit it by hand.
 
 ### Raw ontology
 
@@ -57,7 +57,7 @@ After editing any source file, regenerate all three combined outputs in one step
 uv run python tools/python/build/combine_ontology.py
 ```
 
-Commit the regenerated `ontology-combined.ttl`, `ontology-combined-raw.ttl`, and `ontology-combined-provenance.ttl` together with your source changes.
+Commit the regenerated `ontology-combined-canonical.ttl`, `ontology-combined-raw.ttl`, and `ontology-combined-provenance.ttl` together with your source changes.
 
 ## 1. Branching Strategy
 
@@ -91,15 +91,15 @@ During normal development, you are just adding work to the `develop` bucket.
 3. Regenerate all three `ontology-combined*.ttl` files (see [Section 0](#0-ontology-source-files)) and include them in your commit.
 4. Open a Pull Request into `develop` and merge it.
 
-🛑 **CRITICAL:** Do **NOT** remove the `-develop` suffix from `owl:versionInfo` in `src/ontology/ontology-definitions.ttl` during this phase. Just merge your code. The release bot will handle versions and collect your commits later.
+🛑 **CRITICAL:** Do **NOT** remove the `-develop` suffix from `owl:versionInfo` in `src/ontology/ontology-definitions-canonical.ttl` during this phase. Just merge your code. The release bot will handle versions and collect your commits later.
 
 ## 4. Preparing the Next Version (In Develop)
 
 After a production release is finished, or when starting a new milestone, ensure the `develop` branch reflects the *upcoming* version with a pre-release suffix.
 
-1. Open `src/ontology/ontology-definitions.ttl` on the `develop` branch.
+1. Open `src/ontology/ontology-definitions-canonical.ttl` on the `develop` branch.
 2. Update the `owl:versionInfo` triple to the next anticipated version with a development suffix (e.g., bump `v2.2.0` to `v2.3.0-develop`).
-3. Regenerate `src/ontology/ontology-combined.ttl` (see [Section 0](#0-ontology-source-files)).
+3. Regenerate `src/ontology/ontology-combined-canonical.ttl` (see [Section 0](#0-ontology-source-files)).
 4. Commit these changes directly or via a quick PR to `develop`.
 
 ## 5. Promoting to Production (Stable Release)

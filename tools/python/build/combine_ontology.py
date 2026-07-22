@@ -9,26 +9,31 @@ from pathlib import Path
 ONTOLOGY_DIR = Path("src/ontology")
 
 SHARED_FILES = [
-    "ontology-definitions.ttl",
-    "ontology-enumerations.ttl",
+    "ontology-definitions-canonical.ttl",
+    "ontology-enumerations-canonical.ttl",
+]
+
+# Vocabulary only (no shapes) — safe to pull into raw alongside its own shapes,
+# since ontology-shapes-raw.ttl's RawPersonShape/RawOrganizationShape/etc.
+# reference pulse:ExtractionRun/pulse:partOfRun as sh:path/sh:class values.
+PROVENANCE_VOCAB = [
+    "ontology-definitions-provenance.ttl",
 ]
 
 CANONICAL_FILES = SHARED_FILES + [
-    "ontology-shapes.ttl",
+    "ontology-shapes-canonical.ttl",
 ]
 
-RAW_FILES = SHARED_FILES + [
+RAW_FILES = SHARED_FILES + PROVENANCE_VOCAB + [
     "ontology-definitions-raw.ttl",
     "ontology-enumerations-raw.ttl",
     "ontology-shapes-raw.ttl",
 ]
 
-PROVENANCE_FILES = SHARED_FILES + [
-    "ontology-definitions-provenance.ttl",
-]
+PROVENANCE_FILES = SHARED_FILES + PROVENANCE_VOCAB
 
 VARIANTS = {
-    "ontology-combined.ttl": CANONICAL_FILES,
+    "ontology-combined-canonical.ttl": CANONICAL_FILES,
     "ontology-combined-raw.ttl": RAW_FILES,
     "ontology-combined-provenance.ttl": PROVENANCE_FILES,
 }

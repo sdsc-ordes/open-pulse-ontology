@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'src/ontology/ontology-combined.ttl'
+      - 'src/ontology/ontology-combined-canonical.ttl'
 
 jobs:
   release:
@@ -23,7 +23,7 @@ jobs:
       - name: Extract Clean Version
         id: extract
         run: |
-          VERSION=$(grep -oP 'owl:versionInfo\s+"v?\K[^"]+' src/ontology/ontology-combined.ttl | head -1)
+          VERSION=$(grep -oP 'owl:versionInfo\s+"v?\K[^"]+' src/ontology/ontology-combined-canonical.ttl | head -1)
           if [[ ! "$VERSION" =~ ^v ]]; then VERSION="v$VERSION"; fi
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
