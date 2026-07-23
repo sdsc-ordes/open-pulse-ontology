@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "9a9d7f2",
+          "date": "2026-07-23",
+          "author": "rmfranken",
+          "message": "feat: provenance graph shapes + prefix fixes"
+        },
+        {
           "hash": "ceb9777",
           "date": "2026-07-22",
           "author": "rmfranken",
