@@ -2,14 +2,15 @@
 Test runner for SHACL validation test suite.
 Validates that 'valid' test files pass (conforms=true) and 'invalid' test files fail (conforms=false).
 
-Runs two variants:
-  - canonical: ontology-combined-canonical.ttl against example/
-  - raw:       ontology-combined-raw.ttl against example/raw/
+Runs three variants:
+  - canonical:   ontology-combined-canonical.ttl against example/
+  - raw:         ontology-combined-raw.ttl against example/raw/
+  - provenance:  ontology-combined-provenance.ttl against example/provenance/
 
-The provenance ontology (ontology-combined-provenance.ttl) is intentionally not SHACL-shaped
-— it documents RDF-star annotation patterns on quoted triples, which SHACL cannot target as
-focus nodes (no tool in this repo's stack supports RDF-star: rdflib can't parse Turtle-star,
-pySHACL has no quoted-triple support). There is nothing to validate here.
+The provenance variant only covers the plain-RDF parts of graph:prov (pulse:ExtractionRun).
+The RDF-star winner-links (<<s p o>> prov:wasDerivedFrom ...) are NOT covered and can't be
+— SHACL cannot target a quoted triple as a focus node (no tool in this repo's stack supports
+RDF-star: rdflib can't parse Turtle-star, pySHACL has no quoted-triple support).
 """
 
 import sys
@@ -92,6 +93,7 @@ def main():
     variants = [
         ("canonical", ontology_dir / "ontology-combined-canonical.ttl", project_root / "example"),
         ("raw", ontology_dir / "ontology-combined-raw.ttl", project_root / "example" / "raw"),
+        ("provenance", ontology_dir / "ontology-combined-provenance.ttl", project_root / "example" / "provenance"),
     ]
 
     total_passed = 0

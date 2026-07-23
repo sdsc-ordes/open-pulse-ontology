@@ -1,0 +1,10 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+# INVALID SOFTWARE AGENT - Should FAIL (schema:softwareVersion must be
+# xsd:string, not an integer)
+
+pulse:BadExtractorVersion a prov:SoftwareAgent ;
+    schema:name "git-metadata-extractor" ;
+    schema:softwareVersion 231 .

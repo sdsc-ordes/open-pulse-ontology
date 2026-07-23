@@ -5,11 +5,11 @@
 @prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix org:    <http://www.w3.org/ns/org#> .
 @prefix time:   <http://www.w3.org/2006/time#> .
-@prefix pulse:     <https://open-pulse.epfl.ch/ontology#> .
+@prefix pulse:  <https://open-pulse.epfl.ch/ontology#> .
 @prefix owl:    <http://www.w3.org/2002/07/owl#> .
 @prefix dct:    <http://purl.org/dc/terms/> .
 @prefix wd: <http://www.wikidata.org/entity/> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
 @prefix coar-resource: <http://purl.org/coar/resource_type/> .
 
 # ---------------------------------------------------------

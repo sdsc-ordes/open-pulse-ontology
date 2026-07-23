@@ -39,13 +39,31 @@ Data exactly as extractors emit it, pre-unification: one `PlatformProfile`/`Orga
 
 ### Provenance ontology
 
-`graph:prov`: for a canonical triple, which `ExtractionRun` it was derived from
-(`Observation`, `observedFrom`/`observedProperty`/`observedValue`, `partOfRun`,
-`samePersonAs`, etc). This lives in its own graph — a canonical or raw entity never carries
-these properties itself.
+`graph:prov`: for a canonical triple, which platform-specific extraction it was derived
+from. Recorded as RDF-star annotations directly on the quoted triple they explain (`<< s p
+o >> prov:wasDerivedFrom <output> ; pulse:observationKind …`), not as a separately reified
+node. This lives in its own graph — a canonical or raw entity never carries these
+properties itself.
 
-- `src/ontology/ontology-definitions-provenance.ttl`
-- `src/ontology/ontology-shapes-provenance.ttl`
+One `pulse:ExtractionRun` (a `prov:Activity`) can span several platforms in one batch; each
+platform's raw output is its own `pulse:ExtractionOutput` (a `prov:Entity`) whose IRI *is*
+the named-graph IRI of that platform's substrate graph. Sibling outputs from the same run
+are connected by sharing the same `prov:wasGeneratedBy` target — not by nesting
+`prov:Bundle` (PROV bundles can't nest, and base PROV-O has no native bundle-to-bundle
+link). `graph:prov` itself is the one graph in this ontology correctly typed `prov:Bundle`,
+since its content genuinely is provenance descriptions — self-describing, the same pattern
+as this repo's `owl:Ontology` header.
+
+- `src/ontology/ontology-definitions-provenance.ttl` — the vocabulary.
+- `src/ontology/ontology-shapes-provenance.ttl` — shapes for the plain-RDF parts only
+  (`pulse:ExtractionRun`). **The RDF-star winner-links themselves can't be SHACL-shaped** —
+  no tool in this repo's stack can target a quoted triple as a focus node (rdflib can't
+  parse Turtle-star; pySHACL has no RDF-star support) — so there's no shape and no example
+  fixture for those, just the `rdfs:comment` patterns in the definitions file and a
+  non-parseable illustrative fixture (`example/provenance/example_provenance_graph.ttl`).
+  `pulse:ExtractionOutput` is shaped in `ontology-shapes-raw.ttl` instead, since its
+  self-describing header is asserted inside the raw substrate graph it names, not inside
+  `graph:prov`.
 
 `src/ontology/ontology-combined-provenance.ttl` is generated from the shared base + these two files.
 

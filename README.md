@@ -46,13 +46,18 @@ relate and how each is combined):
   and ORCID. Source files: `ontology-definitions-raw.ttl`, `ontology-enumerations-raw.ttl`,
   `ontology-shapes-raw.ttl` (standalone — does not extend the canonical shapes) → generated
   `ontology-combined-raw.ttl`.
-- **Provenance** — `graph:prov`: for a canonical triple, which `ExtractionRun` it was
-  derived from. Lives in its own graph; canonical/raw entities never carry these properties
-  directly. Recorded as RDF-star annotations on quoted triples, so it is **not
-  SHACL-shaped** — no tool in this repo's stack can target a quoted triple as a focus node
-  (rdflib can't parse Turtle-star; pySHACL has no RDF-star support). Source file:
-  `ontology-definitions-provenance.ttl` (a plain RDFS/OWL vocabulary documenting the
-  expected triple patterns via `rdfs:comment`, not enforcing them) → generated
+- **Provenance** — `graph:prov`: for a canonical triple, which platform-specific
+  `pulse:ExtractionOutput` it was derived from (one `pulse:ExtractionRun` can span several
+  platforms; each platform's raw output is its own `ExtractionOutput`, sharing the run via
+  `prov:wasGeneratedBy`). Lives in its own graph; canonical/raw entities never carry these
+  properties directly. The winner-links themselves are recorded as RDF-star annotations on
+  quoted triples, which **can't be SHACL-shaped** — no tool in this repo's stack can target
+  a quoted triple as a focus node (rdflib can't parse Turtle-star; pySHACL has no RDF-star
+  support). `pulse:ExtractionRun` itself is a plain, ordinary-subject resource though, so
+  it *is* shaped (`ontology-shapes-provenance.ttl`); `pulse:ExtractionOutput`'s shape lives
+  in `ontology-shapes-raw.ttl` instead, since its self-describing header is asserted inside
+  the raw substrate graph it names, not inside `graph:prov`. Source files:
+  `ontology-definitions-provenance.ttl`, `ontology-shapes-provenance.ttl` → generated
   `ontology-combined-provenance.ttl`.
 
 All three share the base classes/properties/enumerations declared in
@@ -77,10 +82,13 @@ The `example/` directory contains test files demonstrating both valid and invali
 - `test_valid_*.ttl` - Valid data conforming to the ontology
 - `test_invalid_*.ttl` - Invalid data triggering specific validation errors
 
-`example/` (canonical) and `example/raw/` each follow this same convention, validated
-against their respective combined file. `test_validation.py` runs both and reports a
-combined summary. There are no example fixtures for provenance — it isn't SHACL-shaped, so
-there's nothing to validate against (see above).
+`example/` (canonical), `example/raw/`, and `example/provenance/` each follow this same
+convention, validated against their respective combined file. `test_validation.py` runs all
+three and reports a combined summary. The RDF-star winner-links in `graph:prov` have no
+fixtures here — they can't be SHACL-validated (see above) — but `example/provenance/` does
+cover the plain-RDF `pulse:ExtractionRun` shape, and there's a separate, explicitly
+non-parseable illustrative file (`example_provenance_graph.ttl`) showing the full RDF-star
+picture by eye.
 
 ## License
 

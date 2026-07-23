@@ -1,0 +1,30 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+pulse:GitHub a pulse:PlatformEnumeration .
+
+# VALID - an ExtractionOutput self-describing header (the substrate
+# graph's own IRI, doubling as the graph name) alongside the ordinary
+# raw data it produced in the same run.
+#
+# pulse:Run2026W01's own `a pulse:ExtractionRun` triple normally lives
+# in graph:prov, not this raw graph — it's asserted here purely so
+# this single-file fixture validates the wasGeneratedBy/sh:class check
+# in isolation, the way tools/python/checks/shacl.py loads one file at
+# a time with no cross-graph visibility.
+pulse:Run2026W01 a pulse:ExtractionRun .
+
+pulse:Run2026W01GitHubOutput a pulse:ExtractionOutput ;
+    prov:wasGeneratedBy pulse:Run2026W01 ;
+    pulse:platform pulse:GitHub ;
+    prov:generatedAtTime "2026-01-05T02:07:00"^^xsd:dateTime .
+
+pulse:JordanProvisional a schema:Person ;
+    schema:name "jordan-reyes" ;
+    pulse:hasProfile pulse:JordanGitHubProfile ;
+    pulse:partOfRun pulse:Run2026W01GitHubOutput .
+
+pulse:JordanGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:platformUsername "jordan-reyes" .

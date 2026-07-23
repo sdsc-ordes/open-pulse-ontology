@@ -1,0 +1,68 @@
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix prov:   <http://www.w3.org/ns/prov#> .
+@prefix schema: <http://schema.org/> .
+@prefix pulse:  <https://open-pulse.epfl.ch/ontology#> .
+
+# ---------------------------------------------------------
+# PROVENANCE SHAPES
+#
+# Covers only the plain-RDF parts of graph:prov — pulse:ExtractionRun
+# has an ordinary IRI subject, so it's fully shapeable. The RDF-star
+# winner-links (<<s p o>> prov:wasDerivedFrom ...) are NOT covered
+# here and can't be: SHACL has no way to target a quoted triple as a
+# focus node (see ontology-definitions-provenance.ttl's header).
+#
+# prov:Bundle isn't shaped either — beyond its rdf:type, graph:prov
+# carries no other required properties on itself yet, so a shape here
+# would be vacuous. Add one if that changes.
+# ---------------------------------------------------------
+
+pulse:ExtractionRunShape
+    a sh:NodeShape ;
+    sh:targetClass pulse:ExtractionRun ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property [
+        sh:path prov:startedAtTime ;
+        sh:datatype xsd:dateTime ;
+        sh:maxCount 1 ;
+        sh:name "Started At"
+    ] ;
+    sh:property [
+        sh:path prov:endedAtTime ;
+        sh:datatype xsd:dateTime ;
+        sh:maxCount 1 ;
+        sh:name "Ended At"
+    ] ;
+    sh:property [
+        sh:path pulse:extractionSeed ;
+        sh:datatype xsd:string ;
+        sh:name "Extraction Seed"
+    ] ;
+    sh:property [
+        sh:path pulse:extractedBy ;
+        sh:class prov:SoftwareAgent ;
+        sh:maxCount 1 ;
+        sh:name "Extracted By"
+    ] .
+
+pulse:SoftwareAgentShape
+    a sh:NodeShape ;
+    sh:targetClass prov:SoftwareAgent ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property [
+        sh:path schema:name ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Name"
+    ] ;
+    sh:property [
+        sh:path schema:softwareVersion ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Version"
+    ] .
