@@ -35,7 +35,7 @@ pulse:RawPersonShape
     a sh:NodeShape ;
     sh:targetClass schema:Person ;
     sh:closed false ;
-    sh:property [ sh:path schema:name ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path schema:name ; sh:datatype xsd:string ] ;
     sh:property [
         sh:path pulse:orcidIdentifier ;
         sh:datatype xsd:string ;
@@ -46,7 +46,6 @@ pulse:RawPersonShape
     sh:property [
         sh:path pulse:hasProfile ;
         sh:class pulse:PlatformProfile ;
-        sh:minCount 1 ;
         sh:name "Has Profile" ;
         sh:description "Platform-scoped identities held by this provisional person. Extraction never resolves canonical identity — this is the anchor."
     ] ;
@@ -79,7 +78,7 @@ pulse:RawOrganizationShape
     a sh:NodeShape ;
     sh:targetClass org:Organization ;
     sh:closed false ;
-    sh:property [ sh:path schema:name ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path schema:name ; sh:datatype xsd:string ] ;
     sh:property [
         sh:path pulse:ror ;
         sh:datatype xsd:string ;
@@ -123,7 +122,6 @@ pulse:RawPlatformProfileShape
     sh:property [
         sh:path pulse:platform ;
         sh:class pulse:PlatformEnumeration ;
-        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:name "Platform"
     ] ;
@@ -159,12 +157,11 @@ pulse:RawOrganizationProfileShape
     sh:property [
         sh:path pulse:platform ;
         sh:class pulse:PlatformEnumeration ;
-        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:name "Platform"
     ] ;
     sh:property [ sh:path pulse:organizationProfileOf ; sh:class org:Organization ; sh:maxCount 1 ; sh:name "Organization Profile Of" ] ;
-    sh:property [ sh:path pulse:organizationHandle ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:name "Organization Handle" ] ;
+    sh:property [ sh:path pulse:organizationHandle ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Organization Handle" ] ;
     sh:property [ sh:path schema:name ; sh:datatype xsd:string ; sh:name "Display Name" ] ;
     sh:property [ sh:path schema:url ; sh:nodeKind sh:IRI ; sh:name "URL" ] ;
     sh:property [ sh:path pulse:platformInternalId ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Platform Internal ID" ] ;
@@ -178,7 +175,7 @@ pulse:RawRepositoryShape
     sh:targetClass schema:SoftwareSourceCode ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
-    sh:property [ sh:path schema:name ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path schema:name ; sh:datatype xsd:string ] ;
     sh:property [ sh:path pulse:repositoryType ; sh:class pulse:RepositoryTypeEnumeration ; sh:name "Repository Type" ] ;
     sh:property [ sh:path pulse:discipline ; sh:class pulse:DisciplineEnumeration ; sh:name "Discipline" ] ;
     sh:property [ sh:path pulse:platformInternalId ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Platform Internal ID" ] ;
@@ -187,7 +184,6 @@ pulse:RawRepositoryShape
     sh:property [
         sh:path pulse:platform ;
         sh:class pulse:PlatformEnumeration ;
-        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:name "Platform"
     ] ;
@@ -196,7 +192,6 @@ pulse:RawRepositoryShape
     sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Creation Date" ] ;
     sh:property [
         sh:path pulse:repositoryHandle ;
-        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:datatype xsd:string ;
         sh:pattern "^[a-zA-Z0-9\\-_.]+(/[a-zA-Z0-9\\-_.]+)+$" ;
@@ -280,7 +275,7 @@ pulse:RawArticleShape
     sh:targetClass schema:ScholarlyArticle ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
-    sh:property [ sh:path schema:name ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path schema:name ; sh:datatype xsd:string ] ;
     sh:property [
         sh:path pulse:doi ;
         sh:datatype xsd:string ;
@@ -334,7 +329,6 @@ pulse:RawMembershipShape
     sh:property [
         sh:path org:organization ;
         sh:class org:Organization ;
-        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:nodeKind sh:IRI ;
         sh:name "Organization"
@@ -355,7 +349,7 @@ pulse:CollectionShape
     sh:targetClass pulse:Collection ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
-    sh:property [ sh:path schema:name ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path schema:name ; sh:datatype xsd:string ] ;
     sh:property [ sh:path pulse:platformInternalId ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Platform Internal ID" ] ;
     sh:property [ sh:path pulse:platform ; sh:class pulse:PlatformEnumeration ; sh:maxCount 1 ; sh:name "Platform" ] ;
     sh:property [
@@ -375,7 +369,7 @@ pulse:CommunityShape
     sh:targetClass pulse:Community ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
-    sh:property [ sh:path schema:name ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path schema:name ; sh:datatype xsd:string ] ;
     sh:property [ sh:path pulse:platformInternalId ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Platform Internal ID" ] ;
     sh:property pulse:DescriptionShape ;
     sh:property [ sh:path schema:url ; sh:nodeKind sh:IRI ; sh:name "URL" ] ;
@@ -388,7 +382,7 @@ pulse:FundingShape
     sh:targetClass pulse:Funding ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
-    sh:property [ sh:path schema:name ; sh:datatype xsd:string ; sh:minCount 1 ] ;
+    sh:property [ sh:path schema:name ; sh:datatype xsd:string ] ;
     sh:property [ sh:path schema:funder ; sh:class org:Organization ; sh:maxCount 1 ; sh:name "Funder" ] ;
     sh:property [ sh:path pulse:hasExternalIdentifier ; sh:class pulse:ExternalIdentifier ; sh:name "Grant Identifier" ] ;
     sh:property [ sh:path time:hasBeginning ; sh:datatype xsd:date ; sh:name "Start Date" ] ;
@@ -402,14 +396,12 @@ pulse:ExternalIdentifierShape
     sh:property [
         sh:path pulse:identifierScheme ;
         sh:class pulse:IdentifierSchemeEnumeration ;
-        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:name "Scheme"
     ] ;
     sh:property [
         sh:path schema:identifier ;
         sh:datatype xsd:string ;
-        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:name "Value"
     ] .
@@ -428,14 +420,12 @@ pulse:ExtractionOutputShape
     sh:property [
         sh:path prov:wasGeneratedBy ;
         sh:class pulse:ExtractionRun ;
-        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:name "Was Generated By"
     ] ;
     sh:property [
         sh:path pulse:platform ;
         sh:class pulse:PlatformEnumeration ;
-        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:name "Platform"
     ] ;
