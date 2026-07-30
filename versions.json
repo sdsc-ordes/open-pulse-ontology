@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "290579d",
+          "date": "2026-07-30",
+          "author": "rmfranken",
+          "message": "fix: reusable \"description\" shape"
+        },
+        {
           "hash": "7c915db",
           "date": "2026-07-30",
           "author": "rmfranken",
