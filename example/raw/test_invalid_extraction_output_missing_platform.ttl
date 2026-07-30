@@ -1,0 +1,8 @@
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+# INVALID EXTRACTION OUTPUT - Should FAIL (pulse:platform is required
+# — an ExtractionOutput without a platform can't be attributed to a source)
+
+pulse:BadOutput a pulse:ExtractionOutput ;
+    prov:wasGeneratedBy pulse:Run2026W01 .

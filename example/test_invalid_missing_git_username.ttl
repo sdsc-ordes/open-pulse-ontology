@@ -3,16 +3,18 @@
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wd: <http://www.wikidata.org/entity/> .
+pulse:GitHub a pulse:PlatformEnumeration .
 wd:Q395 a pulse:DisciplineEnumeration .
 pulse:Software a pulse:RepositoryTypeEnumeration .
 
 # INVALID PERSON - Should FAIL validation
-# Missing all required identifiers - must have at least one of: orcid, githubUsername, email, or infoscienceIdentifier (sh:xone constraint)
+# Missing all required identifiers - must have an ORCID identifier or at least one platform profile (sh:or constraint)
 
 pulse:InvalidMissingGitUsernameRepo a schema:SoftwareSourceCode ;
     schema:name "Missing Git Username Test" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "example/invalid-git-username" ;
+    pulse:repositoryHandle "example/invalid-git-username" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.citation> ;
     schema:author pulse:PersonMissingGitUsername ;

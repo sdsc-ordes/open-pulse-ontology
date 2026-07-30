@@ -1,0 +1,53 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+pulse:HuggingFace a pulse:PlatformEnumeration .
+pulse:Space a pulse:RepositoryTypeEnumeration .
+pulse:Model a pulse:RepositoryTypeEnumeration .
+pulse:Data a pulse:RepositoryTypeEnumeration .
+pulse:Gradio a pulse:SpaceSdkEnumeration .
+pulse:RunningStatus a pulse:SpaceRuntimeStatusEnumeration .
+
+# VALID - a Hugging Face Space: schema:SoftwareSourceCode with pulse:repositoryType pulse:Space.
+
+pulse:HfSpaceAuthor a schema:Person ;
+    schema:name "Space Author" ;
+    pulse:hasProfile pulse:HfSpaceAuthorHuggingFaceProfile .
+
+pulse:HfSpaceAuthorHuggingFaceProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:HuggingFace ;
+    pulse:platformUsername "spaceauthor" .
+
+pulse:VerboseTranslatorDemoSpace a schema:SoftwareSourceCode ;
+    schema:name "verbose-lab/translator-demo" ;
+    schema:dateCreated "2024-03-01T00:00:00"^^xsd:dateTime ;
+    pulse:repositoryHandle "verbose-lab/translator-demo" ;
+    pulse:platform pulse:HuggingFace ;
+    pulse:repositoryType pulse:Space ;
+    schema:author pulse:HfSpaceAuthor ;
+    schema:license <https://spdx.org/licenses/Apache-2.0.html> ;
+    pulse:sdk pulse:Gradio ;
+    pulse:hardware "cpu-basic" ;
+    pulse:runtimeStatus pulse:RunningStatus ;
+    pulse:likeCount 14 ;
+    pulse:fileCount 8 ;
+    pulse:relatedRepository pulse:VerboseTranslationModel , pulse:VerboseParallelCorpus ;
+    schema:dateModified "2026-06-15T00:00:00"^^xsd:dateTime .
+
+# Referenced from test_valid_repository_hf_model.ttl / test_valid_repository_hf_dataset.ttl.
+# Declared minimally here so this file also validates standalone.
+pulse:VerboseTranslationModel a schema:SoftwareSourceCode ;
+    schema:name "verbose-lab/en-fr-translator" ;
+    schema:dateCreated "2024-02-10T00:00:00"^^xsd:dateTime ;
+    pulse:repositoryHandle "verbose-lab/en-fr-translator" ;
+    pulse:platform pulse:HuggingFace ;
+    pulse:repositoryType pulse:Model ;
+    schema:author pulse:HfSpaceAuthor .
+
+pulse:VerboseParallelCorpus a schema:SoftwareSourceCode ;
+    schema:name "verbose-lab/en-fr-parallel-corpus" ;
+    schema:dateCreated "2023-11-01T00:00:00"^^xsd:dateTime ;
+    pulse:repositoryHandle "verbose-lab/en-fr-parallel-corpus" ;
+    pulse:platform pulse:HuggingFace ;
+    pulse:repositoryType pulse:Data ;
+    schema:author pulse:HfSpaceAuthor .

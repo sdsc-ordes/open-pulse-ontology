@@ -2,6 +2,7 @@
 @prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # INVALID REPOSITORY - Should FAIL validation
 # Missing required properties:
@@ -10,11 +11,16 @@
 
 pulse:InvalidMissingRequired a schema:SoftwareSourceCode ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "example/invalid-repo" ;
+    pulse:repositoryHandle "example/invalid-repo" ;
+    pulse:platform pulse:GitHub ;
     schema:programmingLanguage "Python" .
 
 pulse:InvalidPerson a schema:Person ;
-    schema:email "invalid@example.com" ;
-    pulse:githubUsername "invaliduser" ;
+    schema:name "Invalid Person" ;
     pulse:orcidIdentifier "0000-0008-9012-3456" ;
-    schema:name "Invalid Person" .
+    pulse:hasProfile pulse:InvalidPersonGitHubProfile .
+
+pulse:InvalidPersonGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:platformUsername "invaliduser" ;
+    schema:email "invalid@example.com" .

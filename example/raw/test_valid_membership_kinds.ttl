@@ -1,0 +1,52 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+pulse:Employment a pulse:MembershipTypeEnumeration .
+pulse:Education a pulse:MembershipTypeEnumeration .
+pulse:SocietyMembership a pulse:MembershipTypeEnumeration .
+pulse:ORCID a pulse:PlatformEnumeration .
+
+# VALID - verbose MembershipShape additions: pulse:membershipType, Department, Qualification.
+
+pulse:MultiAffiliatedResearcher a schema:Person ;
+    schema:name "Multi Affiliated Researcher" ;
+    pulse:orcidIdentifier "0000-0005-9999-0000" ;
+    pulse:hasProfile pulse:MultiAffiliatedResearcherOrcidProfile ;
+    org:hasMembership pulse:EmploymentAtEpfl , pulse:EducationAtEth , pulse:IeeeMembership .
+
+pulse:MultiAffiliatedResearcherOrcidProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:ORCID ;
+    pulse:platformUsername "0000-0005-9999-0000" .
+
+pulse:EPFL a org:Organization ;
+    schema:name "EPFL" ;
+    pulse:ror "https://ror.org/02aj6n233" .
+
+pulse:ETHZ a org:Organization ;
+    schema:name "ETH Zurich" ;
+    pulse:ror "https://ror.org/05a28qc87" .
+
+pulse:IEEE a org:Organization ;
+    schema:name "Institute of Electrical and Electronics Engineers" ;
+    pulse:ror "https://ror.org/05zbe4x28" .
+
+pulse:EmploymentAtEpfl a org:Membership ;
+    org:organization pulse:EPFL ;
+    org:role "Senior Scientist" ;
+    pulse:membershipType pulse:Employment ;
+    pulse:department "School of Computer and Communication Sciences" ;
+    time:hasBeginning "2020-09-01"^^xsd:date .
+
+pulse:EducationAtEth a org:Membership ;
+    org:organization pulse:ETHZ ;
+    pulse:membershipType pulse:Education ;
+    pulse:qualification "PhD in Computer Science" ;
+    time:hasBeginning "2014-09-01"^^xsd:date ;
+    time:hasEnd "2019-06-30"^^xsd:date .
+
+pulse:IeeeMembership a org:Membership ;
+    org:organization pulse:IEEE ;
+    pulse:membershipType pulse:SocietyMembership ;
+    time:hasBeginning "2018-01-01"^^xsd:date .

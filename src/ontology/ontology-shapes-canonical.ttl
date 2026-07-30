@@ -1,0 +1,524 @@
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix time:   <http://www.w3.org/2006/time#> .
+@prefix pulse:  <https://open-pulse.epfl.ch/ontology#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+
+# ---------------------------------------------------------
+# REUSABLE PROPERTY SHAPES
+# ---------------------------------------------------------
+
+pulse:NameShape
+    a sh:PropertyShape ;
+    sh:path schema:name ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 .
+
+pulse:DescriptionShape
+    a sh:PropertyShape ;
+    sh:path schema:description ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:name "Description" ;
+    sh:description "A short free-text description of the item." .
+
+pulse:EmailShape
+    a sh:PropertyShape ;
+    sh:path schema:email ;
+    sh:nodeKind sh:Literal ;
+    sh:pattern "^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" ;
+    sh:description "Reusable validation for institutional and personal email addresses." .
+
+pulse:UrlShape
+    a sh:PropertyShape ;
+    sh:path schema:url ;
+    sh:nodeKind sh:IRI ;
+    sh:description "Standard validation for any web URL." .
+
+pulse:ProfileEmailShape
+    a sh:PropertyShape ;
+    sh:path schema:email ;
+    sh:nodeKind sh:Literal ;
+    sh:pattern "^[\\w\\-\\.\\+]+@([\\w-]+\\.)+[\\w-]{2,}$" ;
+    sh:description "Platform email pattern allowing '+' sub-addressing (e.g. GitHub '1024+user@users.noreply.github.com')." .
+
+pulse:OrganizationTypeShape
+    a sh:PropertyShape ;
+    sh:path pulse:organizationType ;
+    sh:class pulse:OrganizationTypeEnumeration ;
+    sh:name "Organization Type" ;
+    sh:description "Must be a valid IRI from the Organization Type enumeration (e.g., pulse:University)." .
+
+pulse:PlatformUsernameShape
+    a sh:PropertyShape ;
+    sh:path pulse:platformUsername ;
+    sh:datatype xsd:string ;
+    sh:description "The person's handle on this platform (e.g. a GitHub login, Hugging Face username, or Infoscience person identifier), interpreted relative to pulse:platform." .
+
+pulse:PlatformInternalIdShape
+    a sh:PropertyShape ;
+    sh:path pulse:platformInternalId ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:description "The stable platform-issued internal ID, interpreted relative to pulse:platform." .
+
+pulse:PlatformNodeIdShape
+    a sh:PropertyShape ;
+    sh:path pulse:platformNodeId ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:description "A platform's own opaque global node ID, interpreted relative to pulse:platform." .
+
+pulse:RepositoryHandleShape
+    a sh:PropertyShape ;
+    sh:path pulse:repositoryHandle ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:pattern "^[a-zA-Z0-9\\-_.]+(/[a-zA-Z0-9\\-_.]+)+$" ;
+    sh:description "The repository handle, e.g. 'owner/repository' (GitHub, Bitbucket) or 'group/subgroup/project' (GitLab's nested groups)." .
+
+pulse:DisciplineShape
+    a sh:PropertyShape ;
+    sh:path pulse:discipline ;
+    sh:class pulse:DisciplineEnumeration ;
+    sh:name "Discipline" ;
+    sh:description "Must be a valid IRI from the Wikidata-based Discipline enumeration." .
+
+pulse:RepositoryTypeShape
+    a sh:PropertyShape ;
+    sh:path pulse:repositoryType ;
+    sh:class pulse:RepositoryTypeEnumeration ;
+    sh:name "Repository Type" ;
+    sh:description "Must be a valid IRI from the Repository Type enumeration (e.g., pulse:Software)." .
+
+pulse:PublicationTypeShape
+    a sh:PropertyShape ;
+    sh:path pulse:publicationType ;
+    sh:class pulse:PublicationTypeEnumeration ;
+    sh:name "Publication Type" ;
+    sh:description "Must be a valid IRI from the Publication Type enumeration (e.g., pulse:JournalArticle)." .
+
+pulse:AccessRightShape
+    a sh:PropertyShape ;
+    sh:path pulse:accessRight ;
+    sh:class pulse:AccessRightEnumeration ;
+    sh:maxCount 1 ;
+    sh:name "Access Right" ;
+    sh:description "Must be a valid IRI from the Access Right enumeration (e.g., pulse:OpenAccess)." .
+
+
+pulse:DoiShape
+    a sh:PropertyShape ;
+    sh:path pulse:doi ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:pattern "^10\\.\\d{4,9}/[-._;()/:a-zA-Z0-9]+$" ;
+    sh:description "Standard DOI validation." .
+
+pulse:OrcidShape
+    a sh:PropertyShape ;
+    sh:path pulse:orcidIdentifier ;
+    sh:datatype xsd:string ;
+    sh:pattern "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$" ;
+    sh:description "ORCID identifier validation." .
+
+pulse:RorShape
+    a sh:PropertyShape ;
+    sh:path pulse:ror ;
+    sh:datatype xsd:string ;
+    sh:pattern "^https://ror\\.org/[0-9a-z]{9}$" ;
+    sh:description "Standard ROR ID validation." .
+
+pulse:HasUnitShape
+    a sh:PropertyShape ;
+    sh:path org:hasUnit ;
+    sh:class org:Organization ;
+    sh:description "Link to a subunit, project, or department." .
+
+pulse:UnitOfShape
+    a sh:PropertyShape ;
+    sh:path org:unitOf ;
+    sh:class org:Organization ;
+    sh:description "Link back to the managing/parent organization." .
+
+pulse:RepositoryStarsShape
+    a sh:PropertyShape ;
+    sh:path pulse:repositoryStars ;
+    sh:datatype xsd:integer ;
+    sh:maxCount 1 ;
+    sh:description "Number of stars for the repository." .
+
+pulse:RepositoryForksShape
+    a sh:PropertyShape ;
+    sh:path pulse:repositoryForks ;
+    sh:datatype xsd:integer ;
+    sh:maxCount 1 ;
+    sh:description "Number of forks for the repository." .
+
+# ---------------------------------------------------------
+# NODE SHAPES
+# ---------------------------------------------------------
+
+pulse:PersonShape
+    a sh:NodeShape ;
+    sh:targetClass schema:Person ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property pulse:NameShape ;
+    sh:property pulse:OrcidShape ;
+    sh:property [
+        sh:path pulse:hasProfile ;
+        sh:class pulse:PlatformProfile ;
+        sh:name "Has Profile" ;
+        sh:description "Platform-scoped identities (GitHub, Infoscience, ...) held by this person. Each carries the name/email/handle used on that platform."
+    ] ;
+    sh:property [ sh:path pulse:hasContribution ; sh:class pulse:Contribution ; sh:name "Has Contribution" ] ;
+    sh:property [
+        sh:path org:hasMembership ;
+        sh:class org:Membership ;
+        sh:name "hasMembership"
+    ] ;
+    sh:property [
+        sh:path pulse:owns ;
+        sh:class schema:SoftwareSourceCode ;
+        sh:name "Owns Repository"
+    ] ;
+    sh:property [
+        sh:path pulse:hasAuthoredArticle ;
+        sh:class schema:ScholarlyArticle ;
+        sh:name "Has Authored Article" ;
+        sh:description "Scholarly articles authored by this person."
+    ] ;
+    # A person is identifiable either by a cross-platform ORCID anchor or by at least one platform profile.
+    sh:or (
+        [ sh:property [ sh:path pulse:orcidIdentifier ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path pulse:hasProfile ; sh:minCount 1 ] ]
+    ) .
+
+pulse:PlatformProfileShape
+    a sh:NodeShape ;
+    sh:targetClass pulse:PlatformProfile ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property [
+        sh:path pulse:platform ;
+        sh:class pulse:PlatformEnumeration ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Platform" ;
+        sh:description "Which platform this profile lives on (from the Platform enumeration)."
+    ] ;
+    sh:property [
+        sh:path pulse:profileOf ;
+        sh:class schema:Person ;
+        sh:maxCount 1 ;
+        sh:name "Profile Of" ;
+        sh:description "Optional back-link to the person this profile belongs to."
+    ] ;
+    sh:property [
+        sh:path schema:name ;
+        sh:datatype xsd:string ;
+        sh:name "Display Name" ;
+        sh:description "The name as it appears on this platform (may differ per platform)."
+    ] ;
+    sh:property pulse:ProfileEmailShape ;
+    sh:property pulse:UrlShape ;
+    sh:property pulse:PlatformUsernameShape ;
+    sh:property pulse:PlatformInternalIdShape ;
+    sh:property pulse:PlatformNodeIdShape ;
+    sh:or (
+        [ sh:property [ sh:path pulse:platformUsername ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path schema:email ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path schema:url ; sh:minCount 1 ] ]
+    ) .
+
+pulse:OrganizationProfileShape
+    a sh:NodeShape ;
+    sh:targetClass pulse:OrganizationProfile ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property [
+        sh:path pulse:platform ;
+        sh:class pulse:PlatformEnumeration ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Platform" ;
+        sh:description "Which platform this profile lives on (from the Platform enumeration)."
+    ] ;
+    sh:property [
+        sh:path pulse:organizationProfileOf ;
+        sh:class org:Organization ;
+        sh:maxCount 1 ;
+        sh:name "Organization Profile Of" ;
+        sh:description "Optional back-link to the organization this profile belongs to."
+    ] ;
+    sh:property [
+        sh:path pulse:organizationHandle ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Organization Handle" ;
+        sh:description "The org's handle on this platform (e.g. a GitHub login, a Hugging Face org slug, or an Infoscience organization UUID)."
+    ] ;
+    sh:property [
+        sh:path schema:name ;
+        sh:datatype xsd:string ;
+        sh:name "Display Name" ;
+        sh:description "The name as it appears on this platform (may differ per platform)."
+    ] ;
+    sh:property pulse:UrlShape ;
+    sh:property pulse:PlatformInternalIdShape .
+
+pulse:ArticleShape
+    a sh:NodeShape ;
+    sh:targetClass schema:ScholarlyArticle ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property pulse:NameShape ;
+    sh:property pulse:DoiShape ;
+    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this article"   ] ;
+    sh:property [ sh:path schema:sourceOrganization ; sh:class org:Organization ; sh:name "Source Organization" ] ;
+    sh:property [
+        sh:path pulse:hasDeposit ;
+        sh:class pulse:Deposit ;
+        sh:minCount 1 ;
+        sh:name "Has Deposit" ;
+        sh:description "Platform-specific deposits of this article (e.g. its Zenodo record, its Infoscience entry, its arXiv submission). Each carries that platform's own internal ID, access right, publisher and publication date."
+    ] .
+
+pulse:DepositShape
+    a sh:NodeShape ;
+    sh:targetClass pulse:Deposit ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property [
+        sh:path pulse:platform ;
+        sh:class pulse:PlatformEnumeration ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Platform" ;
+        sh:description "Which platform this deposit lives on (e.g. pulse:Zenodo, pulse:Infoscience, pulse:ArXiv)."
+    ] ;
+    sh:property [
+        sh:path pulse:depositOf ;
+        sh:class schema:ScholarlyArticle ;
+        sh:maxCount 1 ;
+        sh:name "Deposit Of" ;
+        sh:description "Back-link to the article this is a deposit of."
+    ] ;
+    sh:property pulse:PlatformInternalIdShape ;
+    sh:property [
+        sh:path schema:datePublished ;
+        sh:datatype xsd:date ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Publication Date" ;
+        sh:description "The date this deposit was published/registered on its platform."
+    ] ;
+    sh:property [
+        sh:path schema:publisher ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Publisher" ;
+        sh:description "The publisher's name, as free text."
+    ] ;
+    sh:property pulse:PublicationTypeShape ;
+    sh:property pulse:AccessRightShape .
+
+pulse:OrganizationShape
+    a sh:NodeShape ;
+    sh:targetClass org:Organization ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property pulse:NameShape ;
+    sh:property pulse:RorShape ;
+    sh:property pulse:OrganizationTypeShape ;
+    sh:property pulse:HasUnitShape ;
+    sh:property pulse:UnitOfShape ;
+    sh:property [
+        sh:path pulse:hasOrganizationProfile ;
+        sh:class pulse:OrganizationProfile ;
+        sh:name "Has Organization Profile" ;
+        sh:description "Platform-scoped identities (GitHub, Hugging Face, Infoscience, ...) held by this organization. Each carries the handle/name/url used on that platform."
+    ] ;
+    sh:property [
+        sh:path pulse:owns ;
+        sh:class schema:SoftwareSourceCode ;
+        sh:name "Owns Repositories" ;
+        sh:description "Repositories owned by this organization."
+    ] ;
+    # An organization is identifiable either by a cross-platform ROR anchor or by at least one platform profile.
+    sh:or (
+        [ sh:property [ sh:path pulse:ror ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path pulse:hasOrganizationProfile ; sh:minCount 1 ] ]
+    ) .
+
+pulse:RepositoryShape
+    a sh:NodeShape ;
+    sh:targetClass schema:SoftwareSourceCode ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property pulse:NameShape ;
+    sh:property pulse:RepositoryTypeShape ;
+    sh:property pulse:DisciplineShape ;
+    sh:property pulse:PlatformInternalIdShape ;
+    sh:property pulse:PlatformNodeIdShape ;
+    sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this repository."   ] ;
+    sh:property [
+        sh:path pulse:platform ;
+        sh:class pulse:PlatformEnumeration ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Platform" ;
+        sh:description "The code-hosting platform this repository lives on (e.g. pulse:GitHub, pulse:GitLab, pulse:Bitbucket)."
+    ] ;
+    sh:property pulse:RepositoryStarsShape ;
+    sh:property pulse:RepositoryForksShape ;
+    sh:property [ sh:path schema:dateCreated ; sh:datatype xsd:dateTime ; sh:name "Creation Date" ] ;
+    sh:property pulse:RepositoryHandleShape ;
+    sh:property [ sh:path schema:license ; sh:nodeKind sh:IRI ; sh:name "License" ] ;
+    sh:property [ sh:path schema:citation ; sh:nodeKind sh:IRI ; sh:name "Citation" ] ;
+    sh:property [ sh:path schema:programmingLanguage ; sh:datatype xsd:string ] ;
+    sh:property [
+        sh:path pulse:ownedBy ;
+        sh:or (
+            [ sh:class schema:Person ]
+            [ sh:class org:Organization ]
+        ) ;
+        sh:maxCount 1 ;
+        sh:name "Owned By" ;
+        sh:description "The Person or Organization that owns this repository."
+    ] ;
+    sh:property [
+        sh:path pulse:isForkOf ;
+        sh:class schema:SoftwareSourceCode ;
+        sh:maxCount 1 ;
+        sh:name "Is Fork Of" ;
+        sh:description "The repository this was forked from."
+    ] .
+
+pulse:ContributionShape
+    a sh:NodeShape ;
+    sh:targetClass pulse:Contribution ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property [
+        sh:path pulse:contributionTo ;
+        sh:class schema:SoftwareSourceCode ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Contribution To" ;
+        sh:description "The repository this contribution belongs to."
+    ] ;
+    sh:property [
+        sh:path pulse:contributionCount ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:name "Contribution Count" ;
+        sh:description "Number of commits made."
+    ] ;
+    sh:property [
+        sh:path pulse:firstContributionDate ;
+        sh:datatype xsd:dateTime ;
+        sh:name "First Contribution Date"
+    ] ;
+    sh:property [
+        sh:path pulse:lastContributionDate ;
+        sh:datatype xsd:dateTime ;
+        sh:name "Last Contribution Date"
+    ] ;
+    sh:property [
+        sh:path schema:author ;
+        sh:class schema:Person ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Git Author" ;
+        sh:description "The person who made these contributions."
+    ] ;
+    sh:property [
+        sh:path pulse:gitAuthorName ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Git Author Name" ;
+        sh:description "The author name as it literally appeared in the aggregated commits."
+    ] ;
+    sh:property [
+        sh:path pulse:gitAuthorEmail ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Git Author Email" ;
+        sh:description "The author email as it literally appeared in the aggregated commits."
+    ] .
+
+pulse:MembershipShape
+    a sh:NodeShape ;
+    sh:targetClass org:Membership ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property [
+        sh:path org:organization ;
+        sh:class org:Organization ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:name "Organization"
+    ] ;
+    sh:property [ sh:path org:role ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Role" ] ;
+    sh:property [
+        sh:path time:hasBeginning ;
+        sh:datatype xsd:date ;
+        sh:lessThanOrEquals time:hasEnd ;
+        sh:name "Start Date"
+    ] ;
+    sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ; sh:name "End Date" ] .
+
+pulse:ProjectShape
+    a sh:NodeShape ;
+    sh:targetClass schema:Project ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property pulse:NameShape ;
+    sh:property pulse:DescriptionShape ;
+    sh:property pulse:UrlShape ;
+    sh:property [
+        sh:path pulse:projectOutput ;
+        sh:or (
+            [ sh:class schema:SoftwareSourceCode ]
+            [ sh:class schema:ScholarlyArticle ]
+        ) ;
+        sh:name "Project Output" ;
+        sh:description "A repository or scholarly article produced by this project."
+    ] ;
+    sh:property [
+        sh:path schema:member ;
+        sh:class schema:Person ;
+        sh:name "Member" ;
+        sh:description "A person participating in this project."
+    ] ;
+    sh:property [
+        sh:path schema:sourceOrganization ;
+        sh:class org:Organization ;
+        sh:name "Host Organization" ;
+        sh:description "The organization(s) hosting or running this project."
+    ] ;
+    sh:property [
+        sh:path schema:funder ;
+        sh:class org:Organization ;
+        sh:name "Funder" ;
+        sh:description "The organization(s) funding this project."
+    ] ;
+    sh:property [
+        sh:path time:hasBeginning ;
+        sh:datatype xsd:date ;
+        sh:lessThanOrEquals time:hasEnd ;
+        sh:name "Start Date"
+    ] ;
+    sh:property [ sh:path time:hasEnd ; sh:datatype xsd:date ; sh:maxCount 1 ; sh:name "End Date" ] .

@@ -1,0 +1,12 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+
+# INVALID PLATFORM PROFILE - Should FAIL validation
+# Missing required pulse:platform (minCount 1) on the PlatformProfile
+
+pulse:ProfilePerson a schema:Person ;
+    schema:name "Paula Profile" ;
+    pulse:hasProfile pulse:OrphanProfile .
+
+pulse:OrphanProfile a pulse:PlatformProfile ;
+    pulse:platformUsername "paulaprofile" .

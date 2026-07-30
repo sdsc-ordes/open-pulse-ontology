@@ -4,10 +4,24 @@ on:
   workflow_call:
   push:
     paths:
-      - 'ontology-combined.ttl'
+      - 'src/ontology/ontology-combined-canonical.ttl'
+      - 'src/ontology/ontology-definitions-canonical.ttl'
+      - 'src/ontology/ontology-enumerations-canonical.ttl'
+      - 'src/ontology/ontology-shapes-canonical.ttl'
+      - 'src/ontology/ontology-combined-raw.ttl'
+      - 'src/ontology/ontology-definitions-raw.ttl'
+      - 'src/ontology/ontology-enumerations-raw.ttl'
+      - 'src/ontology/ontology-shapes-raw.ttl'
   pull_request:
     paths:
-      - 'ontology-combined.ttl'
+      - 'src/ontology/ontology-combined-canonical.ttl'
+      - 'src/ontology/ontology-definitions-canonical.ttl'
+      - 'src/ontology/ontology-enumerations-canonical.ttl'
+      - 'src/ontology/ontology-shapes-canonical.ttl'
+      - 'src/ontology/ontology-combined-raw.ttl'
+      - 'src/ontology/ontology-definitions-raw.ttl'
+      - 'src/ontology/ontology-enumerations-raw.ttl'
+      - 'src/ontology/ontology-shapes-raw.ttl'
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -24,6 +38,10 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: SHACL validation
+      - name: SHACL validation (canonical)
         run: |
-          uv run python tools/python/checks/shacl.py ontology-combined.ttl src/quality-checks/shacl-shacl.ttl
+          uv run python tools/python/checks/shacl.py src/ontology/ontology-combined-canonical.ttl src/quality-checks/shacl-shacl.ttl
+
+      - name: SHACL validation (raw)
+        run: |
+          uv run python tools/python/checks/shacl.py src/ontology/ontology-combined-raw.ttl src/quality-checks/shacl-shacl.ttl

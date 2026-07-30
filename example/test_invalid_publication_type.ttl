@@ -1,0 +1,21 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+
+# INVALID PUBLICATION TYPE - Should FAIL (pulse:publicationType must be a
+# pulse:PublicationTypeEnumeration value, not a pulse:RepositoryTypeEnumeration one)
+
+pulse:BadPublicationTypeArticle a schema:ScholarlyArticle ;
+    schema:name "Article With Wrong Publication Type" ;
+    schema:author pulse:PubTypeAuthor ;
+    pulse:hasDeposit pulse:BadPublicationTypeArticleDeposit .
+
+pulse:BadPublicationTypeArticleDeposit a pulse:Deposit ;
+    pulse:platform pulse:Infoscience ;
+    schema:datePublished "2025-03-01"^^xsd:date ;
+    pulse:publicationType pulse:Software .
+
+pulse:PubTypeAuthor a schema:Person ;
+    schema:name "Pub Type Author" ;
+    pulse:orcidIdentifier "0000-0004-1234-5678" .

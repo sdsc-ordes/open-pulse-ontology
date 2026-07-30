@@ -3,25 +3,21 @@ import rdflib
 import sys
 import logging
 
-# Set up basic logging
 logging.basicConfig(
-    level=logging.INFO,  # Default to INFO level
+    level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
 
 
 def run_shacl_validation(data_file, shapes_file):
-    # Load the data graph
     data_graph = rdflib.Graph()
     data_graph.parse(data_file, format="turtle")
     logging.info(f"Data graph loaded with {len(data_graph)} triples.")
 
-    # Load the SHACL shapes graph
     shapes_graph = rdflib.Graph()
     shapes_graph.parse(shapes_file, format="turtle")
     logging.info(f"Shapes graph loaded with {len(shapes_graph)} triples.")
 
-    # Perform SHACL validation
     conforms, results_graph, results_text = validate(
         data_graph=data_graph, shacl_graph=shapes_graph, debug=False
     )

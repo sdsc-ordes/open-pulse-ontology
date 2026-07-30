@@ -5,6 +5,7 @@
 @prefix wd: <http://www.wikidata.org/entity/> .
 wd:Q395 a pulse:DisciplineEnumeration .
 pulse:Software a pulse:RepositoryTypeEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # VALID REPOSITORY - Should PASS validation
 # This repository satisfies all required constraints:
@@ -21,11 +22,12 @@ pulse:Software a pulse:RepositoryTypeEnumeration .
 pulse:ValidRepo a schema:SoftwareSourceCode ;
     schema:name "Valid Test Repository" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "example/valid-repo" ;
+    pulse:repositoryHandle "example/valid-repo" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.citation> ;
     schema:programmingLanguage "Python" ;
-    pulse:githubRepoStars "12"^^xsd:integer ;
+    pulse:repositoryStars "12"^^xsd:integer ;
     schema:author pulse:ValidAuthor ;
     pulse:ownedBy pulse:ValidOrganization ;
     pulse:repositoryType pulse:Software ;
@@ -33,11 +35,19 @@ pulse:ValidRepo a schema:SoftwareSourceCode ;
 
 pulse:ValidAuthor a schema:Person ;
     schema:name "Jane Doe" ;
-    schema:email "jane.doe@example.com" ;
-    pulse:githubUsername "janedoe" ;
-    pulse:orcidIdentifier "0000-0002-1825-0097" .
+    pulse:orcidIdentifier "0000-0002-1825-0097" ;
+    pulse:hasProfile pulse:ValidAuthorGitHubProfile .
+
+pulse:ValidAuthorGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:platformUsername "janedoe" ;
+    schema:email "jane.doe@example.com" .
 
 pulse:ValidOrganization a org:Organization ;
     schema:name "Example Research Lab" ;
-    schema:identifier "https://ror.org/012345678" ;
-    pulse:githubOrganizationHandle "DeepLabCut" .
+    pulse:ror "https://ror.org/012345678" ;
+    pulse:hasOrganizationProfile pulse:ValidOrganizationGitHubProfile .
+
+pulse:ValidOrganizationGitHubProfile a pulse:OrganizationProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:organizationHandle "DeepLabCut" .

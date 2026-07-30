@@ -1,0 +1,18 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# INVALID - pulse:visibility must be an IRI from pulse:VisibilityEnumeration
+# (e.g. pulse:PublicVisibility), not a plain string literal. Should FAIL validation.
+
+pulse:BadVisibilityAuthor a schema:Person ;
+    schema:name "Bad Visibility Author" ;
+    pulse:orcidIdentifier "0000-0006-1111-2222" .
+
+pulse:BadVisibilityRepo a schema:SoftwareSourceCode ;
+    schema:name "bad-visibility-repo" ;
+    schema:dateCreated "2024-01-01T00:00:00"^^xsd:dateTime ;
+    pulse:repositoryHandle "example/bad-visibility-repo" ;
+    pulse:platform pulse:GitHub ;
+    schema:author pulse:BadVisibilityAuthor ;
+    pulse:visibility "public" .
