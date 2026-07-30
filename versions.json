@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "7c915db",
+          "date": "2026-07-30",
+          "author": "rmfranken",
+          "message": "fix: ontology statements specific to raw, canonical and prov"
+        },
+        {
           "hash": "e8fcceb",
           "date": "2026-07-30",
           "author": "rmfranken",
