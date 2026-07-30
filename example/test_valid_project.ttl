@@ -40,7 +40,7 @@ pulse:HostLab a org:Organization ;
     schema:name "Host Lab" ;
     pulse:ror "https://ror.org/02s376052" ;
     pulse:hasOrganizationProfile pulse:HostLabGitHubProfile ;
-    pulse:OrganizationType pulse:ResearchInstitution .
+    pulse:organizationType pulse:ResearchInstitution .
 
 pulse:HostLabGitHubProfile a pulse:OrganizationProfile ;
     pulse:platform pulse:GitHub ;

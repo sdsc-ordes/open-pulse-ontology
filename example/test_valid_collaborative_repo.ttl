@@ -69,7 +69,7 @@ pulse:EPFLCenter a org:Organization ;
     schema:name "EPFL Center for Systems Biology" ;
     pulse:ror "https://ror.org/02s376052" ;
     pulse:hasOrganizationProfile pulse:EPFLCenterGitHubProfile ;
-    pulse:OrganizationType pulse:ResearchInstitution ;
+    pulse:organizationType pulse:ResearchInstitution ;
     pulse:owns pulse:CollabRepo .
 
 pulse:EPFLCenterGitHubProfile a pulse:OrganizationProfile ;

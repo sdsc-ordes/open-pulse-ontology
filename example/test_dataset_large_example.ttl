@@ -41,7 +41,7 @@ pulse:EPFLComputationalLab a org:Organization ;
     schema:name "EPFL Computational Lab" ;
     pulse:ror "https://ror.org/02s376052" ;
     pulse:hasOrganizationProfile pulse:EPFLComputationalLabGitHubProfile ;
-    pulse:OrganizationType pulse:ResearchInstitution ;
+    pulse:organizationType pulse:ResearchInstitution ;
     pulse:owns pulse:SimulationFramework ;
     pulse:owns pulse:DataProcessing .
 
@@ -54,7 +54,7 @@ pulse:SwissResearchAlliance a org:Organization ;
     schema:name "Swiss Research Alliance" ;
     pulse:ror "https://ror.org/01wyqb977" ;
     pulse:hasOrganizationProfile pulse:SwissResearchAllianceGitHubProfile ;
-    pulse:OrganizationType pulse:ResearchInstitution ;
+    pulse:organizationType pulse:ResearchInstitution ;
     pulse:owns pulse:NetworkAnalysis ;
     pulse:owns pulse:SimulationFramework .
 
@@ -67,7 +67,7 @@ pulse:DepartmentPhysics a org:Organization ;
     schema:name "Department of Physics - ETH Zurich" ;
     pulse:ror "https://ror.org/05a28qc87" ;
     pulse:hasOrganizationProfile pulse:DepartmentPhysicsGitHubProfile ;
-    pulse:OrganizationType pulse:University ;
+    pulse:organizationType pulse:University ;
     org:hasUnit pulse:PhysicsSimulationUnit .
 
 pulse:DepartmentPhysicsGitHubProfile a pulse:OrganizationProfile ;

@@ -71,7 +71,7 @@ pulse:platformInternalId a rdf:Property ; skos:prefLabel "platform internal ID" 
 pulse:platformNodeId a rdf:Property ; skos:prefLabel "platform node ID" ; skos:definition "A platform's own opaque global node identifier for this resource (e.g. a GitHub GraphQL node ID), interpreted relative to pulse:platform." .
 pulse:discipline a rdf:Property ; skos:prefLabel "discipline" ; skos:definition "The academic or scientific discipline associated with the resource." .
 pulse:repositoryType a rdf:Property ; skos:prefLabel "repository type" ; skos:definition "The type or category of the repository (e.g., software, data, publication)." .
-pulse:OrganizationType a rdf:Property ; skos:prefLabel "organization type" ; skos:definition "The type or category of the organization (e.g., university, research institute, company)." .
+pulse:organizationType a rdf:Property ; skos:prefLabel "organization type" ; skos:definition "The type or category of the organization (e.g., university, research institute, company)." .
 pulse:repositoryStars a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "repository stars" ; skos:definition "The number of stars a repository has received." .
 pulse:repositoryForks a rdf:Property ; rdfs:range xsd:integer ; skos:prefLabel "repository forks" ; skos:definition "The number of forks (copies) of a repository." .
 

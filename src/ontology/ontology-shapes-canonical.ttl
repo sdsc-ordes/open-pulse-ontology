@@ -43,7 +43,7 @@ pulse:ProfileEmailShape
 
 pulse:OrganizationTypeShape
     a sh:PropertyShape ;
-    sh:path pulse:OrganizationType ;
+    sh:path pulse:organizationType ;
     sh:class pulse:OrganizationTypeEnumeration ;
     sh:name "Organization Type" ;
     sh:description "Must be a valid IRI from the Organization Type enumeration (e.g., pulse:University)." .

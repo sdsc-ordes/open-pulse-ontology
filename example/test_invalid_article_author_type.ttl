@@ -21,7 +21,7 @@ pulse:OrgAuthor a org:Organization ;
     schema:name "Publishing Org" ;
     pulse:ror "https://ror.org/02s376052" ;
     pulse:hasOrganizationProfile pulse:OrgAuthorGitHubProfile ;
-    pulse:OrganizationType pulse:ResearchInstitution .
+    pulse:organizationType pulse:ResearchInstitution .
 
 pulse:OrgAuthorGitHubProfile a pulse:OrganizationProfile ;
     pulse:platform pulse:GitHub ;

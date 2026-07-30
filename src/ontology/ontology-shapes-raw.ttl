@@ -93,7 +93,7 @@ pulse:RawOrganizationShape
         sh:description "Platform-scoped identities held by this provisional organization, if any were discovered on a platform."
     ] ;
     sh:property [
-        sh:path pulse:OrganizationType ;
+        sh:path pulse:organizationType ;
         sh:class pulse:OrganizationTypeEnumeration ;
         sh:name "Organization Type"
     ] ;
