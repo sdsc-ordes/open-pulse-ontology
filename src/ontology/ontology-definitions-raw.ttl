@@ -13,6 +13,16 @@
 @prefix datacite: <http://purl.org/spar/datacite/> .
 
 # ---------------------------------------------------------
+# ONTOLOGY HEADER
+# ---------------------------------------------------------
+
+<https://open-pulse.epfl.ch/ontology/raw#> a owl:Ontology ;
+    dct:abstract "The raw substrate of the Open Pulse Ontology: data as extractors emit it, pre-unification, one PlatformProfile per source. Shares its vocabulary with the canonical ontology (see <https://open-pulse.epfl.ch/ontology#>) but is combined and validated as its own document." ;
+    dct:license <https://spdx.org/licenses/CC-BY-4.0.html> ;
+    dct:title "Open Pulse Ontology - Raw" ;
+    owl:versionInfo "v3.0.0-develop"^^xsd:string .
+
+# ---------------------------------------------------------
 # VERBOSE CLASS & PROPERTY SECTION
 # ---------------------------------------------------------
 

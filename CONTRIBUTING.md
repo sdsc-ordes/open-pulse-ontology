@@ -13,8 +13,17 @@ of them into the same SHACL shapes graph (see "Why raw is standalone" below).
 
 ### Shared base files
 
-- `src/ontology/ontology-definitions-canonical.ttl` — the ontology header (`owl:versionInfo` lives here) plus the base classes and properties reused by all three ontologies.
+- `src/ontology/ontology-definitions-canonical.ttl` — the canonical ontology's own `owl:Ontology`
+  header (`<https://open-pulse.epfl.ch/ontology#>`) plus the base classes and properties reused
+  by all three ontologies.
 - `src/ontology/ontology-enumerations-canonical.ttl` — the base enumeration classes and their instances (repository types, organization types, platforms, disciplines).
+
+Raw and provenance each declare their **own** `owl:Ontology` header, in their own definitions
+file (`<https://open-pulse.epfl.ch/ontology/raw#>`, `<https://open-pulse.epfl.ch/ontology/provenance#>`)
+rather than inheriting the canonical one — they're combined and released together, but they
+aren't the same ontology document. All three headers carry the same `owl:versionInfo`, bumped
+together in lockstep (see "Preparing the Next Version" below); the canonical header remains the
+source of truth the release bot reads.
 
 ### Canonical ontology
 
@@ -29,7 +38,7 @@ property, closed shapes, one node per real-world entity.
 
 Data exactly as extractors emit it, pre-unification: one `PlatformProfile`/`OrganizationProfile` per source, provisional identity (no ORCID/ROR required), open shapes, plus every platform-specific field needed for full field-parity with GitHub, Hugging Face, Zenodo and ORCID (internal/node IDs, repository file artifacts, Hugging Face Model/Dataset/Space fields, Zenodo Records/Communities, ORCID Employment/Education/Funding, etc).
 
-- `src/ontology/ontology-definitions-raw.ttl`
+- `src/ontology/ontology-definitions-raw.ttl` — includes raw's own `owl:Ontology` header.
 - `src/ontology/ontology-enumerations-raw.ttl`
 - `src/ontology/ontology-shapes-raw.ttl`
 
@@ -54,7 +63,7 @@ link). `graph:prov` itself is the one graph in this ontology correctly typed `pr
 since its content genuinely is provenance descriptions — self-describing, the same pattern
 as this repo's `owl:Ontology` header.
 
-- `src/ontology/ontology-definitions-provenance.ttl` — the vocabulary.
+- `src/ontology/ontology-definitions-provenance.ttl` — the vocabulary, plus provenance's own `owl:Ontology` header.
 - `src/ontology/ontology-shapes-provenance.ttl` — shapes for the plain-RDF parts only
   (`pulse:ExtractionRun`). **The RDF-star winner-links themselves can't be SHACL-shaped** —
   no tool in this repo's stack can target a quoted triple as a focus node (rdflib can't
@@ -109,15 +118,21 @@ During normal development, you are just adding work to the `develop` bucket.
 3. Regenerate all three `ontology-combined*.ttl` files (see [Section 0](#0-ontology-source-files)) and include them in your commit.
 4. Open a Pull Request into `develop` and merge it.
 
-🛑 **CRITICAL:** Do **NOT** remove the `-develop` suffix from `owl:versionInfo` in `src/ontology/ontology-definitions-canonical.ttl` during this phase. Just merge your code. The release bot will handle versions and collect your commits later.
+🛑 **CRITICAL:** Do **NOT** remove the `-develop` suffix from `owl:versionInfo` in
+`src/ontology/ontology-definitions-canonical.ttl`, `ontology-definitions-raw.ttl`, or
+`ontology-definitions-provenance.ttl` during this phase. Just merge your code. The release bot
+will handle versions and collect your commits later.
 
 ## 4. Preparing the Next Version (In Develop)
 
 After a production release is finished, or when starting a new milestone, ensure the `develop` branch reflects the *upcoming* version with a pre-release suffix.
 
-1. Open `src/ontology/ontology-definitions-canonical.ttl` on the `develop` branch.
-2. Update the `owl:versionInfo` triple to the next anticipated version with a development suffix (e.g., bump `v2.2.0` to `v2.3.0-develop`).
-3. Regenerate `src/ontology/ontology-combined-canonical.ttl` (see [Section 0](#0-ontology-source-files)).
+1. On the `develop` branch, open `src/ontology/ontology-definitions-canonical.ttl`,
+   `ontology-definitions-raw.ttl`, and `ontology-definitions-provenance.ttl`.
+2. Update the `owl:versionInfo` triple in **all three** files to the same next anticipated
+   version with a development suffix (e.g., bump `v2.2.0` to `v2.3.0-develop`). The canonical
+   file is the source of truth the release bot reads, but all three must match.
+3. Regenerate all three `ontology-combined*.ttl` files (see [Section 0](#0-ontology-source-files)).
 4. Commit these changes directly or via a quick PR to `develop`.
 
 ## 5. Promoting to Production (Stable Release)

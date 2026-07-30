@@ -1784,6 +1784,16 @@ wd:Q103495 a pulse:DisciplineEnumeration; skos:prefLabel "World war"@en; rdfs:su
 wd:Q6984185 a pulse:DisciplineEnumeration; skos:prefLabel "Writers"@en; rdfs:subClassOf wd:Q6497044 .
 
 # ---------------------------------------------------------
+# ONTOLOGY HEADER
+# ---------------------------------------------------------
+
+<https://open-pulse.epfl.ch/ontology/provenance#> a owl:Ontology ;
+    dct:abstract "The provenance layer of the Open Pulse Ontology: for a canonical triple, which platform-specific extraction it was derived from. Shares its vocabulary with the canonical ontology (see <https://open-pulse.epfl.ch/ontology#>) but is combined and validated as its own document." ;
+    dct:license <https://spdx.org/licenses/CC-BY-4.0.html> ;
+    dct:title "Open Pulse Ontology - Provenance" ;
+    owl:versionInfo "v3.0.0-develop"^^xsd:string .
+
+# ---------------------------------------------------------
 # PROVENANCE SCHEMA (graph:prov)
 #
 # Not SHACL-shaped, deliberately. Winner-links are recorded as RDF-star
@@ -1992,6 +2002,16 @@ pulse:extractionSeed
     skos:prefLabel "extraction seed" ;
     skos:definition "One of the seed identifiers (e.g. a repository handle) an ExtractionRun was started from. Multi-valued — a run typically has many." ;
     rdfs:comment "pulse:Run1 pulse:extractionSeed \"owner/repo1\" , \"owner/repo2\" ." .
+
+# ---------------------------------------------------------
+# ONTOLOGY HEADER
+# ---------------------------------------------------------
+
+<https://open-pulse.epfl.ch/ontology/raw#> a owl:Ontology ;
+    dct:abstract "The raw substrate of the Open Pulse Ontology: data as extractors emit it, pre-unification, one PlatformProfile per source. Shares its vocabulary with the canonical ontology (see <https://open-pulse.epfl.ch/ontology#>) but is combined and validated as its own document." ;
+    dct:license <https://spdx.org/licenses/CC-BY-4.0.html> ;
+    dct:title "Open Pulse Ontology - Raw" ;
+    owl:versionInfo "v3.0.0-develop"^^xsd:string .
 
 # ---------------------------------------------------------
 # VERBOSE CLASS & PROPERTY SECTION

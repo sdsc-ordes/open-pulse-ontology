@@ -24,9 +24,14 @@ jobs:
           CLEAN=$(echo "$CURRENT" | sed 's/-.*//')
           if [[ ! "$CLEAN" =~ ^v ]]; then CLEAN="v$CLEAN"; fi
 
-          # owl:versionInfo lives in src/ontology/ontology-definitions-canonical.ttl (source of truth);
-          # ontology-combined-canonical.ttl is generated from it further down.
-          sed -i "s|owl:versionInfo \"v\?$CURRENT\"|owl:versionInfo \"$CLEAN\"|" src/ontology/ontology-definitions-canonical.ttl
+          # ontology-definitions-canonical.ttl is the source of truth; raw and provenance
+          # each carry their own owl:Ontology header but are versioned in lockstep with it,
+          # since all three are released together (see CONTRIBUTING.md Section 0).
+          # ontology-combined-*.ttl are generated from these further down.
+          sed -i "s|owl:versionInfo \"v\?$CURRENT\"|owl:versionInfo \"$CLEAN\"|" \
+            src/ontology/ontology-definitions-canonical.ttl \
+            src/ontology/ontology-definitions-raw.ttl \
+            src/ontology/ontology-definitions-provenance.ttl
           echo "clean_version=$CLEAN" >> $GITHUB_OUTPUT
 
       - name: Install uv

@@ -6,6 +6,17 @@
 @prefix prov:   <http://www.w3.org/ns/prov#> .
 @prefix schema: <http://schema.org/> .
 @prefix pulse:  <https://open-pulse.epfl.ch/ontology#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+
+# ---------------------------------------------------------
+# ONTOLOGY HEADER
+# ---------------------------------------------------------
+
+<https://open-pulse.epfl.ch/ontology/provenance#> a owl:Ontology ;
+    dct:abstract "The provenance layer of the Open Pulse Ontology: for a canonical triple, which platform-specific extraction it was derived from. Shares its vocabulary with the canonical ontology (see <https://open-pulse.epfl.ch/ontology#>) but is combined and validated as its own document." ;
+    dct:license <https://spdx.org/licenses/CC-BY-4.0.html> ;
+    dct:title "Open Pulse Ontology - Provenance" ;
+    owl:versionInfo "v3.0.0-develop"^^xsd:string .
 
 # ---------------------------------------------------------
 # PROVENANCE SCHEMA (graph:prov)
