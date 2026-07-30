@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "e8fcceb",
+          "date": "2026-07-30",
+          "author": "rmfranken",
+          "message": "chore: spelling mistake"
+        },
+        {
           "hash": "c88796b",
           "date": "2026-07-30",
           "author": "rmfranken",
