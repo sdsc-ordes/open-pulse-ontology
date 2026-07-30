@@ -21,6 +21,14 @@ pulse:NameShape
     sh:datatype xsd:string ;
     sh:minCount 1 .
 
+pulse:DescriptionShape
+    a sh:PropertyShape ;
+    sh:path schema:description ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:name "Description" ;
+    sh:description "A short free-text description of the item." .
+
 pulse:EmailShape
     a sh:PropertyShape ;
     sh:path schema:email ;
@@ -478,13 +486,7 @@ pulse:ProjectShape
     sh:closed true ;
     sh:ignoredProperties ( rdf:type owl:sameAs ) ;
     sh:property pulse:NameShape ;
-    sh:property [
-        sh:path schema:description ;
-        sh:datatype xsd:string ;
-        sh:maxCount 1 ;
-        sh:name "Description" ;
-        sh:description "A short description of the project's aim."
-    ] ;
+    sh:property pulse:DescriptionShape ;
     sh:property pulse:UrlShape ;
     sh:property [
         sh:path pulse:projectOutput ;
