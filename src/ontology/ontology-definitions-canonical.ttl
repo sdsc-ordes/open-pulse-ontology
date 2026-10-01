@@ -90,6 +90,7 @@ pulse:hasProfile a rdf:Property ; skos:prefLabel "has profile" ; skos:definition
 pulse:profileOf a rdf:Property ; skos:prefLabel "profile of" ; skos:definition "Links a platform profile back to the Person it belongs to." .
 pulse:hasOrganizationProfile a rdf:Property ; skos:prefLabel "has organization profile" ; skos:definition "Links an Organization to a platform profile (external account/identity) it holds." .
 pulse:organizationProfileOf a rdf:Property ; skos:prefLabel "organization profile of" ; skos:definition "Links a platform profile back to the Organization it belongs to." .
+pulse:platformInstance a rdf:Property ; rdfs:range xsd:anyURI ; skos:prefLabel "platform instance" ; skos:definition "Base URI of the specific platform deployment this profile lives on, for self-hosted platforms (e.g. https://gitlab.epfl.ch). Absent means the platform's canonical public instance. Without it, pulse:platform plus a handle is ambiguous across deployments of the same software: 'epfl' on gitlab.epfl.ch and on gitlab.com would collapse into one profile." .
 pulse:platform a rdf:Property ; rdfs:range pulse:PlatformEnumeration ; skos:prefLabel "platform" ; skos:definition "The external platform associated with this resource (e.g. the platform a PlatformProfile/OrganizationProfile exists on, or the platform hosting a repository)." .
 
 # Project properties

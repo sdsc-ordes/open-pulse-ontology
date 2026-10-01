@@ -136,6 +136,7 @@ pulse:RawPlatformProfileShape
     sh:property [ sh:path schema:url ; sh:nodeKind sh:IRI ; sh:name "URL" ] ;
     sh:property [ sh:path pulse:platformUsername ; sh:datatype xsd:string ; sh:name "Platform Username" ] ;
     sh:property [ sh:path pulse:platformInternalId ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Platform Internal ID" ] ;
+    sh:property [ sh:path pulse:platformInstance ; sh:nodeKind sh:IRI ; sh:maxCount 1 ; sh:name "Platform Instance" ] ;
     sh:property [ sh:path pulse:platformNodeId ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Platform Node ID" ] ;
     sh:property [ sh:path pulse:biography ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Bio" ] ;
     sh:property [ sh:path schema:image ; sh:nodeKind sh:IRI ; sh:maxCount 1 ; sh:name "Image" ] ;
@@ -165,6 +166,7 @@ pulse:RawOrganizationProfileShape
     sh:property [ sh:path schema:name ; sh:datatype xsd:string ; sh:name "Display Name" ] ;
     sh:property [ sh:path schema:url ; sh:nodeKind sh:IRI ; sh:name "URL" ] ;
     sh:property [ sh:path pulse:platformInternalId ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Platform Internal ID" ] ;
+    sh:property [ sh:path pulse:platformInstance ; sh:nodeKind sh:IRI ; sh:maxCount 1 ; sh:name "Platform Instance" ] ;
     sh:property [ sh:path schema:description ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Description" ] ;
     sh:property [ sh:path pulse:location ; sh:datatype xsd:string ; sh:maxCount 1 ; sh:name "Location" ] ;
     sh:property [ sh:path pulse:followerCount ; sh:datatype xsd:integer ; sh:maxCount 1 ; sh:name "Followers" ] ;
