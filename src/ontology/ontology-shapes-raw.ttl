@@ -276,7 +276,7 @@ pulse:RawArticleShape
     a sh:NodeShape ;
     sh:targetClass schema:ScholarlyArticle ;
     sh:closed true ;
-    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:ignoredProperties ( rdf:type owl:sameAs schema:identifier ) ;
     sh:property [ sh:path schema:name ; sh:datatype xsd:string ] ;
     sh:property [
         sh:path pulse:doi ;
