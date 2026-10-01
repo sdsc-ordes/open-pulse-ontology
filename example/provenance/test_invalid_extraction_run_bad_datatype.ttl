@@ -1,0 +1,8 @@
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+# INVALID EXTRACTION RUN - Should FAIL (prov:startedAtTime must be
+# xsd:dateTime, not a bare string)
+
+pulse:BadRun a pulse:ExtractionRun ;
+    prov:startedAtTime "not-a-timestamp" .

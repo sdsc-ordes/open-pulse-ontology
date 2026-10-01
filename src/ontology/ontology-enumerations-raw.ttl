@@ -1,0 +1,81 @@
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix time:   <http://www.w3.org/2006/time#> .
+@prefix pulse:  <https://open-pulse.epfl.ch/ontology#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix coar-resource: <http://purl.org/coar/resource_type/> .
+
+# ---------------------------------------------------------
+# VERBOSE ENUMERATIONS SECTION
+# ---------------------------------------------------------
+
+# Enumeration Classes
+pulse:VisibilityEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Visibility Enumeration" ; skos:definition "Enumeration of repository visibility levels." .
+pulse:ModalityEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Modality Enumeration" ; skos:definition "Enumeration of data modalities covered by a dataset." .
+pulse:SpaceSdkEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Space SDK Enumeration" ; skos:definition "Enumeration of SDKs a Hugging Face Space can be built with." .
+pulse:SpaceRuntimeStatusEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Space Runtime Status Enumeration" ; skos:definition "Enumeration of runtime statuses a Hugging Face Space can be in." .
+pulse:MembershipTypeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Membership Type Enumeration" ; skos:definition "Enumeration of the kinds of affiliation an org:Membership can represent." .
+pulse:IdentifierSchemeEnumeration a rdfs:Class ; rdfs:subClassOf schema:Enumeration ; skos:prefLabel "Identifier Scheme Enumeration" ; skos:definition "Enumeration of external identifier registries/schemes." .
+
+# Enumeration Instances - Visibility
+pulse:PublicVisibility a pulse:VisibilityEnumeration ; skos:prefLabel "Public"@en ; skos:definition "The repository is visible to anyone."@en .
+pulse:PrivateVisibility a pulse:VisibilityEnumeration ; skos:prefLabel "Private"@en ; skos:definition "The repository is visible only to explicitly granted users."@en .
+pulse:InternalVisibility a pulse:VisibilityEnumeration ; skos:prefLabel "Internal"@en ; skos:definition "The repository is visible to all members of the owning organization."@en .
+
+# Enumeration Instances - Modality
+pulse:TextModality a pulse:ModalityEnumeration ; skos:prefLabel "Text"@en ; skos:definition "The dataset consists primarily of text."@en .
+pulse:ImageModality a pulse:ModalityEnumeration ; skos:prefLabel "Image"@en ; skos:definition "The dataset consists primarily of images."@en .
+pulse:AudioModality a pulse:ModalityEnumeration ; skos:prefLabel "Audio"@en ; skos:definition "The dataset consists primarily of audio."@en .
+pulse:VideoModality a pulse:ModalityEnumeration ; skos:prefLabel "Video"@en ; skos:definition "The dataset consists primarily of video."@en .
+pulse:TabularModality a pulse:ModalityEnumeration ; skos:prefLabel "Tabular"@en ; skos:definition "The dataset consists primarily of tabular/structured data."@en .
+pulse:MultimodalModality a pulse:ModalityEnumeration ; skos:prefLabel "Multimodal"@en ; skos:definition "The dataset combines more than one modality."@en .
+
+# Enumeration Instances - Space SDK
+pulse:Gradio a pulse:SpaceSdkEnumeration ; skos:prefLabel "Gradio"@en ; skos:definition "The Space is built with the Gradio SDK."@en .
+pulse:Streamlit a pulse:SpaceSdkEnumeration ; skos:prefLabel "Streamlit"@en ; skos:definition "The Space is built with the Streamlit SDK."@en .
+pulse:DockerSdk a pulse:SpaceSdkEnumeration ; skos:prefLabel "Docker"@en ; skos:definition "The Space is built from a custom Docker image."@en .
+pulse:StaticSdk a pulse:SpaceSdkEnumeration ; skos:prefLabel "Static"@en ; skos:definition "The Space serves static files with no server-side runtime."@en .
+
+# Enumeration Instances - Space Runtime Status
+pulse:RunningStatus a pulse:SpaceRuntimeStatusEnumeration ; skos:prefLabel "Running"@en ; skos:definition "The Space is currently running."@en .
+pulse:SleepingStatus a pulse:SpaceRuntimeStatusEnumeration ; skos:prefLabel "Sleeping"@en ; skos:definition "The Space is paused due to inactivity."@en .
+pulse:BuildingStatus a pulse:SpaceRuntimeStatusEnumeration ; skos:prefLabel "Building"@en ; skos:definition "The Space is currently being built."@en .
+pulse:RuntimeErrorStatus a pulse:SpaceRuntimeStatusEnumeration ; skos:prefLabel "Error"@en ; skos:definition "The Space failed to build or run."@en .
+pulse:PausedStatus a pulse:SpaceRuntimeStatusEnumeration ; skos:prefLabel "Paused"@en ; skos:definition "The Space has been manually paused by its owner."@en .
+
+# Enumeration Instances - Membership Type
+pulse:Employment a pulse:MembershipTypeEnumeration ; skos:prefLabel "Employment"@en ; skos:definition "A paid employment affiliation (e.g. an ORCID Employment entry)."@en .
+pulse:Education a pulse:MembershipTypeEnumeration ; skos:prefLabel "Education"@en ; skos:definition "An education/training affiliation (e.g. an ORCID Education entry)."@en .
+pulse:SocietyMembership a pulse:MembershipTypeEnumeration ; skos:prefLabel "Society Membership"@en ; skos:definition "A professional society or association membership (e.g. an ORCID Membership entry)."@en .
+
+# Enumeration Instances - Identifier Scheme
+pulse:arXiv a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "arXiv"@en ; skos:definition "The arXiv preprint identifier scheme."@en .
+pulse:Scopus a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "Scopus"@en ; skos:definition "The Scopus Author ID scheme."@en .
+pulse:ResearcherId a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ResearcherID"@en ; skos:definition "The Web of Science ResearcherID scheme."@en .
+pulse:ISBN a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISBN"@en ; skos:definition "The International Standard Book Number scheme."@en .
+pulse:ISSN a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISSN"@en ; skos:definition "The International Standard Serial Number scheme."@en .
+pulse:PMID a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "PMID"@en ; skos:definition "The PubMed identifier scheme."@en .
+pulse:OtherIdentifierScheme a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "Other"@en ; skos:definition "An identifier scheme that does not fit into the other categories."@en .
+pulse:Ringgold a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "Ringgold"@en ; skos:definition "The Ringgold Identifier organization registry scheme."@en .
+pulse:GRID a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "GRID"@en ; skos:definition "The Global Research Identifier Database organization scheme (superseded by ROR but still in wide use)."@en .
+pulse:ISNI a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "ISNI"@en ; skos:definition "The International Standard Name Identifier scheme, used for both organizations and people."@en .
+pulse:SWHID a pulse:IdentifierSchemeEnumeration ; skos:prefLabel "SWHID"@en ; skos:definition "The Software Heritage persistent identifier scheme for a repository or a specific artifact within it."@en .
+
+# Additional Enumeration Instances - Publication Types (broadens core to cover Zenodo's non-article upload types)
+# Only Software/Dataset have a verified COAR skos:exactMatch; the rest are unaligned
+# pending manual confirmation against the current vocabulary.
+pulse:SoftwarePublication a pulse:PublicationTypeEnumeration ; skos:prefLabel "Software"@en ; skos:definition "A software deposit (e.g. a Zenodo software upload)."@en ; skos:exactMatch coar-resource:c_5ce6 .
+pulse:DatasetPublication a pulse:PublicationTypeEnumeration ; skos:prefLabel "Dataset"@en ; skos:definition "A dataset deposit (e.g. a Zenodo dataset upload)."@en ; skos:exactMatch coar-resource:c_ddb1 .
+pulse:Poster a pulse:PublicationTypeEnumeration ; skos:prefLabel "Poster"@en ; skos:definition "A conference or research poster."@en .
+pulse:Presentation a pulse:PublicationTypeEnumeration ; skos:prefLabel "Presentation"@en ; skos:definition "A slide deck or recorded presentation."@en .
+pulse:Image a pulse:PublicationTypeEnumeration ; skos:prefLabel "Image"@en ; skos:definition "An image or figure deposit."@en .
+pulse:Video a pulse:PublicationTypeEnumeration ; skos:prefLabel "Video"@en ; skos:definition "A video or audiovisual deposit."@en .
+pulse:Workflow a pulse:PublicationTypeEnumeration ; skos:prefLabel "Workflow"@en ; skos:definition "A computational workflow deposit."@en .
+pulse:PhysicalObject a pulse:PublicationTypeEnumeration ; skos:prefLabel "Physical Object"@en ; skos:definition "A physical object deposit (e.g. a 3D-printable design)."@en .

@@ -1,0 +1,84 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+pulse:Zenodo a pulse:PlatformEnumeration .
+pulse:OpenAccess a pulse:AccessRightEnumeration .
+pulse:SoftwarePublication a pulse:PublicationTypeEnumeration .
+pulse:arXiv a pulse:IdentifierSchemeEnumeration .
+wd:Q2374463 a pulse:DisciplineEnumeration .
+
+# VALID - verbose ArticleShape additions, covering a Zenodo Record, a Hugging
+# Face Paper, and an ORCID Work at once (all reuse schema:ScholarlyArticle).
+
+pulse:RecordCreator a schema:Person ;
+    schema:name "Record Creator" ;
+    pulse:orcidIdentifier "0000-0003-3333-4444" ;
+    pulse:hasProfile pulse:RecordCreatorZenodoProfile .
+
+pulse:RecordCreatorZenodoProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:Zenodo ;
+    pulse:platformUsername "recordcreator" .
+
+pulse:RecordContributor a schema:Person ;
+    schema:name "Record Contributor" ;
+    pulse:orcidIdentifier "0000-0003-5555-6666" ;
+    pulse:hasProfile pulse:RecordContributorZenodoProfile .
+
+pulse:RecordContributorZenodoProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:Zenodo ;
+    pulse:platformUsername "recordcontributor" .
+
+pulse:FunderOrg a org:Organization ;
+    schema:name "Swiss National Science Foundation" ;
+    pulse:ror "https://ror.org/00yjd3n13" .
+
+pulse:VerbosePriorWork a schema:ScholarlyArticle ;
+    schema:name "Earlier Work On Verbose Ontologies" ;
+    schema:author pulse:RecordCreator ;
+    pulse:doi "10.5281/zenodo.1111111" ;
+    pulse:hasDeposit pulse:VerbosePriorWorkDeposit .
+
+pulse:VerbosePriorWorkDeposit a pulse:Deposit ;
+    pulse:platform pulse:Zenodo ;
+    schema:datePublished "2023-01-15"^^xsd:date .
+
+pulse:VerboseZenodoRecord a schema:ScholarlyArticle ;
+    schema:name "A Verbose Ontology for Research Software Metadata" ;
+    schema:author pulse:RecordCreator ;
+    pulse:doi "10.5281/zenodo.1234567" ;
+    pulse:hasDeposit pulse:VerboseZenodoRecordDeposit ;
+    pulse:conceptDoi "10.5281/zenodo.1234566" ;
+    pulse:version "2.0.0" ;
+    schema:description "Describes a verbose extension to the Open Pulse Ontology." ;
+    pulse:keyword "ontology" , "research software" ;
+    pulse:discipline wd:Q2374463 ;
+    schema:license <https://spdx.org/licenses/CC-BY-4.0.html> ;
+    pulse:contributor pulse:RecordContributor ;
+    schema:funder pulse:FunderOrg ;
+    pulse:hasExternalIdentifier pulse:VerboseRecordArxivId ;
+    pulse:references pulse:VerbosePriorWork ;
+    pulse:fileCount 3 ;
+    schema:dateCreated "2026-04-20T00:00:00"^^xsd:dateTime ;
+    schema:dateModified "2026-05-01T00:00:00"^^xsd:dateTime ;
+    pulse:memberOfCommunity pulse:VerboseCommunity .
+
+pulse:VerboseZenodoRecordDeposit a pulse:Deposit ;
+    pulse:platform pulse:Zenodo ;
+    pulse:platformInternalId "1234567" ;
+    schema:datePublished "2026-05-01"^^xsd:date ;
+    pulse:accessRight pulse:OpenAccess ;
+    pulse:publicationType pulse:SoftwarePublication .
+
+pulse:VerboseRecordArxivId a pulse:ExternalIdentifier ;
+    pulse:identifierScheme pulse:arXiv ;
+    schema:identifier "2605.01234" .
+
+pulse:VerboseCommunity a pulse:Community ;
+    schema:name "Research Software Engineering" ;
+    schema:description "A community for research software metadata." ;
+    schema:url <https://zenodo.org/communities/rse> ;
+    schema:image <https://zenodo.org/communities/rse/logo.png> ;
+    pulse:curator pulse:RecordCreator ;
+    schema:member pulse:RecordCreator , pulse:RecordContributor .

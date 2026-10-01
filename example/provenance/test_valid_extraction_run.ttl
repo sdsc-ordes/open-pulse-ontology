@@ -1,0 +1,19 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# VALID - a plain ExtractionRun, the one part of graph:prov that's an
+# ordinary RDF resource (not an RDF-star annotation) and so is
+# SHACL-shapeable. Includes its seed list and the tool version that
+# ran it, as its own shared SoftwareAgent resource.
+
+pulse:Run2026W01 a pulse:ExtractionRun ;
+    prov:startedAtTime "2026-01-05T02:00:00"^^xsd:dateTime ;
+    prov:endedAtTime "2026-01-05T02:14:00"^^xsd:dateTime ;
+    pulse:extractionSeed "sdsc-ordes/open-pulse-ontology" , "org/other-repo" ;
+    pulse:extractedBy pulse:GitMetadataExtractor2_3_1 .
+
+pulse:GitMetadataExtractor2_3_1 a prov:SoftwareAgent ;
+    schema:name "git-metadata-extractor" ;
+    schema:softwareVersion "2.3.1" .

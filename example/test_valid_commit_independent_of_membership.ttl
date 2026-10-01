@@ -7,6 +7,7 @@
 pulse:Software a pulse:RepositoryTypeEnumeration .
 wd:Q395 a pulse:DisciplineEnumeration .
 pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # VALID TEMPORAL ALIGNMENT - Should PASS validation
 # Membership interval is independent of commit timing
@@ -14,7 +15,8 @@ pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
 pulse:InvalidTemporalRepo a schema:SoftwareSourceCode ;
     schema:name "Temporal Misaligned Repo" ;
     schema:dateCreated "2024-02-01T08:00:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "epfl/temporal-misaligned" ;
+    pulse:repositoryHandle "epfl/temporal-misaligned" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.temporal> ;
     schema:programmingLanguage "Scala" ;
@@ -27,10 +29,14 @@ pulse:InvalidTemporalRepo a schema:SoftwareSourceCode ;
 
 pulse:TemporalAuthor a schema:Person ;
     schema:name "Alex Temporal" ;
-    schema:email "alex.temporal@epfl.ch" ;
-    pulse:githubUsername "alextemporal" ;
     pulse:orcidIdentifier "0000-0001-8888-9999" ;
+    pulse:hasProfile pulse:TemporalAuthorGitHubProfile ;
     org:hasMembership pulse:BrokenMembership .
+
+pulse:TemporalAuthorGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:platformUsername "alextemporal" ;
+    schema:email "alex.temporal@epfl.ch" .
 
 pulse:BrokenMembership a org:Membership ;
     org:organization pulse:TemporalLab ;
@@ -40,7 +46,11 @@ pulse:BrokenMembership a org:Membership ;
 
 pulse:TemporalLab a org:Organization ;
     schema:name "EPFL Temporal Lab" ;
-    schema:identifier "https://ror.org/02s376052" ;
-    pulse:githubOrganizationHandle "DeepLabCut" ;
-    pulse:OrganizationType pulse:ResearchInstitution ;
+    pulse:ror "https://ror.org/02s376052" ;
+    pulse:hasOrganizationProfile pulse:TemporalLabGitHubProfile ;
+    pulse:organizationType pulse:ResearchInstitution ;
     pulse:owns pulse:InvalidTemporalRepo .
+
+pulse:TemporalLabGitHubProfile a pulse:OrganizationProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:organizationHandle "DeepLabCut" .

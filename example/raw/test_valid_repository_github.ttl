@@ -1,0 +1,63 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+pulse:GitHub a pulse:PlatformEnumeration .
+pulse:PublicVisibility a pulse:VisibilityEnumeration .
+pulse:SWHID a pulse:IdentifierSchemeEnumeration .
+
+# VALID - verbose RepositoryShape additions for a GitHub-flavored repository.
+
+pulse:VerboseRepoAuthor a schema:Person ;
+    schema:name "Repo Author" ;
+    pulse:orcidIdentifier "0000-0002-1111-2222" ;
+    pulse:hasProfile pulse:VerboseRepoAuthorGitHubProfile .
+
+pulse:VerboseRepoAuthorGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:platformUsername "verboserepoauthor" .
+
+pulse:OtherDependencyRepo a schema:SoftwareSourceCode ;
+    schema:name "utility-lib" ;
+    schema:dateCreated "2020-01-01T00:00:00"^^xsd:dateTime ;
+    pulse:repositoryHandle "verbose-systems-lab/utility-lib" ;
+    pulse:platform pulse:GitHub ;
+    schema:author pulse:VerboseRepoAuthor .
+
+pulse:VerboseRepo a schema:SoftwareSourceCode ;
+    schema:name "verbose-ontology-demo" ;
+    schema:dateCreated "2021-06-15T09:00:00"^^xsd:dateTime ;
+    pulse:repositoryHandle "verbose-systems-lab/verbose-ontology-demo" ;
+    pulse:platform pulse:GitHub ;
+    schema:author pulse:VerboseRepoAuthor ;
+    pulse:platformInternalId "789456123" ;
+    pulse:platformNodeId "R_kgDOAbCdEf" ;
+    schema:description "A demo repository exercising the verbose ontology." ;
+    pulse:tag "ontology" , "rdf" , "shacl" ;
+    schema:url <https://verbose-ontology-demo.example.org> ;
+    pulse:visibility pulse:PublicVisibility ;
+    pulse:archived false ;
+    pulse:isTemplate false ;
+    pulse:defaultBranch "main" ;
+    pulse:watcherCount 12 ;
+    pulse:openIssueCount 3 ;
+    pulse:hasDiscussions true ;
+    pulse:hasWiki false ;
+    pulse:hasPages true ;
+    pulse:releaseCount 9 ;
+    pulse:gitTagCount 9 ;
+    pulse:branchCount 4 ;
+    pulse:readme <https://github.com/verbose-systems-lab/verbose-ontology-demo/blob/main/README.md> ;
+    pulse:fundingConfig <https://github.com/verbose-systems-lab/verbose-ontology-demo/blob/main/.github/FUNDING.yml> ;
+    pulse:publicCodeManifest <https://github.com/verbose-systems-lab/verbose-ontology-demo/blob/main/publiccode.yml> ;
+    pulse:securityPolicy <https://github.com/verbose-systems-lab/verbose-ontology-demo/blob/main/SECURITY.md> ;
+    pulse:codeOfConduct <https://github.com/verbose-systems-lab/verbose-ontology-demo/blob/main/CODE_OF_CONDUCT.md> ;
+    pulse:dependencyCount 6 ;
+    pulse:dependentCount 2 ;
+    pulse:dependsOn pulse:OtherDependencyRepo ;
+    pulse:pushedDate "2026-07-10T18:22:00"^^xsd:dateTime ;
+    schema:dateModified "2026-07-10T18:22:00"^^xsd:dateTime ;
+    pulse:hasExternalIdentifier pulse:VerboseRepoSwhid .
+
+pulse:VerboseRepoSwhid a pulse:ExternalIdentifier ;
+    pulse:identifierScheme pulse:SWHID ;
+    schema:identifier "swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505" .

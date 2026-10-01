@@ -3,6 +3,7 @@
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # INVALID MEMBERSHIP - Should FAIL validation
 # End date is before start date, time:hasBeginning has sh:lessThanOrEqual time:hasEnd
@@ -10,17 +11,22 @@
 pulse:InvalidMembershipRepo a schema:SoftwareSourceCode ;
     schema:name "Invalid Membership Test" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "example/invalid-membership" ;
+    pulse:repositoryHandle "example/invalid-membership" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.citation> ;
     schema:author pulse:PersonWithInvalidMembership .
 
 pulse:PersonWithInvalidMembership a schema:Person ;
     schema:name "Charlie Brown" ;
-    schema:email "charlie@example.com" ;
-    pulse:githubUsername "charliebrown" ;
     pulse:orcidIdentifier "0000-0005-6789-0123" ;
+    pulse:hasProfile pulse:CharlieBrownGitHubProfile ;
     org:hasMembership pulse:InvalidMembership .
+
+pulse:CharlieBrownGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:platformUsername "charliebrown" ;
+    schema:email "charlie@example.com" .
 
 pulse:InvalidMembership a org:Membership ;
     org:organization pulse:SomeOrg ;
@@ -30,5 +36,9 @@ pulse:InvalidMembership a org:Membership ;
 
 pulse:SomeOrg a org:Organization ;
     schema:name "Some Organization" ;
-    schema:identifier "https://ror.org/987654321" ;
-    pulse:githubOrganizationHandle "someorg" .
+    pulse:ror "https://ror.org/987654321" ;
+    pulse:hasOrganizationProfile pulse:SomeOrgGitHubProfile .
+
+pulse:SomeOrgGitHubProfile a pulse:OrganizationProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:organizationHandle "someorg" .

@@ -7,6 +7,8 @@
 wd:Q2329 a pulse:DisciplineEnumeration .
 pulse:Software a pulse:RepositoryTypeEnumeration .
 pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
+pulse:Infoscience a pulse:PlatformEnumeration .
 
 # VALID COMPLETE REPOSITORY - Should PASS validation
 # This is a comprehensive example with all optional properties correctly set
@@ -14,12 +16,13 @@ pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
 pulse:CompleteRepo a schema:SoftwareSourceCode ;
     schema:name "Complete Research Software" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "epfl/research-software" ;
+    pulse:repositoryHandle "epfl/research-software" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/BSD-3-Clause.html> ;
     schema:citation <https://doi.org/10.5281/zenodo.1234567> ;
     schema:programmingLanguage "Python" ;
-    pulse:githubRepoStars "128"^^xsd:integer ;
-    pulse:githubRepoForks "14"^^xsd:integer ;
+    pulse:repositoryStars "128"^^xsd:integer ;
+    pulse:repositoryForks "14"^^xsd:integer ;
     schema:author pulse:LeadResearcher ;
     pulse:ownedBy pulse:EPFLLab ;
     pulse:repositoryType pulse:Software ;
@@ -27,13 +30,24 @@ pulse:CompleteRepo a schema:SoftwareSourceCode ;
 
 pulse:LeadResearcher a schema:Person ;
     schema:name "Dr. Sarah Smith" ;
-    schema:email "sarah.smith@epfl.ch" ;
-    pulse:githubUsername "sarahsmith" ;
-    pulse:infosciencePersonIdentifier "sarah.smith" ;
     pulse:orcidIdentifier "0000-0001-5109-3700" ;
-    schema:url <https://people.epfl.ch/sarah.smith> ;
+    pulse:hasProfile pulse:SarahGitHubProfile , pulse:SarahInfoscienceProfile ;
     pulse:hasContribution pulse:SarahContribution ;
     org:hasMembership pulse:Membership1 .
+
+pulse:SarahGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:profileOf pulse:LeadResearcher ;
+    schema:name "sarahsmith" ;
+    pulse:platformUsername "sarahsmith" .
+
+pulse:SarahInfoscienceProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:Infoscience ;
+    pulse:profileOf pulse:LeadResearcher ;
+    schema:name "Smith, Sarah" ;
+    pulse:platformUsername "sarah.smith" ;
+    schema:email "sarah.smith@epfl.ch" ;
+    schema:url <https://people.epfl.ch/sarah.smith> .
 
 pulse:SarahContribution a pulse:Contribution ;
     schema:author pulse:LeadResearcher ;
@@ -50,8 +64,11 @@ pulse:Membership1 a org:Membership ;
 
 pulse:EPFLLab a org:Organization ;
     schema:name "EPFL Computational Lab" ;
-    schema:identifier "https://ror.org/02s376052" ;
-    pulse:githubOrganizationHandle "DeepLabCut" ;
-    pulse:OrganizationType pulse:ResearchInstitution ;
-    pulse:githubOrgFollowers "320"^^xsd:integer ;
+    pulse:ror "https://ror.org/02s376052" ;
+    pulse:hasOrganizationProfile pulse:EPFLLabGitHubProfile ;
+    pulse:organizationType pulse:ResearchInstitution ;
     pulse:owns pulse:CompleteRepo .
+
+pulse:EPFLLabGitHubProfile a pulse:OrganizationProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:organizationHandle "DeepLabCut" .

@@ -1,0 +1,18 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+pulse:Software a pulse:RepositoryTypeEnumeration .
+
+# INVALID REPOSITORY - Should FAIL validation
+# Missing required pulse:platform (minCount 1) on the Repository
+
+pulse:RepoMissingPlatform a schema:SoftwareSourceCode ;
+    schema:name "Repository Without Platform" ;
+    schema:dateCreated "2024-05-01T09:00:00"^^xsd:dateTime ;
+    pulse:repositoryHandle "some-org/some-repo" ;
+    schema:author pulse:PlatformlessRepoAuthor ;
+    pulse:repositoryType pulse:Software .
+
+pulse:PlatformlessRepoAuthor a schema:Person ;
+    schema:name "Quinn Author" ;
+    pulse:orcidIdentifier "0000-0006-1234-5678" .

@@ -1,32 +1,60 @@
-@prefix pulse:     <https://open-pulse.epfl.ch/ontology#> .
+@prefix pulse:  <https://open-pulse.epfl.ch/ontology#> .
 @prefix schema: <http://schema.org/> .
 @prefix org:    <http://www.w3.org/ns/org#> .
 @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
-@prefix pulse:  <https://open-pulse.epfl.ch/ontology#> .
 @prefix time:   <http://www.w3.org/2006/time#> .
 @prefix wd:     <http://www.wikidata.org/entity/> .
 
 pulse:Software a pulse:RepositoryTypeEnumeration .
 wd:Q395 a pulse:DisciplineEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
+pulse:Infoscience a pulse:PlatformEnumeration .
 
+# The Person is a thin "real-world individual" anchor:
+# preferred name + cross-platform ORCID + links to platform profiles.
 pulse:Alice a schema:Person ;
-    schema:name "Alice" ;
-    schema:email "alice@epfl.ch" ;
-    pulse:githubUsername "alice-dev" ;
+    schema:name "Alice Müller" ;
     pulse:orcidIdentifier "0000-0001-2345-6789" ;
+    pulse:hasProfile pulse:AliceGitHubProfile , pulse:AliceInfoscienceProfile ;
     pulse:hasContribution pulse:AliceRenkuContribution ;
     org:hasMembership pulse:AliceEPFLMembership , pulse:AliceSDSCMembership .
 
+# GitHub identity: display handle + noreply email (note the '+' — allowed by
+# pulse:ProfileEmailShape).
+pulse:AliceGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:profileOf pulse:Alice ;
+    schema:name "alice-dev" ;
+    pulse:platformUsername "alice-dev" ;
+    schema:email "1024+alice-dev@users.noreply.github.com" ;
+    schema:url <https://github.com/alice-dev> .
+
+# Infoscience identity: a different display name form and the institutional email.
+pulse:AliceInfoscienceProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:Infoscience ;
+    pulse:profileOf pulse:Alice ;
+    schema:name "Müller, Alice" ;
+    schema:email "alice@epfl.ch" ;
+    pulse:platformUsername "550e8400-e29b-41d4-a716-446655440000" .
+
 pulse:EPFL a org:Organization ;
     schema:name "EPFL" ;
-    schema:identifier "https://ror.org/02aj6n233" ;
-    pulse:githubOrganizationHandle "epfl" .
+    pulse:ror "https://ror.org/02aj6n233" ;
+    pulse:hasOrganizationProfile pulse:EPFLGitHubProfile .
+
+pulse:EPFLGitHubProfile a pulse:OrganizationProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:organizationHandle "epfl" .
 
 pulse:SDSC a org:Organization ;
     schema:name "Swiss Data Science Center" ;
-    schema:identifier "https://ror.org/03v8tnc06" ;
-    pulse:githubOrganizationHandle "swissdatasciencecenter" ;
+    pulse:ror "https://ror.org/03v8tnc06" ;
+    pulse:hasOrganizationProfile pulse:SDSCGitHubProfile ;
     pulse:owns pulse:RenkuRepo .
+
+pulse:SDSCGitHubProfile a pulse:OrganizationProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:organizationHandle "swissdatasciencecenter" .
 
 pulse:AliceEPFLMembership a org:Membership ;
     org:organization pulse:EPFL ;
@@ -41,11 +69,12 @@ pulse:AliceSDSCMembership a org:Membership ;
 pulse:RenkuRepo a schema:SoftwareSourceCode ;
     schema:name "Renku" ;
     schema:dateCreated "2024-05-13T10:00:00Z"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "swissdatasciencecenter/renku" ;
+    pulse:repositoryHandle "swissdatasciencecenter/renku" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/Apache-2.0.html> ;
     schema:author pulse:Alice ;
     pulse:ownedBy pulse:SDSC ;
-    pulse:repositoryType pulse:Software ; 
+    pulse:repositoryType pulse:Software ;
     pulse:discipline wd:Q395 ;
     schema:programmingLanguage "Python" .
 
@@ -56,3 +85,14 @@ pulse:AliceRenkuContribution a pulse:Contribution ;
     pulse:firstContributionDate "2026-01-10T14:30:00Z"^^xsd:dateTime ;
     pulse:lastContributionDate "2026-01-12T09:15:00Z"^^xsd:dateTime .
 
+# A research project ties people, outputs, host org and funding period together.
+pulse:RenkuProject a schema:Project ;
+    schema:name "Renku: Reproducible Data Science" ;
+    schema:description "Research project building a platform for reproducible and collaborative data science." ;
+    schema:url <https://renkulab.io> ;
+    schema:member pulse:Alice ;
+    schema:sourceOrganization pulse:SDSC ;
+    schema:funder pulse:EPFL ;
+    pulse:projectOutput pulse:RenkuRepo ;
+    time:hasBeginning "2023-01-01"^^xsd:date ;
+    time:hasEnd "2026-12-31"^^xsd:date .

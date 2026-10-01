@@ -4,6 +4,7 @@
 @prefix wd: <http://www.wikidata.org/entity/> .
 wd:Q413 a pulse:DisciplineEnumeration .
 pulse:Software a pulse:RepositoryTypeEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # INVALID CONTRIBUTION - Should FAIL validation
 # Missing required contributionCount field (minCount 1)
@@ -11,7 +12,8 @@ pulse:Software a pulse:RepositoryTypeEnumeration .
 pulse:InvalidContributionRepo a schema:SoftwareSourceCode ;
     schema:name "Invalid Contribution Test" ;
     schema:dateCreated "2024-01-15T10:30:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "example/invalid-contrib" ;
+    pulse:repositoryHandle "example/invalid-contrib" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/MIT.html> ;
     schema:citation <https://doi.org/10.1234/example.invalid> ;
     schema:programmingLanguage "JavaScript" ;
@@ -21,10 +23,14 @@ pulse:InvalidContributionRepo a schema:SoftwareSourceCode ;
 
 pulse:ContribAuthor a schema:Person ;
     schema:name "Charlie Contributor" ;
-    schema:email "charlie@example.com" ;
-    pulse:githubUsername "charliec" ;
     pulse:orcidIdentifier "0000-0003-4567-8901" ;
+    pulse:hasProfile pulse:ContribAuthorGitHubProfile ;
     pulse:hasContribution pulse:InvalidContribution .
+
+pulse:ContribAuthorGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:platformUsername "charliec" ;
+    schema:email "charlie@example.com" .
 
 # Invalid: missing contributionCount (required, minCount 1)
 pulse:InvalidContribution a pulse:Contribution ;

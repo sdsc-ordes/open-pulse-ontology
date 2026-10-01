@@ -1,0 +1,17 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# INVALID - pulse:archived must be xsd:boolean, not a string. Should FAIL validation.
+
+pulse:BadArchivedAuthor a schema:Person ;
+    schema:name "Bad Archived Author" ;
+    pulse:orcidIdentifier "0000-0006-3333-4444" .
+
+pulse:BadArchivedRepo a schema:SoftwareSourceCode ;
+    schema:name "bad-archived-repo" ;
+    schema:dateCreated "2024-01-01T00:00:00"^^xsd:dateTime ;
+    pulse:repositoryHandle "example/bad-archived-repo" ;
+    pulse:platform pulse:GitHub ;
+    schema:author pulse:BadArchivedAuthor ;
+    pulse:archived "yes" .

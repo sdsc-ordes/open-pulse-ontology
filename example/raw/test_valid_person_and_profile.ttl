@@ -1,0 +1,42 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+pulse:GitHub a pulse:PlatformEnumeration .
+pulse:Scopus a pulse:IdentifierSchemeEnumeration .
+
+# VALID - verbose PersonShape and PlatformProfileShape additions.
+
+pulse:AdaResearcher a schema:Person ;
+    schema:name "Ada Researcher" ;
+    pulse:orcidIdentifier "0000-0001-2345-6789" ;
+    pulse:biography "Works on distributed systems and open research software." ;
+    pulse:keyword "distributed systems" , "open science" ;
+    pulse:country "Switzerland" ;
+    schema:email "ada.researcher@example.org" ;
+    schema:url <https://ada-researcher.example.org> ;
+    pulse:hasExternalIdentifier pulse:AdaScopusId ;
+    pulse:hasProfile pulse:AdaGitHubProfile .
+
+pulse:AdaScopusId a pulse:ExternalIdentifier ;
+    pulse:identifierScheme pulse:Scopus ;
+    schema:identifier "57200000000" .
+
+pulse:AdaGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:platformUsername "adaresearcher" ;
+    schema:name "Ada Researcher" ;
+    schema:email "ada@users.noreply.github.com" ;
+    schema:url <https://github.com/adaresearcher> ;
+    pulse:platformInternalId "9812345" ;
+    pulse:platformNodeId "MDQ6VXNlcjk4MTIzNDU=" ;
+    pulse:biography "Distributed systems @ EPFL." ;
+    schema:image <https://avatars.githubusercontent.com/u/9812345> ;
+    pulse:location "Lausanne, Switzerland" ;
+    pulse:socialLink <https://mastodon.social/@adaresearcher> , <https://bsky.app/profile/adaresearcher.bsky.social> ;
+    pulse:followerCount 128 ;
+    pulse:followingCount 42 ;
+    pulse:company "EPFL" ;
+    pulse:publicRepositoryCount 37 ;
+    pulse:publicGistCount 5 ;
+    schema:dateCreated "2015-03-04T10:00:00"^^xsd:dateTime ;
+    schema:dateModified "2026-06-01T08:30:00"^^xsd:dateTime .

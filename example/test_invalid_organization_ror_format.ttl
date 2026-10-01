@@ -6,13 +6,15 @@
 pulse:Software a pulse:RepositoryTypeEnumeration .
 pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
 wd:Q8008 a pulse:DisciplineEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # INVALID ROR IDENTIFIER - Should FAIL (does not match https://ror.org/[0-9a-z]{9})
 
 pulse:BadRORRepo a schema:SoftwareSourceCode ;
     schema:name "Bad ROR Repo" ;
     schema:dateCreated "2024-06-20T12:00:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "example/bad-ror" ;
+    pulse:repositoryHandle "example/bad-ror" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/Apache-2.0.html> ;
     schema:citation <https://doi.org/10.1234/example.badror> ;
     schema:author pulse:RORAuthor ;
@@ -22,12 +24,20 @@ pulse:BadRORRepo a schema:SoftwareSourceCode ;
 
 pulse:RORAuthor a schema:Person ;
     schema:name "ROR Test Author" ;
-    schema:email "ror@example.com" ;
-    pulse:githubUsername "rorauthor" ;
-    pulse:orcidIdentifier "0000-0003-1234-5678" .
+    pulse:orcidIdentifier "0000-0003-1234-5678" ;
+    pulse:hasProfile pulse:RORAuthorGitHubProfile .
+
+pulse:RORAuthorGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:platformUsername "rorauthor" ;
+    schema:email "ror@example.com" .
 
 pulse:BadROROrg a org:Organization ;
     schema:name "Org With Bad ROR" ;
-    schema:identifier "https://ror.org/01234" ;  # invalid: only 5 characters, should be 9
-    pulse:githubOrganizationHandle "example-bad-ror" ;
-    pulse:OrganizationType pulse:ResearchInstitution .
+    pulse:ror "https://ror.org/01234" ;  # invalid: only 5 characters, should be 9
+    pulse:hasOrganizationProfile pulse:BadROROrgGitHubProfile ;
+    pulse:organizationType pulse:ResearchInstitution .
+
+pulse:BadROROrgGitHubProfile a pulse:OrganizationProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:organizationHandle "example-bad-ror" .

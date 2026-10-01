@@ -1,0 +1,51 @@
+@prefix schema: <http://schema.org/> .
+@prefix pulse: <https://open-pulse.epfl.ch/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+pulse:OtherIdentifierScheme a pulse:IdentifierSchemeEnumeration .
+pulse:HuggingFace a pulse:PlatformEnumeration .
+pulse:Model a pulse:RepositoryTypeEnumeration .
+pulse:ORCID a pulse:PlatformEnumeration .
+
+# VALID - the new pulse:Funding class and a Person-owned pulse:Collection.
+
+pulse:FundedResearcher a schema:Person ;
+    schema:name "Funded Researcher" ;
+    pulse:orcidIdentifier "0000-0004-7777-8888" ;
+    pulse:hasProfile pulse:FundedResearcherOrcidProfile ;
+    pulse:hasFunding pulse:VerboseGrant ;
+    pulse:ownsCollection pulse:PersonalCollection .
+
+pulse:FundedResearcherOrcidProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:ORCID ;
+    pulse:platformUsername "0000-0004-7777-8888" .
+
+pulse:GrantFunder a org:Organization ;
+    schema:name "Swiss National Science Foundation" ;
+    pulse:ror "https://ror.org/00yjd3n13" .
+
+pulse:VerboseGrant a pulse:Funding ;
+    schema:name "Open Research Software Metadata Infrastructure" ;
+    schema:funder pulse:GrantFunder ;
+    pulse:hasExternalIdentifier pulse:GrantNumber ;
+    time:hasBeginning "2025-01-01"^^xsd:date ;
+    time:hasEnd "2027-12-31"^^xsd:date .
+
+pulse:GrantNumber a pulse:ExternalIdentifier ;
+    pulse:identifierScheme pulse:OtherIdentifierScheme ;
+    schema:identifier "SNSF-200021-987654" .
+
+pulse:VerboseTranslationModelRef a schema:SoftwareSourceCode ;
+    schema:name "verbose-lab/en-fr-translator" ;
+    schema:dateCreated "2024-02-10T00:00:00"^^xsd:dateTime ;
+    pulse:repositoryHandle "verbose-lab/en-fr-translator" ;
+    pulse:platform pulse:HuggingFace ;
+    pulse:repositoryType pulse:Model ;
+    schema:author pulse:FundedResearcher .
+
+pulse:PersonalCollection a pulse:Collection ;
+    schema:name "My Translation Models" ;
+    pulse:platform pulse:HuggingFace ;
+    pulse:collectionOwnedBy pulse:FundedResearcher ;
+    pulse:collectionIncludes pulse:VerboseTranslationModelRef .

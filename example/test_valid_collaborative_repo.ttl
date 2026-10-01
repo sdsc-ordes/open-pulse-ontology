@@ -7,6 +7,7 @@
 pulse:Software a pulse:RepositoryTypeEnumeration .
 wd:Q420 a pulse:DisciplineEnumeration .
 pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
+pulse:GitHub a pulse:PlatformEnumeration .
 
 # VALID COLLABORATIVE REPOSITORY - Should PASS validation
 # Two contributors with memberships
@@ -14,14 +15,15 @@ pulse:ResearchInstitution a pulse:OrganizationTypeEnumeration .
 pulse:CollabRepo a schema:SoftwareSourceCode ;
     schema:name "Collaborative EPFL Toolkit" ;
     schema:dateCreated "2024-06-15T10:00:00"^^xsd:dateTime ;
-    pulse:githubRepositoryHandle "epfl/collab-toolkit" ;
+    pulse:repositoryHandle "epfl/collab-toolkit" ;
+    pulse:platform pulse:GitHub ;
     schema:license <https://spdx.org/licenses/Apache-2.0.html> ;
     schema:citation <https://doi.org/10.9999/example.collab> ;
     schema:programmingLanguage "Python" ;
     schema:programmingLanguage "C++" ;
     schema:programmingLanguage "Javascript" ;
-    pulse:githubRepoStars "45"^^xsd:integer ;
-    pulse:githubRepoForks "6"^^xsd:integer ;
+    pulse:repositoryStars "45"^^xsd:integer ;
+    pulse:repositoryForks "6"^^xsd:integer ;
     schema:author pulse:LeadDev ;
     schema:author pulse:Contributor ;
     pulse:ownedBy pulse:EPFLCenter ;
@@ -30,18 +32,26 @@ pulse:CollabRepo a schema:SoftwareSourceCode ;
 
 pulse:LeadDev a schema:Person ;
     schema:name "Dr. Lina Morel" ;
-    schema:email "lina.morel@epfl.ch" ;
-    pulse:githubUsername "linam" ;
     pulse:orcidIdentifier "0000-0003-1234-5678" ;
-    schema:url <https://people.epfl.ch/lina.morel> ;
+    pulse:hasProfile pulse:LeadDevGitHubProfile ;
     org:hasMembership pulse:LeadMembership .
+
+pulse:LeadDevGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:platformUsername "linam" ;
+    schema:email "lina.morel@epfl.ch" ;
+    schema:url <https://people.epfl.ch/lina.morel> .
 
 pulse:Contributor a schema:Person ;
     schema:name "Marco Ruiz" ;
-    schema:email "marco.ruiz@epfl.ch" ;
-    pulse:githubUsername "marcor" ;
     pulse:orcidIdentifier "0000-0002-9876-5432" ;
+    pulse:hasProfile pulse:ContributorGitHubProfile ;
     org:hasMembership pulse:ContributorMembership .
+
+pulse:ContributorGitHubProfile a pulse:PlatformProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:platformUsername "marcor" ;
+    schema:email "marco.ruiz@epfl.ch" .
 
 pulse:LeadMembership a org:Membership ;
     org:organization pulse:EPFLCenter ;
@@ -57,8 +67,11 @@ pulse:ContributorMembership a org:Membership ;
 
 pulse:EPFLCenter a org:Organization ;
     schema:name "EPFL Center for Systems Biology" ;
-    schema:identifier "https://ror.org/02s376052" ;
-    pulse:githubOrganizationHandle "DeepLabCut" ;
-    pulse:OrganizationType pulse:ResearchInstitution ;
-    pulse:githubOrgFollowers "410"^^xsd:integer ;
+    pulse:ror "https://ror.org/02s376052" ;
+    pulse:hasOrganizationProfile pulse:EPFLCenterGitHubProfile ;
+    pulse:organizationType pulse:ResearchInstitution ;
     pulse:owns pulse:CollabRepo .
+
+pulse:EPFLCenterGitHubProfile a pulse:OrganizationProfile ;
+    pulse:platform pulse:GitHub ;
+    pulse:organizationHandle "DeepLabCut" .
