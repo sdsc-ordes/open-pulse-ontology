@@ -187,6 +187,12 @@
     "feature/platform-profiles": {
       "commits": [
         {
+          "hash": "aad41de",
+          "date": "2026-10-01",
+          "author": "Robin Franken",
+          "message": "Merge pull request #27 from sdsc-ordes/feature/extractor-patches"
+        },
+        {
           "hash": "290579d",
           "date": "2026-07-30",
           "author": "rmfranken",
