@@ -313,6 +313,16 @@
           "message": "feat(ontology): add Project concept for research endeavors"
         }
       ]
+    },
+    "feature/extractor-patches": {
+      "commits": [
+        {
+          "hash": "55de372",
+          "date": "2026-10-01",
+          "author": "rmfranken",
+          "message": "fix(provenance): make same-as links subPropertyOf skos:exactMatch, not owl:sameAs"
+        }
+      ]
     }
   },
   "latestRelease": "v2.1.2",
