@@ -486,4 +486,46 @@ pulse:ExtractionOutputShape
         sh:datatype xsd:dateTime ;
         sh:maxCount 1 ;
         sh:name "Generated At"
+    ] ;
+    sh:property [
+        sh:path prov:used ;
+        sh:class pulse:SourceSnapshot ;
+        sh:maxCount 1 ;
+        sh:name "Used"
+    ] .
+
+pulse:SourceSnapshotShape
+    a sh:NodeShape ;
+    sh:targetClass pulse:SourceSnapshot ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:property [
+        sh:path schema:name ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Name"
+    ] ;
+    sh:property [
+        sh:path schema:softwareVersion ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Version"
+    ] ;
+    sh:property [
+        sh:path pulse:platform ;
+        sh:class pulse:PlatformEnumeration ;
+        sh:maxCount 1 ;
+        sh:name "Platform"
+    ] ;
+    sh:property [
+        sh:path prov:generatedAtTime ;
+        sh:datatype xsd:dateTime ;
+        sh:maxCount 1 ;
+        sh:name "Generated At"
+    ] ;
+    sh:property [
+        sh:path schema:url ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+        sh:name "URL"
     ] .
