@@ -69,6 +69,13 @@ pulse:PlatformInternalIdShape
     sh:maxCount 1 ;
     sh:description "The stable platform-issued internal ID, interpreted relative to pulse:platform." .
 
+pulse:PlatformInstanceShape
+    a sh:PropertyShape ;
+    sh:path pulse:platformInstance ;
+    sh:nodeKind sh:IRI ;
+    sh:maxCount 1 ;
+    sh:description "Base URI of the self-hosted platform deployment this profile lives on; absent means the platform's canonical public instance." .
+
 pulse:PlatformNodeIdShape
     a sh:PropertyShape ;
     sh:path pulse:platformNodeId ;
@@ -233,6 +240,7 @@ pulse:PlatformProfileShape
     sh:property pulse:UrlShape ;
     sh:property pulse:PlatformUsernameShape ;
     sh:property pulse:PlatformInternalIdShape ;
+    sh:property pulse:PlatformInstanceShape ;
     sh:property pulse:PlatformNodeIdShape ;
     sh:or (
         [ sh:property [ sh:path pulse:platformUsername ; sh:minCount 1 ] ]
@@ -275,13 +283,14 @@ pulse:OrganizationProfileShape
         sh:description "The name as it appears on this platform (may differ per platform)."
     ] ;
     sh:property pulse:UrlShape ;
-    sh:property pulse:PlatformInternalIdShape .
+    sh:property pulse:PlatformInternalIdShape ;
+    sh:property pulse:PlatformInstanceShape .
 
 pulse:ArticleShape
     a sh:NodeShape ;
     sh:targetClass schema:ScholarlyArticle ;
     sh:closed true ;
-    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:ignoredProperties ( rdf:type owl:sameAs schema:identifier ) ;
     sh:property pulse:NameShape ;
     sh:property pulse:DoiShape ;
     sh:property [ sh:path schema:author ; sh:class schema:Person ; sh:minCount 1 ; sh:name "Author"; sh:description "The author of this article"   ] ;
@@ -337,7 +346,7 @@ pulse:OrganizationShape
     a sh:NodeShape ;
     sh:targetClass org:Organization ;
     sh:closed true ;
-    sh:ignoredProperties ( rdf:type owl:sameAs ) ;
+    sh:ignoredProperties ( rdf:type owl:sameAs schema:identifier ) ;
     sh:property pulse:NameShape ;
     sh:property pulse:RorShape ;
     sh:property pulse:OrganizationTypeShape ;
